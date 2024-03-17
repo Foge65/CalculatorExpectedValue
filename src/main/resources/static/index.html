@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FS Profit Calc</title>
+    <link rel="stylesheet" href="css.css">
+</head>
+
+<body>
+
+<div id="rooms">
+    <a>Room:</a>
+    <label for="roomSelect"></label>
+    <select id="roomSelect"></select>
+</div>
+
+<div id="buyIns">
+    <a>BuyIn:</a>
+    <label for="buyInSelect"></label>
+    <select id="buyInSelect"></select>
+</div>
+
+<div id="rakes">
+    <a>Rake:</a>
+    <label for="rakesSelect"></label>
+    <select id="rakesSelect"></select>
+</div>
+
+<a class="inline">Tables:</a>
+<label for="setNumberTables"></label>
+<input type="text" id="setNumberTables" oninput="setValue('setNumberTables', '/tables', 'number')">
+<p id="outputTables"></p>
+
+<a class="inline">TablesPerHour:</a>
+<label for="setNumberTablesPerHour"></label>
+<input type="text" id="setNumberTablesPerHour" oninput="setValue('setNumberTablesPerHour', '/tablesPerHour', 'double')">
+<p id="outputTablesPerHour"></p>
+
+<a class="inline">ChipsEV:</a>
+<label for="setChipsEV"></label>
+<input type="text" id="setChipsEV" oninput="setValue('setChipsEV', '/chipsEV', 'double')">
+<p id="outputChipsEV"></p>
+
+<a class="inline">RackBack:</a>
+<label for="setRakeBack"></label>
+<input type="text" id="setRakeBack" oninput="setValue('setRakeBack', '/rakeBack', 'double')">
+<p id="outputRakeBack"></p>
+
+<a class="inline">Tournaments:</a>
+<label for="setTournaments"></label>
+<input type="text" id="setTournaments" oninput="setValue('setTournaments', '/tournaments', 'number')">
+<p id="outputTournaments"></p>
+
+<a class="inline">HyperEV:</a>
+<label for="getHyperEV"></label>
+<input type="text" id="getHyperEV">
+<p id="outputHyperEV"></p>
+
+<script>
+    getData('/room', param => {
+        listElements(param, "roomSelect");
+    });
+
+    getData('/buyIn', param => {
+        listElements(param, "buyInSelect");
+    });
+
+    getData('/rake', param => {
+        listElements(param, "rakesSelect");
+    });
+
+    function getData(url, callback) {
+        let request = new XMLHttpRequest();
+        request.onreadystatechange = () => {
+            if (request.readyState === XMLHttpRequest.DONE) {
+                if (request.status === 200) {
+                    let data = JSON.parse(request.responseText);
+                    callback(data);
+                } else {
+                    console.error('Error received ' + url + ": ", request.status);
+                }
+            }
+        };
+        request.open('GET', url, true);
+        request.send();
+    }
+
+    function listElements(data, id) {
+        let element = document.getElementById(id);
+        data.forEach(item => {
+            let option = document.createElement("option");
+            option.value = item;
+            option.textContent = item;
+            element.appendChild(option);
+        });
+    }
+
+    function setValue(id, request, type) {
+        let value = document.getElementById(id).value;
+        if (/^\d*\.?\d*$/.test(value)) {
+            let form = new FormData();
+            form.append(type, value);
+
+            fetch(request, {
+                method: 'POST',
+                body: form
+            }).then(() => {
+                getValue('/hyperEV', 'getHyperEV');
+            });
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        getValue('/hyperEV', 'getHyperEV');
+    });
+
+    function getValue(request, id) {
+        fetch(request)
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById(id).value = data;
+            })
+            .catch(error => {
+                console.error('Error received HyperEV: ', error);
+            });
+    }
+</script>
+</body>
+</html>
