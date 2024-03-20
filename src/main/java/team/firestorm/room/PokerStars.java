@@ -1,21 +1,30 @@
-package team.firestorm.entity;
+package team.firestorm.room;
 
 import lombok.Getter;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 @Service
+@Primary
 @Getter
 public class PokerStars implements Room {
+    private final String name = "PokerStars";
     private double[] buyIns;
     private int[] rakes;
     private double[] winCoefficient;
     private double[] loseCoefficient;
 
     public PokerStars() {
+        name();
         buyIns();
         rakes();
         winCoefficient();
         loseCoefficient();
+    }
+
+    @Override
+    public String name() {
+        return name;
     }
 
     @Override
@@ -34,35 +43,46 @@ public class PokerStars implements Room {
 
     @Override
     public int[] rakes() {
-        rakes = new int[4];
+        rakes = new int[9];
         rakes[0] = 8;
         rakes[1] = 7;
-        rakes[2] = 6;
-        rakes[3] = 5;
+        rakes[2] = 7;
+        rakes[3] = 7;
+        rakes[4] = 8;
+        rakes[5] = 7;
+        rakes[6] = 6;
+        rakes[7] = 6;
+        rakes[8] = 5;
         return rakes;
     }
 
     @Override
     public double[] winCoefficient() {
-        winCoefficient = new double[6];
+        winCoefficient = new double[9];
         winCoefficient[0] = 1.7330501;
-        winCoefficient[1] = 0.1760301;
-        winCoefficient[2] = 1.7102501;
-        winCoefficient[3] = 1.7630501;
-        winCoefficient[4] = 1.7930501;
-        winCoefficient[5] = 1.8230501;
+        winCoefficient[1] = 1.7330501;
+        winCoefficient[2] = 1.7330501;
+        winCoefficient[3] = 0.1760301;
+        winCoefficient[4] = 1.7102501;
+        winCoefficient[5] = 1.7630501;
+        winCoefficient[6] = 1.7930501;
+        winCoefficient[7] = 1.7930501;
+        winCoefficient[8] = 1.8230501;
         return winCoefficient;
     }
 
     @Override
     public double[] loseCoefficient() {
-        loseCoefficient = new double[6];
+        loseCoefficient = new double[9];
         loseCoefficient[0] = -0.9871249;
-        loseCoefficient[1] = -0.0991149;
+        loseCoefficient[1] = -0.9871249;
         loseCoefficient[2] = -0.9871249;
-        loseCoefficient[3] = -0.9871249;
+        loseCoefficient[3] = -0.0991149;
         loseCoefficient[4] = -0.9871249;
         loseCoefficient[5] = -0.9871249;
+        loseCoefficient[6] = -0.9871249;
+        loseCoefficient[7] = -0.9871249;
+        loseCoefficient[8] = -0.9871249;
         return loseCoefficient;
     }
 }

@@ -2,65 +2,92 @@ package team.firestorm.controller;
 
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import team.firestorm.entity.Room;
-import team.firestorm.entity.Rooms;
-import team.firestorm.service.HyperEV;
-import team.firestorm.service.UserData;
+import team.firestorm.HyperEV;
+import team.firestorm.UserData;
+import team.firestorm.room.*;
+
+import java.util.List;
 
 @RestController
 @AllArgsConstructor
+@RequestMapping("/api")
 public class UserController {
     private Room room;
     private UserData userData;
     private HyperEV hyperEV;
 
-    @GetMapping("/room")
-    public Rooms[] getRoom() {
-        return Rooms.values();
+    @GetMapping("/allRooms")
+    public List<Room> rooms() {
+        return Rooms.rooms();
     }
 
-    @GetMapping("/buyIn")
-    public double[] getBuyIns() {
+    @GetMapping("/getRoom")
+    public Room getRoom() {
+        return userData.getRoom();
+    }
+
+    @PostMapping("/setRoom")
+    @ResponseBody
+    public void setRoom(@RequestParam("roomClass") String roomClass) {
+        if ("PokerStars".equals(roomClass)) {
+            room = new PokerStars();
+        } else if ("Winamax".equals(roomClass)) {
+            room = new Winamax();
+        } else if ("iPoker".equals(roomClass)) {
+            room = new IPoker();
+        } else {
+            throw new IllegalArgumentException("Unknown room type: " + roomClass);
+        }
+        userData.setRoom(room);
+    }
+
+    @GetMapping("/buyIns")
+    public double[] buyIns() {
         return room.buyIns();
     }
 
-    @GetMapping("/rake")
-    public int[] getRakes() {
+    @PostMapping("/buyIn")
+    public void buyIn(@RequestParam("buyIn") double buyIn) {
+        userData.setBuyIn(buyIn);
+    }
+
+    @GetMapping("/rakes")
+    public int[] rakes() {
         return room.rakes();
     }
 
-    @PostMapping("/tables")
+    @PostMapping("/tournaments")
     @ResponseBody
-    public void setNumberTables(@RequestParam("number") int number) {
-        userData.setNumberTables(number);
-    }
-
-    @PostMapping("/tablesPerHour")
-    @ResponseBody
-    public void setNumberTablesPerHour(@RequestParam("double") double number) {
-        userData.setNumberTablesPerHour(number);
+    public void tournaments(@RequestParam("number") int number) {
+        userData.setTournaments(number);
     }
 
     @PostMapping("/chipsEV")
     @ResponseBody
-    public void setChipsEV(@RequestParam("double") double number) {
+    public void chipsEV(@RequestParam("double") double number) {
         userData.setChipsEV(number);
     }
 
     @PostMapping("/rakeBack")
     @ResponseBody
-    public void setRackBack(@RequestParam("double") double number) {
+    public void rakeBack(@RequestParam("double") double number) {
         userData.setRakeBack(number);
     }
 
-    @PostMapping("/tournaments")
+    @PostMapping("/tables")
     @ResponseBody
-    public void setTournaments(@RequestParam("number") int number) {
-        userData.setTournaments(number);
+    public void tables(@RequestParam("number") int number) {
+        userData.setNumberTables(number);
+    }
+
+    @PostMapping("/tablesPerHour")
+    @ResponseBody
+    public void tablesPerHour(@RequestParam("double") double number) {
+        userData.setNumberTablesPerHour(number);
     }
 
     @GetMapping("/hyperEV")
-    public double getHyperEV() {
+    public double hyperEV() {
         return hyperEV.calculateCoefficients();
     }
 }

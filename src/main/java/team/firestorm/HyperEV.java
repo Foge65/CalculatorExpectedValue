@@ -1,8 +1,8 @@
-package team.firestorm.service;
+package team.firestorm;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import team.firestorm.entity.Room;
+import team.firestorm.room.Room;
 
 @Service
 @AllArgsConstructor
