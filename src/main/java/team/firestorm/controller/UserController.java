@@ -6,8 +6,6 @@ import team.firestorm.HyperEV;
 import team.firestorm.UserData;
 import team.firestorm.room.*;
 
-import java.util.List;
-
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api")
@@ -17,8 +15,8 @@ public class UserController {
     private HyperEV hyperEV;
 
     @GetMapping("/allRooms")
-    public List<Room> rooms() {
-        return Rooms.rooms();
+    public Rooms[] allRooms() {
+        return Rooms.values();
     }
 
     @GetMapping("/getRoom")
@@ -29,14 +27,17 @@ public class UserController {
     @PostMapping("/setRoom")
     @ResponseBody
     public void setRoom(@RequestParam("roomClass") String roomClass) {
-        if ("PokerStars".equals(roomClass)) {
-            room = new PokerStars();
-        } else if ("Winamax".equals(roomClass)) {
-            room = new Winamax();
-        } else if ("iPoker".equals(roomClass)) {
-            room = new IPoker();
-        } else {
-            throw new IllegalArgumentException("Unknown room type: " + roomClass);
+        Rooms rooms = Rooms.valueOf(roomClass);
+        switch (rooms) {
+            case PokerStars:
+                room = new PokerStars();
+                break;
+            case Winamax:
+                room = new Winamax();
+                break;
+            case iPoker:
+                room = new IPoker();
+                break;
         }
         userData.setRoom(room);
     }
