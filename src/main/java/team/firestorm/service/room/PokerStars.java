@@ -1,4 +1,4 @@
-package team.firestorm.room;
+package team.firestorm.service.room;
 
 import lombok.Getter;
 import org.springframework.context.annotation.Primary;
@@ -29,15 +29,16 @@ public class PokerStars implements Room {
 
     @Override
     public double[] buyIns() {
-        buyIns = new double[8];
+        buyIns = new double[9];
         buyIns[0] = 0.25;
         buyIns[1] = 1;
         buyIns[2] = 2;
         buyIns[3] = 5;
-        buyIns[4] = 10;
-        buyIns[5] = 25;
-        buyIns[6] = 50;
-        buyIns[7] = 100;
+        buyIns[4] = 5;
+        buyIns[5] = 10;
+        buyIns[6] = 25;
+        buyIns[7] = 50;
+        buyIns[8] = 100;
         return buyIns;
     }
 

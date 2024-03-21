@@ -1,21 +1,24 @@
 package team.firestorm.controller;
 
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import team.firestorm.HyperEV;
-import team.firestorm.UserData;
-import team.firestorm.room.*;
+import team.firestorm.repository.Model;
+import team.firestorm.service.Coefficient;
+import team.firestorm.service.HyperEV;
+import team.firestorm.service.room.*;
 
 @RestController
 @AllArgsConstructor
 public class UserController {
+    private final Model model;
+    private final HyperEV hyperEV;
+    private final Coefficient coefficient;
     private Room room;
-    private UserData userData;
-    private HyperEV hyperEV;
 
     @GetMapping("/getRooms")
-    public Rooms[] allRooms() {
-        return Rooms.values();
+    public ResponseEntity<Rooms[]> allRooms() {
+        return ResponseEntity.ok(Rooms.values());
     }
 
     @PostMapping("/setRoom")
@@ -33,61 +36,64 @@ public class UserController {
                 this.room = new IPoker();
                 break;
         }
-        userData.setRoom(this.room);
+        model.setRoom(this.room);
     }
 
     @GetMapping("/getBuyIns")
-    public double[] getBuyIns() {
-        return this.room.buyIns();
+    public ResponseEntity<double[]> getBuyIns() {
+        return ResponseEntity.ok(this.room.buyIns());
     }
 
     @PostMapping("/setBuyIn")
     public void setBuyIn(@RequestParam("buyIn") double buyIn) {
-        this.userData.setBuyIn(buyIn);
+        this.model.setBuyIn(buyIn);
+
+        coefficient.setWinCoefficient(buyIn);
+        coefficient.setLoseCoefficient(buyIn);
     }
 
     @GetMapping("/getRakes")
-    public int[] getRakes() {
-        return this.room.rakes();
+    public ResponseEntity<int[]> getRakes() {
+        return ResponseEntity.ok(this.room.rakes());
     }
 
     @PostMapping("/setRake")
     public void setRake(@RequestParam("rake") int rake) {
-        this.userData.setRake(rake);
+        this.model.setRake(rake);
     }
 
     @PostMapping("/setTournaments")
     @ResponseBody
     public void tournaments(@RequestParam("tourney") int tourney) {
-        this.userData.setTournaments(tourney);
+        this.model.setTournaments(tourney);
     }
 
     @PostMapping("/setChipsEV")
     @ResponseBody
     public void chipsEV(@RequestParam("chipsEV") double chipsEV) {
-        this.userData.setChipsEV(chipsEV);
+        this.model.setChipsEV(chipsEV);
     }
 
     @PostMapping("/setRakeBack")
     @ResponseBody
     public void rakeBack(@RequestParam("rakeBack") double rakeBack) {
-        this.userData.setRakeBack(rakeBack);
+        this.model.setRakeBack(rakeBack);
     }
 
     @PostMapping("/setTables")
     @ResponseBody
     public void tables(@RequestParam("tables") int tables) {
-        this.userData.setTables(tables);
+        this.model.setTables(tables);
     }
 
     @PostMapping("/setTablesPerHour")
     @ResponseBody
     public void tablesPerHour(@RequestParam("tables") double tables) {
-        this.userData.setTablesPerHour(tables);
+        this.model.setTablesPerHour(tables);
     }
 
     @GetMapping("/hyperEV")
-    public double hyperEV() {
-        return this.hyperEV.calculateCoefficients();
+    public ResponseEntity<Double> hyperEV() {
+        return ResponseEntity.ok(this.hyperEV.calculateCoefficients());
     }
 }

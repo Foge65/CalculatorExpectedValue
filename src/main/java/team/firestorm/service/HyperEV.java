@@ -1,0 +1,22 @@
+package team.firestorm.service;
+
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
+import team.firestorm.repository.Model;
+
+@Service
+@AllArgsConstructor
+public class HyperEV {
+    private final Model model;
+
+    public double calculateCoefficients() {
+        double buyIn = model.getBuyIn();
+        int tournaments = model.getTournaments();
+        double chipsEV = model.getChipsEV();
+        double winCoefficient = model.getWinCoefficient();
+        double loseCoefficient = model.getLoseCoefficient();
+
+        return buyIn * tournaments * (((500 + chipsEV) / 1500) * winCoefficient
+                + (1 - ((500 + chipsEV) / 1500)) * loseCoefficient);
+    }
+}

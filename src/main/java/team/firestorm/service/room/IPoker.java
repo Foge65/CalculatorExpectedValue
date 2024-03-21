@@ -1,4 +1,4 @@
-package team.firestorm.room;
+package team.firestorm.service.room;
 
 import lombok.Getter;
 import org.springframework.stereotype.Service;

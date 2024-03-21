@@ -11,44 +11,44 @@
 <div id="rooms">
     <a>Room:</a>
     <label for="room"></label>
-    <select id="room" onchange="selectValue(this, '/setRoom', 'room')"></select>
+    <select id="room" onchange="setValueOnChange('/setRoom', 'room', this)"></select>
 </div>
 
 <div id="buyIns">
     <a>BuyIn:</a>
     <label for="buyIn"></label>
-    <select id="buyIn"></select>
+    <select id="buyIn" onchange="setValueOnChange('/setBuyIn', 'buyIn', this)"></select>
 </div>
 
 <div id="rakes">
     <a>Rake:</a>
     <label for="rake"></label>
-    <select id="rake"></select>
+    <select id="rake" onchange="setValueOnChange('/setRake', 'rake', this)"></select>
 </div>
 
 <a class="inline">Tournaments:</a>
 <label for="tournaments"></label>
-<input type="text" id="tournaments" oninput="setValue('tournaments', '/setTournaments', 'tourney')">
+<input type="text" id="tournaments" oninput="setValueOnInput('tournaments', '/setTournaments', 'tourney')">
 <p id="outputTournaments"></p>
 
 <a class="inline">ChipsEV:</a>
 <label for="chipsEV"></label>
-<input type="text" id="chipsEV" oninput="setValue('chipsEV', '/setChipsEV', 'chipsEV')">
+<input type="text" id="chipsEV" oninput="setValueOnInput('chipsEV', '/setChipsEV', 'chipsEV')">
 <p id="outputChipsEV"></p>
 
 <a class="inline">RackBack:</a>
 <label for="rakeBack"></label>
-<input type="text" id="rakeBack" oninput="setValue('rakeBack', '/setRakeBack', 'rakeBack')">
+<input type="text" id="rakeBack" oninput="setValueOnInput('rakeBack', '/setRakeBack', 'rakeBack')">
 <p id="outputRakeBack"></p>
 
 <a class="inline">Tables:</a>
 <label for="tables"></label>
-<input type="text" id="tables" oninput="setValue('tables', '/setTables', 'tables')">
+<input type="text" id="tables" oninput="setValueOnInput('tables', '/setTables', 'tables')">
 <p id="outputTables"></p>
 
 <a class="inline">TablesPerHour:</a>
 <label for="tablesPerHour"></label>
-<input type="text" id="tablesPerHour" oninput="setValue('tablesPerHour', '/setTablesPerHour', 'tables')">
+<input type="text" id="tablesPerHour" oninput="setValueOnInput('tablesPerHour', '/setTablesPerHour', 'tables')">
 <p id="outputTablesPerHour"></p>
 
 <a class="inline">HyperEV:</a>
@@ -59,20 +59,23 @@
 <script>
     getData('/getRooms', param => {
         listElements(param, "room");
+
         document.getElementById("room").selectedIndex = 0;
-        selectValue(document.getElementById("room"), '/setRoom', 'room');
+        setValueOnChange('/setRoom', 'room', document.getElementById("room"));
     });
 
     getData('/getBuyIns', param => {
         listElements(param, "buyIn");
+
         document.getElementById("buyIn").selectedIndex = 0;
-        selectValue(document.getElementById("buyIn"), '/setBuyIn', 'buyIn');
+        setValueOnChange('/setBuyIn', 'buyIn', document.getElementById("buyIn"));
     });
 
     getData('/getRakes', param => {
         listElements(param, "rake");
+
         document.getElementById("rake").selectedIndex = 0;
-        selectValue(document.getElementById("rake"), '/setRake', 'rake');
+        setValueOnChange('/setRake', 'rake', document.getElementById("rake"));
     });
 
     function getData(url, callback) {
@@ -101,9 +104,8 @@
         });
     }
 
-    function selectValue(element, request, requestParam) {
-        let selectedValue = element.value;
-        let url = `${request}?${requestParam}=${encodeURIComponent(selectedValue)}`;
+    function setValueOnChange(request, requestParam, value) {
+        let url = `${request}?${requestParam}=${encodeURIComponent(value.value)}`;
 
         fetch(url, {
             method: 'POST',
@@ -111,17 +113,12 @@
                 'Content-Type': 'application/json'
             }
         })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-            })
-            .catch(error => {
-                console.error('There has been a problem with your fetch operation:', error);
+            .then(() => {
+                getValue('/hyperEV', 'hyperEV');
             });
     }
 
-    function setValue(id, request, requestParam) {
+    function setValueOnInput(id, request, requestParam) {
         let value = document.getElementById(id).value;
         if (/^\d*\.?\d*$/.test(value)) {
             let form = new FormData();
@@ -147,7 +144,7 @@
                 document.getElementById(id).value = data;
             })
             .catch(error => {
-                console.error('Error received HyperEV: ', error);
+                console.error('Error received: ', error);
             });
     }
 

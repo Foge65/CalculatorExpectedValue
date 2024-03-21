@@ -1,14 +1,14 @@
-package team.firestorm;
+package team.firestorm.repository;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.stereotype.Service;
-import team.firestorm.room.Room;
+import org.springframework.stereotype.Repository;
+import team.firestorm.service.room.Room;
 
-@Service
+@Repository
 @Getter
 @Setter
-public class UserData {
+public class Model {
     private Room room;
     private double buyIn;
     private int rake;
@@ -17,4 +17,6 @@ public class UserData {
     private double rakeBack;
     private int tables;
     private double tablesPerHour;
+    private double winCoefficient;
+    private double loseCoefficient;
 }

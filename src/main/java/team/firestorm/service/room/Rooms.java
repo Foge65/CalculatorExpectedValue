@@ -1,4 +1,4 @@
-package team.firestorm.room;
+package team.firestorm.service.room;
 
 public enum Rooms {
     PokerStars,

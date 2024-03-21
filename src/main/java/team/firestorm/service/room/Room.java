@@ -1,4 +1,4 @@
-package team.firestorm.room;
+package team.firestorm.service.room;
 
 public interface Room {
     String name();
