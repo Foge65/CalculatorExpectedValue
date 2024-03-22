@@ -37,6 +37,13 @@
        oninput="setValueOnInput('chipsEV', '/calcEV/setChipsEV', 'chipsEV')">
 <p id="outputChipsEV"></p>
 
+<a class="inline">HyperEV:</a>
+<label for="hyperEV"></label>
+<input type="text" id="hyperEV" readonly>
+<p id="outputHyperEV"></p>
+
+<hr style="width:25%;text-align:left;margin-left:0">
+
 <a class="inline">RackBack:</a>
 <label for="rakeBack"></label>
 <input type="text" id="rakeBack"
@@ -49,34 +56,38 @@
        oninput="setValueOnInput('tables', '/calcEV/setTables', 'tables')">
 <p id="outputTables"></p>
 
-<a class="inline">TablesPerHour:</a>
+<a class="inline">Tables Per Hour:</a>
 <label for="tablesPerHour"></label>
 <input type="text" id="tablesPerHour"
        oninput="setValueOnInput('tablesPerHour', '/calcEV/setTablesPerHour', 'tables')">
 <p id="outputTablesPerHour"></p>
 
-<a class="inline">HyperEV:</a>
-<label for="hyperEV"></label>
-<input type="text" id="hyperEV" readonly>
-<p id="outputHyperEV"></p>
+<hr style="width:25%;text-align:left;margin-left:0">
 
-<a class="inline">DollarsPerHour:</a>
+<a class="inline">Dollars Per Hour:</a>
 <label for="dollarsPerHour"></label>
 <input type="text" id="dollarsPerHour"
        oninput="setValueOnInput('dollarsPerHour', '/calcEV/setDollarsPerHour', 'dollars')">
 <p id="outputDollarsPerHour"></p>
 
-<a class="inline">HoursPerDay:</a>
+<a class="inline">Hours Per Day:</a>
 <label for="hoursPerDay"></label>
 <input type="text" id="hoursPerDay"
        oninput="setValueOnInput('hoursPerDay', '/calcEV/setHoursPerDay', 'hours')">
 <p id="outputHoursPerDay"></p>
 
-<a class="inline">DaysPerMonth:</a>
+<a class="inline">Days Per Month:</a>
 <label for="daysPerMonth"></label>
 <input type="text" id="daysPerMonth"
        oninput="setValueOnInput('daysPerMonth', '/calcEV/setDaysPerMonth', 'days')">
 <p id="outputDaysPerMonth"></p>
+
+<a class="inline">$EV Total:</a>
+<label for="evTotal"></label>
+<input type="text" id="evTotal" readonly>
+<p id="outputEVTotal"></p>
+
+<hr style="width:25%;text-align:left;margin-left:0">
 
 <script>
     getData('/calcEV/getRooms', param => {
@@ -137,6 +148,7 @@
         })
             .then(() => {
                 getValue('/calcEV/hyperEV', 'hyperEV');
+                getValue('/calcEV/evTotal', 'evTotal');
             });
     }
 
@@ -151,12 +163,14 @@
                 body: form
             }).then(() => {
                 getValue('/calcEV/hyperEV', 'hyperEV');
+                getValue('/calcEV/evTotal', 'evTotal');
             });
         }
     }
 
     document.addEventListener("DOMContentLoaded", () => {
         getValue('/calcEV/hyperEV', 'hyperEV');
+        getValue('/calcEV/evTotal', 'evTotal');
     });
 
     function getValue(request, id) {

@@ -9,7 +9,7 @@ import team.firestorm.repository.Model;
 public class HyperEV {
     private final Model model;
 
-    public double calculateCoefficients() {
+    public double hyperEV() {
         double buyIn = model.getBuyIn();
         int tournaments = model.getTournaments();
         double chipsEV = model.getChipsEV();
@@ -18,5 +18,9 @@ public class HyperEV {
 
         return buyIn * tournaments * (((500 + chipsEV) / 1500) * winCoefficient
                 + (1 - ((500 + chipsEV) / 1500)) * loseCoefficient);
+    }
+
+    public double evTotal() {
+        return model.getDollarsPerHour() * model.getHoursPerDay() * model.getDaysPerMonth();
     }
 }

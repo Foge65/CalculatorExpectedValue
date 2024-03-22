@@ -72,6 +72,11 @@ public class UserController {
         this.model.setChipsEV(chipsEV);
     }
 
+    @GetMapping("/hyperEV")
+    public ResponseEntity<Double> hyperEV() {
+        return ResponseEntity.ok(this.hyperEV.hyperEV());
+    }
+
     @PostMapping("/setRakeBack")
     public void rakeBack(@RequestParam("rakeBack") double rakeBack) {
         this.model.setRakeBack(rakeBack);
@@ -87,11 +92,6 @@ public class UserController {
         this.model.setTablesPerHour(tables);
     }
 
-    @GetMapping("/hyperEV")
-    public ResponseEntity<Double> hyperEV() {
-        return ResponseEntity.ok(this.hyperEV.calculateCoefficients());
-    }
-
     @PostMapping("/setDollarsPerHour")
     public void setDollarsPerHour(@RequestParam("dollars") double dollars) {
         this.model.setDollarsPerHour(dollars);
@@ -105,5 +105,10 @@ public class UserController {
     @PostMapping("/setDaysPerMonth")
     public void setDaysPerMonth(@RequestParam("days") double days) {
         this.model.setDaysPerMonth(days);
+    }
+
+    @GetMapping("/evTotal")
+    public ResponseEntity<Double> evTotal() {
+        return ResponseEntity.ok(this.hyperEV.evTotal());
     }
 }

@@ -22,4 +22,5 @@ public class Model {
     private double dollarsPerHour;
     private double hoursPerDay;
     private double daysPerMonth;
+    private double evTotal;
 }
