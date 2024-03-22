@@ -130,7 +130,7 @@
 
     function setValueOnInput(id, request, requestParam) {
         let value = document.getElementById(id).value;
-        if (/^\d*\.?\d*$/.test(value)) {
+        if (value.trim() !== '' && /^\d*\.?\d*$/.test(value)) {
             let form = new FormData();
             form.append(requestParam, value);
 
