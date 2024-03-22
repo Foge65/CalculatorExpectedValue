@@ -95,6 +95,11 @@
        oninput="setValueOnInput('dollarsEVPerTourney', '/calcEV/setDollarsEVPerTourney', 'dollars')">
 <p id="outputDollarsEVPerTourney"></p>
 
+<a class="inline">Profit Total:</a>
+<label for="profitTotal"></label>
+<input id="profitTotal" readonly type="text">
+<p id="outputProfitTotal"></p>
+
 <hr style="width:25%;text-align:left;margin-left:0">
 
 <script>
@@ -157,6 +162,7 @@
             .then(() => {
                 getValue('/calcEV/hyperEV', 'hyperEV');
                 getValue('/calcEV/evTotal', 'evTotal');
+                getValue('/calcEV/profitTotal', 'profitTotal');
             });
     }
 
@@ -172,6 +178,7 @@
             }).then(() => {
                 getValue('/calcEV/hyperEV', 'hyperEV');
                 getValue('/calcEV/evTotal', 'evTotal');
+                getValue('/calcEV/profitTotal', 'profitTotal');
             });
         }
     }
@@ -179,6 +186,7 @@
     document.addEventListener("DOMContentLoaded", () => {
         getValue('/calcEV/hyperEV', 'hyperEV');
         getValue('/calcEV/evTotal', 'evTotal');
+        getValue('/calcEV/profitTotal', 'profitTotal');
     });
 
     function getValue(request, id) {

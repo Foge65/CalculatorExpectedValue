@@ -23,4 +23,9 @@ public class HyperEV {
     public double evTotal() {
         return model.getDollarsPerHour() * model.getHoursPerDay() * model.getDaysPerMonth();
     }
+
+    public double profitTotal() {
+        return hyperEV() + (model.getTournaments() * model.getBuyIn()
+                * model.getRake() / 100 * model.getRakeBack() / 100);
+    }
 }

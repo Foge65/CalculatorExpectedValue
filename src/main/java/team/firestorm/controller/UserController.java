@@ -116,4 +116,9 @@ public class UserController {
     public void setDollarsEVPerTourney(@RequestParam("dollars") double dollars) {
         this.model.setDollarsEVPerTourney(dollars);
     }
+
+    @GetMapping("/profitTotal")
+    public ResponseEntity<Double> profitTotal() {
+        return ResponseEntity.ok(this.hyperEV.profitTotal());
+    }
 }
