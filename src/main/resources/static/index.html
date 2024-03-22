@@ -66,6 +66,12 @@
        oninput="setValueOnInput('dollarsPerHour', '/calcEV/setDollarsPerHour', 'dollars')">
 <p id="outputDollarsPerHour"></p>
 
+<a class="inline">HoursPerDay:</a>
+<label for="hoursPerDay"></label>
+<input type="text" id="hoursPerDay"
+       oninput="setValueOnInput('hoursPerDay', '/calcEV/setHoursPerDay', 'hours')">
+<p id="outputHoursPerDay"></p>
+
 <script>
     getData('/calcEV/getRooms', param => {
         listElements(param, "room");

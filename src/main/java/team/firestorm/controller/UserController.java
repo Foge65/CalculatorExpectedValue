@@ -23,7 +23,6 @@ public class UserController {
     }
 
     @PostMapping("/setRoom")
-    @ResponseBody
     public void setRoom(@RequestParam("room") String room) {
         Rooms rooms = Rooms.valueOf(room);
         switch (rooms) {
@@ -64,31 +63,26 @@ public class UserController {
     }
 
     @PostMapping("/setTournaments")
-    @ResponseBody
     public void tournaments(@RequestParam("tourney") int tourney) {
         this.model.setTournaments(tourney);
     }
 
     @PostMapping("/setChipsEV")
-    @ResponseBody
     public void chipsEV(@RequestParam("chipsEV") double chipsEV) {
         this.model.setChipsEV(chipsEV);
     }
 
     @PostMapping("/setRakeBack")
-    @ResponseBody
     public void rakeBack(@RequestParam("rakeBack") double rakeBack) {
         this.model.setRakeBack(rakeBack);
     }
 
     @PostMapping("/setTables")
-    @ResponseBody
     public void tables(@RequestParam("tables") int tables) {
         this.model.setTables(tables);
     }
 
     @PostMapping("/setTablesPerHour")
-    @ResponseBody
     public void tablesPerHour(@RequestParam("tables") double tables) {
         this.model.setTablesPerHour(tables);
     }
@@ -99,8 +93,12 @@ public class UserController {
     }
 
     @PostMapping("/setDollarsPerHour")
-    @ResponseBody
     public void setDollarsPerHour(@RequestParam("dollars") double dollars) {
         this.model.setDollarsPerHour(dollars);
+    }
+
+    @PostMapping("/setHoursPerDay")
+    public void setHoursPerDay(@RequestParam("hours") double hours) {
+        this.model.setHoursPerDay(hours);
     }
 }
