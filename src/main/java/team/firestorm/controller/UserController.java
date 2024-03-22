@@ -97,4 +97,10 @@ public class UserController {
     public ResponseEntity<Double> hyperEV() {
         return ResponseEntity.ok(this.hyperEV.calculateCoefficients());
     }
+
+    @PostMapping("/setDollarsPerHour")
+    @ResponseBody
+    public void setDollarsPerHour(@RequestParam("dollars") double dollars) {
+        this.model.setDollarsPerHour(dollars);
+    }
 }

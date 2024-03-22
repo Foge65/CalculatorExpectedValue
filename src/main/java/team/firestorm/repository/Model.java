@@ -19,4 +19,5 @@ public class Model {
     private double tablesPerHour;
     private double winCoefficient;
     private double loseCoefficient;
+    private double dollarsPerHour;
 }

@@ -27,33 +27,44 @@
 
 <a class="inline">Tournaments:</a>
 <label for="tournaments"></label>
-<input type="text" id="tournaments" oninput="setValueOnInput('tournaments', '/calcEV/setTournaments', 'tourney')">
+<input type="text" id="tournaments"
+       oninput="setValueOnInput('tournaments', '/calcEV/setTournaments', 'tourney')">
 <p id="outputTournaments"></p>
 
 <a class="inline">ChipsEV:</a>
 <label for="chipsEV"></label>
-<input type="text" id="chipsEV" oninput="setValueOnInput('chipsEV', '/calcEV/setChipsEV', 'chipsEV')">
+<input type="text" id="chipsEV"
+       oninput="setValueOnInput('chipsEV', '/calcEV/setChipsEV', 'chipsEV')">
 <p id="outputChipsEV"></p>
 
 <a class="inline">RackBack:</a>
 <label for="rakeBack"></label>
-<input type="text" id="rakeBack" oninput="setValueOnInput('rakeBack', '/calcEV/setRakeBack', 'rakeBack')">
+<input type="text" id="rakeBack"
+       oninput="setValueOnInput('rakeBack', '/calcEV/setRakeBack', 'rakeBack')">
 <p id="outputRakeBack"></p>
 
 <a class="inline">Tables:</a>
 <label for="tables"></label>
-<input type="text" id="tables" oninput="setValueOnInput('tables', '/calcEV/setTables', 'tables')">
+<input type="text" id="tables"
+       oninput="setValueOnInput('tables', '/calcEV/setTables', 'tables')">
 <p id="outputTables"></p>
 
 <a class="inline">TablesPerHour:</a>
 <label for="tablesPerHour"></label>
-<input type="text" id="tablesPerHour" oninput="setValueOnInput('tablesPerHour', '/calcEV/setTablesPerHour', 'tables')">
+<input type="text" id="tablesPerHour"
+       oninput="setValueOnInput('tablesPerHour', '/calcEV/setTablesPerHour', 'tables')">
 <p id="outputTablesPerHour"></p>
 
 <a class="inline">HyperEV:</a>
 <label for="hyperEV"></label>
 <input type="text" id="hyperEV" readonly>
 <p id="outputHyperEV"></p>
+
+<a class="inline">DollarsPerHour:</a>
+<label for="dollarsPerHour"></label>
+<input type="text" id="dollarsPerHour"
+       oninput="setValueOnInput('dollarsPerHour', '/calcEV/setDollarsPerHour', 'dollars')">
+<p id="outputDollarsPerHour"></p>
 
 <script>
     getData('/calcEV/getRooms', param => {
