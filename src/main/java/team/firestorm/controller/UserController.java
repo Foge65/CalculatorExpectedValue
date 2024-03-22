@@ -10,6 +10,7 @@ import team.firestorm.service.room.*;
 
 @RestController
 @AllArgsConstructor
+@RequestMapping("/calcEV")
 public class UserController {
     private final Model model;
     private final HyperEV hyperEV;

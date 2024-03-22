@@ -4,51 +4,49 @@
     <meta charset="UTF-8">
     <title>FS Profit Calc</title>
     <link rel="stylesheet" href="css.css">
-</head>
 
 <body>
-
 <div id="rooms">
     <a>Room:</a>
     <label for="room"></label>
-    <select id="room" onchange="setValueOnChange('/setRoom', 'room', this)"></select>
+    <select id="room" onchange="setValueOnChange('/calcEV/setRoom', 'room', this)"></select>
 </div>
 
 <div id="buyIns">
     <a>BuyIn:</a>
     <label for="buyIn"></label>
-    <select id="buyIn" onchange="setValueOnChange('/setBuyIn', 'buyIn', this)"></select>
+    <select id="buyIn" onchange="setValueOnChange('/calcEV/setBuyIn', 'buyIn', this)"></select>
 </div>
 
 <div id="rakes">
     <a>Rake:</a>
     <label for="rake"></label>
-    <select id="rake" onchange="setValueOnChange('/setRake', 'rake', this)"></select>
+    <select id="rake" onchange="setValueOnChange('/calcEV/setRake', 'rake', this)"></select>
 </div>
 
 <a class="inline">Tournaments:</a>
 <label for="tournaments"></label>
-<input type="text" id="tournaments" oninput="setValueOnInput('tournaments', '/setTournaments', 'tourney')">
+<input type="text" id="tournaments" oninput="setValueOnInput('tournaments', '/calcEV/setTournaments', 'tourney')">
 <p id="outputTournaments"></p>
 
 <a class="inline">ChipsEV:</a>
 <label for="chipsEV"></label>
-<input type="text" id="chipsEV" oninput="setValueOnInput('chipsEV', '/setChipsEV', 'chipsEV')">
+<input type="text" id="chipsEV" oninput="setValueOnInput('chipsEV', '/calcEV/setChipsEV', 'chipsEV')">
 <p id="outputChipsEV"></p>
 
 <a class="inline">RackBack:</a>
 <label for="rakeBack"></label>
-<input type="text" id="rakeBack" oninput="setValueOnInput('rakeBack', '/setRakeBack', 'rakeBack')">
+<input type="text" id="rakeBack" oninput="setValueOnInput('rakeBack', '/calcEV/setRakeBack', 'rakeBack')">
 <p id="outputRakeBack"></p>
 
 <a class="inline">Tables:</a>
 <label for="tables"></label>
-<input type="text" id="tables" oninput="setValueOnInput('tables', '/setTables', 'tables')">
+<input type="text" id="tables" oninput="setValueOnInput('tables', '/calcEV/setTables', 'tables')">
 <p id="outputTables"></p>
 
 <a class="inline">TablesPerHour:</a>
 <label for="tablesPerHour"></label>
-<input type="text" id="tablesPerHour" oninput="setValueOnInput('tablesPerHour', '/setTablesPerHour', 'tables')">
+<input type="text" id="tablesPerHour" oninput="setValueOnInput('tablesPerHour', '/calcEV/setTablesPerHour', 'tables')">
 <p id="outputTablesPerHour"></p>
 
 <a class="inline">HyperEV:</a>
@@ -57,25 +55,25 @@
 <p id="outputHyperEV"></p>
 
 <script>
-    getData('/getRooms', param => {
+    getData('/calcEV/getRooms', param => {
         listElements(param, "room");
 
         document.getElementById("room").selectedIndex = 0;
-        setValueOnChange('/setRoom', 'room', document.getElementById("room"));
+        setValueOnChange('/calcEV/setRoom', 'room', document.getElementById("room"));
     });
 
-    getData('/getBuyIns', param => {
+    getData('/calcEV/getBuyIns', param => {
         listElements(param, "buyIn");
 
         document.getElementById("buyIn").selectedIndex = 0;
-        setValueOnChange('/setBuyIn', 'buyIn', document.getElementById("buyIn"));
+        setValueOnChange('/calcEV/setBuyIn', 'buyIn', document.getElementById("buyIn"));
     });
 
-    getData('/getRakes', param => {
+    getData('/calcEV/getRakes', param => {
         listElements(param, "rake");
 
         document.getElementById("rake").selectedIndex = 0;
-        setValueOnChange('/setRake', 'rake', document.getElementById("rake"));
+        setValueOnChange('/calcEV/setRake', 'rake', document.getElementById("rake"));
     });
 
     function getData(url, callback) {
@@ -114,7 +112,7 @@
             }
         })
             .then(() => {
-                getValue('/hyperEV', 'hyperEV');
+                getValue('/calcEV/hyperEV', 'hyperEV');
             });
     }
 
@@ -128,13 +126,13 @@
                 method: 'POST',
                 body: form
             }).then(() => {
-                getValue('/hyperEV', 'hyperEV');
+                getValue('/calcEV/hyperEV', 'hyperEV');
             });
         }
     }
 
     document.addEventListener("DOMContentLoaded", () => {
-        getValue('/hyperEV', 'hyperEV');
+        getValue('/calcEV/hyperEV', 'hyperEV');
     });
 
     function getValue(request, id) {
