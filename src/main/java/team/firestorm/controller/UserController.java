@@ -36,7 +36,7 @@ public class UserController {
                 this.room = new IPoker();
                 break;
         }
-        model.setRoom(this.room);
+        this.model.setRoom(this.room);
     }
 
     @GetMapping("/getBuyIns")
@@ -48,8 +48,8 @@ public class UserController {
     public void setBuyIn(@RequestParam("buyIn") double buyIn) {
         this.model.setBuyIn(buyIn);
 
-        coefficient.setWinCoefficient(buyIn);
-        coefficient.setLoseCoefficient(buyIn);
+        this.coefficient.setWinCoefficient(buyIn);
+        this.coefficient.setLoseCoefficient(buyIn);
     }
 
     @GetMapping("/getRakes")

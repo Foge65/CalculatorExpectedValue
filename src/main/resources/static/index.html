@@ -190,6 +190,26 @@
     }
 
     document.addEventListener("DOMContentLoaded", () => {
+        const fields = [
+            "tournaments",
+            "chipsEV",
+            "tables",
+            "tablesPerHour",
+            "dollarsEVPerTourney",
+            "dollarsPerHour",
+            "hoursPerDay",
+            "daysPerMonth",
+            "rakeBack",
+            "otherPayments",
+        ];
+
+        fields.forEach(fieldId => {
+            const field = document.getElementById(fieldId);
+            if (field) {
+                field.value = "0";
+            }
+        });
+
         getValue('/calcEV/hyperEV', 'hyperEV');
         getValue('/calcEV/evTotal', 'evTotal');
         getValue('/calcEV/profitTotal', 'profitTotal');
