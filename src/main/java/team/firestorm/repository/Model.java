@@ -21,4 +21,5 @@ public class Model {
     private double loseCoefficient;
     private double dollarsPerHour;
     private double hoursPerDay;
+    private double daysPerMonth;
 }

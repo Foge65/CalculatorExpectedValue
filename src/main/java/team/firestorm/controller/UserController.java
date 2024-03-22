@@ -101,4 +101,9 @@ public class UserController {
     public void setHoursPerDay(@RequestParam("hours") double hours) {
         this.model.setHoursPerDay(hours);
     }
+
+    @PostMapping("/setDaysPerMonth")
+    public void setDaysPerMonth(@RequestParam("days") double days) {
+        this.model.setDaysPerMonth(days);
+    }
 }
