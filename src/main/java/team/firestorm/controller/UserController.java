@@ -111,4 +111,9 @@ public class UserController {
     public ResponseEntity<Double> evTotal() {
         return ResponseEntity.ok(this.hyperEV.evTotal());
     }
+
+    @PostMapping("/setDollarsEVPerTourney")
+    public void setDollarsEVPerTourney(@RequestParam("dollars") double dollars) {
+        this.model.setDollarsEVPerTourney(dollars);
+    }
 }

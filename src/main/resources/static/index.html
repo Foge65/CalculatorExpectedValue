@@ -44,7 +44,7 @@
 
 <hr style="width:25%;text-align:left;margin-left:0">
 
-<a class="inline">RackBack:</a>
+<a class="inline">RackBack, %:</a>
 <label for="rakeBack"></label>
 <input type="text" id="rakeBack"
        oninput="setValueOnInput('rakeBack', '/calcEV/setRakeBack', 'rakeBack')">
@@ -86,6 +86,14 @@
 <label for="evTotal"></label>
 <input type="text" id="evTotal" readonly>
 <p id="outputEVTotal"></p>
+
+<hr style="width:25%;text-align:left;margin-left:0">
+
+<a class="inline">$EV Per Tourney:</a>
+<label for="dollarsEVPerTourney"></label>
+<input type="text" id="dollarsEVPerTourney"
+       oninput="setValueOnInput('dollarsEVPerTourney', '/calcEV/setDollarsEVPerTourney', 'dollars')">
+<p id="outputDollarsEVPerTourney"></p>
 
 <hr style="width:25%;text-align:left;margin-left:0">
 
