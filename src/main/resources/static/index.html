@@ -37,18 +37,12 @@
        oninput="setValueOnInput('chipsEV', '/calcEV/setChipsEV', 'chipsEV')">
 <p id="outputChipsEV"></p>
 
-<a class="inline">HyperEV:</a>
+<a class="inline"><b>HyperEV:</b></a>
 <label for="hyperEV"></label>
 <input type="text" id="hyperEV" readonly>
 <p id="outputHyperEV"></p>
 
-<hr style="width:25%;text-align:left;margin-left:0">
-
-<a class="inline">RackBack, %:</a>
-<label for="rakeBack"></label>
-<input type="text" id="rakeBack"
-       oninput="setValueOnInput('rakeBack', '/calcEV/setRakeBack', 'rakeBack')">
-<p id="outputRakeBack"></p>
+<hr style="width:50%;text-align:left;margin-left:0">
 
 <a class="inline">Tables:</a>
 <label for="tables"></label>
@@ -62,7 +56,13 @@
        oninput="setValueOnInput('tablesPerHour', '/calcEV/setTablesPerHour', 'tables')">
 <p id="outputTablesPerHour"></p>
 
-<hr style="width:25%;text-align:left;margin-left:0">
+<a class="inline">$EV Per Tourney:</a>
+<label for="dollarsEVPerTourney"></label>
+<input id="dollarsEVPerTourney" oninput="setValueOnInput('dollarsEVPerTourney', '/calcEV/setDollarsEVPerTourney', 'dollars')"
+       type="text">
+<p id="outputDollarsEVPerTourney"></p>
+
+<hr style="width:50%;text-align:left;margin-left:0">
 
 <a class="inline">Dollars Per Hour:</a>
 <label for="dollarsPerHour"></label>
@@ -87,20 +87,26 @@
 <input type="text" id="evTotal" readonly>
 <p id="outputEVTotal"></p>
 
-<hr style="width:25%;text-align:left;margin-left:0">
+<hr style="width:50%;text-align:left;margin-left:0">
 
-<a class="inline">$EV Per Tourney:</a>
-<label for="dollarsEVPerTourney"></label>
-<input type="text" id="dollarsEVPerTourney"
-       oninput="setValueOnInput('dollarsEVPerTourney', '/calcEV/setDollarsEVPerTourney', 'dollars')">
-<p id="outputDollarsEVPerTourney"></p>
+<a class="inline">RackBack, %:</a>
+<label for="rakeBack"></label>
+<input id="rakeBack" oninput="setValueOnInput('rakeBack', '/calcEV/setRakeBack', 'rakeBack')"
+       type="text">
+<p id="outputRakeBack"></p>
 
-<a class="inline">Profit Total:</a>
+<a class="inline">Other Payments, $:</a>
+<label for="otherPayments"></label>
+<input id="otherPayments" oninput="setValueOnInput('otherPayments', '/calcEV/setOtherBonuses', 'dollars')"
+       type="text">
+<p id="outputOtherPayments"></p>
+
+<a class="inline"><b>Profit Total:</b></a>
 <label for="profitTotal"></label>
 <input id="profitTotal" readonly type="text">
 <p id="outputProfitTotal"></p>
 
-<hr style="width:25%;text-align:left;margin-left:0">
+<hr style="width:50%;text-align:left;margin-left:0">
 
 <script>
     getData('/calcEV/getRooms', param => {

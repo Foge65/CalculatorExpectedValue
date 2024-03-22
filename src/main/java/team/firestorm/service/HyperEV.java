@@ -26,6 +26,7 @@ public class HyperEV {
 
     public double profitTotal() {
         return hyperEV() + (model.getTournaments() * model.getBuyIn()
-                * model.getRake() / 100 * model.getRakeBack() / 100);
+                * model.getRake() / 100 * model.getRakeBack() / 100)
+                + model.getOtherPayments();
     }
 }
