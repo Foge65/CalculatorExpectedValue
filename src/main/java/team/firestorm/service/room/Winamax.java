@@ -6,23 +6,16 @@ import org.springframework.stereotype.Service;
 @Service
 @Getter
 public class Winamax implements Room {
-    private final String name = "Winamax";
     private double[] buyIns;
     private int[] rakes;
     private double[] winCoefficient;
     private double[] loseCoefficient;
 
     public Winamax() {
-        name();
         buyIns();
         rakes();
         winCoefficient();
         loseCoefficient();
-    }
-
-    @Override
-    public String name() {
-        return name;
     }
 
     @Override
