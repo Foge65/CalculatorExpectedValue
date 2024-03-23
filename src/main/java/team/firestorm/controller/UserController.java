@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import team.firestorm.repository.Model;
 import team.firestorm.service.Coefficient;
 import team.firestorm.service.HyperEV;
+import team.firestorm.service.Rake;
 import team.firestorm.service.room.*;
 
 @RestController
@@ -15,6 +16,7 @@ public class UserController {
     private final Model model;
     private final HyperEV hyperEV;
     private final Coefficient coefficient;
+    private final Rake rake;
     private Room room;
 
     @GetMapping("/getRooms")
@@ -50,16 +52,8 @@ public class UserController {
 
         this.coefficient.setWinCoefficient(buyIn);
         this.coefficient.setLoseCoefficient(buyIn);
-    }
 
-    @GetMapping("/getRakes")
-    public ResponseEntity<int[]> getRakes() {
-        return ResponseEntity.ok(this.room.rakes());
-    }
-
-    @PostMapping("/setRake")
-    public void setRake(@RequestParam("rake") int rake) {
-        this.model.setRake(rake);
+        this.rake.setRake(buyIn);
     }
 
     @PostMapping("/setTournaments")

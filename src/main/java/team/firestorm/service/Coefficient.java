@@ -23,7 +23,7 @@ public class Coefficient {
         this.model.setLoseCoefficient(loseCoeffs[index]);
     }
 
-    private int matchIndexFromArray(double[] array, double value) {
+    public int matchIndexFromArray(double[] array, double value) {
         int index = -1;
         for (int i = 0; i < array.length; i++) {
             if (array[i] == value) {

@@ -33,7 +33,7 @@ public class IPoker implements Room {
 
     @Override
     public int[] rakes() {
-        rakes = new int[9];
+        rakes = new int[7];
         rakes[0] = 7;
         rakes[1] = 7;
         rakes[2] = 7;
@@ -46,7 +46,7 @@ public class IPoker implements Room {
 
     @Override
     public double[] winCoefficient() {
-        winCoefficient = new double[9];
+        winCoefficient = new double[7];
         winCoefficient[0] = 1.77002;
         winCoefficient[1] = 1.77002;
         winCoefficient[2] = 1.77002;
@@ -59,7 +59,7 @@ public class IPoker implements Room {
 
     @Override
     public double[] loseCoefficient() {
-        loseCoefficient = new double[9];
+        loseCoefficient = new double[7];
         loseCoefficient[0] = -0.99998;
         loseCoefficient[1] = -0.99998;
         loseCoefficient[2] = -0.99998;

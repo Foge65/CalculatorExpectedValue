@@ -19,12 +19,6 @@
     <select id="buyIn" onchange="setValueOnChange('/calcEV/setBuyIn', 'buyIn', this)"></select>
 </div>
 
-<div id="rakes">
-    <a>Rake:</a>
-    <label for="rake"></label>
-    <select id="rake" onchange="setValueOnChange('/calcEV/setRake', 'rake', this)"></select>
-</div>
-
 <a>Tournaments:</a>
 <label for="tournaments"></label>
 <input id="tournaments" oninput="setValueOnInput('tournaments', '/calcEV/setTournaments', 'tourney')" type="text">
@@ -109,11 +103,6 @@
     getData('/calcEV/getBuyIns', data => {
         buildList(data, "buyIn");
         setValueOnChange('/calcEV/setBuyIn', 'buyIn', document.getElementById("buyIn"));
-    });
-
-    getData('/calcEV/getRakes', data => {
-        buildList(data, "rake");
-        setValueOnChange('/calcEV/setRake', 'rake', document.getElementById("rake"));
     });
 
     function getData(url, callback) {
