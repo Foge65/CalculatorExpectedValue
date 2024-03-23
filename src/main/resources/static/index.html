@@ -25,108 +25,94 @@
     <select id="rake" onchange="setValueOnChange('/calcEV/setRake', 'rake', this)"></select>
 </div>
 
-<a class="inline">Tournaments:</a>
+<a>Tournaments:</a>
 <label for="tournaments"></label>
-<input type="text" id="tournaments"
-       oninput="setValueOnInput('tournaments', '/calcEV/setTournaments', 'tourney')">
-<p id="outputTournaments"></p>
+<input id="tournaments" oninput="setValueOnInput('tournaments', '/calcEV/setTournaments', 'tourney')" type="text">
+<p></p>
 
-<a class="inline">ChipsEV:</a>
+<a>ChipsEV:</a>
 <label for="chipsEV"></label>
-<input type="text" id="chipsEV"
-       oninput="setValueOnInput('chipsEV', '/calcEV/setChipsEV', 'chipsEV')">
-<p id="outputChipsEV"></p>
+<input id="chipsEV" oninput="setValueOnInput('chipsEV', '/calcEV/setChipsEV', 'chipsEV')" type="text">
+<p></p>
 
-<a class="inline"><b>HyperEV:</b></a>
+<a><b>HyperEV:</b></a>
 <label for="hyperEV"></label>
 <input type="text" id="hyperEV" readonly>
-<p id="outputHyperEV"></p>
+<p></p>
 
 <hr style="width:50%;text-align:left;margin-left:0">
 
-<a class="inline">Tables:</a>
+<a>Tables:</a>
 <label for="tables"></label>
-<input type="text" id="tables"
-       oninput="setValueOnInput('tables', '/calcEV/setTables', 'tables')">
-<p id="outputTables"></p>
+<input id="tables" oninput="setValueOnInput('tables', '/calcEV/setTables', 'tables')" type="text">
+<p></p>
 
-<a class="inline">Tables Per Hour:</a>
+<a>Tables Per Hour:</a>
 <label for="tablesPerHour"></label>
-<input type="text" id="tablesPerHour"
-       oninput="setValueOnInput('tablesPerHour', '/calcEV/setTablesPerHour', 'tables')">
-<p id="outputTablesPerHour"></p>
+<input id="tablesPerHour" oninput="setValueOnInput('tablesPerHour', '/calcEV/setTablesPerHour', 'tables')" type="text">
+<p></p>
 
-<a class="inline">$EV Per Tourney:</a>
+<a>$EV Per Tourney:</a>
 <label for="dollarsEVPerTourney"></label>
-<input id="dollarsEVPerTourney" oninput="setValueOnInput('dollarsEVPerTourney', '/calcEV/setDollarsEVPerTourney', 'dollars')"
-       type="text">
-<p id="outputDollarsEVPerTourney"></p>
+<input id="dollarsEVPerTourney"
+       oninput="setValueOnInput('dollarsEVPerTourney', '/calcEV/setDollarsEVPerTourney', 'dollars')">
+<p></p>
 
 <hr style="width:50%;text-align:left;margin-left:0">
 
-<a class="inline">Dollars Per Hour:</a>
+<a>Dollars Per Hour:</a>
 <label for="dollarsPerHour"></label>
 <input type="text" id="dollarsPerHour"
        oninput="setValueOnInput('dollarsPerHour', '/calcEV/setDollarsPerHour', 'dollars')">
-<p id="outputDollarsPerHour"></p>
+<p></p>
 
-<a class="inline">Hours Per Day:</a>
+<a>Hours Per Day:</a>
 <label for="hoursPerDay"></label>
-<input type="text" id="hoursPerDay"
-       oninput="setValueOnInput('hoursPerDay', '/calcEV/setHoursPerDay', 'hours')">
-<p id="outputHoursPerDay"></p>
+<input id="hoursPerDay" oninput="setValueOnInput('hoursPerDay', '/calcEV/setHoursPerDay', 'hours')" type="text">
+<p></p>
 
-<a class="inline">Days Per Month:</a>
+<a>Days Per Month:</a>
 <label for="daysPerMonth"></label>
-<input type="text" id="daysPerMonth"
-       oninput="setValueOnInput('daysPerMonth', '/calcEV/setDaysPerMonth', 'days')">
-<p id="outputDaysPerMonth"></p>
+<input id="daysPerMonth" oninput="setValueOnInput('daysPerMonth', '/calcEV/setDaysPerMonth', 'days')" type="text">
+<p></p>
 
-<a class="inline">$EV Total:</a>
+<a><b>$EV Total:</b></a>
 <label for="evTotal"></label>
 <input type="text" id="evTotal" readonly>
-<p id="outputEVTotal"></p>
+<p></p>
 
 <hr style="width:50%;text-align:left;margin-left:0">
 
-<a class="inline">RackBack, %:</a>
+<a>RackBack, %:</a>
 <label for="rakeBack"></label>
-<input id="rakeBack" oninput="setValueOnInput('rakeBack', '/calcEV/setRakeBack', 'rakeBack')"
-       type="text">
-<p id="outputRakeBack"></p>
+<input id="rakeBack" oninput="setValueOnInput('rakeBack', '/calcEV/setRakeBack', 'rakeBack')">
+<p></p>
 
-<a class="inline">Other Payments, $:</a>
+<a>Other Payments, $:</a>
 <label for="otherPayments"></label>
-<input id="otherPayments" oninput="setValueOnInput('otherPayments', '/calcEV/setOtherBonuses', 'dollars')"
-       type="text">
-<p id="outputOtherPayments"></p>
+<input id="otherPayments" oninput="setValueOnInput('otherPayments', '/calcEV/setOtherBonuses', 'dollars')">
+<p></p>
 
-<a class="inline"><b>Profit Total:</b></a>
+<a><b>Profit Total:</b></a>
 <label for="profitTotal"></label>
-<input id="profitTotal" readonly type="text">
-<p id="outputProfitTotal"></p>
+<input id="profitTotal" readonly>
+<p></p>
 
 <hr style="width:50%;text-align:left;margin-left:0">
 
 <script>
-    getData('/calcEV/getRooms', param => {
-        listElements(param, "room");
-
-        document.getElementById("room").selectedIndex = 0;
+    getData('/calcEV/getRooms', data => {
+        buildList(data, "room");
         setValueOnChange('/calcEV/setRoom', 'room', document.getElementById("room"));
     });
 
-    getData('/calcEV/getBuyIns', param => {
-        listElements(param, "buyIn");
-
-        document.getElementById("buyIn").selectedIndex = 0;
+    getData('/calcEV/getBuyIns', data => {
+        buildList(data, "buyIn");
         setValueOnChange('/calcEV/setBuyIn', 'buyIn', document.getElementById("buyIn"));
     });
 
-    getData('/calcEV/getRakes', param => {
-        listElements(param, "rake");
-
-        document.getElementById("rake").selectedIndex = 0;
+    getData('/calcEV/getRakes', data => {
+        buildList(data, "rake");
         setValueOnChange('/calcEV/setRake', 'rake', document.getElementById("rake"));
     });
 
@@ -134,19 +120,15 @@
         let request = new XMLHttpRequest();
         request.onreadystatechange = () => {
             if (request.readyState === XMLHttpRequest.DONE) {
-                if (request.status === 200) {
-                    let data = JSON.parse(request.responseText);
-                    callback(data);
-                } else {
-                    console.error('Error received ' + url + ": ", request.status);
-                }
+                let data = JSON.parse(request.responseText);
+                callback(data);
             }
         };
         request.open('GET', url, true);
         request.send();
     }
 
-    function listElements(data, id) {
+    function buildList(data, id) {
         let element = document.getElementById(id);
         data.forEach(item => {
             let option = document.createElement("option");
@@ -158,18 +140,13 @@
 
     function setValueOnChange(request, requestParam, value) {
         let url = `${request}?${requestParam}=${encodeURIComponent(value.value)}`;
-
         fetch(url, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-            .then(() => {
-                getValue('/calcEV/hyperEV', 'hyperEV');
-                getValue('/calcEV/evTotal', 'evTotal');
-                getValue('/calcEV/profitTotal', 'profitTotal');
-            });
+        }).then(() => {
+            getValue('/calcEV/hyperEV', 'hyperEV');
+            getValue('/calcEV/evTotal', 'evTotal');
+            getValue('/calcEV/profitTotal', 'profitTotal');
+        });
     }
 
     function setValueOnInput(id, request, requestParam) {
@@ -221,9 +198,6 @@
             .then(data => {
                 document.getElementById(id).value = data;
             })
-            .catch(error => {
-                console.error('Error received: ', error);
-            });
     }
 
 </script>
