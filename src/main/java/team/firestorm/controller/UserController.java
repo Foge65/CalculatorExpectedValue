@@ -96,9 +96,9 @@ public class UserController {
         this.model.setHoursPerDay(hours);
     }
 
-    @PostMapping("/setDaysPerMonth")
+    @PostMapping("/setDaysDuringPeriod")
     public void setDaysPerMonth(@RequestParam("days") double days) {
-        this.model.setDaysPerMonth(days);
+        this.model.setDaysDuringPeriod(days);
     }
 
     @GetMapping("/evTotal")
