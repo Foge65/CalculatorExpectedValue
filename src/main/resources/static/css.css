@@ -1,3 +1,18 @@
 p {
     margin: 0;
 }
+
+.table-container {
+    display: flex;
+}
+
+.table-container table {
+    border: 1px solid black;
+    border-collapse: collapse;
+    margin-right: 10px;
+}
+
+td {
+    vertical-align: top;
+    text-align: left;
+}

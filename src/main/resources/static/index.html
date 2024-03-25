@@ -5,105 +5,366 @@
     <title>FS Profit Calc</title>
     <link rel="stylesheet" href="css.css">
     <link rel="icon" href="data:;base64,iVBORw0KGgo=">
-
 <body>
-<div id="rooms">
-    <a>Room:</a>
-    <label for="room"></label>
-    <select id="room" onchange="setValueOnChange('/calcEV/setRoom', 'room', this)"></select>
-</div>
 
-<div id="buyIns">
-    <a>BuyIn:</a>
-    <label for="buyIn"></label>
-    <select id="buyIn" onchange="setValueOnChange('/calcEV/setBuyIn', 'buyIn', this)"></select>
-</div>
-
-<a>Tournaments:</a>
-<label for="tournaments"></label>
-<input id="tournaments" oninput="setValueOnInput('tournaments', '/calcEV/setTournaments', 'tourney')" type="text">
-<p></p>
-
-<a>ChipsEV:</a>
-<label for="chipsEV"></label>
-<input id="chipsEV" oninput="setValueOnInput('chipsEV', '/calcEV/setChipsEV', 'chipsEV')" type="text">
-<p></p>
-
+<div>
 <a><b>HyperEV:</b></a>
-<label for="hyperEV"></label>
 <input type="text" id="hyperEV" readonly>
-<p></p>
+</div>
 
-<hr style="width:50%;text-align:left;margin-left:0">
-
+<div>
 <a>Tables:</a>
-<label for="tables"></label>
-<input id="tables" oninput="setValueOnInput('tables', '/calcEV/setTables', 'tables')" type="text">
-<p></p>
+    <input id="tables" oninput="setValueOnInput('tables', '/calcEV/setTables', 'tables')">
+</div>
 
+<div>
 <a>Tables Per Hour:</a>
-<label for="tablesPerHour"></label>
-<input id="tablesPerHour" oninput="setValueOnInput('tablesPerHour', '/calcEV/setTablesPerHour', 'tables')" type="text">
-<p></p>
+    <input id="tablesPerHour" oninput="setValueOnInput('tablesPerHour', '/calcEV/setTablesPerHour', 'tables')">
+</div>
 
-<a>$EV Per Tourney:</a>
-<label for="dollarsEVPerTourney"></label>
-<input id="dollarsEVPerTourney"
-       oninput="setValueOnInput('dollarsEVPerTourney', '/calcEV/setDollarsEVPerTourney', 'dollars')">
-<p></p>
-
-<hr style="width:50%;text-align:left;margin-left:0">
-
+<div>
 <a>Dollars Per Hour:</a>
-<label for="dollarsPerHour"></label>
 <input type="text" id="dollarsPerHour"
        oninput="setValueOnInput('dollarsPerHour', '/calcEV/setDollarsPerHour', 'dollars')">
-<p></p>
+</div>
 
-<a>Hours Per Day:</a>
-<label for="hoursPerDay"></label>
-<input id="hoursPerDay" oninput="setValueOnInput('hoursPerDay', '/calcEV/setHoursPerDay', 'hours')" type="text">
-<p></p>
-
-<a>Days Per Month:</a>
-<label for="daysPerMonth"></label>
-<input id="daysPerMonth" oninput="setValueOnInput('daysPerMonth', '/calcEV/setDaysPerMonth', 'days')" type="text">
-<p></p>
-
-<a><b>$EV Total:</b></a>
-<label for="evTotal"></label>
-<input type="text" id="evTotal" readonly>
-<p></p>
-
-<hr style="width:50%;text-align:left;margin-left:0">
-
-<a>RackBack, %:</a>
-<label for="rakeBack"></label>
-<input id="rakeBack" oninput="setValueOnInput('rakeBack', '/calcEV/setRakeBack', 'rakeBack')">
-<p></p>
-
+<div>
 <a>Other Payments, $:</a>
-<label for="otherPayments"></label>
 <input id="otherPayments" oninput="setValueOnInput('otherPayments', '/calcEV/setOtherBonuses', 'dollars')">
-<p></p>
+</div>
 
-<a><b>Profit Total:</b></a>
-<label for="profitTotal"></label>
-<input id="profitTotal" readonly>
-<p></p>
+<div class="table-container">
+    <table>
+        <caption>Знаю свой $/час</caption>
+        <tr>
+            <td>
+                <div id="rooms1">
+                    <a>Рум:</a>
+                    <select id="room1" onchange="setValueOnChange('/calcEV/setRoom', 'room', this)"></select>
+                </div>
 
-<hr style="width:50%;text-align:left;margin-left:0">
+                <div id="buyIns1">
+                    <a>Лимит:</a>
+                    <select id="buyIn1" onchange="setValueOnChange('/calcEV/setBuyIn', 'buyIn', this)"></select>
+                </div>
+
+                <div>
+                    <a>Рабочих часов в день:</a>
+                    <input id="hoursPerDay" oninput="setValueOnInput('hoursPerDay', '/calcEV/setHoursPerDay', 'hours')">
+                </div>
+
+                <div>
+                    <a>Рабочих дней в период:</a>
+                    <input id="daysDuringPeriod"
+                           oninput="setValueOnInput('daysDuringPeriod', '/calcEV/setDaysDuringPeriod', 'days')">
+                </div>
+
+                <div>
+                    <a><b>EV BI:</b></a>
+                    <input id="evBI1" readonly>
+                </div>
+
+                <div id="meshs1">
+                    <a>Откатная сетка:</a>
+                    <select id="mesh1" onchange="setValueOnChange('/calcEV/setMesh', 'mesh', this)"></select>
+                </div>
+
+                <div>
+                    <a><b>Доля игрока, %:</b></a>
+                    <input id="playerWinPercent1" readonly>
+                </div>
+
+                <div>
+                    <a><b>Доля игрока, $:</b></a>
+                    <input id="playerWinMoney1" readonly>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <table>
+        <caption>Знаю свой тотал рейкбек</caption>
+        <tr>
+            <td>
+                <div id="rooms2">
+                    <a>Рум:</a>
+                    <select id="room2" onchange="setValueOnChange('/calcEV/setRoom', 'room', this)"></select>
+                </div>
+
+                <div id="buyIns2">
+                    <a>Лимит:</a>
+                    <select id="buyIn2" onchange="setValueOnChange('/calcEV/setBuyIn', 'buyIn', this)"></select>
+                </div>
+
+                <div>
+                    <a>ChipsEV:</a>
+                    <input id="chipsEV" oninput="setValueOnInput('chipsEV', '/calcEV/setChipsEV', 'chipsEV')">
+                </div>
+
+                <div>
+                    <a>$EV / Tourney:</a>
+                    <input id="dollarsEVPerTourney"
+                           oninput="setValueOnInput('dollarsEVPerTourney', '/calcEV/setDollarsEVPerTourney', 'dollars')">
+                </div>
+
+                <div>
+                    <a>RackBack Total, %:</a>
+                    <input id="rakeBack2" oninput="setValueOnInput('rakeBack2', '/calcEV/setRakeBack', 'rakeBack')">
+                </div>
+
+                <div>
+                    <a><b>$EV Total / Tourney:</b></a>
+                    <input id="evTotalPerTourney" readonly type="text">
+                </div>
+
+                <div>
+                    <a>Дистанция за период:</a>
+                    <input id="tournaments"
+                           oninput="setValueOnInput('tournaments', '/calcEV/setTournaments', 'tourney')">
+                </div>
+
+                <div>
+                    <a><b>$EV Total (Общий профит):</b></a>
+                    <input id="profitTotal" readonly>
+                </div>
+
+                <div>
+                    <a><b>EV BI:</b></a>
+                    <input id="evBI2" readonly>
+                </div>
+
+                <div id="meshs2">
+                    <a>Откатная сетка:</a>
+                    <select id="mesh2" onchange="setValueOnChange('/calcEV/setMesh', 'mesh', this)"></select>
+                </div>
+
+                <div>
+                    <a><b>Доля игрока, %:</b></a>
+                    <input id="playerWinPercent2" readonly>
+                </div>
+
+                <div>
+                    <a><b>Доля игрока, $:</b></a>
+                    <input id="playerWinMoney2" readonly>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <table>
+        <caption>Не знаю свой тотал рейкбек</caption>
+        <tr>
+            <td>
+                <div id="rooms3">
+                    <a>Рум:</a>
+                    <select id="room3" onchange="setValueOnChange('/calcEV/setRoom', 'room', this)"></select>
+                </div>
+
+                <div id="buyIns3">
+                    <a>Лимит:</a>
+                    <select id="buyIn3" onchange="setValueOnChange('/calcEV/setBuyIn', 'buyIn', this)"></select>
+                </div>
+
+                <div>
+                    <a>ChipsEV:</a>
+                    <input id="chipsEV3" oninput="setValueOnInput('chipsEV3', '/calcEV/setChipsEV', 'chipsEV')">
+                </div>
+
+                <div>
+                    <a>$EV / Tourney:</a>
+                    <input id="dollarsEVPerTourney3"
+                           oninput="setValueOnInput('dollarsEVPerTourney3', '/calcEV/setDollarsEVPerTourney', 'dollars')">
+                </div>
+
+                <div>
+                    <a>Дистанция в день:</a>
+                    <input id="tournamentsPerDay3"
+                           oninput="setValueOnInput('tournamentsPerDay3', '/calcEV/setTournamentsPerDay', 'tournaments')">
+                </div>
+
+                <div>
+                    <a>Выплаты RB в день, $:</a>
+                    <input id="paymentPerDay3"
+                           oninput="setValueOnInput('paymentPerDay3', '/calcEV/setPaymentPerDay', 'payment')">
+                </div>
+
+                <div>
+                    <a>%RB в день:</a>
+                    <input id="rakeBackPerDay3"
+                           oninput="setValueOnChange('/cacEV/getRakeBackPerDay', 'rakeBack', this)">
+                </div>
+
+                <div>
+                    <a>Игровых дней в неделю:</a>
+                    <input id="workDaysPerWeek3"
+                           oninput="setValueOnInput('workDaysPerWeek3', '/calcEV/setWorkDaysPerWeek', 'days')">
+                </div>
+
+                <div>
+                    <a>Дистанция в неделю:</a>
+                    <input id="tournamentsPerWeek3"
+                           oninput="setValueOnChange('/cacEV/getTournamentsPerWeek', 'tournaments', this)">
+                </div>
+
+                <div>
+                    <a>Выплаты RB в неделю, $:</a>
+                    <input id="paymentsPerWeek3"
+                           oninput="setValueOnInput('paymentsPerWeek3', '/calcEV/setPaymentsPerWeek', 'payment')">
+                </div>
+
+                <div>
+                    <a>%RB в неделю:</a>
+                    <input id="rakeBackPerWeek3"
+                           oninput="setValueOnChange('/cacEV/getRakeBackPerWeek', 'rakeBack', this)">
+                </div>
+
+                <div>
+                    <a>Игровых недель в период:</a>
+                    <input id="workWeekDuring3"
+                           oninput="setValueOnInput('workWeekDuring3', '/calcEV/setWorkWeekDuring', 'week')">
+                </div>
+
+                <div>
+                    <a>Дистанция за период:</a>
+                    <input id="tournamentsForPeriod3"
+                           oninput="setValueOnChange('/cacEV/getTournamentsForPeriod', 'rakeBack', this)">
+                </div>
+
+                <div>
+                    <a>Выплаты RB в период, $:</a>
+                    <input id="paymentDuringPeriod3"
+                           oninput="setValueOnInput('paymentDuringPeriod3', '/calcEV/setPaymentDuringPeriod3', 'payment')">
+                </div>
+
+                <div>
+                    <a>RackBack за период, %:</a>
+                    <input id="rakeBackPercentDuringPeriod3"
+                           oninput="setValueOnChange('/cacEV/getRakeBackPercentDuringPeriod', 'rakeBack', this)">
+                </div>
+
+                <div>
+                    <a>RackBack Total, %:</a>
+                    <input id="rakeBack3"
+                           oninput="setValueOnChange('/cacEV/getRakeBackTotalPercentage', 'rakeBack', this)">
+                </div>
+
+                <div>
+                    <a>$EV Total / Tourney:</a>
+                    <input id="evTotalPerTourney3"
+                           oninput="setValueOnChange('/cacEV/getEVTotalPerTourney', 'ev', this)">
+                </div>
+
+                <div>
+                    <a>$EV Total:</a>
+                    <input id="evTotal3" oninput="setValueOnChange('/cacEV/getEVTotal', 'ev', this)">
+                </div>
+
+                <div>
+                    <a>EV BI:</a>
+                    <input id="evBI3" oninput="setValueOnChange('/cacEV/getEvBI', 'evBI', this)">
+                </div>
+
+                <div id="meshs3">
+                    <a>Откатная сетка:</a>
+                    <select id="mesh3" onchange="setValueOnChange('/calcEV/setMesh', 'mesh', this)"></select>
+                </div>
+
+                <div>
+                    <a><b>Доля игрока, %:</b></a>
+                    <input id="playerWinPercent3" readonly>
+                </div>
+
+                <div>
+                    <a><b>Доля игрока, $:</b></a>
+                    <input id="playerWinMoney3" readonly>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
 
 <script>
-    getData('/calcEV/getRooms', data => {
-        buildList(data, "room");
-        setValueOnChange('/calcEV/setRoom', 'room', document.getElementById("room"));
+
+    function setValueOnInput(id, request, requestParam) {
+        let value = document.getElementById(id).value;
+        if (value.trim() !== '' && /^\d*\.?\d*$/.test(value)) {
+            let form = new FormData();
+            form.append(requestParam, value);
+
+            fetch(request, {
+                method: 'POST',
+                body: form
+            }).then(() => {
+                setValueToListener();
+            });
+        }
+    }
+
+    const setFields = [
+        "tournaments",
+        "chipsEV",
+        "tables",
+        "tablesPerHour",
+        "dollarsEVPerTourney",
+        "dollarsPerHour",
+        "hoursPerDay",
+        "daysDuringPeriod",
+        "rakeBack",
+        "otherPayments",
+    ];
+
+    document.addEventListener("DOMContentLoaded", () => {
+        setFields.forEach(fieldId => {
+            const field = document.getElementById(fieldId);
+            setDefaultValue(field);
+        });
+
+        getData('/calcEV/getRooms', data => {
+            buildList(data, "room1");
+            setValueOnChange('/calcEV/setRoom', 'room', document.getElementById("room1"));
+        });
+
+        getData('/calcEV/getRooms', data => {
+            buildList(data, "room2");
+            setValueOnChange('/calcEV/setRoom', 'room', document.getElementById("room2"));
+        });
+
+        getData('/calcEV/getRooms', data => {
+            buildList(data, "room3");
+            setValueOnChange('/calcEV/setRoom', 'room', document.getElementById("room3"));
+        });
+
+        getData('/calcEV/getBuyIns', data => {
+            buildList(data, "buyIn1");
+            setValueOnChange('/calcEV/setBuyIn', 'buyIn', document.getElementById("buyIn1"));
+        });
+
+        getData('/calcEV/getBuyIns', data => {
+            buildList(data, "buyIn2");
+            setValueOnChange('/calcEV/setBuyIn', 'buyIn', document.getElementById("buyIn2"));
+        });
+
+        getData('/calcEV/getBuyIns', data => {
+            buildList(data, "buyIn3");
+            setValueOnChange('/calcEV/setBuyIn', 'buyIn', document.getElementById("buyIn3"));
+        });
+
+        setValueToListener();
     });
 
-    getData('/calcEV/getBuyIns', data => {
-        buildList(data, "buyIn");
-        setValueOnChange('/calcEV/setBuyIn', 'buyIn', document.getElementById("buyIn"));
-    });
+    function setValueToListener() {
+        getValueById('/calcEV/hyperEV', 'hyperEV');
+        getValueById('/calcEV/evTotal', 'profitTotal');
+        getValueById('/calcEV/profitTotal', 'profitTotal');
+        getValueById('/calcEV/evBI', 'evBI');
+        getValueById('/calcEV/evTotTourney', 'evTotalPerTourney');
+    }
+
+    function setDefaultValue(field) {
+        if (field) {
+            field.value = "0";
+        }
+    }
 
     function getData(url, callback) {
         let request = new XMLHttpRequest();
@@ -132,56 +393,11 @@
         fetch(url, {
             method: 'POST',
         }).then(() => {
-            getValue('/calcEV/hyperEV', 'hyperEV');
-            getValue('/calcEV/evTotal', 'evTotal');
-            getValue('/calcEV/profitTotal', 'profitTotal');
+            setValueToListener();
         });
     }
 
-    function setValueOnInput(id, request, requestParam) {
-        let value = document.getElementById(id).value;
-        if (value.trim() !== '' && /^\d*\.?\d*$/.test(value)) {
-            let form = new FormData();
-            form.append(requestParam, value);
-
-            fetch(request, {
-                method: 'POST',
-                body: form
-            }).then(() => {
-                getValue('/calcEV/hyperEV', 'hyperEV');
-                getValue('/calcEV/evTotal', 'evTotal');
-                getValue('/calcEV/profitTotal', 'profitTotal');
-            });
-        }
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-        const fields = [
-            "tournaments",
-            "chipsEV",
-            "tables",
-            "tablesPerHour",
-            "dollarsEVPerTourney",
-            "dollarsPerHour",
-            "hoursPerDay",
-            "daysPerMonth",
-            "rakeBack",
-            "otherPayments",
-        ];
-
-        fields.forEach(fieldId => {
-            const field = document.getElementById(fieldId);
-            if (field) {
-                field.value = "0";
-            }
-        });
-
-        getValue('/calcEV/hyperEV', 'hyperEV');
-        getValue('/calcEV/evTotal', 'evTotal');
-        getValue('/calcEV/profitTotal', 'profitTotal');
-    });
-
-    function getValue(request, id) {
+    function getValueById(request, id) {
         fetch(request)
             .then(response => response.text())
             .then(data => {
