@@ -3,6 +3,7 @@ package team.firestorm.repository;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Repository;
+import team.firestorm.service.mesh.Mesh;
 import team.firestorm.service.room.Room;
 
 @Repository
@@ -21,8 +22,9 @@ public class Model {
     private double loseCoefficient;
     private double dollarsPerHour;
     private double hoursPerDay;
-    private double daysPerMonth;
+    private double daysDuringPeriod;
     private double evTotal;
     private double dollarsEVPerTourney;
     private double otherPayments;
+    private Mesh mesh;
 }

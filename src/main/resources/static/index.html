@@ -7,45 +7,20 @@
     <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 <body>
 
-<div>
-<a><b>HyperEV:</b></a>
-<input type="text" id="hyperEV" readonly>
-</div>
-
-<div>
-<a>Tables:</a>
-    <input id="tables" oninput="setValueOnInput('tables', '/calcEV/setTables', 'tables')">
-</div>
-
-<div>
-<a>Tables Per Hour:</a>
-    <input id="tablesPerHour" oninput="setValueOnInput('tablesPerHour', '/calcEV/setTablesPerHour', 'tables')">
-</div>
-
-<div>
-<a>Dollars Per Hour:</a>
-<input type="text" id="dollarsPerHour"
-       oninput="setValueOnInput('dollarsPerHour', '/calcEV/setDollarsPerHour', 'dollars')">
-</div>
-
-<div>
-<a>Other Payments, $:</a>
-<input id="otherPayments" oninput="setValueOnInput('otherPayments', '/calcEV/setOtherBonuses', 'dollars')">
-</div>
-
 <div class="table-container">
     <table>
-        <caption>Знаю свой $/час</caption>
+        <caption><h3>Знаю свой $/час</h3></caption>
         <tr>
             <td>
-                <div id="rooms1">
-                    <a>Рум:</a>
-                    <select id="room1" onchange="setValueOnChange('/calcEV/setRoom', 'room', this)"></select>
-                </div>
-
-                <div id="buyIns1">
+                <div>
                     <a>Лимит:</a>
                     <select id="buyIn1" onchange="setValueOnChange('/calcEV/setBuyIn', 'buyIn', this)"></select>
+                </div>
+
+                <div>
+                    <a>$ / Час:</a>
+                    <input id="dollarPerHour"
+                           oninput="setValueOnInput('dollarPerHour', '/calcEV/setDollarPerHour', 'money')">
                 </div>
 
                 <div>
@@ -64,7 +39,7 @@
                     <input id="evBI1" readonly>
                 </div>
 
-                <div id="meshs1">
+                <div>
                     <a>Откатная сетка:</a>
                     <select id="mesh1" onchange="setValueOnChange('/calcEV/setMesh', 'mesh', this)"></select>
                 </div>
@@ -83,15 +58,15 @@
     </table>
 
     <table>
-        <caption>Знаю свой тотал рейкбек</caption>
+        <caption><h3>Знаю свой тотал рейкбек</h3></caption>
         <tr>
             <td>
-                <div id="rooms2">
+                <div>
                     <a>Рум:</a>
                     <select id="room2" onchange="setValueOnChange('/calcEV/setRoom', 'room', this)"></select>
                 </div>
 
-                <div id="buyIns2">
+                <div>
                     <a>Лимит:</a>
                     <select id="buyIn2" onchange="setValueOnChange('/calcEV/setBuyIn', 'buyIn', this)"></select>
                 </div>
@@ -152,15 +127,15 @@
     </table>
 
     <table>
-        <caption>Не знаю свой тотал рейкбек</caption>
+        <caption><h3>Не знаю свой тотал рейкбек</h3></caption>
         <tr>
             <td>
-                <div id="rooms3">
+                <div>
                     <a>Рум:</a>
                     <select id="room3" onchange="setValueOnChange('/calcEV/setRoom', 'room', this)"></select>
                 </div>
 
-                <div id="buyIns3">
+                <div>
                     <a>Лимит:</a>
                     <select id="buyIn3" onchange="setValueOnChange('/calcEV/setBuyIn', 'buyIn', this)"></select>
                 </div>
@@ -347,6 +322,21 @@
         getData('/calcEV/getBuyIns', data => {
             buildList(data, "buyIn3");
             setValueOnChange('/calcEV/setBuyIn', 'buyIn', document.getElementById("buyIn3"));
+        });
+
+        getData('/calcEV/getMeshes', data => {
+            buildList(data, "mesh1");
+            setValueOnChange('/calcEV/setMesh', 'mesh', document.getElementById("mesh1"));
+        });
+
+        getData('/calcEV/getMeshes', data => {
+            buildList(data, "mesh2");
+            setValueOnChange('/calcEV/setMesh', 'mesh', document.getElementById("mesh2"));
+        });
+
+        getData('/calcEV/getMeshes', data => {
+            buildList(data, "mesh3");
+            setValueOnChange('/calcEV/setMesh', 'mesh', document.getElementById("mesh3"));
         });
 
         setValueToListener();

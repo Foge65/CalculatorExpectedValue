@@ -7,6 +7,7 @@ import team.firestorm.repository.Model;
 import team.firestorm.service.Coefficient;
 import team.firestorm.service.HyperEV;
 import team.firestorm.service.Rake;
+import team.firestorm.service.mesh.*;
 import team.firestorm.service.room.*;
 
 @RestController
@@ -18,6 +19,7 @@ public class UserController {
     private final Coefficient coefficient;
     private final Rake rake;
     private Room room;
+    private Mesh mesh;
 
     @GetMapping("/getRooms")
     public ResponseEntity<Rooms[]> allRooms() {
@@ -119,5 +121,37 @@ public class UserController {
     @PostMapping("/setOtherBonuses")
     public void setOtherBonuses(@RequestParam("dollars") double dollars) {
         this.model.setOtherPayments(dollars);
+    }
+
+    @GetMapping("/getMeshes")
+    public ResponseEntity<Meshes[]> getMeshes() {
+        return ResponseEntity.ok(Meshes.values());
+    }
+
+    @PostMapping("/setMesh")
+    public void setMesh(@RequestParam("mesh") String mesh) {
+        Meshes meshes = Meshes.valueOf(mesh);
+        switch (meshes) {
+            case Study:
+                this.mesh = new Study();
+                break;
+            case BackingWithoutStudy:
+                this.mesh = new BackingWithoutStudy();
+                break;
+            case StudyAndBacking:
+                this.mesh = new StudyAndBacking();
+                break;
+        }
+        this.model.setMesh(this.mesh);
+    }
+
+    @GetMapping("/evBI")
+    public ResponseEntity<Double> evBI() {
+        return ResponseEntity.ok(this.hyperEV.evBI());
+    }
+
+    @GetMapping("/evTotTourney")
+    public ResponseEntity<Double> evTotTourney() {
+        return ResponseEntity.ok(this.hyperEV.profitTotalPerTourney());
     }
 }
