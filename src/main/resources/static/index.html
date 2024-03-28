@@ -301,11 +301,6 @@
         });
 
         getData('/calcEV/getRooms', data => {
-            buildList(data, "room1");
-            setValueOnChange('/calcEV/setRoom', 'room', document.getElementById("room1"));
-        });
-
-        getData('/calcEV/getRooms', data => {
             buildList(data, "room2");
             setValueOnChange('/calcEV/setRoom', 'room', document.getElementById("room2"));
         });
