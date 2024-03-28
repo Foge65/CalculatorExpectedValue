@@ -22,7 +22,7 @@ public class Model {
     private double loseCoefficient;
     private double dollarsPerHour;
     private double hoursPerDay;
-    private double daysDuringPeriod;
+    private int daysPerMonth;
     private double evTotal;
     private double dollarsEVPerTourney;
     private double otherPayments;

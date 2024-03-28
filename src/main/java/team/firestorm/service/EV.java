@@ -21,7 +21,7 @@ public class EV {
     }
 
     public double evTotal() {
-        return this.model.getDollarsPerHour() * this.model.getHoursPerDay() * this.model.getDaysDuringPeriod();
+        return this.model.getDollarsPerHour() * this.model.getHoursPerDay() * this.model.getDaysPerMonth();
     }
 
     public double profitTotal() {
