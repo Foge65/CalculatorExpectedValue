@@ -11,7 +11,7 @@ public class EV {
 
     public double hyperEV() {
         double buyIn = this.model.getBuyIn();
-        int tournaments = this.model.getTournaments();
+        int tournaments = this.model.getTourneyPerPeriod();
         double chipsEV = this.model.getChipsEVFromTourney();
         double winCoefficient = this.model.getWinCoefficient();
         double loseCoefficient = this.model.getLoseCoefficient();
@@ -25,7 +25,7 @@ public class EV {
     }
 
     public double profitTotal() {
-        return hyperEV() + (this.model.getTournaments() * this.model.getBuyIn()
+        return hyperEV() + (this.model.getTourneyPerPeriod() * this.model.getBuyIn()
                 * this.model.getRake() / 100 * this.model.getRakeBackTotal() / 100)
                 + this.model.getOtherPayments();
     }

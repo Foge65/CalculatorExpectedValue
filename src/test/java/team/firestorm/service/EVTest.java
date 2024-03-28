@@ -22,7 +22,7 @@ class EVTest {
         ev = new EV(model);
 
         model.setBuyIn(10);
-        model.setTournaments(5000);
+        model.setTourneyPerPeriod(5000);
         model.setChipsEVFromTourney(15);
         coefficient.setWinCoefficient(model.getBuyIn());
         coefficient.setLoseCoefficient(model.getBuyIn());
@@ -39,7 +39,7 @@ class EVTest {
         ev = new EV(model);
 
         model.setBuyIn(10);
-        model.setTournaments(5000);
+        model.setTourneyPerPeriod(5000);
         model.setChipsEVFromTourney(30);
         coefficient.setWinCoefficient(model.getBuyIn());
         coefficient.setLoseCoefficient(model.getBuyIn());
@@ -56,7 +56,7 @@ class EVTest {
         ev = new EV(model);
 
         model.setBuyIn(10);
-        model.setTournaments(5000);
+        model.setTourneyPerPeriod(5000);
         model.setChipsEVFromTourney(15);
         coefficient.setWinCoefficient(model.getBuyIn());
         coefficient.setLoseCoefficient(model.getBuyIn());

@@ -58,9 +58,9 @@ public class UserController {
         this.rake.setRake(buyIn);
     }
 
-    @PostMapping("/setTournaments")
+    @PostMapping("/setTourneyPerPeriod")
     public void tournaments(@RequestParam("tourney") int tourney) {
-        this.model.setTournaments(tourney);
+        this.model.setTourneyPerPeriod(tourney);
     }
 
     @PostMapping("/setChipsEVFromTourney")

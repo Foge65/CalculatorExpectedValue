@@ -13,7 +13,7 @@ public class Model {
     private Room room;
     private double buyIn;
     private int rake;
-    private int tournaments;
+    private int tourneyPerPeriod;
     private double chipsEVFromTourney;
     private double rakeBackTotal;
     private int tables;
