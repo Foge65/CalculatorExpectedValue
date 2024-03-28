@@ -205,4 +205,14 @@ public class UserController {
     public ResponseEntity<Double> getRakeBackPercentPerPeriod() {
         return ResponseEntity.ok(this.ev.rakeBackPercentPerPeriod());
     }
+
+    @GetMapping("/getRakeBackPercentTotal")
+    public ResponseEntity<Double> getRakeBackPercentTotal() {
+        return ResponseEntity.ok(this.ev.rakeBackPercentTotal());
+    }
+
+    @GetMapping("/getDollarEVTotalPerTourney")
+    public ResponseEntity<Double> getDollarEVTotalPerTourney() {
+        return ResponseEntity.ok(this.ev.dollarEVTotalPerTourney());
+    }
 }
