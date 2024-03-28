@@ -14,7 +14,7 @@ public class Model {
     private double buyIn;
     private int rake;
     private int tournaments;
-    private double chipsEV;
+    private double chipsEVFromTourney;
     private double rakeBack;
     private int tables;
     private double tablesPerHour;

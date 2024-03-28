@@ -12,7 +12,7 @@ public class EV {
     public double hyperEV() {
         double buyIn = this.model.getBuyIn();
         int tournaments = this.model.getTournaments();
-        double chipsEV = this.model.getChipsEV();
+        double chipsEV = this.model.getChipsEVFromTourney();
         double winCoefficient = this.model.getWinCoefficient();
         double loseCoefficient = this.model.getLoseCoefficient();
 

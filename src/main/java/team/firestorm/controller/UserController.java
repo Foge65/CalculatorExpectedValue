@@ -63,9 +63,9 @@ public class UserController {
         this.model.setTournaments(tourney);
     }
 
-    @PostMapping("/setChipsEV")
-    public void chipsEV(@RequestParam("chipsEV") double chipsEV) {
-        this.model.setChipsEV(chipsEV);
+    @PostMapping("/setChipsEVFromTourney")
+    public void chipsEV(@RequestParam("chips") double chips) {
+        this.model.setChipsEVFromTourney(chips);
     }
 
     @GetMapping("/hyperEV")
