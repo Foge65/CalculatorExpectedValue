@@ -32,4 +32,5 @@ public class Model {
     private int tourneyPerDay;
     private int tourneyPerWeek;
     private double rakeBackPercentPerDay;
+    private int weeksPerPeriod;
 }

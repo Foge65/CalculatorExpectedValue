@@ -185,4 +185,9 @@ public class UserController {
     public ResponseEntity<Double> getRakeBackPercentPerWeek() {
         return ResponseEntity.ok(this.ev.rakeBackPercentPerWeek());
     }
+
+    @PostMapping("/setWeeksPerPeriod")
+    public void setWeeksPerPeriod(@RequestParam("weeks") int weeks) {
+        this.model.setWeeksPerPeriod(weeks);
+    }
 }
