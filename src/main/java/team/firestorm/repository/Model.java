@@ -27,4 +27,5 @@ public class Model {
     private double dollarsEVPerTourney;
     private double otherPayments;
     private Mesh mesh;
+    private int tourneyPerDay;
 }

@@ -118,7 +118,7 @@ public class UserController {
         return ResponseEntity.ok(this.ev.profitTotal());
     }
 
-    @PostMapping("/setOtherBonuses")
+    @PostMapping("/setOtherPayments")
     public void setOtherBonuses(@RequestParam("dollars") double dollars) {
         this.model.setOtherPayments(dollars);
     }
@@ -153,5 +153,10 @@ public class UserController {
     @GetMapping("/dollarEVTotalFromTourney")
     public ResponseEntity<Double> dollarEVTotalFromTourney() {
         return ResponseEntity.ok(this.ev.dollarEVTotalFromTourney());
+    }
+
+    @PostMapping("/setTourneyPerDay")
+    public void setTourneyPerDay(@RequestParam("tourney") int tourney) {
+        this.model.setTourneyPerDay(tourney);
     }
 }
