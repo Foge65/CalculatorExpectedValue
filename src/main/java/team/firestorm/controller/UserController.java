@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import team.firestorm.repository.Model;
 import team.firestorm.service.Coefficient;
-import team.firestorm.service.HyperEV;
+import team.firestorm.service.EV;
 import team.firestorm.service.Rake;
 import team.firestorm.service.mesh.*;
 import team.firestorm.service.room.*;
@@ -15,7 +15,7 @@ import team.firestorm.service.room.*;
 @RequestMapping("/calcEV")
 public class UserController {
     private final Model model;
-    private final HyperEV hyperEV;
+    private final EV ev;
     private final Coefficient coefficient;
     private final Rake rake;
     private Room room;
@@ -70,7 +70,7 @@ public class UserController {
 
     @GetMapping("/hyperEV")
     public ResponseEntity<Double> hyperEV() {
-        return ResponseEntity.ok(this.hyperEV.hyperEV());
+        return ResponseEntity.ok(this.ev.hyperEV());
     }
 
     @PostMapping("/setRakeBack")
@@ -105,7 +105,7 @@ public class UserController {
 
     @GetMapping("/evTotal")
     public ResponseEntity<Double> evTotal() {
-        return ResponseEntity.ok(this.hyperEV.evTotal());
+        return ResponseEntity.ok(this.ev.evTotal());
     }
 
     @PostMapping("/setDollarsEVPerTourney")
@@ -115,7 +115,7 @@ public class UserController {
 
     @GetMapping("/profitTotal")
     public ResponseEntity<Double> profitTotal() {
-        return ResponseEntity.ok(this.hyperEV.profitTotal());
+        return ResponseEntity.ok(this.ev.profitTotal());
     }
 
     @PostMapping("/setOtherBonuses")
@@ -147,11 +147,11 @@ public class UserController {
 
     @GetMapping("/evBI")
     public ResponseEntity<Double> evBI() {
-        return ResponseEntity.ok(this.hyperEV.evBI());
+        return ResponseEntity.ok(this.ev.evBI());
     }
 
     @GetMapping("/evTotTourney")
     public ResponseEntity<Double> evTotTourney() {
-        return ResponseEntity.ok(this.hyperEV.profitTotalPerTourney());
+        return ResponseEntity.ok(this.ev.profitTotalPerTourney());
     }
 }

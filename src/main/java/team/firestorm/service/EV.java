@@ -6,7 +6,7 @@ import team.firestorm.repository.Model;
 
 @Service
 @AllArgsConstructor
-public class HyperEV {
+public class EV {
     private final Model model;
 
     public double hyperEV() {
