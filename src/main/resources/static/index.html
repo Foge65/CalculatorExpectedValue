@@ -97,7 +97,7 @@
 
                 <div>
                     <a><b>$EV Total / Tourney:</b></a>
-                    <input id="evTotalPerTourney" readonly type="text">
+                    <input id="dollarEVTotalFromTourney2" readonly type="text">
                 </div>
 
                 <div>
@@ -353,8 +353,7 @@
     function setValueToListener() {
         getValueById('/calcEV/dollarEVTotal', 'dollarEVTotal1');
         getValueById('/calcEV/evBI', 'evBI1');
-        getValueById('/calcEV/profitTotal', 'profitTotal');
-        getValueById('/calcEV/evTotTourney', 'evTotalPerTourney');
+        getValueById('/calcEV/dollarEVTotalFromTourney', 'dollarEVTotalFromTourney2');
     }
 
     function setDefaultValue(field) {

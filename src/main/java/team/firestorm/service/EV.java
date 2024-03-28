@@ -34,7 +34,7 @@ public class EV {
         return dollarEVTotal() / this.model.getBuyIn();
     }
 
-    public Double profitTotalPerTourney() {
+    public Double dollarEVTotalFromTourney() {
         return this.model.getBuyIn() * this.model.getRake() * this.model.getRakeBackTotal()
                 + this.model.getDollarsEVPerTourney();
     }

@@ -150,8 +150,8 @@ public class UserController {
         return ResponseEntity.ok(this.ev.evBI());
     }
 
-    @GetMapping("/evTotTourney")
-    public ResponseEntity<Double> evTotTourney() {
-        return ResponseEntity.ok(this.ev.profitTotalPerTourney());
+    @GetMapping("/dollarEVTotalFromTourney")
+    public ResponseEntity<Double> dollarEVTotalFromTourney() {
+        return ResponseEntity.ok(this.ev.dollarEVTotalFromTourney());
     }
 }
