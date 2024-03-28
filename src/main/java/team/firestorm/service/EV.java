@@ -53,4 +53,8 @@ public class EV {
     public Integer tourneyPerPeriod() {
         return tourneyPerWeek() * this.model.getWeeksPerPeriod();
     }
+
+    public Double rakeBackPercentPerPeriod() {
+        return this.model.getRakeBackDollarsPerPeriod() / (tourneyPerPeriod() * this.model.getBuyIn() * this.model.getRake());
+    }
 }

@@ -217,9 +217,8 @@
                 </div>
 
                 <div>
-                    <a>RackBack за период, %:</a>
-                    <input id="rakeBackPercentDuringPeriod3"
-                           oninput="setValueOnChange('/cacEV/getRakeBackPercentDuringPeriod', 'rakeBack', this)">
+                    <a><b>RackBack за период, %:</b></a>
+                    <input id="rakeBackPercentPerPeriod3" readonly>
                 </div>
 
                 <div>
@@ -352,6 +351,7 @@
         getValueById('/calcEV/getTourneyPerWeek', 'tourneyPerWeek3');
         getValueById('/calcEV/getRakeBackPercentPerWeek', 'rakeBackPercentPerWeek3');
         getValueById('/calcEV/getTourneyPerPeriod', 'tourneyPerPeriod3');
+        getValueById('/calcEV/getRakeBackPercentPerPeriod', 'rakeBackPercentPerPeriod3');
     }
 
     function setDefaultValue(field) {

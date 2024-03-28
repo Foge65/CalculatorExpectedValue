@@ -190,6 +190,7 @@ public class UserController {
     public void setWeeksPerPeriod(@RequestParam("weeks") int weeks) {
         this.model.setWeeksPerPeriod(weeks);
     }
+
     @GetMapping("/getTourneyPerPeriod")
     public ResponseEntity<Integer> getTourneyPerPeriod() {
         return ResponseEntity.ok(this.ev.tourneyPerPeriod());
@@ -198,5 +199,10 @@ public class UserController {
     @PostMapping("/setRakeBackDollarsPerPeriod")
     public void setRakeBackDollarsPerPeriod(@RequestParam("dollars") double dollars) {
         this.model.setRakeBackDollarsPerPeriod(dollars);
+    }
+
+    @GetMapping("/getRakeBackPercentPerPeriod")
+    public ResponseEntity<Double> getRakeBackPercentPerPeriod() {
+        return ResponseEntity.ok(this.ev.rakeBackPercentPerPeriod());
     }
 }
