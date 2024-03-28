@@ -20,7 +20,7 @@ public class EV {
                 + (1 - ((500 + chipsEV) / 1500)) * loseCoefficient);
     }
 
-    public double evTotal() {
+    public double dollarEVTotal() {
         return this.model.getDollarsPerHour() * this.model.getHoursPerDay() * this.model.getDaysPerMonth();
     }
 
@@ -31,7 +31,7 @@ public class EV {
     }
 
     public Double evBI() {
-        return this.model.getEvTotal() / this.model.getBuyIn();
+        return dollarEVTotal() / this.model.getBuyIn();
     }
 
     public Double profitTotalPerTourney() {

@@ -36,6 +36,11 @@
                 </div>
 
                 <div>
+                    <a><b>$EV Total (общий профит):</b></a>
+                    <input id="dollarEVTotal1" readonly>
+                </div>
+
+                <div>
                     <a><b>EV BI:</b></a>
                     <input id="evBI1" readonly>
                 </div>
@@ -344,10 +349,9 @@
     });
 
     function setValueToListener() {
-        getValueById('/calcEV/hyperEV', 'hyperEV');
-        getValueById('/calcEV/evTotal', 'profitTotal');
+        getValueById('/calcEV/dollarEVTotal', 'dollarEVTotal1');
+        getValueById('/calcEV/evBI', 'evBI1');
         getValueById('/calcEV/profitTotal', 'profitTotal');
-        getValueById('/calcEV/evBI', 'evBI');
         getValueById('/calcEV/evTotTourney', 'evTotalPerTourney');
     }
 

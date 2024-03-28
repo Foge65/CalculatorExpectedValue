@@ -103,9 +103,9 @@ public class UserController {
         this.model.setDaysPerMonth(days);
     }
 
-    @GetMapping("/evTotal")
-    public ResponseEntity<Double> evTotal() {
-        return ResponseEntity.ok(this.ev.evTotal());
+    @GetMapping("/dollarEVTotal")
+    public ResponseEntity<Double> dollarEVTotal() {
+        return ResponseEntity.ok(this.ev.dollarEVTotal());
     }
 
     @PostMapping("/setDollarsEVPerTourney")
