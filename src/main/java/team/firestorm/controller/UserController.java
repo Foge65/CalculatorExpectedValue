@@ -14,6 +14,7 @@ import team.firestorm.service.room.*;
 @AllArgsConstructor
 @RequestMapping("/calcEV")
 public class UserController {
+    //    TODO : Может разбить на 3 контроллера? Будет для каждого блока свой
     private final Model model;
     private final EV ev;
     private final Coefficient coefficient;
@@ -163,6 +164,11 @@ public class UserController {
     @PostMapping("/setTourneyPerDay")
     public void setTourneyPerDay(@RequestParam("tourney") int tourney) {
         this.model.setTourneyPerDay(tourney);
+    }
+
+    @GetMapping("/getTourneyPerWeek")
+    public ResponseEntity<Integer> getTourneyPerWeek() {
+        return ResponseEntity.ok(this.ev.tourneyPerWeek());
     }
 
     @GetMapping("/getRakeBackPercentPerDay")

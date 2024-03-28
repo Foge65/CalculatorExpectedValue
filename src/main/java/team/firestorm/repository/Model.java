@@ -29,5 +29,6 @@ public class Model {
     private double rakeBackDollarsPerDay;
     private Mesh mesh;
     private int tourneyPerDay;
+    private int tourneyPerWeek;
     private double rakeBackPercentPerDay;
 }

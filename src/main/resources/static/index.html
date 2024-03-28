@@ -184,9 +184,8 @@
                 </div>
 
                 <div>
-                    <a>Дистанция в неделю:</a>
-                    <input id="tournamentsPerWeek3"
-                           oninput="setValueOnChange('/cacEV/getTournamentsPerWeek', 'tournaments', this)">
+                    <a><b>Дистанция в неделю:</b></a>
+                    <input id="tourneyPerWeek3" readonly>
                 </div>
 
                 <div>
@@ -284,21 +283,12 @@
     }
 
     const setFields = [
-        "tournaments",
-        "chipsEV",
-        "tables",
-        "tablesPerHour",
-        "dollarsEVPerTourney",
-        "dollarsPerHour",
-        "hoursPerDay",
-        "daysDuringPeriod",
-        "rakeBack",
-        "otherPayments",
+        //     TODO: Заполнить поля для установки дефолтного значения
     ];
 
     document.addEventListener("DOMContentLoaded", () => {
-        setFields.forEach(fieldId => {
-            const field = document.getElementById(fieldId);
+        setFields.forEach(element => {
+            const field = document.getElementById(element);
             setDefaultValue(field);
         });
 
@@ -361,6 +351,7 @@
         getValueById('/calcEV/dollarEVTotal', 'dollarEVTotal3');
         getValueById('/calcEV/evBI', 'evBI3');
         getValueById('/calcEV/getRakeBackPercentPerDay', 'rakeBackPercentPerDay3');
+        getValueById('/calcEV/getTourneyPerWeek', 'tourneyPerWeek3');
     }
 
     function setDefaultValue(field) {
