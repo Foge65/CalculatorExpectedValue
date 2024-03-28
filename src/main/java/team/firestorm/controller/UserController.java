@@ -73,9 +73,9 @@ public class UserController {
         return ResponseEntity.ok(this.ev.hyperEV());
     }
 
-    @PostMapping("/setRakeBack")
+    @PostMapping("/setRakeBackTotal")
     public void rakeBack(@RequestParam("rakeBack") double rakeBack) {
-        this.model.setRakeBack(rakeBack);
+        this.model.setRakeBackTotal(rakeBack);
     }
 
     @PostMapping("/setTables")

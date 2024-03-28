@@ -26,7 +26,7 @@ public class EV {
 
     public double profitTotal() {
         return hyperEV() + (this.model.getTournaments() * this.model.getBuyIn()
-                * this.model.getRake() / 100 * this.model.getRakeBack() / 100)
+                * this.model.getRake() / 100 * this.model.getRakeBackTotal() / 100)
                 + this.model.getOtherPayments();
     }
 
@@ -35,7 +35,7 @@ public class EV {
     }
 
     public Double profitTotalPerTourney() {
-        return this.model.getBuyIn() * this.model.getRake() * this.model.getRakeBack()
+        return this.model.getBuyIn() * this.model.getRake() * this.model.getRakeBackTotal()
                 + this.model.getDollarsEVPerTourney();
     }
 }
