@@ -261,6 +261,9 @@
 </div>
 
 <script>
+    const setFields = [
+        //     TODO: Заполнить поля для установки дефолтного значения
+    ];
 
     function setValueOnInput(id, request, requestParam) {
         let value = document.getElementById(id).value;
@@ -276,10 +279,6 @@
             });
         }
     }
-
-    const setFields = [
-        //     TODO: Заполнить поля для установки дефолтного значения
-    ];
 
     document.addEventListener("DOMContentLoaded", () => {
         setFields.forEach(element => {
@@ -338,13 +337,11 @@
     function setValueToListener() {
         getValueById('/calcEV/dollarEVTotal', 'dollarEVTotal1');
         getValueById('/calcEV/evBI', 'evBI1');
-        getValueById('/calcEV/dollarEVTotalFromTourney', 'dollarEVTotalFromTourney2');
 
+        getValueById('/calcEV/dollarEVTotalFromTourney', 'dollarEVTotalFromTourney2');
         getValueById('/calcEV/dollarEVTotal', 'dollarEVTotal2');
         getValueById('/calcEV/evBI', 'evBI2');
 
-        getValueById('/calcEV/dollarEVTotal', 'dollarEVTotal3');
-        getValueById('/calcEV/evBI', 'evBI3');
         getValueById('/calcEV/getRakeBackPercentPerDay', 'rakeBackPercentPerDay3');
         getValueById('/calcEV/getTourneyPerWeek', 'tourneyPerWeek3');
         getValueById('/calcEV/getRakeBackPercentPerWeek', 'rakeBackPercentPerWeek3');
@@ -352,6 +349,8 @@
         getValueById('/calcEV/getRakeBackPercentPerPeriod', 'rakeBackPercentPerPeriod3');
         getValueById('/calcEV/getRakeBackPercentTotal', 'rakeBackPercentTotal3');
         getValueById('/calcEV/getDollarEVTotalPerTourney', 'dollarEVTotalPerTourney3');
+        getValueById('/calcEV/dollarEVTotal', 'dollarEVTotal3');
+        getValueById('/calcEV/evBI', 'evBI3');
     }
 
     function setDefaultValue(field) {

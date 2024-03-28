@@ -119,11 +119,6 @@ public class UserController {
         this.model.setDollarsEVPerTourney(dollars);
     }
 
-    @GetMapping("/profitTotal")
-    public ResponseEntity<Double> profitTotal() {
-        return ResponseEntity.ok(this.ev.profitTotal());
-    }
-
     @PostMapping("/setRakeBackDollarsPerDay")
     public void setRakeBackDollarsPerDay(@RequestParam("payments") double payments) {
         this.model.setRakeBackDollarsPerDay(payments);

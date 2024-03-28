@@ -24,45 +24,40 @@ public class EV {
         return this.model.getDollarsPerHour() * this.model.getHoursPerDay() * this.model.getDaysPerMonth();
     }
 
-    public double profitTotal() {
-        return hyperEV() + (this.model.getTourneyPerPeriod() * this.model.getBuyIn()
-                * this.model.getRake() / 100 * this.model.getRakeBackTotal() / 100);
-    }
-
-    public Double evBI() {
+    public double evBI() {
         return dollarEVTotal() / this.model.getBuyIn();
     }
 
-    public Double dollarEVTotalFromTourney() {
+    public double dollarEVTotalFromTourney() {
         return this.model.getBuyIn() * this.model.getRake() * this.model.getRakeBackTotal()
                 + this.model.getDollarsEVPerTourney();
     }
 
-    public Double rakeBackPercentPerDay() {
+    public double rakeBackPercentPerDay() {
         return this.model.getRakeBackDollarsPerDay() / (this.model.getTourneyPerDay() * this.model.getBuyIn() * this.model.getRake());
     }
 
-    public Integer tourneyPerWeek() {
+    public int tourneyPerWeek() {
         return this.model.getTourneyPerDay() * this.model.getDaysPerWeek();
     }
 
-    public Double rakeBackPercentPerWeek() {
+    public double rakeBackPercentPerWeek() {
         return this.model.getRakeBackDollarsPerWeek() / (this.model.getBuyIn() * this.model.getRake() * tourneyPerWeek());
     }
 
-    public Integer tourneyPerPeriod() {
+    public int tourneyPerPeriod() {
         return tourneyPerWeek() * this.model.getWeeksPerPeriod();
     }
 
-    public Double rakeBackPercentPerPeriod() {
+    public double rakeBackPercentPerPeriod() {
         return this.model.getRakeBackDollarsPerPeriod() / (tourneyPerPeriod() * this.model.getBuyIn() * this.model.getRake());
     }
 
-    public Double rakeBackPercentTotal() {
+    public double rakeBackPercentTotal() {
         return rakeBackPercentPerDay() + rakeBackPercentPerWeek() + rakeBackPercentPerPeriod();
     }
 
-    public Double dollarEVTotalPerTourney() {
+    public double dollarEVTotalPerTourney() {
         return this.model.getBuyIn() * this.model.getRake() * rakeBackPercentTotal() + this.model.getDollarsEVPerTourney();
     }
 }
