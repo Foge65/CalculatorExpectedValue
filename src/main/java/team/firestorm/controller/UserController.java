@@ -129,6 +129,11 @@ public class UserController {
         this.model.setRakeBackDollarsPerDay(payments);
     }
 
+    @PostMapping("/setRakeBackDollarsPerWeek")
+    public void setRakeBackDollarsPerWeek(@RequestParam("payments") double payments) {
+        this.model.setRakeBackDollarsPerWeek(payments);
+    }
+
     @GetMapping("/getMeshes")
     public ResponseEntity<Meshes[]> getMeshes() {
         return ResponseEntity.ok(Meshes.values());
