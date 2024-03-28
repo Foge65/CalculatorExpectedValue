@@ -238,13 +238,13 @@
                 </div>
 
                 <div>
-                    <a>$EV Total:</a>
-                    <input id="evTotal3" oninput="setValueOnChange('/cacEV/getEVTotal', 'ev', this)">
+                    <a><b>$EV Total (Общий профит):</b></a>
+                    <input id="dollarEVTotal3" readonly>
                 </div>
 
                 <div>
-                    <a>EV BI:</a>
-                    <input id="evBI3" oninput="setValueOnChange('/cacEV/getEvBI', 'evBI', this)">
+                    <a><b>EV BI:</b></a>
+                    <input id="evBI3" readonly>
                 </div>
 
                 <div id="meshs3">
@@ -353,9 +353,13 @@
     function setValueToListener() {
         getValueById('/calcEV/dollarEVTotal', 'dollarEVTotal1');
         getValueById('/calcEV/evBI', 'evBI1');
-
         getValueById('/calcEV/dollarEVTotalFromTourney', 'dollarEVTotalFromTourney2');
+
         getValueById('/calcEV/dollarEVTotal', 'dollarEVTotal2');
+        getValueById('/calcEV/evBI', 'evBI2');
+
+        getValueById('/calcEV/dollarEVTotal', 'dollarEVTotal3');
+        getValueById('/calcEV/evBI', 'evBI3');
     }
 
     function setDefaultValue(field) {
