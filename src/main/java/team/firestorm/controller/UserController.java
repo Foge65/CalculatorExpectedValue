@@ -119,8 +119,8 @@ public class UserController {
     }
 
     @PostMapping("/setRakeBackDollarsPerDay")
-    public void setRakeBackDollarsPerDay(@RequestParam("dollars") double payments) {
-        this.model.setRakeBackPaymentsPerDay(payments);
+    public void setRakeBackDollarsPerDay(@RequestParam("payments") double payments) {
+        this.model.setRakeBackDollarsPerDay(payments);
     }
 
     @GetMapping("/getMeshes")
@@ -158,5 +158,10 @@ public class UserController {
     @PostMapping("/setTourneyPerDay")
     public void setTourneyPerDay(@RequestParam("tourney") int tourney) {
         this.model.setTourneyPerDay(tourney);
+    }
+
+    @GetMapping("/getRakeBackPercentPerDay")
+    public ResponseEntity<Double> getRakeBackPercentPerDay() {
+        return ResponseEntity.ok(this.ev.rakeBackPercentPerDay());
     }
 }

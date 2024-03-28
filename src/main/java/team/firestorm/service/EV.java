@@ -37,4 +37,8 @@ public class EV {
         return this.model.getBuyIn() * this.model.getRake() * this.model.getRakeBackTotal()
                 + this.model.getDollarsEVPerTourney();
     }
+
+    public Double rakeBackPercentPerDay() {
+        return this.model.getRakeBackDollarsPerDay() / (this.model.getTourneyPerDay() * this.model.getBuyIn() * this.model.getRake());
+    }
 }

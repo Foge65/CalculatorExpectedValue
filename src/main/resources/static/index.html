@@ -173,9 +173,8 @@
                 </div>
 
                 <div>
-                    <a>%RB в день:</a>
-                    <input id="rakeBackPerDay3"
-                           oninput="setValueOnChange('/cacEV/getRakeBackPerDay', 'rakeBack', this)">
+                    <a><b>%RB в день:</b></a>
+                    <input id="rakeBackPercentPerDay3" readonly>
                 </div>
 
                 <div>
@@ -233,7 +232,7 @@
                 </div>
 
                 <div>
-                    <a>$EV Total / Tourney:</a>
+                    <a>$EV Total/Tourney:</a>
                     <input id="evTotalPerTourney3"
                            oninput="setValueOnChange('/cacEV/getEVTotalPerTourney', 'ev', this)">
                 </div>
@@ -361,6 +360,7 @@
 
         getValueById('/calcEV/dollarEVTotal', 'dollarEVTotal3');
         getValueById('/calcEV/evBI', 'evBI3');
+        getValueById('/calcEV/getRakeBackPercentPerDay', 'rakeBackPercentPerDay3');
     }
 
     function setDefaultValue(field) {
