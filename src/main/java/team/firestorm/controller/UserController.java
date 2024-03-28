@@ -190,4 +190,9 @@ public class UserController {
     public void setWeeksPerPeriod(@RequestParam("weeks") int weeks) {
         this.model.setWeeksPerPeriod(weeks);
     }
+
+    @GetMapping("/getTourneyPerPeriod")
+    public ResponseEntity<Integer> getTourneyPerPeriod() {
+        return ResponseEntity.ok(this.ev.tourneyPerPeriod());
+    }
 }

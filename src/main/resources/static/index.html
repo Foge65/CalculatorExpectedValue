@@ -206,9 +206,8 @@
                 </div>
 
                 <div>
-                    <a>Дистанция за период:</a>
-                    <input id="tournamentsForPeriod3"
-                           oninput="setValueOnChange('/cacEV/getTournamentsForPeriod', 'rakeBack', this)">
+                    <a><b>Дистанция за период:</b></a>
+                    <input id="tourneyPerPeriod3" readonly>
                 </div>
 
                 <div>
@@ -352,6 +351,7 @@
         getValueById('/calcEV/getRakeBackPercentPerDay', 'rakeBackPercentPerDay3');
         getValueById('/calcEV/getTourneyPerWeek', 'tourneyPerWeek3');
         getValueById('/calcEV/getRakeBackPercentPerWeek', 'rakeBackPercentPerWeek3');
+        getValueById('/calcEV/getTourneyPerPeriod', 'tourneyPerPeriod3');
     }
 
     function setDefaultValue(field) {
