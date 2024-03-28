@@ -180,4 +180,9 @@ public class UserController {
     public ResponseEntity<Double> getRakeBackPercentPerDay() {
         return ResponseEntity.ok(this.ev.rakeBackPercentPerDay());
     }
+
+    @GetMapping("/getRakeBackPercentPerWeek")
+    public ResponseEntity<Double> getRakeBackPercentPerWeek() {
+        return ResponseEntity.ok(this.ev.rakeBackPercentPerWeek());
+    }
 }

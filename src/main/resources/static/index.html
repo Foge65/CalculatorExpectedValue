@@ -195,9 +195,8 @@
                 </div>
 
                 <div>
-                    <a>%RB в неделю:</a>
-                    <input id="rakeBackPerWeek3"
-                           oninput="setValueOnChange('/cacEV/getRakeBackPerWeek', 'rakeBack', this)">
+                    <a><b>%RB в неделю:</b></a>
+                    <input id="rakeBackPercentPerWeek3" readonly>
                 </div>
 
                 <div>
@@ -352,6 +351,7 @@
         getValueById('/calcEV/evBI', 'evBI3');
         getValueById('/calcEV/getRakeBackPercentPerDay', 'rakeBackPercentPerDay3');
         getValueById('/calcEV/getTourneyPerWeek', 'tourneyPerWeek3');
+        getValueById('/calcEV/getRakeBackPercentPerWeek', 'rakeBackPercentPerWeek3');
     }
 
     function setDefaultValue(field) {
