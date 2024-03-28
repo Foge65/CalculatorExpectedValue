@@ -118,9 +118,9 @@ public class UserController {
         return ResponseEntity.ok(this.ev.profitTotal());
     }
 
-    @PostMapping("/setOtherPayments")
-    public void setOtherBonuses(@RequestParam("dollars") double dollars) {
-        this.model.setOtherPayments(dollars);
+    @PostMapping("/setRakeBackDollarsPerDay")
+    public void setRakeBackDollarsPerDay(@RequestParam("dollars") double payments) {
+        this.model.setRakeBackPaymentsPerDay(payments);
     }
 
     @GetMapping("/getMeshes")

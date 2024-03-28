@@ -26,8 +26,7 @@ public class EV {
 
     public double profitTotal() {
         return hyperEV() + (this.model.getTourneyPerPeriod() * this.model.getBuyIn()
-                * this.model.getRake() / 100 * this.model.getRakeBackTotal() / 100)
-                + this.model.getOtherPayments();
+                * this.model.getRake() / 100 * this.model.getRakeBackTotal() / 100);
     }
 
     public Double evBI() {

@@ -25,7 +25,7 @@ public class Model {
     private int daysPerMonth;
     private double evTotal;
     private double dollarsEVPerTourney;
-    private double otherPayments;
+    private double rakeBackPaymentsPerDay;
     private Mesh mesh;
     private int tourneyPerDay;
 }
