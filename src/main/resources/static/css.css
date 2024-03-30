@@ -12,9 +12,25 @@ p {
     margin-right: 10px;
 }
 
-td {
+.table-container td {
     vertical-align: top;
     text-align: left;
+}
+
+.table-container div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.table-container div a {
+    margin-right: 5px;
+}
+
+.table-container div select,
+.table-container div input {
+    box-sizing: border-box;
+    width: 100px;
 }
 
 h3 {
