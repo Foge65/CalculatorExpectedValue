@@ -12,7 +12,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import team.firestorm.service.mesh.Meshes;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@AutoConfigureMockMvc
+@AutoConfigureMockMvc(printOnlyOnFailure = false)
 class UserControllerTest {
     @Autowired
     private MockMvc mockMvc;
@@ -34,8 +34,7 @@ class UserControllerTest {
 
     @Test
     void getMeshes() throws Exception {
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/calcEV/getMeshes")
-                        .contentType(MediaType.APPLICATION_JSON))
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/calcEV/getMeshes"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.jsonPath("$", Matchers.hasSize(Meshes.values().length)))

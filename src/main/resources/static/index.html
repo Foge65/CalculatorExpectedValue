@@ -289,16 +289,13 @@
                 method: 'POST',
                 body: form
             }).then(() => {
-                setValueToListener();
+                addToListener();
             });
         }
     }
 
     document.addEventListener("DOMContentLoaded", () => {
-        setFields.forEach(element => {
-            const field = document.getElementById(element);
-            setDefaultValue(field);
-        });
+        setDefaultValue();
 
         getData('/calcEV/getRooms', data => {
             buildList(data, "room2");
@@ -340,10 +337,38 @@
             setValueOnChange('/calcEV/setMesh', 'mesh', document.getElementById("mesh3"));
         });
 
-        setValueToListener();
+        addToListener();
+
+        let roomSelect2 = document.getElementById("room2");
+        let roomSelect3 = document.getElementById("room3");
+
+        roomSelect2.addEventListener("change", () => {
+            updateBuyInsForRoom(roomSelect2.value, "buyIn2");
+        });
+
+        roomSelect3.addEventListener("change", () => {
+            updateBuyInsForRoom(roomSelect3.value, "buyIn3");
+        });
     });
 
-    function setValueToListener() {
+    function updateBuyInsForRoom(room, buyInId) {
+        let buyInSelect = document.getElementById(buyInId);
+        buyInSelect.innerHTML = "";
+
+        getData(`/calcEV/getBuyIns?room=${encodeURIComponent(room)}`, data => {
+            buildList(data, buyInId);
+            setValueOnChange('/calcEV/setBuyIn', 'buyIn', buyInSelect);
+        });
+    }
+
+    function setDefaultValue() {
+        setFields.forEach(element => {
+            const field = document.getElementById(element);
+            field.value = "0";
+        });
+    }
+
+    function addToListener() {
         getValueById('/calcEV/dollarEVTotal', 'dollarEVTotal1');
         getValueById('/calcEV/evBI', 'evBI1');
 
@@ -360,12 +385,6 @@
         getValueById('/calcEV/getDollarEVTotalPerTourney', 'dollarEVTotalPerTourney3');
         getValueById('/calcEV/dollarEVTotal', 'dollarEVTotal3');
         getValueById('/calcEV/evBI', 'evBI3');
-    }
-
-    function setDefaultValue(field) {
-        if (field) {
-            field.value = "0";
-        }
     }
 
     function getData(url, callback) {
@@ -395,7 +414,7 @@
         fetch(url, {
             method: 'POST',
         }).then(() => {
-            setValueToListener();
+            addToListener();
         });
     }
 

@@ -9,40 +9,25 @@ import team.firestorm.service.room.Room;
 import team.firestorm.service.room.Winamax;
 
 class EVTest {
-    private Room room;
     private Model model;
     private Coefficient coefficient;
     private EV ev;
 
     @Test
     void hyperEV_PokerStars() {
-        room = new PokerStars();
-        model = new Model();
-        coefficient = new Coefficient(model, room);
-        ev = new EV(model);
+        initRoom(new PokerStars());
 
-        model.setBuyIn(10);
-        model.setTourneyPerPeriod(5000);
-        model.setChipsEVFromTourney(15);
-        coefficient.setWinCoefficient(model.getBuyIn());
-        coefficient.setLoseCoefficient(model.getBuyIn());
+        setData();
 
         double hyperEV = this.ev.hyperEV();
-        Assertions.assertEquals(-2144.9074999999984, hyperEV);
+        Assertions.assertEquals(-769.8199999999988, hyperEV);
     }
 
     @Test
     void hyperEV_Winamax() {
-        room = new Winamax();
-        model = new Model();
-        coefficient = new Coefficient(model, room);
-        ev = new EV(model);
+        initRoom(new Winamax());
 
-        model.setBuyIn(10);
-        model.setTourneyPerPeriod(5000);
-        model.setChipsEVFromTourney(30);
-        coefficient.setWinCoefficient(model.getBuyIn());
-        coefficient.setLoseCoefficient(model.getBuyIn());
+        setData();
 
         double hyperEV = this.ev.hyperEV();
         Assertions.assertEquals(-1570.5216666666688, hyperEV);
@@ -50,18 +35,25 @@ class EVTest {
 
     @Test
     void hyperEV_iPoker() {
-        room = new IPoker();
+        initRoom(new IPoker());
+
+        setData();
+
+        double hyperEV = this.ev.hyperEV();
+        Assertions.assertEquals(-1062.3333333333374, hyperEV);
+    }
+
+    private void initRoom(Room room) {
         model = new Model();
         coefficient = new Coefficient(model, room);
         ev = new EV(model);
+    }
 
+    private void setData() {
         model.setBuyIn(10);
         model.setTourneyPerPeriod(5000);
-        model.setChipsEVFromTourney(15);
+        model.setChipsEVFromTourney(30);
         coefficient.setWinCoefficient(model.getBuyIn());
         coefficient.setLoseCoefficient(model.getBuyIn());
-
-        double hyperEV = this.ev.hyperEV();
-        Assertions.assertEquals(-2447.3333333333403, hyperEV);
     }
 }
