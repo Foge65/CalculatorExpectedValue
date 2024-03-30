@@ -426,8 +426,8 @@
         fetch(request)
             .then(response => response.text())
             .then(data => {
-                document.getElementById(id).value = data;
-            })
+                document.getElementById(id).value = isNaN(parseFloat(data)) ? 0 : parseFloat(data);
+            });
     }
 
 </script>
