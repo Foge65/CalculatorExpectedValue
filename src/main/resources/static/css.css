@@ -1,15 +1,9 @@
-p {
-    margin: 0;
-}
-
 .table-container {
     display: flex;
 }
 
 .table-container table {
-    border: 1px solid black;
-    border-collapse: collapse;
-    margin-right: 10px;
+    margin: 0 20px;
 }
 
 .table-container td {
@@ -20,19 +14,31 @@ p {
 .table-container div {
     display: flex;
     justify-content: space-between;
-    align-items: center;
 }
 
 .table-container div a {
-    margin-right: 5px;
+    margin-right: 10px;
 }
 
 .table-container div select,
 .table-container div input {
     box-sizing: border-box;
     width: 100px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
 }
 
 h3 {
     margin: 0;
+    font-family: kanit, sans-serif;
+    color: #fff;
+}
+
+* {
+    font-size: medium;
+    color: darkgray;
+    background-color: #252736;
+    font-family: -apple-system, BlinkMacSystemFont, segoe ui, roboto, oxygen, ubuntu, cantarell, fira sans, droid sans, helvetica neue, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
