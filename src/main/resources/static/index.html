@@ -19,19 +19,19 @@
 
                 <div>
                     <a>$/Час:</a>
-                    <input id="dollarsPerHour1"
+                    <input id="dollarsPerHour1" type="number"
                            oninput="setValueOnInput('dollarsPerHour1', '/calcEV/setDollarsPerHour', 'dollars')">
                 </div>
 
                 <div>
                     <a>Рабочих часов в день:</a>
-                    <input id="hoursPerDay1"
+                    <input id="hoursPerDay1" type="number"
                            oninput="setValueOnInput('hoursPerDay1', '/calcEV/setHoursPerDay', 'hours')">
                 </div>
 
                 <div>
                     <a>Рабочих дней в месяц:</a>
-                    <input id="daysPerMonth1"
+                    <input id="daysPerMonth1" type="number"
                            oninput="setValueOnInput('daysPerMonth1', '/calcEV/setDaysPerMonth', 'days')">
                 </div>
 
@@ -79,19 +79,19 @@
 
                 <div>
                     <a>ChipsEV/Tourney:</a>
-                    <input id="chipsEV2"
+                    <input id="chipsEV2" type="number"
                            oninput="setValueOnInput('chipsEV2', '/calcEV/setChipsEVFromTourney', 'chips')">
                 </div>
 
                 <div>
                     <a>$EV/Tourney:</a>
-                    <input id="dollarsEVPerTourney2"
+                    <input id="dollarsEVPerTourney2" type="number"
                            oninput="setValueOnInput('dollarsEVPerTourney2', '/calcEV/setDollarsEVPerTourney', 'dollars')">
                 </div>
 
                 <div>
                     <a>RackBack Total, %:</a>
-                    <input id="rakeBackTotal2"
+                    <input id="rakeBackTotal2" type="number"
                            oninput="setValueOnInput('rakeBackTotal2', '/calcEV/setRakeBackTotal', 'rakeBack')">
                 </div>
 
@@ -102,7 +102,7 @@
 
                 <div>
                     <a>Дистанция за период:</a>
-                    <input id="tourneyPerPeriod2"
+                    <input id="tourneyPerPeriod2" type="number"
                            oninput="setValueOnInput('tourneyPerPeriod2', '/calcEV/setTourneyPerPeriod', 'tourney')">
                 </div>
 
@@ -150,25 +150,25 @@
 
                 <div>
                     <a>ChipsEV/Tourney:</a>
-                    <input id="chipsEV3"
+                    <input id="chipsEV3" type="number"
                            oninput="setValueOnInput('chipsEV3', '/calcEV/setChipsEVFromTourney', 'chips')">
                 </div>
 
                 <div>
                     <a>$EV/Tourney:</a>
-                    <input id="dollarsEVPerTourney3"
+                    <input id="dollarsEVPerTourney3" type="number"
                            oninput="setValueOnInput('dollarsEVPerTourney3', '/calcEV/setDollarsEVPerTourney', 'dollars')">
                 </div>
 
                 <div>
                     <a>Дистанция в день:</a>
-                    <input id="tourneyPerDay3"
+                    <input id="tourneyPerDay3" type="number"
                            oninput="setValueOnInput('tourneyPerDay3', '/calcEV/setTourneyPerDay', 'tourney')">
                 </div>
 
                 <div>
                     <a>Выплаты RB в день, $:</a>
-                    <input id="rakeBackDollarsPerDay3"
+                    <input id="rakeBackDollarsPerDay3" type="number"
                            oninput="setValueOnInput('rakeBackDollarsPerDay3', '/calcEV/setRakeBackDollarsPerDay', 'payments')">
                 </div>
 
@@ -179,7 +179,7 @@
 
                 <div>
                     <a>Игровых дней в неделю:</a>
-                    <input id="daysPerWeek3"
+                    <input id="daysPerWeek3" type="number"
                            oninput="setValueOnInput('daysPerWeek3', '/calcEV/setDaysPerWeek', 'days')">
                 </div>
 
@@ -190,7 +190,7 @@
 
                 <div>
                     <a>Выплаты RB в неделю, $:</a>
-                    <input id="rakeBackDollarsPerWeek3"
+                    <input id="rakeBackDollarsPerWeek3" type="number"
                            oninput="setValueOnInput('rakeBackDollarsPerWeek3', '/calcEV/setRakeBackDollarsPerWeek', 'payments')">
                 </div>
 
@@ -201,7 +201,7 @@
 
                 <div>
                     <a>Игровых недель в период:</a>
-                    <input id="weeksPerPeriod3"
+                    <input id="weeksPerPeriod3" type="number"
                            oninput="setValueOnInput('weeksPerPeriod3', '/calcEV/setWeeksPerPeriod', 'weeks')">
                 </div>
 
@@ -212,7 +212,7 @@
 
                 <div>
                     <a>Выплаты RB в период, $:</a>
-                    <input id="rakeBackDollarsPerPeriod3"
+                    <input id="rakeBackDollarsPerPeriod3" type="number"
                            oninput="setValueOnInput('rakeBackDollarsPerPeriod3', '/calcEV/setRakeBackDollarsPerPeriod', 'dollars')">
                 </div>
 
@@ -279,21 +279,6 @@
         'rakeBackDollarsPerPeriod3'
     ];
 
-    function setValueOnInput(id, request, requestParam) {
-        let value = document.getElementById(id).value;
-        if (value.trim() !== '' && /^\d*\.?\d*$/.test(value)) {
-            let form = new FormData();
-            form.append(requestParam, value);
-
-            fetch(request, {
-                method: 'POST',
-                body: form
-            }).then(() => {
-                addToListener();
-            });
-        }
-    }
-
     document.addEventListener("DOMContentLoaded", () => {
         setDefaultValue();
 
@@ -355,23 +340,6 @@
         });
     });
 
-    function updateBuyInsForRoom(room, buyInId) {
-        let buyInSelect = document.getElementById(buyInId);
-        buyInSelect.innerHTML = "";
-
-        getData(`/calcEV/getBuyIns?room=${encodeURIComponent(room)}`, data => {
-            buildList(data, buyInId);
-            setValueOnChange('/calcEV/setBuyIn', 'buyIn', buyInSelect);
-        });
-    }
-
-    function setDefaultValue() {
-        setFields.forEach(element => {
-            const field = document.getElementById(element);
-            field.value = "0";
-        });
-    }
-
     function addToListener() {
         getValueById('/calcEV/dollarEVTotal', 'dollarEVTotal1');
         getValueById('/calcEV/evBI', 'evBI1');
@@ -389,6 +357,47 @@
         getValueById('/calcEV/getDollarEVTotalPerTourney', 'dollarEVTotalPerTourney3');
         getValueById('/calcEV/dollarEVTotal', 'dollarEVTotal3');
         getValueById('/calcEV/evBI', 'evBI3');
+    }
+
+    function setValueOnInput(id, request, requestParam) {
+        let value = document.getElementById(id).value;
+        if (value.trim() !== '' && /^\d*\.?\d*$/.test(value)) {
+            let form = new FormData();
+            form.append(requestParam, value);
+
+            fetch(request, {
+                method: 'POST',
+                body: form
+            }).then(() => {
+                addToListener();
+            });
+        }
+    }
+
+    function setValueOnChange(request, requestParam, value) {
+        let url = `${request}?${requestParam}=${encodeURIComponent(value.value)}`;
+        fetch(url, {
+            method: 'POST',
+        }).then(() => {
+            addToListener();
+        });
+    }
+
+    function setDefaultValue() {
+        setFields.forEach(element => {
+            const field = document.getElementById(element);
+            field.value = "0";
+        });
+    }
+
+    function updateBuyInsForRoom(room, buyInId) {
+        let buyInSelect = document.getElementById(buyInId);
+        buyInSelect.innerHTML = "";
+
+        getData(`/calcEV/getBuyIns?room=${encodeURIComponent(room)}`, data => {
+            buildList(data, buyInId);
+            setValueOnChange('/calcEV/setBuyIn', 'buyIn', buyInSelect);
+        });
     }
 
     function getData(url, callback) {
@@ -410,15 +419,6 @@
             option.value = item;
             option.textContent = item;
             element.appendChild(option);
-        });
-    }
-
-    function setValueOnChange(request, requestParam, value) {
-        let url = `${request}?${requestParam}=${encodeURIComponent(value.value)}`;
-        fetch(url, {
-            method: 'POST',
-        }).then(() => {
-            addToListener();
         });
     }
 
