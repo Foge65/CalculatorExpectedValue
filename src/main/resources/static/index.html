@@ -426,7 +426,8 @@
         fetch(request)
             .then(response => response.text())
             .then(data => {
-                document.getElementById(id).value = isNaN(parseFloat(data)) ? 0 : parseFloat(data);
+                const parsedData = parseFloat(data);
+                document.getElementById(id).value = isNaN(parsedData) ? 0 : parsedData.toFixed(2);
             });
     }
 
