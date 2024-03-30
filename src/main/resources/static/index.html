@@ -297,6 +297,10 @@
     document.addEventListener("DOMContentLoaded", () => {
         setDefaultValue();
 
+        fetch('/calcEV/resetAllFields', {
+            method: 'POST',
+        })
+
         getData('/calcEV/getRooms', data => {
             buildList(data, "room2");
             setValueOnChange('/calcEV/setRoom', 'room', document.getElementById("room2"));

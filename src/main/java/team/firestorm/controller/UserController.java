@@ -210,4 +210,23 @@ public class UserController {
     public ResponseEntity<Double> getDollarEVTotalPerTourney() {
         return ResponseEntity.ok(this.ev.dollarEVTotalPerTourney());
     }
+
+    @PostMapping("/resetAllFields")
+    public void resetAllFields() {
+        this.model.setDollarsPerHour(0);
+        this.model.setHoursPerDay(0);
+        this.model.setDaysPerMonth(0);
+        this.model.setChipsEVFromTourney(0);
+        this.model.setDollarsEVPerTourney(0);
+        this.model.setRakeBackTotal(0);
+        this.model.setTourneyPerPeriod(0);
+        this.model.setChipsEVFromTourney(0);
+        this.model.setDollarsEVPerTourney(0);
+        this.model.setTourneyPerDay(0);
+        this.model.setRakeBackDollarsPerDay(0);
+        this.model.setDaysPerWeek(0);
+        this.model.setRakeBackDollarsPerWeek(0);
+        this.model.setWeeksPerPeriod(0);
+        this.model.setRakeBackDollarsPerPeriod(0);
+    }
 }
