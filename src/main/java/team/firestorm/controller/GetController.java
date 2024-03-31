@@ -5,9 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import team.firestorm.repository.Model;
 import team.firestorm.service.DontKnowMyTotalRakeBack;
-import team.firestorm.service.HyperEV;
 import team.firestorm.service.KnowMyDollarPerHour;
 import team.firestorm.service.KnowMyTotalRakeBack;
 import team.firestorm.service.mesh.Meshes;
@@ -18,12 +16,10 @@ import team.firestorm.service.room.Rooms;
 @RequestMapping("/calcEV")
 @AllArgsConstructor
 public class GetController {
-    private final HyperEV hyperEV;
     private final KnowMyDollarPerHour knowMyDollarPerHour;
     private final KnowMyTotalRakeBack knowMyTotalRakeBack;
     private final DontKnowMyTotalRakeBack dontKnowMyTotalRakeBack;
     private Room room;
-    private Model model;
 
     @GetMapping("/getRooms")
     public ResponseEntity<Rooms[]> rooms() {
@@ -35,9 +31,14 @@ public class GetController {
         return ResponseEntity.ok(this.room.buyIns());
     }
 
-    @GetMapping("/getDollarsEVPerTourney")
-    public ResponseEntity<Double> dollarEVPerTourney() {
-        return ResponseEntity.ok(this.hyperEV.hyperEV() / this.model.getTourneyPerPeriod());
+    @GetMapping("/getDollarsEVPerTourney2")
+    public ResponseEntity<Double> dollarEVPerTourney2() {
+        return ResponseEntity.ok(this.knowMyTotalRakeBack.dollarEVPerTourney());
+    }
+
+    @GetMapping("/getDollarsEVPerTourney3")
+    public ResponseEntity<Double> dollarEVPerTourney3() {
+        return ResponseEntity.ok(this.dontKnowMyTotalRakeBack.dollarEVPerTourney());
     }
 
     @GetMapping("/dollarEVTotal1")

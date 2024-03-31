@@ -8,10 +8,16 @@ import team.firestorm.repository.Model;
 @AllArgsConstructor
 public class KnowMyTotalRakeBack {
     private final Model model;
+    private final HyperEV hyperEV;
+
+    public double dollarEVPerTourney() {
+        int tourney = this.model.getTourneyPerPeriod();
+        return hyperEV.hyperEV(tourney) / tourney;
+    }
 
     public double dollarEVTotalPerTourney() {
         return this.model.getBuyIn() * this.model.getRake() / 100 * this.model.getRakeBackTotal() / 100
-                + this.model.getDollarsEVPerTourney();
+                + dollarEVPerTourney();
     }
 
     public double dollarEVTotal() {
