@@ -9,8 +9,35 @@ import team.firestorm.repository.Model;
 public class DontKnowMyTotalRakeBack {
     private final Model model;
 
+    public double rakeBackPercentPerDay() {
+        return this.model.getRakeBackDollarsPerDay() /
+                (this.model.getBuyIn() * this.model.getRake() / 100 * this.model.getTourneyPerDay()) * 100;
+    }
+
+    public int tourneyPerWeek() {
+        return this.model.getTourneyPerDay() * this.model.getDaysPerWeek();
+    }
+
+    public double rakeBackPercentPerWeek() {
+        return this.model.getRakeBackDollarsPerWeek() /
+                (this.model.getBuyIn() * this.model.getRake() / 100 * tourneyPerWeek()) * 100;
+    }
+
+    public int tourneyPerPeriod() {
+        return tourneyPerWeek() * this.model.getWeeksPerPeriod();
+    }
+
+    public double rakeBackPercentPerPeriod() {
+        return this.model.getRakeBackDollarsPerPeriod()
+                / (this.model.getBuyIn() * this.model.getRake() / 100 * tourneyPerPeriod()) * 100;
+    }
+
+    public double rakeBackPercentTotal() {
+        return rakeBackPercentPerDay() + rakeBackPercentPerWeek() + rakeBackPercentPerPeriod();
+    }
+
     public double dollarEVTotalPerTourney() {
-        return this.model.getBuyIn() * this.model.getRake() * this.model.getRakeBackTotal()
+        return this.model.getBuyIn() * this.model.getRake() / 100 * rakeBackPercentTotal() / 100
                 + this.model.getDollarsEVPerTourney();
     }
 
@@ -19,30 +46,6 @@ public class DontKnowMyTotalRakeBack {
     }
 
     public double evBI() {
-        return 0;
-    }
-
-    public double rakeBackPercentPerDay() {
-        return this.model.getRakeBackDollarsPerDay() / (this.model.getTourneyPerDay() * this.model.getBuyIn() * this.model.getRake());
-    }
-
-    public int tourneyPerWeek() {
-        return this.model.getTourneyPerDay() * this.model.getDaysPerWeek();
-    }
-
-    public double rakeBackPercentPerWeek() {
-        return this.model.getRakeBackDollarsPerWeek() / (this.model.getBuyIn() * this.model.getRake() * tourneyPerWeek());
-    }
-
-    public int tourneyPerPeriod() {
-        return tourneyPerWeek() * this.model.getWeeksPerPeriod();
-    }
-
-    public double rakeBackPercentPerPeriod() {
-        return this.model.getRakeBackDollarsPerPeriod() / (tourneyPerPeriod() * this.model.getBuyIn() * this.model.getRake());
-    }
-
-    public double rakeBackPercentTotal() {
-        return rakeBackPercentPerDay() + rakeBackPercentPerWeek() + rakeBackPercentPerPeriod();
+        return dollarEVTotal() / this.model.getBuyIn();
     }
 }

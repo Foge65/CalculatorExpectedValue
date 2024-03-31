@@ -10,7 +10,7 @@ public class KnowMyTotalRakeBack {
     private final Model model;
 
     public double dollarEVTotalPerTourney() {
-        return this.model.getBuyIn() * this.model.getRake() * this.model.getRakeBackTotal()
+        return this.model.getBuyIn() * this.model.getRake() / 100 * this.model.getRakeBackTotal() / 100
                 + this.model.getDollarsEVPerTourney();
     }
 
@@ -19,6 +19,6 @@ public class KnowMyTotalRakeBack {
     }
 
     public double evBI() {
-        return 0;
+        return dollarEVTotal() / this.model.getBuyIn();
     }
 }
