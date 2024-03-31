@@ -1,31 +1,25 @@
 package team.firestorm.controller;
 
 import lombok.AllArgsConstructor;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import team.firestorm.repository.Model;
 import team.firestorm.service.Coefficient;
-import team.firestorm.service.EV;
 import team.firestorm.service.Rake;
 import team.firestorm.service.mesh.*;
 import team.firestorm.service.room.*;
 
 @RestController
-@AllArgsConstructor
 @RequestMapping("/calcEV")
-public class UserController {
-    //    TODO : Может разбить на 3 контроллера? Будет для каждого блока свой
+@AllArgsConstructor
+public class SetController {
     private final Model model;
-    private final EV ev;
     private final Coefficient coefficient;
     private final Rake rake;
     private Room room;
     private Mesh mesh;
-
-    @GetMapping("/getRooms")
-    public ResponseEntity<Rooms[]> allRooms() {
-        return ResponseEntity.ok(Rooms.values());
-    }
 
     @PostMapping("/setRoom")
     public void setRoom(@RequestParam("room") String room) {
@@ -42,11 +36,6 @@ public class UserController {
                 break;
         }
         this.model.setRoom(this.room);
-    }
-
-    @GetMapping("/getBuyIns")
-    public ResponseEntity<double[]> getBuyIns() {
-        return ResponseEntity.ok(this.room.buyIns());
     }
 
     @PostMapping("/setBuyIn")
@@ -69,24 +58,9 @@ public class UserController {
         this.model.setChipsEVFromTourney(chips);
     }
 
-    @GetMapping("/hyperEV")
-    public ResponseEntity<Double> hyperEV() {
-        return ResponseEntity.ok(this.ev.hyperEV());
-    }
-
     @PostMapping("/setRakeBackTotal")
     public void rakeBack(@RequestParam("rakeBack") double rakeBack) {
         this.model.setRakeBackTotal(rakeBack);
-    }
-
-    @PostMapping("/setTables")
-    public void tables(@RequestParam("tables") int tables) {
-        this.model.setTables(tables);
-    }
-
-    @PostMapping("/setTablesPerHour")
-    public void tablesPerHour(@RequestParam("tables") double tables) {
-        this.model.setTablesPerHour(tables);
     }
 
     @PostMapping("/setDollarsPerHour")
@@ -109,11 +83,6 @@ public class UserController {
         this.model.setDaysPerMonth(days);
     }
 
-    @GetMapping("/dollarEVTotal")
-    public ResponseEntity<Double> dollarEVTotal() {
-        return ResponseEntity.ok(this.ev.dollarEVTotal());
-    }
-
     @PostMapping("/setDollarsEVPerTourney")
     public void setDollarsEVPerTourney(@RequestParam("dollars") double dollars) {
         this.model.setDollarsEVPerTourney(dollars);
@@ -127,11 +96,6 @@ public class UserController {
     @PostMapping("/setRakeBackDollarsPerWeek")
     public void setRakeBackDollarsPerWeek(@RequestParam("payments") double payments) {
         this.model.setRakeBackDollarsPerWeek(payments);
-    }
-
-    @GetMapping("/getMeshes")
-    public ResponseEntity<Meshes[]> getMeshes() {
-        return ResponseEntity.ok(Meshes.values());
     }
 
     @PostMapping("/setMesh")
@@ -151,34 +115,9 @@ public class UserController {
         this.model.setMesh(this.mesh);
     }
 
-    @GetMapping("/evBI")
-    public ResponseEntity<Double> evBI() {
-        return ResponseEntity.ok(this.ev.evBI());
-    }
-
-    @GetMapping("/dollarEVTotalFromTourney")
-    public ResponseEntity<Double> dollarEVTotalFromTourney() {
-        return ResponseEntity.ok(this.ev.dollarEVTotalFromTourney());
-    }
-
     @PostMapping("/setTourneyPerDay")
     public void setTourneyPerDay(@RequestParam("tourney") int tourney) {
         this.model.setTourneyPerDay(tourney);
-    }
-
-    @GetMapping("/getTourneyPerWeek")
-    public ResponseEntity<Integer> getTourneyPerWeek() {
-        return ResponseEntity.ok(this.ev.tourneyPerWeek());
-    }
-
-    @GetMapping("/getRakeBackPercentPerDay")
-    public ResponseEntity<Double> getRakeBackPercentPerDay() {
-        return ResponseEntity.ok(this.ev.rakeBackPercentPerDay());
-    }
-
-    @GetMapping("/getRakeBackPercentPerWeek")
-    public ResponseEntity<Double> getRakeBackPercentPerWeek() {
-        return ResponseEntity.ok(this.ev.rakeBackPercentPerWeek());
     }
 
     @PostMapping("/setWeeksPerPeriod")
@@ -186,29 +125,9 @@ public class UserController {
         this.model.setWeeksPerPeriod(weeks);
     }
 
-    @GetMapping("/getTourneyPerPeriod")
-    public ResponseEntity<Integer> getTourneyPerPeriod() {
-        return ResponseEntity.ok(this.ev.tourneyPerPeriod());
-    }
-
     @PostMapping("/setRakeBackDollarsPerPeriod")
     public void setRakeBackDollarsPerPeriod(@RequestParam("dollars") double dollars) {
         this.model.setRakeBackDollarsPerPeriod(dollars);
-    }
-
-    @GetMapping("/getRakeBackPercentPerPeriod")
-    public ResponseEntity<Double> getRakeBackPercentPerPeriod() {
-        return ResponseEntity.ok(this.ev.rakeBackPercentPerPeriod());
-    }
-
-    @GetMapping("/getRakeBackPercentTotal")
-    public ResponseEntity<Double> getRakeBackPercentTotal() {
-        return ResponseEntity.ok(this.ev.rakeBackPercentTotal());
-    }
-
-    @GetMapping("/getDollarEVTotalPerTourney")
-    public ResponseEntity<Double> getDollarEVTotalPerTourney() {
-        return ResponseEntity.ok(this.ev.dollarEVTotalPerTourney());
     }
 
     @PostMapping("/resetAllFields")
@@ -220,8 +139,6 @@ public class UserController {
         this.model.setDollarsEVPerTourney(0);
         this.model.setRakeBackTotal(0);
         this.model.setTourneyPerPeriod(0);
-        this.model.setChipsEVFromTourney(0);
-        this.model.setDollarsEVPerTourney(0);
         this.model.setTourneyPerDay(0);
         this.model.setRakeBackDollarsPerDay(0);
         this.model.setDaysPerWeek(0);

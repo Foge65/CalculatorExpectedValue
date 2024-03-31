@@ -6,31 +6,20 @@ import team.firestorm.repository.Model;
 
 @Service
 @AllArgsConstructor
-public class EV {
+public class DontKnowMyTotalRakeBack {
     private final Model model;
 
-    public double hyperEV() {
-        double buyIn = this.model.getBuyIn();
-        int tournaments = this.model.getTourneyPerPeriod();
-        double chipsEV = this.model.getChipsEVFromTourney();
-        double winCoefficient = this.model.getWinCoefficient();
-        double loseCoefficient = this.model.getLoseCoefficient();
-
-        return buyIn * tournaments * (((500 + chipsEV) / 1500) * winCoefficient
-                + (1 - ((500 + chipsEV) / 1500)) * loseCoefficient);
+    public double dollarEVTotalPerTourney() {
+        return this.model.getBuyIn() * this.model.getRake() * this.model.getRakeBackTotal()
+                + this.model.getDollarsEVPerTourney();
     }
 
     public double dollarEVTotal() {
-        return this.model.getDollarsPerHour() * this.model.getHoursPerDay() * this.model.getDaysPerMonth();
+        return tourneyPerPeriod() * dollarEVTotalPerTourney();
     }
 
     public double evBI() {
-        return dollarEVTotal() / this.model.getBuyIn();
-    }
-
-    public double dollarEVTotalFromTourney() {
-        return this.model.getBuyIn() * this.model.getRake() * this.model.getRakeBackTotal()
-                + this.model.getDollarsEVPerTourney();
+        return 0;
     }
 
     public double rakeBackPercentPerDay() {
@@ -55,9 +44,5 @@ public class EV {
 
     public double rakeBackPercentTotal() {
         return rakeBackPercentPerDay() + rakeBackPercentPerWeek() + rakeBackPercentPerPeriod();
-    }
-
-    public double dollarEVTotalPerTourney() {
-        return this.model.getBuyIn() * this.model.getRake() * rakeBackPercentTotal() + this.model.getDollarsEVPerTourney();
     }
 }

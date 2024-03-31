@@ -14,49 +14,58 @@
             <td>
                 <div>
                     <a>Лимит:</a>
+                    <label for="buyIn1"></label>
                     <select id="buyIn1" onchange="setValueOnChange('/calcEV/setBuyIn', 'buyIn', this)"></select>
                 </div>
 
                 <div>
                     <a>$/Час:</a>
+                    <label for="dollarsPerHour1"></label>
                     <input id="dollarsPerHour1" type="number"
                            oninput="setValueOnInput('dollarsPerHour1', '/calcEV/setDollarsPerHour', 'dollars')">
                 </div>
 
                 <div>
                     <a>Рабочих часов в день:</a>
+                    <label for="hoursPerDay1"></label>
                     <input id="hoursPerDay1" type="number"
                            oninput="setValueOnInput('hoursPerDay1', '/calcEV/setHoursPerDay', 'hours')">
                 </div>
 
                 <div>
                     <a>Рабочих дней в месяц:</a>
+                    <label for="daysPerMonth1"></label>
                     <input id="daysPerMonth1" type="number"
                            oninput="setValueOnInput('daysPerMonth1', '/calcEV/setDaysPerMonth', 'days')">
                 </div>
 
                 <div>
                     <a><b>$EV Total (общий профит):</b></a>
+                    <label for="dollarEVTotal1"></label>
                     <input id="dollarEVTotal1" readonly>
                 </div>
 
                 <div>
                     <a><b>EV BI:</b></a>
+                    <label for="evBI1"></label>
                     <input id="evBI1" readonly>
                 </div>
 
                 <div>
                     <a>Откатная сетка:</a>
+                    <label for="mesh1"></label>
                     <select id="mesh1" onchange="setValueOnChange('/calcEV/setMesh', 'mesh', this)"></select>
                 </div>
 
                 <div>
                     <a><b>Доля игрока, %:</b></a>
+                    <label for="playerWinPercent1"></label>
                     <input id="playerWinPercent1" readonly>
                 </div>
 
                 <div>
                     <a><b>Доля игрока, $:</b></a>
+                    <label for="playerWinMoney1"></label>
                     <input id="playerWinMoney1" readonly>
                 </div>
             </td>
@@ -69,65 +78,77 @@
             <td>
                 <div>
                     <a>Рум:</a>
+                    <label for="room2"></label>
                     <select id="room2" onchange="setValueOnChange('/calcEV/setRoom', 'room', this)"></select>
                 </div>
 
                 <div>
                     <a>Лимит:</a>
+                    <label for="buyIn2"></label>
                     <select id="buyIn2" onchange="setValueOnChange('/calcEV/setBuyIn', 'buyIn', this)"></select>
                 </div>
 
                 <div>
                     <a>ChipsEV/Tourney:</a>
+                    <label for="chipsEV2"></label>
                     <input id="chipsEV2" type="number"
                            oninput="setValueOnInput('chipsEV2', '/calcEV/setChipsEVFromTourney', 'chips')">
                 </div>
 
                 <div>
                     <a>$EV/Tourney:</a>
+                    <label for="dollarsEVPerTourney2"></label>
                     <input id="dollarsEVPerTourney2" type="number"
                            oninput="setValueOnInput('dollarsEVPerTourney2', '/calcEV/setDollarsEVPerTourney', 'dollars')">
                 </div>
 
                 <div>
                     <a>RackBack Total, %:</a>
+                    <label for="rakeBackTotal2"></label>
                     <input id="rakeBackTotal2" type="number"
                            oninput="setValueOnInput('rakeBackTotal2', '/calcEV/setRakeBackTotal', 'rakeBack')">
                 </div>
 
                 <div>
-                    <a><b>$EV Total / Tourney:</b></a>
-                    <input id="dollarEVTotalFromTourney2" readonly type="text">
+                    <a><b>$EV Total/Tourney:</b></a>
+                    <label for="dollarEVTotalPerTourney2"></label>
+                    <input id="dollarEVTotalPerTourney2" readonly>
                 </div>
 
                 <div>
                     <a>Дистанция за период:</a>
+                    <label for="tourneyPerPeriod2"></label>
                     <input id="tourneyPerPeriod2" type="number"
                            oninput="setValueOnInput('tourneyPerPeriod2', '/calcEV/setTourneyPerPeriod', 'tourney')">
                 </div>
 
                 <div>
                     <a><b>$EV Total (Общий профит):</b></a>
+                    <label for="dollarEVTotal2"></label>
                     <input id="dollarEVTotal2" readonly>
                 </div>
 
                 <div>
                     <a><b>EV BI:</b></a>
+                    <label for="evBI2"></label>
                     <input id="evBI2" readonly>
                 </div>
 
                 <div id="meshs2">
                     <a>Откатная сетка:</a>
+                    <label for="mesh2"></label>
                     <select id="mesh2" onchange="setValueOnChange('/calcEV/setMesh', 'mesh', this)"></select>
                 </div>
 
                 <div>
                     <a><b>Доля игрока, %:</b></a>
+                    <label for="playerWinPercent2"></label>
                     <input id="playerWinPercent2" readonly>
                 </div>
 
                 <div>
                     <a><b>Доля игрока, $:</b></a>
+                    <label for="playerWinMoney2"></label>
                     <input id="playerWinMoney2" readonly>
                 </div>
             </td>
@@ -140,119 +161,141 @@
             <td>
                 <div>
                     <a>Рум:</a>
+                    <label for="room3"></label>
                     <select id="room3" onchange="setValueOnChange('/calcEV/setRoom', 'room', this)"></select>
                 </div>
 
                 <div>
                     <a>Лимит:</a>
+                    <label for="buyIn3"></label>
                     <select id="buyIn3" onchange="setValueOnChange('/calcEV/setBuyIn', 'buyIn', this)"></select>
                 </div>
 
                 <div>
                     <a>ChipsEV/Tourney:</a>
+                    <label for="chipsEV3"></label>
                     <input id="chipsEV3" type="number"
                            oninput="setValueOnInput('chipsEV3', '/calcEV/setChipsEVFromTourney', 'chips')">
                 </div>
 
                 <div>
                     <a>$EV/Tourney:</a>
+                    <label for="dollarsEVPerTourney3"></label>
                     <input id="dollarsEVPerTourney3" type="number"
                            oninput="setValueOnInput('dollarsEVPerTourney3', '/calcEV/setDollarsEVPerTourney', 'dollars')">
                 </div>
 
                 <div>
                     <a>Дистанция в день:</a>
+                    <label for="tourneyPerDay3"></label>
                     <input id="tourneyPerDay3" type="number"
                            oninput="setValueOnInput('tourneyPerDay3', '/calcEV/setTourneyPerDay', 'tourney')">
                 </div>
 
                 <div>
                     <a>Выплаты RB в день, $:</a>
+                    <label for="rakeBackDollarsPerDay3"></label>
                     <input id="rakeBackDollarsPerDay3" type="number"
                            oninput="setValueOnInput('rakeBackDollarsPerDay3', '/calcEV/setRakeBackDollarsPerDay', 'payments')">
                 </div>
 
                 <div>
                     <a><b>%RB в день:</b></a>
+                    <label for="rakeBackPercentPerDay3"></label>
                     <input id="rakeBackPercentPerDay3" readonly>
                 </div>
 
                 <div>
                     <a>Игровых дней в неделю:</a>
+                    <label for="daysPerWeek3"></label>
                     <input id="daysPerWeek3" type="number"
                            oninput="setValueOnInput('daysPerWeek3', '/calcEV/setDaysPerWeek', 'days')">
                 </div>
 
                 <div>
                     <a><b>Дистанция в неделю:</b></a>
+                    <label for="tourneyPerWeek3"></label>
                     <input id="tourneyPerWeek3" readonly>
                 </div>
 
                 <div>
                     <a>Выплаты RB в неделю, $:</a>
+                    <label for="rakeBackDollarsPerWeek3"></label>
                     <input id="rakeBackDollarsPerWeek3" type="number"
                            oninput="setValueOnInput('rakeBackDollarsPerWeek3', '/calcEV/setRakeBackDollarsPerWeek', 'payments')">
                 </div>
 
                 <div>
                     <a><b>%RB в неделю:</b></a>
+                    <label for="rakeBackPercentPerWeek3"></label>
                     <input id="rakeBackPercentPerWeek3" readonly>
                 </div>
 
                 <div>
                     <a>Игровых недель в период:</a>
+                    <label for="weeksPerPeriod3"></label>
                     <input id="weeksPerPeriod3" type="number"
                            oninput="setValueOnInput('weeksPerPeriod3', '/calcEV/setWeeksPerPeriod', 'weeks')">
                 </div>
 
                 <div>
                     <a><b>Дистанция за период:</b></a>
+                    <label for="tourneyPerPeriod3"></label>
                     <input id="tourneyPerPeriod3" readonly>
                 </div>
 
                 <div>
                     <a>Выплаты RB в период, $:</a>
+                    <label for="rakeBackDollarsPerPeriod3"></label>
                     <input id="rakeBackDollarsPerPeriod3" type="number"
                            oninput="setValueOnInput('rakeBackDollarsPerPeriod3', '/calcEV/setRakeBackDollarsPerPeriod', 'dollars')">
                 </div>
 
                 <div>
                     <a><b>RackBack за период, %:</b></a>
+                    <label for="rakeBackPercentPerPeriod3"></label>
                     <input id="rakeBackPercentPerPeriod3" readonly>
                 </div>
 
                 <div>
                     <a><b>RackBack Total, %:</b></a>
+                    <label for="rakeBackPercentTotal3"></label>
                     <input id="rakeBackPercentTotal3" readonly>
                 </div>
 
                 <div>
                     <a><b>$EV Total/Tourney:</b></a>
+                    <label for="dollarEVTotalPerTourney3"></label>
                     <input id="dollarEVTotalPerTourney3" readonly>
                 </div>
 
                 <div>
                     <a><b>$EV Total (Общий профит):</b></a>
+                    <label for="dollarEVTotal3"></label>
                     <input id="dollarEVTotal3" readonly>
                 </div>
 
                 <div>
                     <a><b>EV BI:</b></a>
+                    <label for="evBI3"></label>
                     <input id="evBI3" readonly>
                 </div>
 
                 <div id="meshs3">
                     <a>Откатная сетка:</a>
+                    <label for="mesh3"></label>
                     <select id="mesh3" onchange="setValueOnChange('/calcEV/setMesh', 'mesh', this)"></select>
                 </div>
 
                 <div>
                     <a><b>Доля игрока, %:</b></a>
+                    <label for="playerWinPercent3"></label>
                     <input id="playerWinPercent3" readonly>
                 </div>
 
                 <div>
                     <a><b>Доля игрока, $:</b></a>
+                    <label for="playerWinMoney3"></label>
                     <input id="playerWinMoney3" readonly>
                 </div>
             </td>
@@ -265,10 +308,12 @@
         'dollarsPerHour1',
         'hoursPerDay1',
         'daysPerMonth1',
+
         'chipsEV2',
         'dollarsEVPerTourney2',
         'rakeBackTotal2',
         'tourneyPerPeriod2',
+
         'chipsEV3',
         'dollarsEVPerTourney3',
         'tourneyPerDay3',
@@ -341,12 +386,12 @@
     });
 
     function addToListener() {
-        getValueById('/calcEV/dollarEVTotal', 'dollarEVTotal1');
-        getValueById('/calcEV/evBI', 'evBI1');
+        getValueById('/calcEV/dollarEVTotal1', 'dollarEVTotal1');
+        getValueById('/calcEV/evBI1', 'evBI1');
 
-        getValueById('/calcEV/dollarEVTotalFromTourney', 'dollarEVTotalFromTourney2');
-        getValueById('/calcEV/dollarEVTotal', 'dollarEVTotal2');
-        getValueById('/calcEV/evBI', 'evBI2');
+        getValueById('/calcEV/getDollarEVTotalPerTourney2', 'dollarEVTotalPerTourney2');
+        getValueById('/calcEV/dollarEVTotal2', 'dollarEVTotal2');
+        getValueById('/calcEV/evBI2', 'evBI2');
 
         getValueById('/calcEV/getRakeBackPercentPerDay', 'rakeBackPercentPerDay3');
         getValueById('/calcEV/getTourneyPerWeek', 'tourneyPerWeek3');
@@ -354,9 +399,9 @@
         getValueById('/calcEV/getTourneyPerPeriod', 'tourneyPerPeriod3');
         getValueById('/calcEV/getRakeBackPercentPerPeriod', 'rakeBackPercentPerPeriod3');
         getValueById('/calcEV/getRakeBackPercentTotal', 'rakeBackPercentTotal3');
-        getValueById('/calcEV/getDollarEVTotalPerTourney', 'dollarEVTotalPerTourney3');
-        getValueById('/calcEV/dollarEVTotal', 'dollarEVTotal3');
-        getValueById('/calcEV/evBI', 'evBI3');
+        getValueById('/calcEV/getDollarEVTotalPerTourney3', 'dollarEVTotalPerTourney3');
+        getValueById('/calcEV/dollarEVTotal3', 'dollarEVTotal3');
+        getValueById('/calcEV/evBI3', 'evBI3');
     }
 
     function setValueOnInput(id, request, requestParam) {
