@@ -96,10 +96,9 @@
                 </div>
 
                 <div>
-                    <a>$EV/Tourney:</a>
+                    <a><b>$EV/Tourney:</b></a>
                     <label for="dollarsEVPerTourney2"></label>
-                    <input id="dollarsEVPerTourney2" type="number"
-                           oninput="setValueOnInput('dollarsEVPerTourney2', '/calcEV/setDollarsEVPerTourney', 'dollars')">
+                    <input id="dollarsEVPerTourney2" readonly>
                 </div>
 
                 <div>
@@ -179,10 +178,9 @@
                 </div>
 
                 <div>
-                    <a>$EV/Tourney:</a>
+                    <a><b>$EV/Tourney:</b></a>
                     <label for="dollarsEVPerTourney3"></label>
-                    <input id="dollarsEVPerTourney3" type="number"
-                           oninput="setValueOnInput('dollarsEVPerTourney3', '/calcEV/setDollarsEVPerTourney', 'dollars')">
+                    <input id="dollarsEVPerTourney3" readonly>
                 </div>
 
                 <div>
@@ -310,12 +308,10 @@
         'daysPerMonth1',
 
         'chipsEV2',
-        'dollarsEVPerTourney2',
         'rakeBackTotal2',
         'tourneyPerPeriod2',
 
         'chipsEV3',
-        'dollarsEVPerTourney3',
         'tourneyPerDay3',
         'rakeBackDollarsPerDay3',
         'daysPerWeek3',
@@ -389,10 +385,12 @@
         getValueById('/calcEV/dollarEVTotal1', 'dollarEVTotal1');
         getValueById('/calcEV/evBI1', 'evBI1');
 
+        getValueById('/calcEV/getDollarsEVPerTourney', 'dollarsEVPerTourney2');
         getValueById('/calcEV/getDollarEVTotalPerTourney2', 'dollarEVTotalPerTourney2');
         getValueById('/calcEV/dollarEVTotal2', 'dollarEVTotal2');
         getValueById('/calcEV/evBI2', 'evBI2');
 
+        getValueById('/calcEV/getDollarsEVPerTourney', 'dollarsEVPerTourney3');
         getValueById('/calcEV/getRakeBackPercentPerDay', 'rakeBackPercentPerDay3');
         getValueById('/calcEV/getTourneyPerWeek', 'tourneyPerWeek3');
         getValueById('/calcEV/getRakeBackPercentPerWeek', 'rakeBackPercentPerWeek3');

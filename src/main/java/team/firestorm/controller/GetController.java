@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import team.firestorm.repository.Model;
 import team.firestorm.service.DontKnowMyTotalRakeBack;
 import team.firestorm.service.HyperEV;
 import team.firestorm.service.KnowMyDollarPerHour;
@@ -22,20 +23,21 @@ public class GetController {
     private final KnowMyTotalRakeBack knowMyTotalRakeBack;
     private final DontKnowMyTotalRakeBack dontKnowMyTotalRakeBack;
     private Room room;
+    private Model model;
 
     @GetMapping("/getRooms")
-    public ResponseEntity<Rooms[]> allRooms() {
+    public ResponseEntity<Rooms[]> rooms() {
         return ResponseEntity.ok(Rooms.values());
     }
 
     @GetMapping("/getBuyIns")
-    public ResponseEntity<double[]> getBuyIns() {
+    public ResponseEntity<double[]> buyIns() {
         return ResponseEntity.ok(this.room.buyIns());
     }
 
-    @GetMapping("/hyperEV")
-    public ResponseEntity<Double> hyperEV() {
-        return ResponseEntity.ok(this.hyperEV.hyperEV());
+    @GetMapping("/getDollarsEVPerTourney")
+    public ResponseEntity<Double> dollarEVPerTourney() {
+        return ResponseEntity.ok(this.hyperEV.hyperEV() / this.model.getTourneyPerPeriod());
     }
 
     @GetMapping("/dollarEVTotal1")
@@ -54,7 +56,7 @@ public class GetController {
     }
 
     @GetMapping("/getMeshes")
-    public ResponseEntity<Meshes[]> getMeshes() {
+    public ResponseEntity<Meshes[]> meshes() {
         return ResponseEntity.ok(Meshes.values());
     }
 
@@ -74,42 +76,42 @@ public class GetController {
     }
 
     @GetMapping("/getDollarEVTotalPerTourney2")
-    public ResponseEntity<Double> getDollarEVTotalPerTourney() {
+    public ResponseEntity<Double> dollarEVTotalPerTourney2() {
         return ResponseEntity.ok(this.knowMyTotalRakeBack.dollarEVTotalPerTourney());
     }
 
     @GetMapping("/getDollarEVTotalPerTourney3")
-    public ResponseEntity<Double> dollarEVTotalFromTourney() {
+    public ResponseEntity<Double> dollarEVTotalPerTourney3() {
         return ResponseEntity.ok(this.dontKnowMyTotalRakeBack.dollarEVTotalPerTourney());
     }
 
     @GetMapping("/getTourneyPerWeek")
-    public ResponseEntity<Integer> getTourneyPerWeek() {
+    public ResponseEntity<Integer> tourneyPerWeek() {
         return ResponseEntity.ok(this.dontKnowMyTotalRakeBack.tourneyPerWeek());
     }
 
+    @GetMapping("/getTourneyPerPeriod")
+    public ResponseEntity<Integer> tourneyPerPeriod() {
+        return ResponseEntity.ok(this.dontKnowMyTotalRakeBack.tourneyPerPeriod());
+    }
+
     @GetMapping("/getRakeBackPercentPerDay")
-    public ResponseEntity<Double> getRakeBackPercentPerDay() {
+    public ResponseEntity<Double> rakeBackPercentPerDay() {
         return ResponseEntity.ok(this.dontKnowMyTotalRakeBack.rakeBackPercentPerDay());
     }
 
     @GetMapping("/getRakeBackPercentPerWeek")
-    public ResponseEntity<Double> getRakeBackPercentPerWeek() {
+    public ResponseEntity<Double> rakeBackPercentPerWeek() {
         return ResponseEntity.ok(this.dontKnowMyTotalRakeBack.rakeBackPercentPerWeek());
     }
 
-    @GetMapping("/getTourneyPerPeriod")
-    public ResponseEntity<Integer> getTourneyPerPeriod() {
-        return ResponseEntity.ok(this.dontKnowMyTotalRakeBack.tourneyPerPeriod());
-    }
-
     @GetMapping("/getRakeBackPercentPerPeriod")
-    public ResponseEntity<Double> getRakeBackPercentPerPeriod() {
+    public ResponseEntity<Double> rakeBackPercentPerPeriod() {
         return ResponseEntity.ok(this.dontKnowMyTotalRakeBack.rakeBackPercentPerPeriod());
     }
 
     @GetMapping("/getRakeBackPercentTotal")
-    public ResponseEntity<Double> getRakeBackPercentTotal() {
+    public ResponseEntity<Double> rakeBackPercentTotal() {
         return ResponseEntity.ok(this.dontKnowMyTotalRakeBack.rakeBackPercentTotal());
     }
 }

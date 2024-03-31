@@ -16,7 +16,7 @@ class SetControllerTest {
     private MockMvc mockMvc;
 
     @Test
-    void setRoom() throws Exception {
+    void room() throws Exception {
         this.mockMvc.perform(post("/calcEV/setRoom")
                         .param("room", "PokerStars"))
                 .andExpect(status().isOk());
@@ -31,7 +31,7 @@ class SetControllerTest {
     }
 
     @Test
-    void setMesh() throws Exception {
+    void mesh() throws Exception {
         this.mockMvc.perform(post("/calcEV/setMesh")
                         .param("mesh", "Study"))
                 .andExpect(status().isOk());

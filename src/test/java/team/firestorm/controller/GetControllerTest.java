@@ -20,7 +20,7 @@ class GetControllerTest {
     private MockMvc mockMvc;
 
     @Test
-    void getMeshes() throws Exception {
+    void meshes() throws Exception {
         this.mockMvc.perform(get("/calcEV/getMeshes"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
