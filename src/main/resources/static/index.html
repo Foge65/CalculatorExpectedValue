@@ -91,8 +91,7 @@
                 <div>
                     <a>ChipsEV/Tourney:</a>
                     <label for="chipsEV2"></label>
-                    <input id="chipsEV2" type="number"
-                           oninput="setValueOnInput('chipsEV2', '/calcEV/setChipsEVFromTourney', 'chips')">
+                    <input id="chipsEV2" oninput="setSyncValue('chipsEV2', 'chipsEV3')" type="number">
                 </div>
 
                 <div>
@@ -173,8 +172,7 @@
                 <div>
                     <a>ChipsEV/Tourney:</a>
                     <label for="chipsEV3"></label>
-                    <input id="chipsEV3" type="number"
-                           oninput="setValueOnInput('chipsEV3', '/calcEV/setChipsEVFromTourney', 'chips')">
+                    <input id="chipsEV3" oninput="setSyncValue('chipsEV3', 'chipsEV2')" type="number">
                 </div>
 
                 <div>
@@ -372,11 +370,11 @@
         let roomSelect2 = document.getElementById("room2");
         let roomSelect3 = document.getElementById("room3");
 
-        roomSelect2.addEventListener("change", () => {
+        roomSelect2.addEventListener('change', () => {
             updateBuyInsForRoom(roomSelect2.value, "buyIn2");
         });
 
-        roomSelect3.addEventListener("change", () => {
+        roomSelect3.addEventListener('change', () => {
             updateBuyInsForRoom(roomSelect3.value, "buyIn3");
         });
     });
@@ -472,6 +470,11 @@
                 const parsedData = parseFloat(data);
                 document.getElementById(id).value = isNaN(parsedData) ? 0 : parsedData.toFixed(2);
             });
+    }
+
+    function setSyncValue(inputId, targetId) {
+        document.getElementById(targetId).value = document.getElementById(inputId).value;
+        setValueOnInput(targetId, '/calcEV/setChipsEVFromTourney', 'chips');
     }
 
 </script>
