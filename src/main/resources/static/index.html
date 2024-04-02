@@ -15,7 +15,7 @@
                 <div>
                     <a>Лимит:</a>
                     <label for="buyIn1"></label>
-                    <select id="buyIn1" onchange="setValueOnChange('/calcEV/setBuyIn', 'buyIn', this)"></select>
+                    <select id="buyIn1" onchange="setSyncBuyIn('buyIn1', 'buyIn2', 'buyIn3')"></select>
                 </div>
 
                 <div>
@@ -85,13 +85,13 @@
                 <div>
                     <a>Лимит:</a>
                     <label for="buyIn2"></label>
-                    <select id="buyIn2" onchange="setValueOnChange('/calcEV/setBuyIn', 'buyIn', this)"></select>
+                    <select id="buyIn2" onchange="setSyncBuyIn('buyIn2', 'buyIn1', 'buyIn3')"></select>
                 </div>
 
                 <div>
                     <a>ChipsEV/Tourney:</a>
                     <label for="chipsEV2"></label>
-                    <input id="chipsEV2" oninput="setSyncValue('chipsEV2', 'chipsEV3')" type="number">
+                    <input id="chipsEV2" oninput="setSyncChipsEV('chipsEV2', 'chipsEV3')" type="number">
                 </div>
 
                 <div>
@@ -166,13 +166,13 @@
                 <div>
                     <a>Лимит:</a>
                     <label for="buyIn3"></label>
-                    <select id="buyIn3" onchange="setValueOnChange('/calcEV/setBuyIn', 'buyIn', this)"></select>
+                    <select id="buyIn3" onchange="setSyncBuyIn('buyIn3', 'buyIn1', 'buyIn2')"></select>
                 </div>
 
                 <div>
                     <a>ChipsEV/Tourney:</a>
                     <label for="chipsEV3"></label>
-                    <input id="chipsEV3" oninput="setSyncValue('chipsEV3', 'chipsEV2')" type="number">
+                    <input id="chipsEV3" oninput="setSyncChipsEV('chipsEV3', 'chipsEV2')" type="number">
                 </div>
 
                 <div>
@@ -472,9 +472,16 @@
             });
     }
 
-    function setSyncValue(inputId, targetId) {
+    function setSyncChipsEV(inputId, targetId) {
         document.getElementById(targetId).value = document.getElementById(inputId).value;
         setValueOnInput(targetId, '/calcEV/setChipsEVFromTourney', 'chips');
+    }
+
+    function setSyncBuyIn(inputId, targetId1, targetId2) {
+        let inputValue = document.getElementById(inputId).value;
+        document.getElementById(targetId1).value = inputValue;
+        document.getElementById(targetId2).value = inputValue;
+        setValueOnChange('/calcEV/setBuyIn', 'buyIn', document.getElementById(inputId));
     }
 
 </script>
