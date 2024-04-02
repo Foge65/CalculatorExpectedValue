@@ -79,7 +79,7 @@
                 <div>
                     <a>Рум:</a>
                     <label for="room2"></label>
-                    <select id="room2" onchange="setValueOnChange('/calcEV/setRoom', 'room', this)"></select>
+                    <select id="room2" onchange="setSyncRoom('room2', 'room3')"></select>
                 </div>
 
                 <div>
@@ -160,7 +160,7 @@
                 <div>
                     <a>Рум:</a>
                     <label for="room3"></label>
-                    <select id="room3" onchange="setValueOnChange('/calcEV/setRoom', 'room', this)"></select>
+                    <select id="room3" onchange="setSyncRoom('room3', 'room2')"></select>
                 </div>
 
                 <div>
@@ -321,10 +321,6 @@
     document.addEventListener("DOMContentLoaded", () => {
         setDefaultValue();
 
-        fetch('/calcEV/resetAllFields', {
-            method: 'POST',
-        })
-
         getData('/calcEV/getRooms', data => {
             buildList(data, "room2");
             setValueOnChange('/calcEV/setRoom', 'room', document.getElementById("room2"));
@@ -365,21 +361,21 @@
             setValueOnChange('/calcEV/setMesh', 'mesh', document.getElementById("mesh3"));
         });
 
-        addToListener();
+        addToListenerCalculatingFields();
 
         let roomSelect2 = document.getElementById("room2");
         let roomSelect3 = document.getElementById("room3");
 
         roomSelect2.addEventListener('change', () => {
-            updateBuyInsForRoom(roomSelect2.value, "buyIn2");
+            updateBuyIns(roomSelect2);
         });
 
         roomSelect3.addEventListener('change', () => {
-            updateBuyInsForRoom(roomSelect3.value, "buyIn3");
+            updateBuyIns(roomSelect3);
         });
     });
 
-    function addToListener() {
+    function addToListenerCalculatingFields() {
         getValueById('/calcEV/dollarEVTotal1', 'dollarEVTotal1');
         getValueById('/calcEV/evBI1', 'evBI1');
 
@@ -410,7 +406,7 @@
                 method: 'POST',
                 body: form
             }).then(() => {
-                addToListener();
+                addToListenerCalculatingFields();
             });
         }
     }
@@ -420,7 +416,7 @@
         fetch(url, {
             method: 'POST',
         }).then(() => {
-            addToListener();
+            addToListenerCalculatingFields();
         });
     }
 
@@ -429,15 +425,9 @@
             const field = document.getElementById(element);
             field.value = "0";
         });
-    }
 
-    function updateBuyInsForRoom(room, buyInId) {
-        let buyInSelect = document.getElementById(buyInId);
-        buyInSelect.innerHTML = "";
-
-        getData(`/calcEV/getBuyIns?room=${encodeURIComponent(room)}`, data => {
-            buildList(data, buyInId);
-            setValueOnChange('/calcEV/setBuyIn', 'buyIn', buyInSelect);
+        fetch('/calcEV/resetAllFields', {
+            method: 'POST'
         });
     }
 
@@ -445,8 +435,7 @@
         let request = new XMLHttpRequest();
         request.onreadystatechange = () => {
             if (request.readyState === XMLHttpRequest.DONE) {
-                let data = JSON.parse(request.responseText);
-                callback(data);
+                callback(JSON.parse(request.responseText));
             }
         };
         request.open('GET', url, true);
@@ -482,6 +471,29 @@
         document.getElementById(targetId1).value = inputValue;
         document.getElementById(targetId2).value = inputValue;
         setValueOnChange('/calcEV/setBuyIn', 'buyIn', document.getElementById(inputId));
+    }
+
+    function setSyncRoom(inputId, targetId) {
+        document.getElementById(targetId).value = document.getElementById(inputId).value;
+        setValueOnChange('/calcEV/setRoom', 'room', document.getElementById(inputId));
+    }
+
+    function updateBuyIns(roomSelect2) {
+        let url = `/calcEV/setRoom?room=${encodeURIComponent(roomSelect2.value)}`;
+
+        fetch(url, {
+            method: 'POST',
+        }).then(() => {
+            getData('/calcEV/getBuyIns', data => {
+                document.getElementById('buyIn1').innerHTML = '';
+                document.getElementById('buyIn2').innerHTML = '';
+                document.getElementById('buyIn3').innerHTML = '';
+
+                buildList(data, 'buyIn1');
+                buildList(data, 'buyIn2');
+                buildList(data, 'buyIn3');
+            });
+        });
     }
 
 </script>

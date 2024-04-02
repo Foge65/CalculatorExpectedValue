@@ -36,6 +36,10 @@ public class SetController {
                 break;
         }
         this.model.setRoom(this.room);
+        this.model.setBuyIns(this.room.buyIns());
+        this.model.setRakes(this.room.rakes());
+        this.model.setWinCoefficients(this.room.winCoefficient());
+        this.model.setLoseCoefficients(this.room.loseCoefficient());
     }
 
     @PostMapping("/setBuyIn")

@@ -2,15 +2,20 @@ package team.firestorm.repository;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 import team.firestorm.service.mesh.Mesh;
 import team.firestorm.service.room.Room;
 
-@Repository
+@Component
 @Getter
 @Setter
 public class Model {
     private Room room;
+    private double[] buyIns;
+    private int[] rakes;
+    private double[] winCoefficients;
+    private double[] loseCoefficients;
+
     private double buyIn;
     private int rake;
     private int tourneyPerDay;

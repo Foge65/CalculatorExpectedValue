@@ -24,7 +24,7 @@ public class Coefficient {
     }
 
     public int matchIndexFromArray(double[] array, double value) {
-        int index = -1;
+        int index = 0;
         for (int i = 0; i < array.length; i++) {
             if (array[i] == value) {
                 index = i;

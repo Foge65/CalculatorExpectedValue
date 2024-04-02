@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import team.firestorm.repository.Model;
 import team.firestorm.service.DontKnowMyTotalRakeBack;
 import team.firestorm.service.KnowMyDollarPerHour;
 import team.firestorm.service.KnowMyTotalRakeBack;
@@ -20,6 +21,7 @@ public class GetController {
     private final KnowMyTotalRakeBack knowMyTotalRakeBack;
     private final DontKnowMyTotalRakeBack dontKnowMyTotalRakeBack;
     private Room room;
+    private Model model;
 
     @GetMapping("/getRooms")
     public ResponseEntity<Rooms[]> rooms() {
@@ -28,7 +30,7 @@ public class GetController {
 
     @GetMapping("/getBuyIns")
     public ResponseEntity<double[]> buyIns() {
-        return ResponseEntity.ok(this.room.buyIns());
+        return ResponseEntity.ok(this.model.getBuyIns());
     }
 
     @GetMapping("/getDollarsEVPerTourney2")
