@@ -13,13 +13,13 @@ public class Coefficient {
 
     public void setWinCoefficient(double buyIn) {
         int index = matchIndexFromArray(room.buyIns(), buyIn);
-        double[] winCoeffs = room.winCoefficient();
+        double[] winCoeffs = model.getWinCoefficients();
         this.model.setWinCoefficient(winCoeffs[index]);
     }
 
     public void setLoseCoefficient(double buyIn) {
         int index = matchIndexFromArray(room.buyIns(), buyIn);
-        double[] loseCoeffs = room.loseCoefficient();
+        double[] loseCoeffs = model.getLoseCoefficients();
         this.model.setLoseCoefficient(loseCoeffs[index]);
     }
 

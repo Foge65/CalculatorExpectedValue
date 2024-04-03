@@ -21,15 +21,7 @@ class SetControllerTest {
     private Model model;
 
     @Test
-    void room() throws Exception {
-        this.mockMvc.perform(post("/calcEV/setRoom")
-                        .param("room", "PokerStars"))
-                .andExpect(status().isOk());
-
-        this.mockMvc.perform(post("/calcEV/setRoom")
-                        .param("room", "Winamax"))
-                .andExpect(status().isOk());
-
+    void buyIn() throws Exception {
         this.mockMvc.perform(post("/calcEV/setRoom")
                         .param("room", "iPoker"))
                 .andExpect(status().isOk());

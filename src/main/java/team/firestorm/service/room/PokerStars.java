@@ -1,5 +1,6 @@
 package team.firestorm.service.room;
 
+import jakarta.annotation.PostConstruct;
 import lombok.Getter;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
@@ -13,7 +14,8 @@ public class PokerStars implements Room {
     private double[] winCoefficient;
     private double[] loseCoefficient;
 
-    public PokerStars() {
+    @PostConstruct
+    public void init() {
         buyIns();
         rakes();
         winCoefficient();

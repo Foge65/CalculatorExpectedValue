@@ -1,5 +1,6 @@
 package team.firestorm.service.room;
 
+import jakarta.annotation.PostConstruct;
 import lombok.Getter;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +12,8 @@ public class Winamax implements Room {
     private double[] winCoefficient;
     private double[] loseCoefficient;
 
-    public Winamax() {
+    @PostConstruct
+    public void init() {
         buyIns();
         rakes();
         winCoefficient();

@@ -484,14 +484,23 @@
         fetch(url, {
             method: 'POST',
         }).then(() => {
-            getData('/calcEV/getBuyIns', data => {
-                document.getElementById('buyIn1').innerHTML = '';
-                document.getElementById('buyIn2').innerHTML = '';
-                document.getElementById('buyIn3').innerHTML = '';
+            document.getElementById('buyIn1').innerHTML = '';
+            document.getElementById('buyIn2').innerHTML = '';
+            document.getElementById('buyIn3').innerHTML = '';
 
-                buildList(data, 'buyIn1');
-                buildList(data, 'buyIn2');
-                buildList(data, 'buyIn3');
+            getData('/calcEV/getBuyIns', data => {
+                buildList(data, "buyIn1");
+                setValueOnChange('/calcEV/setBuyIn', 'buyIn', document.getElementById("buyIn1"));
+            });
+
+            getData('/calcEV/getBuyIns', data => {
+                buildList(data, "buyIn2");
+                setValueOnChange('/calcEV/setBuyIn', 'buyIn', document.getElementById("buyIn2"));
+            });
+
+            getData('/calcEV/getBuyIns', data => {
+                buildList(data, "buyIn3");
+                setValueOnChange('/calcEV/setBuyIn', 'buyIn', document.getElementById("buyIn3"));
             });
         });
     }

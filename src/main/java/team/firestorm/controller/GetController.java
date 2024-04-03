@@ -10,7 +10,6 @@ import team.firestorm.service.DontKnowMyTotalRakeBack;
 import team.firestorm.service.KnowMyDollarPerHour;
 import team.firestorm.service.KnowMyTotalRakeBack;
 import team.firestorm.service.mesh.Meshes;
-import team.firestorm.service.room.Room;
 import team.firestorm.service.room.Rooms;
 
 @RestController
@@ -20,7 +19,6 @@ public class GetController {
     private final KnowMyDollarPerHour knowMyDollarPerHour;
     private final KnowMyTotalRakeBack knowMyTotalRakeBack;
     private final DontKnowMyTotalRakeBack dontKnowMyTotalRakeBack;
-    private Room room;
     private Model model;
 
     @GetMapping("/getRooms")
