@@ -7,6 +7,8 @@
     <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 <body>
 
+<div id="cookie"></div>
+
 <div class="table-container">
     <table>
         <caption><h3>Знаю свой $/час</h3></caption>
@@ -319,6 +321,9 @@
     ];
 
     document.addEventListener("DOMContentLoaded", () => {
+        setCookie();
+        setCookieValue();
+
         setDefaultValue();
 
         getData('/calcEV/getRooms', data => {
@@ -503,6 +508,40 @@
                 setValueOnChange('/calcEV/setBuyIn', 'buyIn', document.getElementById("buyIn3"));
             });
         });
+    }
+
+    function setCookie() {
+        fetch('/cookie/setCookie', {
+            method: 'GET'
+        })
+            .then(response => {
+                if (response.ok) {
+                    getCookie();
+                }
+            });
+    }
+
+    function getCookie() {
+        fetch('/cookie/getCookie', {
+            method: 'GET'
+        });
+    }
+
+    function setCookieValue() {
+        fetch('/cookie/getCookieValue?cookieName=user', {
+            method: 'GET'
+        })
+            .then(data => {
+                fetch('/cookie/saveData', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        user: data
+                    }),
+                    headers: {
+                        'Content-type': 'application/json'
+                    }
+                });
+            });
     }
 
 </script>
