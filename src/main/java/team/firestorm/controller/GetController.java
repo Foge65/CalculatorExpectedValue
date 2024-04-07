@@ -115,4 +115,34 @@ public class GetController {
     public ResponseEntity<Double> rakeBackPercentTotal() {
         return ResponseEntity.ok(this.dontKnowMyTotalRakeBack.rakeBackPercentTotal());
     }
+
+    @GetMapping("/getRollbackPercent1")
+    public ResponseEntity<Integer> rollbackPercent1() {
+        return ResponseEntity.ok(this.knowMyDollarPerHour.rollbackPercent());
+    }
+
+    @GetMapping("/getRollbackDollar1")
+    public ResponseEntity<Double> rollbackDollar1() {
+        return ResponseEntity.ok(this.knowMyDollarPerHour.rollbackDollar());
+    }
+
+    @GetMapping("/getRollbackPercent2")
+    public ResponseEntity<Integer> rollbackPercent2() {
+        return ResponseEntity.ok(this.knowMyTotalRakeBack.rollbackPercent());
+    }
+
+    @GetMapping("/getRollbackDollar2")
+    public ResponseEntity<Double> rollbackDollar2() {
+        return ResponseEntity.ok(this.knowMyTotalRakeBack.rollbackDollar());
+    }
+
+    @GetMapping("/getRollbackPercent3")
+    public ResponseEntity<Integer> rollbackPercent3() {
+        return ResponseEntity.ok(this.dontKnowMyTotalRakeBack.rollbackPercent());
+    }
+
+    @GetMapping("/getRollbackDollar3")
+    public ResponseEntity<Double> rollbackDollar3() {
+        return ResponseEntity.ok(this.dontKnowMyTotalRakeBack.rollbackDollar());
+    }
 }
