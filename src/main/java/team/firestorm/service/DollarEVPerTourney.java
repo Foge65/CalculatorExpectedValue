@@ -6,16 +6,16 @@ import team.firestorm.repository.Model;
 
 @Service
 @AllArgsConstructor
-public class HyperEV {
+public class DollarEVPerTourney {
     private final Model model;
 
-    public double hyperEV(int tourney) {
+    public double dollarEVPerTourney() {
         double buyIn = this.model.getBuyIn();
         double chipsEV = this.model.getChipsEVFromTourney();
         double winCoefficient = this.model.getWinCoefficient();
         double loseCoefficient = this.model.getLoseCoefficient();
 
-        return buyIn * tourney * (((500 + chipsEV) / 1500) * winCoefficient
+        return buyIn * 1 * (((500 + chipsEV) / 1500) * winCoefficient
                 + (1 - ((500 + chipsEV) / 1500)) * loseCoefficient);
     }
 }

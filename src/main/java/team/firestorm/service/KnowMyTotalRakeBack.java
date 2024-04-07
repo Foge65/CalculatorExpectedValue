@@ -11,11 +11,10 @@ import team.firestorm.service.mesh.StudyAndBacking;
 @AllArgsConstructor
 public class KnowMyTotalRakeBack {
     private final Model model;
-    private final HyperEV hyperEV;
+    private final DollarEVPerTourney dollarEVPerTourney;
 
     public double dollarEVPerTourney() {
-        int tourney = this.model.getTourneyPerPeriod();
-        return hyperEV.hyperEV(tourney) / tourney;
+        return dollarEVPerTourney.dollarEVPerTourney();
     }
 
     public double dollarEVTotalPerTourney() {
