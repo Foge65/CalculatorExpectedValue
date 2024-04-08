@@ -7,27 +7,15 @@ import org.springframework.stereotype.Service;
 @Service
 @Primary
 @Getter
-public class Study implements Mesh {
+public class StudyWithoutBacking implements Mesh {
     private final String name = "Обучение";
 
-    public Study() {
+    public StudyWithoutBacking() {
         name();
-        profitRatio();
-        rollback();
     }
 
     @Override
     public String name() {
         return name;
-    }
-
-    @Override
-    public int profitRatio() {
-        return 0;
-    }
-
-    @Override
-    public int rollback() {
-        return 0;
     }
 }

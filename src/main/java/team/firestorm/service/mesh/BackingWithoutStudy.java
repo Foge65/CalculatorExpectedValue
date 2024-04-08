@@ -10,22 +10,10 @@ public class BackingWithoutStudy implements Mesh {
 
     public BackingWithoutStudy() {
         name();
-        profitRatio();
-        rollback();
     }
 
     @Override
     public String name() {
         return name;
-    }
-
-    @Override
-    public int profitRatio() {
-        return 0;
-    }
-
-    @Override
-    public int rollback() {
-        return 0;
     }
 }

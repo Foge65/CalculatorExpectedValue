@@ -49,7 +49,7 @@ class SetControllerTest {
     @Test
     void mesh() throws Exception {
         this.mockMvc.perform(post("/calcEV/setMesh")
-                        .param("mesh", "Study"))
+                        .param("mesh", "BackingWithStudy"))
                 .andExpect(status().isOk());
 
         this.mockMvc.perform(post("/calcEV/setMesh")
@@ -57,7 +57,7 @@ class SetControllerTest {
                 .andExpect(status().isOk());
 
         this.mockMvc.perform(post("/calcEV/setMesh")
-                        .param("mesh", "StudyAndBacking"))
+                        .param("mesh", "StudyWithoutBacking"))
                 .andExpect(status().isOk());
     }
 }

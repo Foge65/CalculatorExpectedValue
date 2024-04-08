@@ -1,7 +1,7 @@
 package team.firestorm.service.mesh;
 
 public enum Meshes {
-    StudyAndBacking,
+    BackingWithStudy,
     BackingWithoutStudy,
-    Study
+    StudyWithoutBacking
 }

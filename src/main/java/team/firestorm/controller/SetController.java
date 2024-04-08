@@ -101,14 +101,14 @@ public class SetController {
     public void mesh(@RequestParam("mesh") String mesh) {
         Meshes meshes = Meshes.valueOf(mesh);
         switch (meshes) {
-            case Study:
-                this.mesh = new Study();
+            case BackingWithStudy:
+                this.mesh = new BackingWithStudy();
                 break;
             case BackingWithoutStudy:
                 this.mesh = new BackingWithoutStudy();
                 break;
-            case StudyAndBacking:
-                this.mesh = new StudyAndBacking();
+            case StudyWithoutBacking:
+                this.mesh = new StudyWithoutBacking();
                 break;
         }
         this.model.setMesh(this.mesh);
