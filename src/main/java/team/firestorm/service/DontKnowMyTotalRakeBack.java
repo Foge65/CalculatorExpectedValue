@@ -1,6 +1,5 @@
 package team.firestorm.service;
 
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import team.firestorm.repository.Model;
 import team.firestorm.service.mesh.BackingWithStudy;
@@ -9,10 +8,15 @@ import team.firestorm.service.mesh.Mesh;
 import team.firestorm.service.mesh.StudyWithoutBacking;
 
 @Service
-@AllArgsConstructor
-public class DontKnowMyTotalRakeBack {
+public class DontKnowMyTotalRakeBack extends ResultFiledServiceBase implements ResultFiledService {
     private final Model model;
     private final DollarEVPerTourney dollarEVPerTourney;
+
+    public DontKnowMyTotalRakeBack(Model model, DollarEVPerTourney dollarEVPerTourney) {
+        super(model);
+        this.model = model;
+        this.dollarEVPerTourney = dollarEVPerTourney;
+    }
 
     public double dollarEVPerTourney() {
         return dollarEVPerTourney.dollarEVPerTourney();
@@ -50,12 +54,9 @@ public class DontKnowMyTotalRakeBack {
                 + dollarEVPerTourney();
     }
 
+    @Override
     public double dollarEVTotal() {
         return tourneyPerPeriod() * dollarEVTotalPerTourney();
-    }
-
-    public double evBI() {
-        return dollarEVTotal() / this.model.getBuyIn();
     }
 
     public int rollbackPercent() {

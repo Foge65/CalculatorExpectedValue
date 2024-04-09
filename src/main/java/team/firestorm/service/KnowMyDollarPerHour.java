@@ -1,6 +1,5 @@
 package team.firestorm.service;
 
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import team.firestorm.repository.Model;
 import team.firestorm.service.mesh.BackingWithStudy;
@@ -9,16 +8,17 @@ import team.firestorm.service.mesh.Mesh;
 import team.firestorm.service.mesh.StudyWithoutBacking;
 
 @Service
-@AllArgsConstructor
-public class KnowMyDollarPerHour {
+public class KnowMyDollarPerHour extends ResultFiledServiceBase implements ResultFiledService {
     private final Model model;
 
-    public double dollarEVTotal() {
-        return this.model.getDollarsPerHour() * this.model.getHoursPerDay() * this.model.getDaysPerMonth();
+    public KnowMyDollarPerHour(Model model) {
+        super(model);
+        this.model = model;
     }
 
-    public double evBI() {
-        return dollarEVTotal() / this.model.getBuyIn();
+    @Override
+    public double dollarEVTotal() {
+        return this.model.getDollarsPerHour() * this.model.getHoursPerDay() * this.model.getDaysPerMonth();
     }
 
     public int rollbackPercent() {
