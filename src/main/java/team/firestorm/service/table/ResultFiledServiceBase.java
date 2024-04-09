@@ -1,17 +1,26 @@
-package team.firestorm.service;
+package team.firestorm.service.table;
 
 import lombok.RequiredArgsConstructor;
-import lombok.experimental.SuperBuilder;
 import team.firestorm.repository.Model;
 import team.firestorm.service.mesh.BackingWithStudy;
 import team.firestorm.service.mesh.BackingWithoutStudy;
 import team.firestorm.service.mesh.Mesh;
 import team.firestorm.service.mesh.StudyWithoutBacking;
 
-@SuperBuilder
 @RequiredArgsConstructor
 public abstract class ResultFiledServiceBase implements ResultFiledService {
     private final Model model;
+
+    @Override
+    public double dollarEVPerTourney() {
+        double buyIn = this.model.getBuyIn();
+        double chipsEV = this.model.getChipsEVFromTourney();
+        double winCoefficient = this.model.getWinCoefficient();
+        double loseCoefficient = this.model.getLoseCoefficient();
+
+        return buyIn * 1 * (((500 + chipsEV) / 1500) * winCoefficient
+                + (1 - ((500 + chipsEV) / 1500)) * loseCoefficient);
+    }
 
     @Override
     public double evBI() {

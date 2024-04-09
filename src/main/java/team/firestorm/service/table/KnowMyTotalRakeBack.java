@@ -1,4 +1,4 @@
-package team.firestorm.service;
+package team.firestorm.service.table;
 
 import org.springframework.stereotype.Service;
 import team.firestorm.repository.Model;
@@ -6,16 +6,10 @@ import team.firestorm.repository.Model;
 @Service
 public class KnowMyTotalRakeBack extends ResultFiledServiceBase implements ResultFiledService {
     private final Model model;
-    private final DollarEVPerTourney dollarEVPerTourney;
 
-    public KnowMyTotalRakeBack(Model model, DollarEVPerTourney dollarEVPerTourney) {
+    public KnowMyTotalRakeBack(Model model) {
         super(model);
         this.model = model;
-        this.dollarEVPerTourney = dollarEVPerTourney;
-    }
-
-    public double dollarEVPerTourney() {
-        return dollarEVPerTourney.dollarEVPerTourney();
     }
 
     public double dollarEVTotalPerTourney() {

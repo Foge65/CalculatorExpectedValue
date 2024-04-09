@@ -1,4 +1,4 @@
-package team.firestorm.service;
+package team.firestorm.service.table;
 
 import org.springframework.stereotype.Service;
 import team.firestorm.repository.Model;

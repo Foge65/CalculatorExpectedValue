@@ -1,9 +1,11 @@
-package team.firestorm.service;
+package team.firestorm.service.table;
 
 public interface ResultFiledService {
-    double evBI();
+    double dollarEVPerTourney();
 
     double dollarEVTotal();
+
+    double evBI();
 
     int rollbackPercent();
 
