@@ -167,4 +167,9 @@ public abstract class ResultFiledServiceBase implements ResultFiledService {
 
         return rollback;
     }
+
+    @Override
+    public double rollbackDollar() {
+        return dollarEVTotal() * rollbackPercent() / 100;
+    }
 }

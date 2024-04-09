@@ -6,4 +6,6 @@ public interface ResultFiledService {
     double dollarEVTotal();
 
     int rollbackPercent();
+
+    double rollbackDollar();
 }

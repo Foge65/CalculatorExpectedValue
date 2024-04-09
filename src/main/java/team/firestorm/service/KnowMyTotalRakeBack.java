@@ -27,8 +27,4 @@ public class KnowMyTotalRakeBack extends ResultFiledServiceBase implements Resul
     public double dollarEVTotal() {
         return dollarEVTotalPerTourney() * this.model.getTourneyPerPeriod();
     }
-
-    public double rollbackDollar() {
-        return dollarEVTotal() * rollbackPercent() / 100;
-    }
 }

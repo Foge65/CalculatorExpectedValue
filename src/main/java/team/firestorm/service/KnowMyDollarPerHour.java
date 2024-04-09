@@ -16,8 +16,4 @@ public class KnowMyDollarPerHour extends ResultFiledServiceBase implements Resul
     public double dollarEVTotal() {
         return this.model.getDollarsPerHour() * this.model.getHoursPerDay() * this.model.getDaysPerMonth();
     }
-
-    public double rollbackDollar() {
-        return dollarEVTotal() * rollbackPercent() / 100;
-    }
 }

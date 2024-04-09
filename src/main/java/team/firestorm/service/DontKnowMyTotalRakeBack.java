@@ -54,8 +54,4 @@ public class DontKnowMyTotalRakeBack extends ResultFiledServiceBase implements R
     public double dollarEVTotal() {
         return tourneyPerPeriod() * dollarEVTotalPerTourney();
     }
-
-    public double rollbackDollar() {
-        return dollarEVTotal() * rollbackPercent() / 100;
-    }
 }
