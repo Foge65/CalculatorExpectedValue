@@ -13,6 +13,11 @@ public class KnowMyDollarPerHour extends ResultFiledServiceBase implements Resul
     }
 
     @Override
+    public double dollarEVPerTourneyTotal() {
+        return 0;
+    }
+
+    @Override
     public double dollarEVTotal() {
         return this.model.getDollarsPerHour() * this.model.getHoursPerDay() * this.model.getDaysPerMonth();
     }

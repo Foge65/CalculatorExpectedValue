@@ -78,12 +78,12 @@ public class GetController {
 
     @GetMapping("/getDollarEVTotalPerTourney2")
     public ResponseEntity<Double> dollarEVTotalPerTourney2() {
-        return ResponseEntity.ok(this.knowMyTotalRakeBack.dollarEVTotalPerTourney());
+        return ResponseEntity.ok(this.knowMyTotalRakeBack.dollarEVPerTourneyTotal());
     }
 
     @GetMapping("/getDollarEVTotalPerTourney3")
     public ResponseEntity<Double> dollarEVTotalPerTourney3() {
-        return ResponseEntity.ok(this.dontKnowMyTotalRakeBack.dollarEVTotalPerTourney());
+        return ResponseEntity.ok(this.dontKnowMyTotalRakeBack.dollarEVPerTourneyTotal());
     }
 
     @GetMapping("/getTourneyPerWeek")

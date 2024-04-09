@@ -39,14 +39,13 @@ public class DontKnowMyTotalRakeBack extends ResultFiledServiceBase implements R
         return rakeBackPercentPerDay() + rakeBackPercentPerWeek() + rakeBackPercentPerPeriod();
     }
 
-    @Override
-    public double dollarEVTotalPerTourney() {
+    public double dollarEVPerTourneyTotal() {
         return this.model.getBuyIn() * this.model.getRake() / 100 * rakeBackPercentTotal() / 100
                 + dollarEVPerTourney();
     }
 
     @Override
     public double dollarEVTotal() {
-        return tourneyPerPeriod() * dollarEVTotalPerTourney();
+        return tourneyPerPeriod() * dollarEVPerTourneyTotal();
     }
 }
