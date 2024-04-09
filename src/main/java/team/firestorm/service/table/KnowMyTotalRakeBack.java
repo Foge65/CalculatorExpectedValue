@@ -12,6 +12,7 @@ public class KnowMyTotalRakeBack extends ResultFiledServiceBase implements Resul
         this.model = model;
     }
 
+    @Override
     public double dollarEVTotalPerTourney() {
         return this.model.getBuyIn() * this.model.getRake() / 100 * this.model.getRakeBackTotal() / 100
                 + dollarEVPerTourney();
