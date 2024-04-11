@@ -1,74 +1,74 @@
 <!DOCTYPE html>
-<html lang='en'>
+<html lang="en">
 <head>
-    <meta charset='UTF-8'>
+    <meta charset="UTF-8">
     <title>FS Profit Calc</title>
-    <link href='css.css' rel='stylesheet'>
-    <link href='data:;base64,iVBORw0KGgo=' rel='icon'>
+    <link href="css.css" rel="stylesheet">
+    <link href="data:;base64,iVBORw0KGgo=" rel="icon">
 <body>
 
-<div id='cookie'></div>
+<div id="cookie"></div>
 
-<div class='table-container'>
+<div class="table-container">
     <table>
         <caption><h3>Знаю свой $/час</h3></caption>
         <tr>
             <td>
                 <div>
                     <a>Лимит:</a>
-                    <label for='buyIn1'></label>
-                    <select id='buyIn1' onchange="setSyncBuyIn('buyIn1', 'buyIn2', 'buyIn3')"></select>
+                    <label for="buyIn1"></label>
+                    <select id="buyIn1" onchange="setSyncBuyIn('buyIn1', 'buyIn2', 'buyIn3')"></select>
                 </div>
 
                 <div>
                     <a>$/Час:</a>
-                    <label for='dollarsPerHour1'></label>
-                    <input id='dollarsPerHour1' type='number'
+                    <label for="dollarsPerHour1"></label>
+                    <input id="dollarsPerHour1" type="number"
                            oninput="setValueOnInput('dollarsPerHour1', '/calcEV/setDollarsPerHour', 'dollars')">
                 </div>
 
                 <div>
                     <a>Рабочих часов в день:</a>
-                    <label for='hoursPerDay1'></label>
-                    <input id='hoursPerDay1' type='number'
+                    <label for="hoursPerDay1"></label>
+                    <input id="hoursPerDay1" type="number"
                            oninput="setValueOnInput('hoursPerDay1', '/calcEV/setHoursPerDay', 'hours')">
                 </div>
 
                 <div>
                     <a>Рабочих дней в месяц:</a>
-                    <label for='daysPerMonth1'></label>
-                    <input id='daysPerMonth1' type='number'
+                    <label for="daysPerMonth1"></label>
+                    <input id="daysPerMonth1" type="number"
                            oninput="setValueOnInput('daysPerMonth1', '/calcEV/setDaysPerMonth', 'days')">
                 </div>
 
                 <div>
                     <a><b>$EV Total (общий профит):</b></a>
-                    <label for='dollarEVTotal1'></label>
-                    <input id='dollarEVTotal1' readonly>
+                    <label for="dollarEVTotal1"></label>
+                    <input id="dollarEVTotal1" readonly>
                 </div>
 
                 <div>
                     <a><b>EV BI:</b></a>
-                    <label for='evBI1'></label>
-                    <input id='evBI1' readonly>
+                    <label for="evBI1"></label>
+                    <input id="evBI1" readonly>
                 </div>
 
                 <div>
                     <a>Откатная сетка:</a>
-                    <label for='mesh1'></label>
-                    <select id='mesh1' onchange="setSyncMesh('mesh1', 'mesh2', 'mesh3')"></select>
+                    <label for="mesh1"></label>
+                    <select id="mesh1" onchange="setSyncMesh('mesh1', 'mesh2', 'mesh3')"></select>
                 </div>
 
                 <div>
                     <a><b>Доля игрока, %:</b></a>
-                    <label for='playerWinPercent1'></label>
-                    <input id='playerWinPercent1' readonly>
+                    <label for="playerWinPercent1"></label>
+                    <input id="playerWinPercent1" readonly>
                 </div>
 
                 <div>
                     <a><b>Доля игрока, $:</b></a>
-                    <label for='playerWinMoney1'></label>
-                    <input id='playerWinMoney1' readonly>
+                    <label for="playerWinMoney1"></label>
+                    <input id="playerWinMoney1" readonly>
                 </div>
             </td>
         </tr>
@@ -80,76 +80,76 @@
             <td>
                 <div>
                     <a>Рум:</a>
-                    <label for='room2'></label>
-                    <select id='room2' onchange="setSyncRoom('room2', 'room3')"></select>
+                    <label for="room2"></label>
+                    <select id="room2" onchange="setSyncRoom('room2', 'room3')"></select>
                 </div>
 
                 <div>
                     <a>Лимит:</a>
-                    <label for='buyIn2'></label>
-                    <select id='buyIn2' onchange="setSyncBuyIn('buyIn2', 'buyIn1', 'buyIn3')"></select>
+                    <label for="buyIn2"></label>
+                    <select id="buyIn2" onchange="setSyncBuyIn('buyIn2', 'buyIn1', 'buyIn3')"></select>
                 </div>
 
                 <div>
                     <a>ChipsEV/Tourney:</a>
-                    <label for='chipsEV2'></label>
-                    <input id='chipsEV2' oninput="setSyncChipsEV('chipsEV2', 'chipsEV3')" type='number'>
+                    <label for="chipsEV2"></label>
+                    <input id="chipsEV2" oninput="setSyncChipsEV('chipsEV2', 'chipsEV3')" type="number">
                 </div>
 
                 <div>
                     <a><b>$EV/Tourney:</b></a>
-                    <label for='dollarsEVPerTourney2'></label>
-                    <input id='dollarsEVPerTourney2' readonly>
+                    <label for="dollarsEVPerTourney2"></label>
+                    <input id="dollarsEVPerTourney2" readonly>
                 </div>
 
                 <div>
                     <a>RakeBack Total, %:</a>
-                    <label for='rakeBackTotal2'></label>
-                    <input id='rakeBackTotal2' type='number'
+                    <label for="rakeBackTotal2"></label>
+                    <input id="rakeBackTotal2" type="number"
                            oninput="setValueOnInput('rakeBackTotal2', '/calcEV/setRakeBackTotal', 'rakeBack')">
                 </div>
 
                 <div>
                     <a><b>$EV Total/Tourney:</b></a>
-                    <label for='dollarEVTotalPerTourney2'></label>
-                    <input id='dollarEVTotalPerTourney2' readonly>
+                    <label for="dollarEVTotalPerTourney2"></label>
+                    <input id="dollarEVTotalPerTourney2" readonly>
                 </div>
 
                 <div>
                     <a>Дистанция за период:</a>
-                    <label for='tourneyPerPeriod2'></label>
-                    <input id='tourneyPerPeriod2' type='number'
+                    <label for="tourneyPerPeriod2"></label>
+                    <input id="tourneyPerPeriod2" type="number"
                            oninput="setValueOnInput('tourneyPerPeriod2', '/calcEV/setTourneyPerPeriod', 'tourney')">
                 </div>
 
                 <div>
                     <a><b>$EV Total (Общий профит):</b></a>
-                    <label for='dollarEVTotal2'></label>
-                    <input id='dollarEVTotal2' readonly>
+                    <label for="dollarEVTotal2"></label>
+                    <input id="dollarEVTotal2" readonly>
                 </div>
 
                 <div>
                     <a><b>EV BI:</b></a>
-                    <label for='evBI2'></label>
-                    <input id='evBI2' readonly>
+                    <label for="evBI2"></label>
+                    <input id="evBI2" readonly>
                 </div>
 
                 <div>
                     <a>Откатная сетка:</a>
-                    <label for='mesh2'></label>
-                    <select id='mesh2' onchange="setSyncMesh('mesh2', 'mesh1', 'mesh3')"></select>
+                    <label for="mesh2"></label>
+                    <select id="mesh2" onchange="setSyncMesh('mesh2', 'mesh1', 'mesh3')"></select>
                 </div>
 
                 <div>
                     <a><b>Доля игрока, %:</b></a>
-                    <label for='playerWinPercent2'></label>
-                    <input id='playerWinPercent2' readonly>
+                    <label for="playerWinPercent2"></label>
+                    <input id="playerWinPercent2" readonly>
                 </div>
 
                 <div>
                     <a><b>Доля игрока, $:</b></a>
-                    <label for='playerWinMoney2'></label>
-                    <input id='playerWinMoney2' readonly>
+                    <label for="playerWinMoney2"></label>
+                    <input id="playerWinMoney2" readonly>
                 </div>
             </td>
         </tr>
@@ -161,140 +161,140 @@
             <td>
                 <div>
                     <a>Рум:</a>
-                    <label for='room3'></label>
-                    <select id='room3' onchange="setSyncRoom('room3', 'room2')"></select>
+                    <label for="room3"></label>
+                    <select id="room3" onchange="setSyncRoom('room3', 'room2')"></select>
                 </div>
 
                 <div>
                     <a>Лимит:</a>
-                    <label for='buyIn3'></label>
-                    <select id='buyIn3' onchange="setSyncBuyIn('buyIn3', 'buyIn1', 'buyIn2')"></select>
+                    <label for="buyIn3"></label>
+                    <select id="buyIn3" onchange="setSyncBuyIn('buyIn3', 'buyIn1', 'buyIn2')"></select>
                 </div>
 
                 <div>
                     <a>ChipsEV/Tourney:</a>
-                    <label for='chipsEV3'></label>
-                    <input id='chipsEV3' oninput="setSyncChipsEV('chipsEV3', 'chipsEV2')" type='number'>
+                    <label for="chipsEV3"></label>
+                    <input id="chipsEV3" oninput="setSyncChipsEV('chipsEV3', 'chipsEV2')" type="number">
                 </div>
 
                 <div>
                     <a><b>$EV/Tourney:</b></a>
-                    <label for='dollarsEVPerTourney3'></label>
-                    <input id='dollarsEVPerTourney3' readonly>
+                    <label for="dollarsEVPerTourney3"></label>
+                    <input id="dollarsEVPerTourney3" readonly>
                 </div>
 
                 <div>
                     <a>Дистанция в день:</a>
-                    <label for='tourneyPerDay3'></label>
-                    <input id='tourneyPerDay3' type='number'
+                    <label for="tourneyPerDay3"></label>
+                    <input id="tourneyPerDay3" type="number"
                            oninput="setValueOnInput('tourneyPerDay3', '/calcEV/setTourneyPerDay', 'tourney')">
                 </div>
 
                 <div>
                     <a>Выплаты RakeBack в день, $:</a>
-                    <label for='rakeBackDollarsPerDay3'></label>
-                    <input id='rakeBackDollarsPerDay3' type='number'
+                    <label for="rakeBackDollarsPerDay3"></label>
+                    <input id="rakeBackDollarsPerDay3" type="number"
                            oninput="setValueOnInput('rakeBackDollarsPerDay3', '/calcEV/setRakeBackDollarsPerDay', 'payments')">
                 </div>
 
                 <div>
                     <a><b>%RakeBack в день:</b></a>
-                    <label for='rakeBackPercentPerDay3'></label>
-                    <input id='rakeBackPercentPerDay3' readonly>
+                    <label for="rakeBackPercentPerDay3"></label>
+                    <input id="rakeBackPercentPerDay3" readonly>
                 </div>
 
                 <div>
                     <a>Игровых дней в неделю:</a>
-                    <label for='daysPerWeek3'></label>
-                    <input id='daysPerWeek3' type='number'
+                    <label for="daysPerWeek3"></label>
+                    <input id="daysPerWeek3" type="number"
                            oninput="setValueOnInput('daysPerWeek3', '/calcEV/setDaysPerWeek', 'days')">
                 </div>
 
                 <div>
                     <a><b>Дистанция в неделю:</b></a>
-                    <label for='tourneyPerWeek3'></label>
-                    <input id='tourneyPerWeek3' readonly>
+                    <label for="tourneyPerWeek3"></label>
+                    <input id="tourneyPerWeek3" readonly>
                 </div>
 
                 <div>
                     <a>Выплаты RakeBack в неделю, $:</a>
-                    <label for='rakeBackDollarsPerWeek3'></label>
-                    <input id='rakeBackDollarsPerWeek3' type='number'
+                    <label for="rakeBackDollarsPerWeek3"></label>
+                    <input id="rakeBackDollarsPerWeek3" type="number"
                            oninput="setValueOnInput('rakeBackDollarsPerWeek3', '/calcEV/setRakeBackDollarsPerWeek', 'payments')">
                 </div>
 
                 <div>
                     <a><b>%RakeBack в неделю:</b></a>
-                    <label for='rakeBackPercentPerWeek3'></label>
-                    <input id='rakeBackPercentPerWeek3' readonly>
+                    <label for="rakeBackPercentPerWeek3"></label>
+                    <input id="rakeBackPercentPerWeek3" readonly>
                 </div>
 
                 <div>
                     <a>Игровых недель в период:</a>
-                    <label for='weeksPerPeriod3'></label>
-                    <input id='weeksPerPeriod3' type='number'
+                    <label for="weeksPerPeriod3"></label>
+                    <input id="weeksPerPeriod3" type="number"
                            oninput="setValueOnInput('weeksPerPeriod3', '/calcEV/setWeeksPerPeriod', 'weeks')">
                 </div>
 
                 <div>
                     <a><b>Дистанция за период:</b></a>
-                    <label for='tourneyPerPeriod3'></label>
-                    <input id='tourneyPerPeriod3' readonly>
+                    <label for="tourneyPerPeriod3"></label>
+                    <input id="tourneyPerPeriod3" readonly>
                 </div>
 
                 <div>
                     <a>Выплаты RakeBack в период, $:</a>
-                    <label for='rakeBackDollarsPerPeriod3'></label>
-                    <input id='rakeBackDollarsPerPeriod3' type='number'
+                    <label for="rakeBackDollarsPerPeriod3"></label>
+                    <input id="rakeBackDollarsPerPeriod3" type="number"
                            oninput="setValueOnInput('rakeBackDollarsPerPeriod3', '/calcEV/setRakeBackDollarsPerPeriod', 'dollars')">
                 </div>
 
                 <div>
                     <a><b>RakeBack за период, %:</b></a>
-                    <label for='rakeBackPercentPerPeriod3'></label>
-                    <input id='rakeBackPercentPerPeriod3' readonly>
+                    <label for="rakeBackPercentPerPeriod3"></label>
+                    <input id="rakeBackPercentPerPeriod3" readonly>
                 </div>
 
                 <div>
                     <a><b>RakeBack Total, %:</b></a>
-                    <label for='rakeBackPercentTotal3'></label>
-                    <input id='rakeBackPercentTotal3' readonly>
+                    <label for="rakeBackPercentTotal3"></label>
+                    <input id="rakeBackPercentTotal3" readonly>
                 </div>
 
                 <div>
                     <a><b>$EV Total/Tourney:</b></a>
-                    <label for='dollarEVTotalPerTourney3'></label>
-                    <input id='dollarEVTotalPerTourney3' readonly>
+                    <label for="dollarEVTotalPerTourney3"></label>
+                    <input id="dollarEVTotalPerTourney3" readonly>
                 </div>
 
                 <div>
                     <a><b>$EV Total (Общий профит):</b></a>
-                    <label for='dollarEVTotal3'></label>
-                    <input id='dollarEVTotal3' readonly>
+                    <label for="dollarEVTotal3"></label>
+                    <input id="dollarEVTotal3" readonly>
                 </div>
 
                 <div>
                     <a><b>EV BI:</b></a>
-                    <label for='evBI3'></label>
-                    <input id='evBI3' readonly>
+                    <label for="evBI3"></label>
+                    <input id="evBI3" readonly>
                 </div>
 
                 <div>
                     <a>Откатная сетка:</a>
-                    <label for='mesh3'></label>
-                    <select id='mesh3' onchange="setSyncMesh('mesh3', 'mesh1', 'mesh2')"></select>
+                    <label for="mesh3"></label>
+                    <select id="mesh3" onchange="setSyncMesh('mesh3', 'mesh1', 'mesh2')"></select>
                 </div>
 
                 <div>
                     <a><b>Доля игрока, %:</b></a>
-                    <label for='playerWinPercent3'></label>
-                    <input id='playerWinPercent3' readonly>
+                    <label for="playerWinPercent3"></label>
+                    <input id="playerWinPercent3" readonly>
                 </div>
 
                 <div>
                     <a><b>Доля игрока, $:</b></a>
-                    <label for='playerWinMoney3'></label>
-                    <input id='playerWinMoney3' readonly>
+                    <label for="playerWinMoney3"></label>
+                    <input id="playerWinMoney3" readonly>
                 </div>
             </td>
         </tr>
@@ -303,118 +303,118 @@
 
 <script>
     const setFields = [
-        'dollarsPerHour1',
-        'hoursPerDay1',
-        'daysPerMonth1',
+        "dollarsPerHour1",
+        "hoursPerDay1",
+        "daysPerMonth1",
 
-        'chipsEV2',
-        'rakeBackTotal2',
-        'tourneyPerPeriod2',
+        "chipsEV2",
+        "rakeBackTotal2",
+        "tourneyPerPeriod2",
 
-        'chipsEV3',
-        'tourneyPerDay3',
-        'rakeBackDollarsPerDay3',
-        'daysPerWeek3',
-        'rakeBackDollarsPerWeek3',
-        'weeksPerPeriod3',
-        'rakeBackDollarsPerPeriod3'
+        "chipsEV3",
+        "tourneyPerDay3",
+        "rakeBackDollarsPerDay3",
+        "daysPerWeek3",
+        "rakeBackDollarsPerWeek3",
+        "weeksPerPeriod3",
+        "rakeBackDollarsPerPeriod3"
     ];
 
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener("DOMContentLoaded", () => {
         setCookie();
         setCookieValue();
 
         setDefaultValue();
 
-        getData('/calcEV/getRooms', data => {
-            buildList(data, 'room2');
-            setValueOnChange('/calcEV/setRoom', 'room', document.getElementById('room2'));
+        getData("/calcEV/getRooms", data => {
+            buildList(data, "room2");
+            setValueOnChange("/calcEV/setRoom", "room", document.getElementById("room2"));
         });
 
-        getData('/calcEV/getRooms', data => {
-            buildList(data, 'room3');
-            setValueOnChange('/calcEV/setRoom', 'room', document.getElementById('room3'));
+        getData("/calcEV/getRooms", data => {
+            buildList(data, "room3");
+            setValueOnChange("/calcEV/setRoom", "room", document.getElementById("room3"));
         });
 
-        getData('/calcEV/getBuyIns', data => {
-            buildList(data, 'buyIn1');
-            setValueOnChange('/calcEV/setBuyIn', 'buyIn', document.getElementById('buyIn1'));
+        getData("/calcEV/getBuyIns", data => {
+            buildList(data, "buyIn1");
+            setValueOnChange("/calcEV/setBuyIn", "buyIn", document.getElementById("buyIn1"));
         });
 
-        getData('/calcEV/getBuyIns', data => {
-            buildList(data, 'buyIn2');
-            setValueOnChange('/calcEV/setBuyIn', 'buyIn', document.getElementById('buyIn2'));
+        getData("/calcEV/getBuyIns", data => {
+            buildList(data, "buyIn2");
+            setValueOnChange("/calcEV/setBuyIn", "buyIn", document.getElementById("buyIn2"));
         });
 
-        getData('/calcEV/getBuyIns', data => {
-            buildList(data, 'buyIn3');
-            setValueOnChange('/calcEV/setBuyIn', 'buyIn', document.getElementById('buyIn3'));
+        getData("/calcEV/getBuyIns", data => {
+            buildList(data, "buyIn3");
+            setValueOnChange("/calcEV/setBuyIn", "buyIn", document.getElementById("buyIn3"));
         });
 
-        getData('/calcEV/getMeshes', data => {
-            buildListMesh(data, 'mesh1');
-            setValueOnChange('/calcEV/setMesh', 'mesh', document.getElementById('mesh1'));
+        getData("/calcEV/getMeshes", data => {
+            buildListMesh(data, "mesh1");
+            setValueOnChange("/calcEV/setMesh", "mesh", document.getElementById("mesh1"));
         });
 
-        getData('/calcEV/getMeshes', data => {
-            buildListMesh(data, 'mesh2');
-            setValueOnChange('/calcEV/setMesh', 'mesh', document.getElementById('mesh2'));
+        getData("/calcEV/getMeshes", data => {
+            buildListMesh(data, "mesh2");
+            setValueOnChange("/calcEV/setMesh", "mesh", document.getElementById("mesh2"));
         });
 
-        getData('/calcEV/getMeshes', data => {
-            buildListMesh(data, 'mesh3');
-            setValueOnChange('/calcEV/setMesh', 'mesh', document.getElementById('mesh3'));
+        getData("/calcEV/getMeshes", data => {
+            buildListMesh(data, "mesh3");
+            setValueOnChange("/calcEV/setMesh", "mesh", document.getElementById("mesh3"));
         });
 
         addToListenerCalculatingFields();
 
-        let roomSelect2 = document.getElementById('room2');
-        let roomSelect3 = document.getElementById('room3');
+        let roomSelect2 = document.getElementById("room2");
+        let roomSelect3 = document.getElementById("room3");
 
-        roomSelect2.addEventListener('change', () => {
+        roomSelect2.addEventListener("change", () => {
             updateBuyIn(roomSelect2);
         });
 
-        roomSelect3.addEventListener('change', () => {
+        roomSelect3.addEventListener("change", () => {
             updateBuyIn(roomSelect3);
         });
     });
 
     function addToListenerCalculatingFields() {
-        getValueById('/calcEV/dollarEVTotal1', 'dollarEVTotal1');
-        getValueById('/calcEV/evBI1', 'evBI1');
-        getValueById('/calcEV/getRollbackPercent1', 'playerWinPercent1');
-        getValueById('/calcEV/getRollbackDollar1', 'playerWinMoney1');
+        getValueById("/calcEV/dollarEVTotal1", "dollarEVTotal1");
+        getValueById("/calcEV/evBI1", "evBI1");
+        getValueById("/calcEV/getRollbackPercent1", "playerWinPercent1");
+        getValueById("/calcEV/getRollbackDollar1", "playerWinMoney1");
 
-        getValueById('/calcEV/getDollarsEVPerTourney2', 'dollarsEVPerTourney2');
-        getValueById('/calcEV/getDollarEVTotalPerTourney2', 'dollarEVTotalPerTourney2');
-        getValueById('/calcEV/dollarEVTotal2', 'dollarEVTotal2');
-        getValueById('/calcEV/evBI2', 'evBI2');
-        getValueById('/calcEV/getRollbackPercent2', 'playerWinPercent2');
-        getValueById('/calcEV/getRollbackDollar2', 'playerWinMoney2');
+        getValueById("/calcEV/getDollarsEVPerTourney2", "dollarsEVPerTourney2");
+        getValueById("/calcEV/getDollarEVTotalPerTourney2", "dollarEVTotalPerTourney2");
+        getValueById("/calcEV/dollarEVTotal2", "dollarEVTotal2");
+        getValueById("/calcEV/evBI2", "evBI2");
+        getValueById("/calcEV/getRollbackPercent2", "playerWinPercent2");
+        getValueById("/calcEV/getRollbackDollar2", "playerWinMoney2");
 
-        getValueById('/calcEV/getDollarsEVPerTourney3', 'dollarsEVPerTourney3');
-        getValueById('/calcEV/getRakeBackPercentPerDay', 'rakeBackPercentPerDay3');
-        getValueById('/calcEV/getTourneyPerWeek', 'tourneyPerWeek3');
-        getValueById('/calcEV/getRakeBackPercentPerWeek', 'rakeBackPercentPerWeek3');
-        getValueById('/calcEV/getTourneyPerPeriod', 'tourneyPerPeriod3');
-        getValueById('/calcEV/getRakeBackPercentPerPeriod', 'rakeBackPercentPerPeriod3');
-        getValueById('/calcEV/getRakeBackPercentTotal', 'rakeBackPercentTotal3');
-        getValueById('/calcEV/getDollarEVTotalPerTourney3', 'dollarEVTotalPerTourney3');
-        getValueById('/calcEV/dollarEVTotal3', 'dollarEVTotal3');
-        getValueById('/calcEV/evBI3', 'evBI3');
-        getValueById('/calcEV/getRollbackPercent3', 'playerWinPercent3');
-        getValueById('/calcEV/getRollbackDollar3', 'playerWinMoney3');
+        getValueById("/calcEV/getDollarsEVPerTourney3", "dollarsEVPerTourney3");
+        getValueById("/calcEV/getRakeBackPercentPerDay", "rakeBackPercentPerDay3");
+        getValueById("/calcEV/getTourneyPerWeek", "tourneyPerWeek3");
+        getValueById("/calcEV/getRakeBackPercentPerWeek", "rakeBackPercentPerWeek3");
+        getValueById("/calcEV/getTourneyPerPeriod", "tourneyPerPeriod3");
+        getValueById("/calcEV/getRakeBackPercentPerPeriod", "rakeBackPercentPerPeriod3");
+        getValueById("/calcEV/getRakeBackPercentTotal", "rakeBackPercentTotal3");
+        getValueById("/calcEV/getDollarEVTotalPerTourney3", "dollarEVTotalPerTourney3");
+        getValueById("/calcEV/dollarEVTotal3", "dollarEVTotal3");
+        getValueById("/calcEV/evBI3", "evBI3");
+        getValueById("/calcEV/getRollbackPercent3", "playerWinPercent3");
+        getValueById("/calcEV/getRollbackDollar3", "playerWinMoney3");
     }
 
     function setValueOnInput(id, request, requestParam) {
         let value = document.getElementById(id).value;
-        if (value.trim() !== '' && /^\d*\.?\d*$/.test(value)) {
+        if (value.trim() !== "" && /^\d*\.?\d*$/.test(value)) {
             let form = new FormData();
             form.append(requestParam, value);
 
             fetch(request, {
-                method: 'POST',
+                method: "POST",
                 body: form
             }).then(() => {
                 addToListenerCalculatingFields();
@@ -425,7 +425,7 @@
     function setValueOnChange(request, requestParam, value) {
         let url = `${request}?${requestParam}=${encodeURIComponent(value.value)}`;
         fetch(url, {
-            method: 'POST',
+            method: "POST",
         }).then(() => {
             addToListenerCalculatingFields();
         });
@@ -434,11 +434,11 @@
     function setDefaultValue() {
         setFields.forEach(element => {
             const field = document.getElementById(element);
-            field.value = '0';
+            field.value = "0";
         });
 
-        fetch('/calcEV/resetAllFields', {
-            method: 'POST'
+        fetch("/calcEV/resetAllFields", {
+            method: "POST"
         });
     }
 
@@ -449,14 +449,14 @@
                 callback(JSON.parse(request.responseText));
             }
         };
-        request.open('GET', url, true);
+        request.open("GET", url, true);
         request.send();
     }
 
     function buildList(data, id) {
         let element = document.getElementById(id);
         data.forEach(item => {
-            let option = document.createElement('option');
+            let option = document.createElement("option");
             option.value = item;
             option.textContent = item;
             element.appendChild(option);
@@ -466,13 +466,13 @@
     function buildListMesh(data, id) {
         let element = document.getElementById(id);
         let translation = {
-            BackingWithStudy: 'Бекинг с обучением',
-            BackingWithoutStudy: 'Бекинг без обучения',
-            StudyWithoutBacking: 'Обучение без бекинга',
+            BackingWithStudy: "Бекинг с обучением",
+            BackingWithoutStudy: "Бекинг без обучения",
+            StudyWithoutBacking: "Обучение без бекинга",
         };
 
         data.forEach(item => {
-            let option = document.createElement('option');
+            let option = document.createElement("option");
             option.value = item;
             option.textContent = translation[item];
             element.appendChild(option);
@@ -490,57 +490,57 @@
 
     function setSyncChipsEV(inputId, targetId) {
         document.getElementById(targetId).value = document.getElementById(inputId).value;
-        setValueOnInput(targetId, '/calcEV/setChipsEVFromTourney', 'chips');
+        setValueOnInput(targetId, "/calcEV/setChipsEVFromTourney", "chips");
     }
 
     function setSyncBuyIn(inputId, targetId1, targetId2) {
         let inputValue = document.getElementById(inputId).value;
         document.getElementById(targetId1).value = inputValue;
         document.getElementById(targetId2).value = inputValue;
-        setValueOnChange('/calcEV/setBuyIn', 'buyIn', document.getElementById(inputId));
+        setValueOnChange("/calcEV/setBuyIn", "buyIn", document.getElementById(inputId));
     }
 
     function setSyncRoom(inputId, targetId) {
         document.getElementById(targetId).value = document.getElementById(inputId).value;
-        setValueOnChange('/calcEV/setRoom', 'room', document.getElementById(inputId));
+        setValueOnChange("/calcEV/setRoom", "room", document.getElementById(inputId));
     }
 
     function setSyncMesh(inputId, targetId1, targetId2) {
         document.getElementById(targetId1).value = document.getElementById(inputId).value;
         document.getElementById(targetId2).value = document.getElementById(inputId).value;
-        setValueOnChange('/calcEV/setMesh', 'mesh', document.getElementById(inputId));
+        setValueOnChange("/calcEV/setMesh", "mesh", document.getElementById(inputId));
     }
 
     function updateBuyIn(room) {
         let url = `/calcEV/setRoom?room=${encodeURIComponent(room.value)}`;
 
         fetch(url, {
-            method: 'POST',
+            method: "POST",
         }).then(() => {
-            document.getElementById('buyIn1').innerHTML = '';
-            document.getElementById('buyIn2').innerHTML = '';
-            document.getElementById('buyIn3').innerHTML = '';
+            document.getElementById("buyIn1").innerHTML = "";
+            document.getElementById("buyIn2").innerHTML = "";
+            document.getElementById("buyIn3").innerHTML = "";
 
-            getData('/calcEV/getBuyIns', data => {
-                buildList(data, 'buyIn1');
-                setValueOnChange('/calcEV/setBuyIn', 'buyIn', document.getElementById('buyIn1'));
+            getData("/calcEV/getBuyIns", data => {
+                buildList(data, "buyIn1");
+                setValueOnChange("/calcEV/setBuyIn", "buyIn", document.getElementById("buyIn1"));
             });
 
-            getData('/calcEV/getBuyIns', data => {
-                buildList(data, 'buyIn2');
-                setValueOnChange('/calcEV/setBuyIn', 'buyIn', document.getElementById('buyIn2'));
+            getData("/calcEV/getBuyIns", data => {
+                buildList(data, "buyIn2");
+                setValueOnChange("/calcEV/setBuyIn", "buyIn", document.getElementById("buyIn2"));
             });
 
-            getData('/calcEV/getBuyIns', data => {
-                buildList(data, 'buyIn3');
-                setValueOnChange('/calcEV/setBuyIn', 'buyIn', document.getElementById('buyIn3'));
+            getData("/calcEV/getBuyIns", data => {
+                buildList(data, "buyIn3");
+                setValueOnChange("/calcEV/setBuyIn", "buyIn", document.getElementById("buyIn3"));
             });
         });
     }
 
     function setCookie() {
-        fetch('/cookie/setCookie', {
-            method: 'GET'
+        fetch("/cookie/setCookie", {
+            method: "GET"
         })
             .then(response => {
                 if (response.ok) {
@@ -550,23 +550,23 @@
     }
 
     function getCookie() {
-        fetch('/cookie/getCookie', {
-            method: 'GET'
+        fetch("/cookie/getCookie", {
+            method: "GET"
         });
     }
 
     function setCookieValue() {
-        fetch('/cookie/getCookieValue?cookieName=user', {
-            method: 'GET'
+        fetch("/cookie/getCookieValue?cookieName=user", {
+            method: "GET"
         })
             .then(data => {
-                fetch('/cookie/saveData', {
-                    method: 'POST',
+                fetch("/cookie/saveData", {
+                    method: "POST",
                     body: JSON.stringify({
                         user: data
                     }),
                     headers: {
-                        'Content-type': 'application/json'
+                        "Content-type": "application/json"
                     }
                 });
             });
