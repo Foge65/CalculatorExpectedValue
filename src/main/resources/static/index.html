@@ -352,17 +352,17 @@
         });
 
         getData('/calcEV/getMeshes', data => {
-            buildList(data, 'mesh1');
+            buildListMesh(data, 'mesh1');
             setValueOnChange('/calcEV/setMesh', 'mesh', document.getElementById('mesh1'));
         });
 
         getData('/calcEV/getMeshes', data => {
-            buildList(data, 'mesh2');
+            buildListMesh(data, 'mesh2');
             setValueOnChange('/calcEV/setMesh', 'mesh', document.getElementById('mesh2'));
         });
 
         getData('/calcEV/getMeshes', data => {
-            buildList(data, 'mesh3');
+            buildListMesh(data, 'mesh3');
             setValueOnChange('/calcEV/setMesh', 'mesh', document.getElementById('mesh3'));
         });
 
@@ -459,6 +459,22 @@
             let option = document.createElement('option');
             option.value = item;
             option.textContent = item;
+            element.appendChild(option);
+        });
+    }
+
+    function buildListMesh(data, id) {
+        let element = document.getElementById(id);
+        let translation = {
+            BackingWithStudy: 'Бекинг с обучением',
+            BackingWithoutStudy: 'Бекинг без обучения',
+            StudyWithoutBacking: 'Обучение без бекинга',
+        };
+
+        data.forEach(item => {
+            let option = document.createElement('option');
+            option.value = item;
+            option.textContent = translation[item];
             element.appendChild(option);
         });
     }
