@@ -1,15 +1,15 @@
 package team.firestorm.service.table;
 
 import org.springframework.stereotype.Service;
-import team.firestorm.repository.Model;
+import team.firestorm.repository.ModelRepository;
 
 @Service
 public class KnowMyDollarPerHour extends ResultFiledServiceBase implements ResultFiledService {
-    private final Model model;
+    private final ModelRepository modelRepository;
 
-    public KnowMyDollarPerHour(Model model) {
-        super(model);
-        this.model = model;
+    public KnowMyDollarPerHour(ModelRepository modelRepository) {
+        super(modelRepository);
+        this.modelRepository = modelRepository;
     }
 
     @Override
@@ -19,6 +19,6 @@ public class KnowMyDollarPerHour extends ResultFiledServiceBase implements Resul
 
     @Override
     public double dollarEVTotal() {
-        return this.model.getDollarsPerHour() * this.model.getHoursPerDay() * this.model.getDaysPerMonth();
+        return this.modelRepository.getDollarsPerHour() * this.modelRepository.getHoursPerDay() * this.modelRepository.getDaysPerMonth();
     }
 }

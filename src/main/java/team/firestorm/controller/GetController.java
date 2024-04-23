@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import team.firestorm.repository.Model;
+import team.firestorm.repository.ModelRepository;
 import team.firestorm.service.mesh.Meshes;
 import team.firestorm.service.room.Rooms;
 import team.firestorm.service.table.DontKnowMyTotalRakeBack;
@@ -19,7 +19,7 @@ public class GetController {
     private final KnowMyDollarPerHour knowMyDollarPerHour;
     private final KnowMyTotalRakeBack knowMyTotalRakeBack;
     private final DontKnowMyTotalRakeBack dontKnowMyTotalRakeBack;
-    private Model model;
+    private ModelRepository modelRepository;
 
     @GetMapping("/getRooms")
     public ResponseEntity<Rooms[]> rooms() {
@@ -28,7 +28,7 @@ public class GetController {
 
     @GetMapping("/getBuyIns")
     public ResponseEntity<double[]> buyIns() {
-        return ResponseEntity.ok(this.model.getBuyIns());
+        return ResponseEntity.ok(this.modelRepository.getBuyIns());
     }
 
     @GetMapping("/getDollarsEVPerTourney2")

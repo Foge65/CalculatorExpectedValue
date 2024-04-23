@@ -2,14 +2,14 @@ package team.firestorm.repository;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import team.firestorm.service.mesh.Mesh;
 import team.firestorm.service.room.Room;
 
-@Component
+@Repository
 @Getter
 @Setter
-public class Model {
+public class ModelRepository {
     private Room room;
     private double[] buyIns;
     private int[] rakes;

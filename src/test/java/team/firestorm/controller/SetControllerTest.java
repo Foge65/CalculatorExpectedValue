@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
-import team.firestorm.repository.Model;
+import team.firestorm.repository.ModelRepository;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -18,7 +18,7 @@ class SetControllerTest {
     @Autowired
     private MockMvc mockMvc;
     @Autowired
-    private Model model;
+    private ModelRepository modelRepository;
 
     @Test
     void buyIn() throws Exception {
@@ -29,12 +29,12 @@ class SetControllerTest {
         this.mockMvc.perform(post("/calcEV/setBuyIn")
                         .param("buyIn", "25"))
                 .andExpect(status().isOk());
-        assertFalse(arrayContainsValue(this.model.getBuyIns(), 25));
+        assertFalse(arrayContainsValue(this.modelRepository.getBuyIns(), 25));
 
         this.mockMvc.perform(post("/calcEV/setBuyIn")
                         .param("buyIn", "20"))
                 .andExpect(status().isOk());
-        assertTrue(arrayContainsValue(this.model.getBuyIns(), 20));
+        assertTrue(arrayContainsValue(this.modelRepository.getBuyIns(), 20));
     }
 
     private boolean arrayContainsValue(double[] array, int value) {

@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import team.firestorm.repository.Model;
+import team.firestorm.repository.ModelRepository;
 import team.firestorm.service.Coefficient;
 import team.firestorm.service.Rake;
 import team.firestorm.service.mesh.*;
@@ -15,7 +15,7 @@ import team.firestorm.service.room.*;
 @RequestMapping("/calcEV")
 @AllArgsConstructor
 public class SetController {
-    private final Model model;
+    private final ModelRepository modelRepository;
     private final Coefficient coefficient;
     private final Rake rake;
     private Room room;
@@ -35,16 +35,16 @@ public class SetController {
                 this.room = new IPoker();
                 break;
         }
-        this.model.setRoom(this.room);
-        this.model.setBuyIns(this.room.buyIns());
-        this.model.setRakes(this.room.rakes());
-        this.model.setWinCoefficients(this.room.winCoefficient());
-        this.model.setLoseCoefficients(this.room.loseCoefficient());
+        this.modelRepository.setRoom(this.room);
+        this.modelRepository.setBuyIns(this.room.buyIns());
+        this.modelRepository.setRakes(this.room.rakes());
+        this.modelRepository.setWinCoefficients(this.room.winCoefficient());
+        this.modelRepository.setLoseCoefficients(this.room.loseCoefficient());
     }
 
     @PostMapping("/setBuyIn")
     public void buyIn(@RequestParam("buyIn") double buyIn) {
-        this.model.setBuyIn(buyIn);
+        this.modelRepository.setBuyIn(buyIn);
 
         this.coefficient.setWinCoefficient(buyIn);
         this.coefficient.setLoseCoefficient(buyIn);
@@ -54,47 +54,47 @@ public class SetController {
 
     @PostMapping("/setTourneyPerPeriod")
     public void tourneyPerPeriod(@RequestParam("tourney") int tourney) {
-        this.model.setTourneyPerPeriod(tourney);
+        this.modelRepository.setTourneyPerPeriod(tourney);
     }
 
     @PostMapping("/setChipsEVFromTourney")
     public void chipsEV(@RequestParam("chips") double chips) {
-        this.model.setChipsEVFromTourney(chips);
+        this.modelRepository.setChipsEVFromTourney(chips);
     }
 
     @PostMapping("/setRakeBackTotal")
     public void rakeBack(@RequestParam("rakeBack") double rakeBack) {
-        this.model.setRakeBackTotal(rakeBack);
+        this.modelRepository.setRakeBackTotal(rakeBack);
     }
 
     @PostMapping("/setDollarsPerHour")
     public void dollarPerHour(@RequestParam("dollars") double dollars) {
-        this.model.setDollarsPerHour(dollars);
+        this.modelRepository.setDollarsPerHour(dollars);
     }
 
     @PostMapping("/setHoursPerDay")
     public void hourPerDay(@RequestParam("hours") double hours) {
-        this.model.setHoursPerDay(hours);
+        this.modelRepository.setHoursPerDay(hours);
     }
 
     @PostMapping("/setDaysPerWeek")
     public void dayPerWeek(@RequestParam("days") int days) {
-        this.model.setDaysPerWeek(days);
+        this.modelRepository.setDaysPerWeek(days);
     }
 
     @PostMapping("/setDaysPerMonth")
     public void dayPerMonth(@RequestParam("days") int days) {
-        this.model.setDaysPerMonth(days);
+        this.modelRepository.setDaysPerMonth(days);
     }
 
     @PostMapping("/setRakeBackDollarsPerDay")
     public void rakeBackDollarPerDay(@RequestParam("payments") double payments) {
-        this.model.setRakeBackDollarsPerDay(payments);
+        this.modelRepository.setRakeBackDollarsPerDay(payments);
     }
 
     @PostMapping("/setRakeBackDollarsPerWeek")
     public void rakeBackDollarPerWeek(@RequestParam("payments") double payments) {
-        this.model.setRakeBackDollarsPerWeek(payments);
+        this.modelRepository.setRakeBackDollarsPerWeek(payments);
     }
 
     @PostMapping("/setMesh")
@@ -111,38 +111,38 @@ public class SetController {
                 this.mesh = new StudyWithoutBacking();
                 break;
         }
-        this.model.setMesh(this.mesh);
+        this.modelRepository.setMesh(this.mesh);
     }
 
     @PostMapping("/setTourneyPerDay")
     public void tourneyPerDay(@RequestParam("tourney") int tourney) {
-        this.model.setTourneyPerDay(tourney);
+        this.modelRepository.setTourneyPerDay(tourney);
     }
 
     @PostMapping("/setWeeksPerPeriod")
     public void weekPerPeriod(@RequestParam("weeks") int weeks) {
-        this.model.setWeeksPerPeriod(weeks);
+        this.modelRepository.setWeeksPerPeriod(weeks);
     }
 
     @PostMapping("/setRakeBackDollarsPerPeriod")
     public void rakeBackDollarPerPeriod(@RequestParam("dollars") double dollars) {
-        this.model.setRakeBackDollarsPerPeriod(dollars);
+        this.modelRepository.setRakeBackDollarsPerPeriod(dollars);
     }
 
     @PostMapping("/resetAllFields")
     public void resetAllField() {
-        this.model.setDollarsPerHour(0);
-        this.model.setHoursPerDay(0);
-        this.model.setDaysPerMonth(0);
-        this.model.setChipsEVFromTourney(0);
-        this.model.setDollarsEVPerTourney(0);
-        this.model.setRakeBackTotal(0);
-        this.model.setTourneyPerPeriod(0);
-        this.model.setTourneyPerDay(0);
-        this.model.setRakeBackDollarsPerDay(0);
-        this.model.setDaysPerWeek(0);
-        this.model.setRakeBackDollarsPerWeek(0);
-        this.model.setWeeksPerPeriod(0);
-        this.model.setRakeBackDollarsPerPeriod(0);
+        this.modelRepository.setDollarsPerHour(0);
+        this.modelRepository.setHoursPerDay(0);
+        this.modelRepository.setDaysPerMonth(0);
+        this.modelRepository.setChipsEVFromTourney(0);
+        this.modelRepository.setDollarsEVPerTourney(0);
+        this.modelRepository.setRakeBackTotal(0);
+        this.modelRepository.setTourneyPerPeriod(0);
+        this.modelRepository.setTourneyPerDay(0);
+        this.modelRepository.setRakeBackDollarsPerDay(0);
+        this.modelRepository.setDaysPerWeek(0);
+        this.modelRepository.setRakeBackDollarsPerWeek(0);
+        this.modelRepository.setWeeksPerPeriod(0);
+        this.modelRepository.setRakeBackDollarsPerPeriod(0);
     }
 }

@@ -1,7 +1,7 @@
 package team.firestorm.service.table;
 
 import lombok.RequiredArgsConstructor;
-import team.firestorm.repository.Model;
+import team.firestorm.repository.ModelRepository;
 import team.firestorm.service.mesh.BackingWithStudy;
 import team.firestorm.service.mesh.BackingWithoutStudy;
 import team.firestorm.service.mesh.Mesh;
@@ -9,14 +9,14 @@ import team.firestorm.service.mesh.StudyWithoutBacking;
 
 @RequiredArgsConstructor
 public abstract class ResultFiledServiceBase implements ResultFiledService {
-    private final Model model;
+    private final ModelRepository modelRepository;
 
     @Override
     public double dollarEVPerTourney() {
-        double buyIn = this.model.getBuyIn();
-        double chipsEV = this.model.getChipsEVFromTourney();
-        double winCoefficient = this.model.getWinCoefficient();
-        double loseCoefficient = this.model.getLoseCoefficient();
+        double buyIn = this.modelRepository.getBuyIn();
+        double chipsEV = this.modelRepository.getChipsEVFromTourney();
+        double winCoefficient = this.modelRepository.getWinCoefficient();
+        double loseCoefficient = this.modelRepository.getLoseCoefficient();
 
         return buyIn * 1 * (((500 + chipsEV) / 1500) * winCoefficient
                 + (1 - ((500 + chipsEV) / 1500)) * loseCoefficient);
@@ -24,15 +24,15 @@ public abstract class ResultFiledServiceBase implements ResultFiledService {
 
     @Override
     public double evBI() {
-        return dollarEVTotal() / this.model.getBuyIn();
+        return dollarEVTotal() / this.modelRepository.getBuyIn();
     }
 
     @Override
     public int rollbackPercent() {
         double evBI = evBI();
         int rollback = 0;
-        Mesh mesh = this.model.getMesh();
-        double buyIn = this.model.getBuyIn();
+        Mesh mesh = this.modelRepository.getMesh();
+        double buyIn = this.modelRepository.getBuyIn();
 
         if (mesh instanceof BackingWithStudy) {
             if (buyIn < 5) {

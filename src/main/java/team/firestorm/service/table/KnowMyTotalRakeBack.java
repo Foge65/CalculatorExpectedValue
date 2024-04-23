@@ -1,24 +1,24 @@
 package team.firestorm.service.table;
 
 import org.springframework.stereotype.Service;
-import team.firestorm.repository.Model;
+import team.firestorm.repository.ModelRepository;
 
 @Service
 public class KnowMyTotalRakeBack extends ResultFiledServiceBase implements ResultFiledService {
-    private final Model model;
+    private final ModelRepository modelRepository;
 
-    public KnowMyTotalRakeBack(Model model) {
-        super(model);
-        this.model = model;
+    public KnowMyTotalRakeBack(ModelRepository modelRepository) {
+        super(modelRepository);
+        this.modelRepository = modelRepository;
     }
 
     public double dollarEVPerTourneyTotal() {
-        return this.model.getBuyIn() * this.model.getRake() / 100 * this.model.getRakeBackTotal() / 100
+        return this.modelRepository.getBuyIn() * this.modelRepository.getRake() / 100 * this.modelRepository.getRakeBackTotal() / 100
                 + dollarEVPerTourney();
     }
 
     @Override
     public double dollarEVTotal() {
-        return dollarEVPerTourneyTotal() * this.model.getTourneyPerPeriod();
+        return dollarEVPerTourneyTotal() * this.modelRepository.getTourneyPerPeriod();
     }
 }
