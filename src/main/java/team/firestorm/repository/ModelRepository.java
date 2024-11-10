@@ -17,7 +17,7 @@ public class ModelRepository {
     private double[] loseCoefficients;
 
     private double buyIn;
-    private int rake;
+    private double rake;
     private int tourneyPerDay;
     private int tourneyPerPeriod;
     private double chipsEVFromTourney;
@@ -34,4 +34,9 @@ public class ModelRepository {
     private double rakeBackTotal;
     private int weeksPerPeriod;
     private Mesh mesh;
+
+    private double desiredProfit;
+    private int expChipsEV;
+    private int tables;
+    private double rakebackPercent;
 }

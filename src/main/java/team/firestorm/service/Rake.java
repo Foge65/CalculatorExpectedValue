@@ -13,8 +13,9 @@ public class Rake {
     private final Coefficient coefficient;
 
     public void setRake(double buyIn) {
-        int index = coefficient.matchIndexFromArray(room.buyIns(), buyIn);
+        int index = coefficient.findSelectedCoefficient(room.buyIns(), buyIn);
         int[] rakes = room.rakes();
         this.modelRepository.setRake(rakes[index]);
     }
+
 }
