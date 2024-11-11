@@ -36,7 +36,7 @@ public class ModelRepository {
     private Mesh mesh;
 
     private double desiredProfit;
-    private int expChipsT;
+    private double expChipsT;
     private double expEVT;
     private int tables;
     private double rakebackPercent;

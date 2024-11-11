@@ -55,7 +55,7 @@ class ProfitCalcTest {
         double buyIn = 10.0;
         modelRepository.setBuyIn(buyIn);
 
-        int chipsEV = 56;
+        double chipsEV = 56;
         modelRepository.setExpChipsT(chipsEV);
 
         double winCoefficient = 1.7280079;
@@ -65,7 +65,7 @@ class ProfitCalcTest {
         modelRepository.setLoseCoefficient(loseCoefficient);
 
         profitCalc = new ProfitCalc(modelRepository);
-        double dollarEVPerTourney = profitCalc.dollarEVPerTourney(buyIn, chipsEV, winCoefficient, loseCoefficient);
+        double dollarEVPerTourney = profitCalc.dollarEVPerTourney();
 
         Assertions.assertEquals(0.15749233333333335, dollarEVPerTourney);
     }

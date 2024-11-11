@@ -22,7 +22,7 @@ public class ProfitController {
 
     @GetMapping("/expEVT")
     public ResponseEntity<Double> expEVT() {
-        return ResponseEntity.ok(modelRepository.getExpEVT());
+        return ResponseEntity.ok(profitCalc.dollarEVPerTourney());
     }
 
     @GetMapping("/needHours")
@@ -66,7 +66,7 @@ public class ProfitController {
     }
 
     @PostMapping("/expChipsT")
-    public void expChipsT(@RequestParam("chips") int chips) {
+    public void expChipsT(@RequestParam("chips") double chips) {
         modelRepository.setExpChipsT(chips);
     }
 
@@ -78,5 +78,10 @@ public class ProfitController {
     @PostMapping("/haveHours")
     public void haveHours(@RequestParam("haveHours") int haveHours) {
         modelRepository.setHaveHours(haveHours);
+    }
+
+    @PostMapping("/rakebackPct")
+    public void rakebackPct(@RequestParam("rakeback") double rakeback) {
+        modelRepository.setRakebackPercent(rakeback);
     }
 }

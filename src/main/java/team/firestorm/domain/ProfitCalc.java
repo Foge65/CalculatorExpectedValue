@@ -25,11 +25,7 @@ public class ProfitCalc {
 
         double rakeback = modelRepository.getRakebackPercent();
 
-        int chipsEV = modelRepository.getExpChipsT();
-        double winCoefficient = modelRepository.getWinCoefficient();
-        double loseCoefficient = modelRepository.getLoseCoefficient();
-
-        double dollarEVPerTourney = dollarEVPerTourney(buyIn, chipsEV, winCoefficient, loseCoefficient);
+        double dollarEVPerTourney = dollarEVPerTourney();
 
         double requiredTourneys = desiredProfit / (rollback / 100) / (buyIn * (rake / 100) * (rakeback / 100) + dollarEVPerTourney) + 1;
 
@@ -186,8 +182,12 @@ public class ProfitCalc {
         return rollback;
     }
 
+    public double dollarEVPerTourney() {
+        double buyIn = modelRepository.getBuyIn();
+        double chipsEV = modelRepository.getExpChipsT();
+        double winCoefficient = modelRepository.getWinCoefficient();
+        double loseCoefficient = modelRepository.getLoseCoefficient();
 
-    public double dollarEVPerTourney(double buyIn, double chipsEV, double winCoefficient, double loseCoefficient) {
         double expEVT = buyIn * 1 * (((500 + chipsEV) / 1500) * winCoefficient
                                      + (1 - ((500 + chipsEV) / 1500)) * loseCoefficient);
 

@@ -22,16 +22,16 @@ class SetControllerTest {
 
     @Test
     void buyIn() throws Exception {
-        this.mockMvc.perform(post("/calcEV/setRoom")
+        this.mockMvc.perform(post("/setRoom")
                         .param("room", "iPoker"))
                 .andExpect(status().isOk());
 
-        this.mockMvc.perform(post("/calcEV/setBuyIn")
+        this.mockMvc.perform(post("/setBuyIn")
                         .param("buyIn", "25"))
                 .andExpect(status().isOk());
         assertFalse(arrayContainsValue(this.modelRepository.getBuyIns(), 25));
 
-        this.mockMvc.perform(post("/calcEV/setBuyIn")
+        this.mockMvc.perform(post("/setBuyIn")
                         .param("buyIn", "20"))
                 .andExpect(status().isOk());
         assertTrue(arrayContainsValue(this.modelRepository.getBuyIns(), 20));
@@ -48,15 +48,15 @@ class SetControllerTest {
 
     @Test
     void mesh() throws Exception {
-        this.mockMvc.perform(post("/calcEV/setMesh")
+        this.mockMvc.perform(post("/setMesh")
                         .param("mesh", "BackingWithStudy"))
                 .andExpect(status().isOk());
 
-        this.mockMvc.perform(post("/calcEV/setMesh")
+        this.mockMvc.perform(post("/setMesh")
                         .param("mesh", "BackingWithoutStudy"))
                 .andExpect(status().isOk());
 
-        this.mockMvc.perform(post("/calcEV/setMesh")
+        this.mockMvc.perform(post("/setMesh")
                         .param("mesh", "StudyWithoutBacking"))
                 .andExpect(status().isOk());
     }
