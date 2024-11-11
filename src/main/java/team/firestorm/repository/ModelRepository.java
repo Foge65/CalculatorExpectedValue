@@ -36,7 +36,17 @@ public class ModelRepository {
     private Mesh mesh;
 
     private double desiredProfit;
-    private int expChipsEV;
+    private int expChipsT;
+    private double expEVT;
     private int tables;
     private double rakebackPercent;
+    private double requiredTourneys;
+    private double tourneysPerTable;
+    private int rollback;
+    private double requiredHours;
+
+    private int haveHours;
+    private double tourneys;
+    private double estimatedExpectation;
+    private double profitAfterRollback;
 }
