@@ -7,38 +7,350 @@
     <link href="data:;base64,iVBORw0KGgo=" rel="icon">
 <body>
 
-<div id="cookie"></div>
-
 <div class="table-container">
+    <table>
+        <caption><h3>Желаемый профит</h3></caption>
+
+        <tr>
+            <td><a>Желаемый профит</a></td>
+            <td colspan="2">
+                <label for="desiredProfit"></label>
+                <input id="desiredProfit" oninput="setValue('/desiredProfit', 'profit', this)"
+                       type="number">
+            </td>
+        </tr>
+
+        <tr>
+            <td><a>Рум</a></td>
+            <td>
+                <label for="room1"></label>
+                <select id="room1" onchange="setValue('/setRoom', 'room', this)"></select>
+            </td>
+            <td>
+                <label for="room2"></label>
+                <select id="room2" onchange="setValue('/setRoom', 'room', this)"></select>
+            </td>
+        </tr>
+
+        <tr>
+            <td><a>Лимит</a></td>
+            <td>
+                <label for="buyIn1"></label>
+                <select id="buyIn1" onchange="setValue('/setBuyIn', 'buyIn', this)"></select>
+            </td>
+            <td>
+                <label for="buyIn2"></label>
+                <select id="buyIn2" onchange="setValue('/setBuyIn', 'buyIn', this)"></select>
+            </td>
+        </tr>
+
+        <tr>
+            <td><a>Среднее ChipEV/T по пулу (для ориентира)</a></td>
+            <td>
+                <label for="avgChipsT1"></label>
+                <input id="avgChipsT1" readonly>
+            </td>
+            <td>
+                <label for="avgChipsT2"></label>
+                <input id="avgChipsT2" readonly>
+            </td>
+        </tr>
+
+        <tr>
+            <td><a>Ожидаемое ChipEV/T</a></td>
+            <td>
+                <label for="expChipsT1"></label>
+                <input id="expChipsT1" oninput="setValue('/expChipsT', 'chips', this)" type="number">
+            </td>
+            <td>
+                <label for="expChipsT2"></label>
+                <input id="expChipsT2" oninput="setValue('/expChipsT', 'chips', this)" type="number">
+            </td>
+        </tr>
+
+        <tr>
+            <td><a>Ожидаемое $EV/Т</a></td>
+            <td>
+                <label for="expEVT1"></label>
+                <input id="expEVT1" readonly>
+            </td>
+            <td>
+                <label for="expEVT2"></label>
+                <input id="expEVT2" readonly>
+            </td>
+        </tr>
+
+        <tr>
+            <td><a>Кол-во окон одновр-но</a></td>
+            <td>
+                <label for="tables1"></label>
+                <input id="tables1">
+            </td>
+            <td>
+                <label for="tables2"></label>
+                <input id="tables2">
+            </td>
+        </tr>
+
+        <tr>
+            <td><a>Величина RB, %</a></td>
+            <td>
+                <label for="rakebackPct1"></label>
+                <input id="rakebackPct1">
+            </td>
+            <td>
+                <label for="rakebackPct2"></label>
+                <input id="rakebackPct2">
+            </td>
+        </tr>
+
+        <tr>
+            <td><a>Тип контракта</a></td>
+            <td colspan="2">
+                <label for="mesh1"></label>
+                <select id="mesh1"></select>
+            </td>
+        </tr>
+
+        <tr>
+            <td><a>% отката по контракту</a></td>
+            <td>
+                <label for="rollbackPct1"></label>
+                <input id="rollbackPct1">
+            </td>
+            <td>
+                <label for="rollbackPct2"></label>
+                <input id="rollbackPct2">
+            </td>
+        </tr>
+
+        <tr class="blank-row">
+            <td colspan="3"></td>
+        </tr>
+
+        <tr>
+            <td><a>Необходимое кол-во турниров</a></td>
+            <td>
+                <label for="tourneysNeed1"></label>
+                <input id="tourneysNeed1">
+            </td>
+            <td>
+                <label for="tourneysNeed2"></label>
+                <input id="tourneysNeed2">
+            </td>
+        </tr>
+
+        <tr>
+            <td><a>Необходимое кол-во часов</a></td>
+            <td>
+                <label for="hoursNeed1"></label>
+                <input id="hoursNeed1">
+            </td>
+            <td>
+                <label for="hoursNeed2"></label>
+                <input id="hoursNeed2">
+            </td>
+        </tr>
+
+        <tr>
+            <td><a>$/час</a></td>
+            <td>
+                <label for="dollarsPerHour1"></label>
+                <input id="dollarsPerHour1">
+            </td>
+            <td>
+                <label for="dollarsPerHour2"></label>
+                <input id="dollarsPerHour2">
+            </td>
+        </tr>
+
+    </table>
+
+    <table>
+        <caption><h3>Есть часов в месяц</h3></caption>
+
+        <tr>
+            <td><a>Есть часов в месяц</a></td>
+            <td colspan="2">
+                <label for="haveHours"></label>
+                <input id="haveHours">
+            </td>
+        </tr>
+
+        <tr>
+            <td><a>Кол-во окон одновр-но</a></td>
+            <td>
+                <label for="tables3"></label>
+                <input id="tables3">
+            </td>
+            <td>
+                <label for="tables4"></label>
+                <input id="tables4">
+            </td>
+        </tr>
+
+        <tr>
+            <td><a>Рум</a></td>
+            <td>
+                <label for="room3"></label>
+                <select id="room3"></select>
+            </td>
+            <td>
+                <label for="room4"></label>
+                <select id="room4"></select>
+            </td>
+        </tr>
+
+        <tr>
+            <td><a>Лимит</a></td>
+            <td>
+                <label for="buyIn3"></label>
+                <select id="buyIn3"></select>
+            </td>
+            <td>
+                <label for="buyIn4"></label>
+                <select id="buyIn4"></select>
+            </td>
+        </tr>
+
+        <tr>
+            <td><a>Среднее ChipEV/T по пулу (для ориентира)</a></td>
+            <td>
+                <label for="avgChipsT3"></label>
+                <input id="avgChipsT3">
+            </td>
+            <td>
+                <label for="avgChipsT4"></label>
+                <input id="avgChipsT4">
+            </td>
+        </tr>
+
+        <tr>
+            <td><a>Ожидаемое ChipEV/T</a></td>
+            <td>
+                <label for="expChipsT3"></label>
+                <input id="expChipsT3">
+            </td>
+            <td>
+                <label for="expChipsT4"></label>
+                <input id="expChipsT4">
+            </td>
+        </tr>
+
+        <tr>
+            <td><a>Ожидаемое $EV/Т</a></td>
+            <td>
+                <label for="expEVT3"></label>
+                <input id="expEVT3">
+            </td>
+            <td>
+                <label for="expEVT4"></label>
+                <input id="expEVT4">
+            </td>
+        </tr>
+
+        <tr>
+            <td><a>Величина RB, %</a></td>
+            <td>
+                <label for="rakebackPct3"></label>
+                <input id="rakebackPct3">
+            </td>
+            <td>
+                <label for="rakebackPct4"></label>
+                <input id="rakebackPct4">
+            </td>
+        </tr>
+
+        <tr>
+            <td><a>Тип контракта</a></td>
+            <td colspan="2">
+                <label for="mesh2"></label>
+                <select id="mesh2"></select>
+            </td>
+        </tr>
+
+        <tr>
+            <td><a>% отката по контракту</a></td>
+            <td>
+                <label for="rollbackPct3"></label>
+                <input id="rollbackPct3">
+            </td>
+            <td>
+                <label for="rollbackPct4"></label>
+                <input id="rollbackPct4">
+            </td>
+        </tr>
+
+        <tr class="blank-row">
+            <td colspan="3"></td>
+        </tr>
+
+        <tr>
+            <td><a>Кол-во турниров</a></td>
+            <td>
+                <label for="tourneys1"></label>
+                <input id="tourneys1">
+            </td>
+            <td>
+                <label for="tourneys2"></label>
+                <input id="tourneys2">
+            </td>
+        </tr>
+
+        <tr>
+            <td><a>Предполагаемое ожидание</a></td>
+            <td>
+                <label for="estimatedExpectation1"></label>
+                <input id="estimatedExpectation1">
+            </td>
+            <td>
+                <label for="estimatedExpectation2"></label>
+                <input id="estimatedExpectation2">
+            </td>
+        </tr>
+
+        <tr>
+            <td><a>$/час</a></td>
+            <td>
+                <label for="dollarsPerHour3"></label>
+                <input id="dollarsPerHour3">
+            </td>
+            <td>
+                <label for="dollarsPerHour4"></label>
+                <input id="dollarsPerHour4">
+            </td>
+        </tr>
+    </table>
+
     <table>
         <caption><h3>Знаю свой $/час</h3></caption>
         <tr>
             <td>
                 <div>
                     <a>Лимит:</a>
-                    <label for="buyIn1"></label>
-                    <select id="buyIn1" onchange="setSyncBuyIn('buyIn1', 'buyIn2', 'buyIn3')"></select>
+                    <label for="buyIn5"></label>
+                    <select id="buyIn5" onchange="setSyncBuyIn('buyIn5', 'buyIn6', 'buyIn7')"></select>
                 </div>
 
                 <div>
                     <a>$/Час:</a>
-                    <label for="dollarsPerHour1"></label>
-                    <input id="dollarsPerHour1" type="number"
-                           oninput="setValueOnInput('dollarsPerHour1', '/calcEV/setDollarsPerHour', 'dollars')">
+                    <label for="dollarsPerHour5"></label>
+                    <input id="dollarsPerHour5" oninput="setValueOnInput('dollarsPerHour1', '/setDollarsPerHour', 'dollars')"
+                           type="number">
                 </div>
 
                 <div>
                     <a>Рабочих часов в день:</a>
                     <label for="hoursPerDay1"></label>
                     <input id="hoursPerDay1" type="number"
-                           oninput="setValueOnInput('hoursPerDay1', '/calcEV/setHoursPerDay', 'hours')">
+                           oninput="setValueOnInput('hoursPerDay1', '/setHoursPerDay', 'hours')">
                 </div>
 
                 <div>
                     <a>Рабочих дней в месяц:</a>
                     <label for="daysPerMonth1"></label>
                     <input id="daysPerMonth1" type="number"
-                           oninput="setValueOnInput('daysPerMonth1', '/calcEV/setDaysPerMonth', 'days')">
+                           oninput="setValueOnInput('daysPerMonth1', '/setDaysPerMonth', 'days')">
                 </div>
 
                 <div>
@@ -55,8 +367,8 @@
 
                 <div>
                     <a>Откатная сетка:</a>
-                    <label for="mesh1"></label>
-                    <select id="mesh1" onchange="setSyncMesh('mesh1', 'mesh2', 'mesh3')"></select>
+                    <label for="mesh5"></label>
+                    <select id="mesh5" onchange="setSyncMesh('mesh5', 'mesh6', 'mesh7')"></select>
                 </div>
 
                 <div>
@@ -80,14 +392,14 @@
             <td>
                 <div>
                     <a>Рум:</a>
-                    <label for="room2"></label>
-                    <select id="room2" onchange="setSyncRoom('room2', 'room3')"></select>
+                    <label for="room6"></label>
+                    <select id="room6" onchange="setSyncRoom('room2', 'room3')"></select>
                 </div>
 
                 <div>
                     <a>Лимит:</a>
-                    <label for="buyIn2"></label>
-                    <select id="buyIn2" onchange="setSyncBuyIn('buyIn2', 'buyIn1', 'buyIn3')"></select>
+                    <label for="buyIn6"></label>
+                    <select id="buyIn6" onchange="setSyncBuyIn('buyIn6', 'buyIn5', 'buyIn7')"></select>
                 </div>
 
                 <div>
@@ -106,7 +418,7 @@
                     <a>RakeBack Total, %:</a>
                     <label for="rakeBackTotal2"></label>
                     <input id="rakeBackTotal2" type="number"
-                           oninput="setValueOnInput('rakeBackTotal2', '/calcEV/setRakeBackTotal', 'rakeBack')">
+                           oninput="setValueOnInput('rakeBackTotal2', '/setRakeBackTotal', 'rakeBack')">
                 </div>
 
                 <div>
@@ -119,7 +431,7 @@
                     <a>Дистанция за период:</a>
                     <label for="tourneyPerPeriod2"></label>
                     <input id="tourneyPerPeriod2" type="number"
-                           oninput="setValueOnInput('tourneyPerPeriod2', '/calcEV/setTourneyPerPeriod', 'tourney')">
+                           oninput="setValueOnInput('tourneyPerPeriod2', '/setTourneyPerPeriod', 'tourney')">
                 </div>
 
                 <div>
@@ -136,8 +448,8 @@
 
                 <div>
                     <a>Откатная сетка:</a>
-                    <label for="mesh2"></label>
-                    <select id="mesh2" onchange="setSyncMesh('mesh2', 'mesh1', 'mesh3')"></select>
+                    <label for="mesh6"></label>
+                    <select id="mesh6" onchange="setSyncMesh('mesh6', 'mesh5', 'mesh7')"></select>
                 </div>
 
                 <div>
@@ -161,14 +473,14 @@
             <td>
                 <div>
                     <a>Рум:</a>
-                    <label for="room3"></label>
-                    <select id="room3" onchange="setSyncRoom('room3', 'room2')"></select>
+                    <label for="room7"></label>
+                    <select id="room7" onchange="setSyncRoom('room3', 'room2')"></select>
                 </div>
 
                 <div>
                     <a>Лимит:</a>
-                    <label for="buyIn3"></label>
-                    <select id="buyIn3" onchange="setSyncBuyIn('buyIn3', 'buyIn1', 'buyIn2')"></select>
+                    <label for="buyIn7"></label>
+                    <select id="buyIn7" onchange="setSyncBuyIn('buyIn7', 'buyIn5', 'buyIn6')"></select>
                 </div>
 
                 <div>
@@ -187,14 +499,14 @@
                     <a>Дистанция в день:</a>
                     <label for="tourneyPerDay3"></label>
                     <input id="tourneyPerDay3" type="number"
-                           oninput="setValueOnInput('tourneyPerDay3', '/calcEV/setTourneyPerDay', 'tourney')">
+                           oninput="setValueOnInput('tourneyPerDay3', '/setTourneyPerDay', 'tourney')">
                 </div>
 
                 <div>
                     <a>Выплаты RakeBack в день, $:</a>
                     <label for="rakeBackDollarsPerDay3"></label>
                     <input id="rakeBackDollarsPerDay3" type="number"
-                           oninput="setValueOnInput('rakeBackDollarsPerDay3', '/calcEV/setRakeBackDollarsPerDay', 'payments')">
+                           oninput="setValueOnInput('rakeBackDollarsPerDay3', '/setRakeBackDollarsPerDay', 'payments')">
                 </div>
 
                 <div>
@@ -207,7 +519,7 @@
                     <a>Игровых дней в неделю:</a>
                     <label for="daysPerWeek3"></label>
                     <input id="daysPerWeek3" type="number"
-                           oninput="setValueOnInput('daysPerWeek3', '/calcEV/setDaysPerWeek', 'days')">
+                           oninput="setValueOnInput('daysPerWeek3', '/setDaysPerWeek', 'days')">
                 </div>
 
                 <div>
@@ -220,7 +532,7 @@
                     <a>Выплаты RakeBack в неделю, $:</a>
                     <label for="rakeBackDollarsPerWeek3"></label>
                     <input id="rakeBackDollarsPerWeek3" type="number"
-                           oninput="setValueOnInput('rakeBackDollarsPerWeek3', '/calcEV/setRakeBackDollarsPerWeek', 'payments')">
+                           oninput="setValueOnInput('rakeBackDollarsPerWeek3', '/setRakeBackDollarsPerWeek', 'payments')">
                 </div>
 
                 <div>
@@ -233,7 +545,7 @@
                     <a>Игровых недель в период:</a>
                     <label for="weeksPerPeriod3"></label>
                     <input id="weeksPerPeriod3" type="number"
-                           oninput="setValueOnInput('weeksPerPeriod3', '/calcEV/setWeeksPerPeriod', 'weeks')">
+                           oninput="setValueOnInput('weeksPerPeriod3', '/setWeeksPerPeriod', 'weeks')">
                 </div>
 
                 <div>
@@ -246,7 +558,7 @@
                     <a>Выплаты RakeBack в период, $:</a>
                     <label for="rakeBackDollarsPerPeriod3"></label>
                     <input id="rakeBackDollarsPerPeriod3" type="number"
-                           oninput="setValueOnInput('rakeBackDollarsPerPeriod3', '/calcEV/setRakeBackDollarsPerPeriod', 'dollars')">
+                           oninput="setValueOnInput('rakeBackDollarsPerPeriod3', '/setRakeBackDollarsPerPeriod', 'dollars')">
                 </div>
 
                 <div>
@@ -281,8 +593,8 @@
 
                 <div>
                     <a>Откатная сетка:</a>
-                    <label for="mesh3"></label>
-                    <select id="mesh3" onchange="setSyncMesh('mesh3', 'mesh1', 'mesh2')"></select>
+                    <label for="mesh7"></label>
+                    <select id="mesh7" onchange="setSyncMesh('mesh7', 'mesh5', 'mesh6')"></select>
                 </div>
 
                 <div>
