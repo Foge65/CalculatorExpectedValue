@@ -2,7 +2,7 @@ package team.firestorm.out;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import team.firestorm.newdesign.ProfitCalc;
+import team.firestorm.domain.ProfitCalc;
 import team.firestorm.repository.ModelRepository;
 import team.firestorm.service.mesh.BackingWithoutStudy;
 
@@ -19,7 +19,7 @@ class ProfitCalcTest {
         modelRepository.setRake(7.0);
         modelRepository.setMesh(new BackingWithoutStudy());
         modelRepository.setRakebackPercent(35.0);
-        modelRepository.setExpChipsEV(56);
+        modelRepository.setExpChipsT(56);
         modelRepository.setWinCoefficient(1.7280079);
         modelRepository.setLoseCoefficient(-0.9927421);
 
@@ -56,7 +56,7 @@ class ProfitCalcTest {
         modelRepository.setBuyIn(buyIn);
 
         int chipsEV = 56;
-        modelRepository.setExpChipsEV(chipsEV);
+        modelRepository.setExpChipsT(chipsEV);
 
         double winCoefficient = 1.7280079;
         modelRepository.setWinCoefficient(winCoefficient);

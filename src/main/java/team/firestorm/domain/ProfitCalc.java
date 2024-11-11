@@ -1,12 +1,14 @@
-package team.firestorm.newdesign;
+package team.firestorm.domain;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 import team.firestorm.repository.ModelRepository;
 import team.firestorm.service.mesh.BackingWithStudy;
 import team.firestorm.service.mesh.BackingWithoutStudy;
 import team.firestorm.service.mesh.Mesh;
 import team.firestorm.service.mesh.StudyWithoutBacking;
 
+@Service
 @RequiredArgsConstructor
 public class ProfitCalc {
     private final ModelRepository modelRepository;
@@ -23,13 +25,17 @@ public class ProfitCalc {
 
         double rakeback = modelRepository.getRakebackPercent();
 
-        int chipsEV = modelRepository.getExpChipsEV();
+        int chipsEV = modelRepository.getExpChipsT();
         double winCoefficient = modelRepository.getWinCoefficient();
         double loseCoefficient = modelRepository.getLoseCoefficient();
 
         double dollarEVPerTourney = dollarEVPerTourney(buyIn, chipsEV, winCoefficient, loseCoefficient);
 
-        return desiredProfit / (rollback / 100) / (buyIn * (rake / 100) * (rakeback / 100) + dollarEVPerTourney) + 1;
+        double requiredTourneys = desiredProfit / (rollback / 100) / (buyIn * (rake / 100) * (rakeback / 100) + dollarEVPerTourney) + 1;
+
+        modelRepository.setRequiredTourneys(requiredTourneys);
+
+        return requiredTourneys;
     }
 
     public double rollbackPercent(Mesh mesh, double buyIn, double evBI) {
@@ -175,13 +181,58 @@ public class ProfitCalc {
             }
         }
 
+        modelRepository.setRollback(rollback);
+
         return rollback;
     }
 
 
     public double dollarEVPerTourney(double buyIn, double chipsEV, double winCoefficient, double loseCoefficient) {
-        return buyIn * 1 * (((500 + chipsEV) / 1500) * winCoefficient
-                            + (1 - ((500 + chipsEV) / 1500)) * loseCoefficient);
+        double expEVT = buyIn * 1 * (((500 + chipsEV) / 1500) * winCoefficient
+                                     + (1 - ((500 + chipsEV) / 1500)) * loseCoefficient);
+
+        modelRepository.setExpEVT(expEVT);
+
+        return expEVT;
     }
 
+    public double requiredHours() {
+        double requiredHours = modelRepository.getRequiredTourneys() / (modelRepository.getTables() * modelRepository.getTourneysPerTable());
+
+        modelRepository.setRequiredHours(requiredHours);
+
+        return requiredHours;
+    }
+
+    public double dollarsPerHour() {
+        return modelRepository.getDesiredProfit() / modelRepository.getRequiredHours();
+    }
+
+    public double tourneys() {
+        double tourneys = modelRepository.getTables() * modelRepository.getTourneysPerTable() * modelRepository.getHaveHours();
+
+        modelRepository.setTourneys(tourneys);
+
+        return tourneys;
+    }
+
+    public double estimatedExpectation() {
+        double exp = (modelRepository.getExpEVT() + modelRepository.getBuyIn() * (modelRepository.getRake() / 100)
+                                                    * (modelRepository.getRakebackPercent() / 100))
+                     * modelRepository.getTables() * modelRepository.getTourneysPerTable() * modelRepository.getHaveHours();
+
+        modelRepository.setEstimatedExpectation(exp);
+
+        return exp;
+    }
+
+    public double dollarsPerHour2() {
+        return modelRepository.getEstimatedExpectation() / modelRepository.getHaveHours();
+    }
+
+    public double profitAfterRollback() {
+        double profit = modelRepository.getEstimatedExpectation() * modelRepository.getRollback();
+        modelRepository.setProfitAfterRollback(profit);
+        return profit;
+    }
 }
