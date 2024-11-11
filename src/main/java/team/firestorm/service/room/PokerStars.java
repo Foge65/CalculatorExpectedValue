@@ -77,4 +77,9 @@ public class PokerStars implements Room {
         loseCoefficient[7] = -0.9871249;
         return loseCoefficient;
     }
+
+    @Override
+    public double tourneysPerTable() {
+        return 7.5;
+    }
 }

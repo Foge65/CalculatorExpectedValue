@@ -75,4 +75,9 @@ public class Winamax implements Room {
         loseCoefficient[7] = -0.9929760;
         return loseCoefficient;
     }
+
+    @Override
+    public double tourneysPerTable() {
+        return 11.5;
+    }
 }

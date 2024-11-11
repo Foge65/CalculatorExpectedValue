@@ -71,4 +71,9 @@ public class IPoker implements Room {
         loseCoefficient[6] = -0.99748;
         return loseCoefficient;
     }
+
+    @Override
+    public double tourneysPerTable() {
+        return 9;
+    }
 }

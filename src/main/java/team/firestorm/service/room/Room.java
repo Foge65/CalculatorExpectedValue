@@ -8,4 +8,6 @@ public interface Room {
     double[] winCoefficient();
 
     double[] loseCoefficient();
+
+    double tourneysPerTable();
 }
