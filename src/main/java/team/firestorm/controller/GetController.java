@@ -3,7 +3,6 @@ package team.firestorm.controller;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import team.firestorm.repository.ModelRepository;
 import team.firestorm.service.mesh.Meshes;
@@ -13,7 +12,6 @@ import team.firestorm.service.table.KnowMyDollarPerHour;
 import team.firestorm.service.table.KnowMyTotalRakeBack;
 
 @RestController
-@RequestMapping("/calcEV")
 @AllArgsConstructor
 public class GetController {
     private final KnowMyDollarPerHour knowMyDollarPerHour;
