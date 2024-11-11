@@ -2,7 +2,6 @@ package team.firestorm.controller;
 
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import team.firestorm.repository.ModelRepository;
@@ -12,7 +11,6 @@ import team.firestorm.service.mesh.*;
 import team.firestorm.service.room.*;
 
 @RestController
-@RequestMapping("/calcEV")
 @AllArgsConstructor
 public class SetController {
     private final ModelRepository modelRepository;
@@ -40,6 +38,7 @@ public class SetController {
         this.modelRepository.setRakes(this.room.rakes());
         this.modelRepository.setWinCoefficients(this.room.winCoefficient());
         this.modelRepository.setLoseCoefficients(this.room.loseCoefficient());
+        this.modelRepository.setTourneysPerTable(this.room.tourneysPerTable());
     }
 
     @PostMapping("/setBuyIn")
