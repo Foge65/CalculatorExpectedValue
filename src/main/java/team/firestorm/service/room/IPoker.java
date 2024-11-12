@@ -21,6 +21,11 @@ public class IPoker implements Room {
     }
 
     @Override
+    public String name() {
+        return "iPoker";
+    }
+
+    @Override
     public double[] buyIns() {
         buyIns = new double[7];
         buyIns[0] = 1;

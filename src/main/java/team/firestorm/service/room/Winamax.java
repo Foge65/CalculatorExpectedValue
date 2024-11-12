@@ -21,6 +21,11 @@ public class Winamax implements Room {
     }
 
     @Override
+    public String name() {
+        return "Winamax";
+    }
+
+    @Override
     public double[] buyIns() {
         buyIns = new double[8];
         buyIns[0] = 0.25;
