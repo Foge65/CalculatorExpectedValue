@@ -8,11 +8,11 @@ table {
 td {
     vertical-align: top;
     text-align: left;
+    white-space: nowrap;
 }
 
 div {
     display: flex;
-    justify-content: space-between;
 }
 
 div a {
