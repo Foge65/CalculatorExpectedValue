@@ -51,8 +51,8 @@ public class ProfitController {
     }
 
     @GetMapping("/getRollbackPercent")
-    public ResponseEntity<Integer> rollbackPercent() {
-        return ResponseEntity.ok(modelRepository.getRollback());
+    public ResponseEntity<Double> rollbackPercent() {
+        return ResponseEntity.ok(profitCalc.rollbackPercent());
     }
 
     @GetMapping("/profitAfterRollback")
@@ -76,8 +76,8 @@ public class ProfitController {
     }
 
     @PostMapping("/haveHours")
-    public void haveHours(@RequestParam("haveHours") int haveHours) {
-        modelRepository.setHaveHours(haveHours);
+    public void haveHours(@RequestParam("hours") int hours) {
+        modelRepository.setHaveHours(hours);
     }
 
     @PostMapping("/rakebackPct")

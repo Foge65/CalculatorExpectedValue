@@ -12,14 +12,13 @@ import team.firestorm.service.mesh.StudyWithoutBacking;
 @RequiredArgsConstructor
 public class ProfitCalc {
     private final ModelRepository modelRepository;
+    private final Mesh mesh;
 
     public double requiredTourneys() {
         double desiredProfit = modelRepository.getDesiredProfit();
         double buyIn = modelRepository.getBuyIn();
 
-        Mesh mesh = modelRepository.getMesh();
-
-        double rollback = rollbackPercent(mesh, buyIn, desiredProfit / buyIn);
+        double rollback = modelRepository.getRollback();
 
         double rake = modelRepository.getRake();
 
@@ -34,7 +33,10 @@ public class ProfitCalc {
         return requiredTourneys;
     }
 
-    public double rollbackPercent(Mesh mesh, double buyIn, double evBI) {
+    public double rollbackPercent() {
+        double buyIn = modelRepository.getBuyIn();
+        double evBI = modelRepository.getDesiredProfit() / buyIn;
+
         int rollback = 0;
 
         if (mesh instanceof BackingWithStudy) {

@@ -130,6 +130,12 @@ public class SetController {
 
     @PostMapping("/resetAllFields")
     public void resetAllField() {
+        modelRepository.setDesiredProfit(0);
+        modelRepository.setExpChipsT(0);
+        modelRepository.setTables(0);
+        modelRepository.setRakebackPercent(0);
+        modelRepository.setHaveHours(0);
+
         this.modelRepository.setDollarsPerHour(0);
         this.modelRepository.setHoursPerDay(0);
         this.modelRepository.setDaysPerMonth(0);

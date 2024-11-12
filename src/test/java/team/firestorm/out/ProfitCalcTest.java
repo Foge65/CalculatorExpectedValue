@@ -5,10 +5,12 @@ import org.junit.jupiter.api.Test;
 import team.firestorm.domain.ProfitCalc;
 import team.firestorm.repository.ModelRepository;
 import team.firestorm.service.mesh.BackingWithoutStudy;
+import team.firestorm.service.mesh.Mesh;
 
 class ProfitCalcTest {
     private ModelRepository modelRepository;
     private ProfitCalc profitCalc;
+    private Mesh mesh;
 
     @Test
     void requiredTourneys() {
@@ -22,8 +24,11 @@ class ProfitCalcTest {
         modelRepository.setExpChipsT(56);
         modelRepository.setWinCoefficient(1.7280079);
         modelRepository.setLoseCoefficient(-0.9927421);
+        modelRepository.setRollback(85);
 
-        profitCalc = new ProfitCalc(modelRepository);
+        mesh = new BackingWithoutStudy();
+
+        profitCalc = new ProfitCalc(modelRepository, mesh);
         double requiredTourneys = profitCalc.requiredTourneys();
 
         Assertions.assertEquals(2923.9639692564597, requiredTourneys);
@@ -42,8 +47,8 @@ class ProfitCalcTest {
         BackingWithoutStudy mesh = new BackingWithoutStudy();
         modelRepository.setMesh(mesh);
 
-        profitCalc = new ProfitCalc(modelRepository);
-        double rollback = profitCalc.rollbackPercent(mesh, buyIn, desiredProfit / buyIn);
+        profitCalc = new ProfitCalc(modelRepository, mesh);
+        double rollback = profitCalc.rollbackPercent();
 
         Assertions.assertEquals(85, rollback);
     }
@@ -64,7 +69,7 @@ class ProfitCalcTest {
         double loseCoefficient = -0.9927421;
         modelRepository.setLoseCoefficient(loseCoefficient);
 
-        profitCalc = new ProfitCalc(modelRepository);
+        profitCalc = new ProfitCalc(modelRepository, mesh);
         double dollarEVPerTourney = profitCalc.dollarEVPerTourney();
 
         Assertions.assertEquals(0.15749233333333335, dollarEVPerTourney);
