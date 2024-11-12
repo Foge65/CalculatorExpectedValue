@@ -5,6 +5,16 @@ document.addEventListener("DOMContentLoaded", () => {
     setDefaultValue();
 
     getData("/getRooms", data => {
+        buildList(data, "room1");
+        setValueOnChange("/setRoom", "room", document.getElementById("room1"));
+    });
+
+    getData("/getRooms", data => {
+        buildList(data, "room2");
+        setValueOnChange("/setRoom", "room", document.getElementById("room2"));
+    });
+
+    getData("/getRooms", data => {
         buildList(data, "room6");
         setValueOnChange("/setRoom", "room", document.getElementById("room6"));
     });
@@ -30,6 +40,16 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     getData("/getMeshes", data => {
+        buildListMesh(data, "mesh1");
+        setValueOnChange("/setMesh", "mesh", document.getElementById("mesh1"));
+    });
+
+    getData("/getMeshes", data => {
+        buildListMesh(data, "mesh2");
+        setValueOnChange("/setMesh", "mesh", document.getElementById("mesh2"));
+    });
+
+    getData("/getMeshes", data => {
         buildListMesh(data, "mesh5");
         setValueOnChange("/setMesh", "mesh", document.getElementById("mesh5"));
     });
@@ -46,8 +66,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
     addToListenerCalculatingFields();
 
+    let roomSelect1 = document.getElementById("room1");
     let roomSelect2 = document.getElementById("room2");
     let roomSelect3 = document.getElementById("room3");
+    let roomSelect4 = document.getElementById("room4");
+    let roomSelect6 = document.getElementById("room6");
+    let roomSelect7 = document.getElementById("room7");
+
+    roomSelect1.addEventListener("change", () => {
+        updateBuyIn(roomSelect1);
+    });
 
     roomSelect2.addEventListener("change", () => {
         updateBuyIn(roomSelect2);
@@ -56,9 +84,40 @@ document.addEventListener("DOMContentLoaded", () => {
     roomSelect3.addEventListener("change", () => {
         updateBuyIn(roomSelect3);
     });
+
+    roomSelect4.addEventListener("change", () => {
+        updateBuyIn(roomSelect4);
+    });
+
+    roomSelect6.addEventListener("change", () => {
+        updateBuyIn(roomSelect6);
+    });
+
+    roomSelect7.addEventListener("change", () => {
+        updateBuyIn(roomSelect7);
+    });
 });
 
 function addToListenerCalculatingFields() {
+    getValueById("/expEVT", "expEVT1");
+    getValueById("/expEVT", "expEVT2");
+    getValueById("/expEVT", "expEVT3");
+    getValueById("/expEVT", "expEVT4");
+    getValueById("/getRollbackPercent", "rollbackPct1");
+    getValueById("/getRollbackPercent", "rollbackPct2");
+    getValueById("/needTourneys", "tourneysNeed1");
+    getValueById("/needTourneys", "tourneysNeed2");
+    getValueById("/needHours", "hoursNeed1");
+    getValueById("/needHours", "hoursNeed2");
+    getValueById("/dollarsPerHour", "dollarsPerHour1");
+    getValueById("/dollarsPerHour", "dollarsPerHour2");
+    getValueById("/dollarsPerHour", "dollarsPerHour3");
+    getValueById("/dollarsPerHour", "dollarsPerHour4");
+    getValueById("/tourneys", "tourneys1");
+    getValueById("/tourneys", "tourneys2");
+    getValueById("/estimatedExpectation", "estimatedExpectation1");
+    getValueById("/estimatedExpectation", "estimatedExpectation2");
+
     getValueById("/dollarEVTotal1", "dollarEVTotal1");
     getValueById("/evBI1", "evBI1");
     getValueById("/getRollbackPercent1", "playerWinPercent1");

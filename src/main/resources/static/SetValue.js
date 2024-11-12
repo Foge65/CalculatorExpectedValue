@@ -56,6 +56,10 @@ function updateBuyIn(room) {
         document.getElementById("buyIn1").innerHTML = "";
         document.getElementById("buyIn2").innerHTML = "";
         document.getElementById("buyIn3").innerHTML = "";
+        document.getElementById("buyIn4").innerHTML = "";
+        document.getElementById("buyIn5").innerHTML = "";
+        document.getElementById("buyIn6").innerHTML = "";
+        document.getElementById("buyIn7").innerHTML = "";
 
         getData("/getBuyIns", data => {
             buildList(data, "buyIn1");
@@ -70,6 +74,26 @@ function updateBuyIn(room) {
         getData("/getBuyIns", data => {
             buildList(data, "buyIn3");
             setValueOnChange("/setBuyIn", "buyIn", document.getElementById("buyIn3"));
+        });
+
+        getData("/getBuyIns", data => {
+            buildList(data, "buyIn4");
+            setValueOnChange("/setBuyIn", "buyIn", document.getElementById("buyIn4"));
+        });
+
+        getData("/getBuyIns", data => {
+            buildList(data, "buyIn5");
+            setValueOnChange("/setBuyIn", "buyIn", document.getElementById("buyIn5"));
+        });
+
+        getData("/getBuyIns", data => {
+            buildList(data, "buyIn6");
+            setValueOnChange("/setBuyIn", "buyIn", document.getElementById("buyIn6"));
+        });
+
+        getData("/getBuyIns", data => {
+            buildList(data, "buyIn7");
+            setValueOnChange("/setBuyIn", "buyIn", document.getElementById("buyIn7"));
         });
     });
 }

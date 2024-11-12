@@ -1,5 +1,20 @@
 const setFields = [
-    "dollarsPerHour1",
+    "desiredProfit",
+    "expChipsT1",
+    "expChipsT2",
+    "expChipsT3",
+    "expChipsT4",
+    "tables1",
+    "tables2",
+    "tables3",
+    "tables4",
+    "rakebackPct1",
+    "rakebackPct2",
+    "rakebackPct3",
+    "rakebackPct4",
+    "haveHours",
+
+    "dollarsPerHour5",
     "hoursPerDay1",
     "daysPerMonth1",
 
