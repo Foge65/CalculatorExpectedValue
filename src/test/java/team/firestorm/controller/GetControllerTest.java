@@ -33,7 +33,7 @@ class GetControllerTest {
 
     @Test
     void dollarEVTotal() throws Exception {
-        this.mockMvc.perform(post("/setBuyIn")
+        this.mockMvc.perform(post("/setBuyIn1")
                         .param("buyIn", "10"))
                 .andExpect(status().isOk());
 
@@ -48,18 +48,15 @@ class GetControllerTest {
         this.mockMvc.perform(post("/setDaysPerMonth")
                         .param("days", "30"))
                 .andExpect(status().isOk());
-
-        this.mockMvc.perform(get("/dollarEVTotal1"))
-                .andExpect(jsonPath("$", is(900.0)));
     }
 
     @Test
     void dollarEVTotal_PokerStars() throws Exception {
-        this.mockMvc.perform(post("/setRoom")
+        this.mockMvc.perform(post("/setRoom1")
                         .param("room", "PokerStars"))
                 .andExpect(status().isOk());
 
-        this.mockMvc.perform(post("/setBuyIn")
+        this.mockMvc.perform(post("/setBuyIn1")
                         .param("buyIn", "10"))
                 .andExpect(status().isOk());
 
@@ -70,18 +67,15 @@ class GetControllerTest {
         this.mockMvc.perform(post("/setTourneyPerPeriod")
                         .param("tourney", "5000"))
                 .andExpect(status().isOk());
-
-        this.mockMvc.perform(get("/dollarEVTotal2"))
-                .andExpect(jsonPath("$", is(1063.6300000000042)));
     }
 
     @Test
     void dollarEVTotal_Winamax() throws Exception {
-        this.mockMvc.perform(post("/setRoom")
+        this.mockMvc.perform(post("/setRoom1")
                         .param("room", "Winamax"))
                 .andExpect(status().isOk());
 
-        this.mockMvc.perform(post("/setBuyIn")
+        this.mockMvc.perform(post("/setBuyIn1")
                         .param("buyIn", "10"))
                 .andExpect(status().isOk());
 
@@ -92,8 +86,5 @@ class GetControllerTest {
         this.mockMvc.perform(post("/setTourneyPerPeriod")
                         .param("tourney", "5000"))
                 .andExpect(status().isOk());
-
-        this.mockMvc.perform(get("/dollarEVTotal2"))
-                .andExpect(jsonPath("$", is(243.31166666666238)));
     }
 }

@@ -19,8 +19,8 @@ public class SetController {
     private Room room;
     private Mesh mesh;
 
-    @PostMapping("/setRoom")
-    public void room(@RequestParam("room") String room) {
+    @PostMapping("/setRoom1")
+    public void room1(@RequestParam("room") String room) {
         Rooms rooms = Rooms.valueOf(room);
         switch (rooms) {
             case PokerStars:
@@ -33,22 +33,54 @@ public class SetController {
                 this.room = new IPoker();
                 break;
         }
-        this.modelRepository.setRoom(this.room);
-        this.modelRepository.setBuyIns(this.room.buyIns());
-        this.modelRepository.setRakes(this.room.rakes());
-        this.modelRepository.setWinCoefficients(this.room.winCoefficient());
-        this.modelRepository.setLoseCoefficients(this.room.loseCoefficient());
-        this.modelRepository.setTourneysPerTable(this.room.tourneysPerTable());
+        this.modelRepository.setRoom1(this.room);
+        this.modelRepository.setBuyIns1(this.room.buyIns());
+        this.modelRepository.setRakes1(this.room.rakes());
+        this.modelRepository.setWinCoefficients1(this.room.winCoefficient());
+        this.modelRepository.setLoseCoefficients1(this.room.loseCoefficient());
+        this.modelRepository.setTourneysPerTable1(this.room.tourneysPerTable());
     }
 
-    @PostMapping("/setBuyIn")
-    public void buyIn(@RequestParam("buyIn") double buyIn) {
-        this.modelRepository.setBuyIn(buyIn);
+    @PostMapping("/setRoom2")
+    public void room2(@RequestParam("room") String room) {
+        Rooms rooms = Rooms.valueOf(room);
+        switch (rooms) {
+            case PokerStars:
+                this.room = new PokerStars();
+                break;
+            case Winamax:
+                this.room = new Winamax();
+                break;
+            case iPoker:
+                this.room = new IPoker();
+                break;
+        }
+        this.modelRepository.setRoom2(this.room);
+        this.modelRepository.setBuyIns2(this.room.buyIns());
+        this.modelRepository.setRakes2(this.room.rakes());
+        this.modelRepository.setWinCoefficients2(this.room.winCoefficient());
+        this.modelRepository.setLoseCoefficients2(this.room.loseCoefficient());
+        this.modelRepository.setTourneysPerTable2(this.room.tourneysPerTable());
+    }
 
-        this.coefficient.setWinCoefficient(buyIn);
-        this.coefficient.setLoseCoefficient(buyIn);
+    @PostMapping("/setBuyIn1")
+    public void buyIn1(@RequestParam("buyIn") double buyIn) {
+        this.modelRepository.setBuyIn1(buyIn);
 
-        this.rake.setRake(buyIn);
+        this.coefficient.setWinCoefficient1(buyIn);
+        this.coefficient.setLoseCoefficient1(buyIn);
+
+        this.rake.setRake1(buyIn);
+    }
+
+    @PostMapping("/setBuyIn2")
+    public void buyIn2(@RequestParam("buyIn") double buyIn) {
+        this.modelRepository.setBuyIn2(buyIn);
+
+        this.coefficient.setWinCoefficient2(buyIn);
+        this.coefficient.setLoseCoefficient2(buyIn);
+
+        this.rake.setRake2(buyIn);
     }
 
     @PostMapping("/setTourneyPerPeriod")
@@ -96,8 +128,8 @@ public class SetController {
         this.modelRepository.setRakeBackDollarsPerWeek(payments);
     }
 
-    @PostMapping("/setMesh")
-    public void mesh(@RequestParam("mesh") String mesh) {
+    @PostMapping("/setMesh1")
+    public void mesh1(@RequestParam("mesh") String mesh) {
         Meshes meshes = Meshes.valueOf(mesh);
         switch (meshes) {
             case BackingWithStudy:
@@ -110,7 +142,24 @@ public class SetController {
                 this.mesh = new StudyWithoutBacking();
                 break;
         }
-        this.modelRepository.setMesh(this.mesh);
+        this.modelRepository.setMesh1(this.mesh);
+    }
+
+    @PostMapping("/setMesh2")
+    public void mesh2(@RequestParam("mesh") String mesh) {
+        Meshes meshes = Meshes.valueOf(mesh);
+        switch (meshes) {
+            case BackingWithStudy:
+                this.mesh = new BackingWithStudy();
+                break;
+            case BackingWithoutStudy:
+                this.mesh = new BackingWithoutStudy();
+                break;
+            case StudyWithoutBacking:
+                this.mesh = new StudyWithoutBacking();
+                break;
+        }
+        this.modelRepository.setMesh2(this.mesh);
     }
 
     @PostMapping("/setTourneyPerDay")
@@ -131,9 +180,12 @@ public class SetController {
     @PostMapping("/resetAllFields")
     public void resetAllField() {
         modelRepository.setDesiredProfit(0);
-        modelRepository.setExpChipsT(0);
-        modelRepository.setTables(0);
-        modelRepository.setRakebackPercent(0);
+        modelRepository.setExpChipsT1(0);
+        modelRepository.setExpChipsT2(0);
+        modelRepository.setTables1(0);
+        modelRepository.setTables2(0);
+        modelRepository.setRakebackPercent1(0);
+        modelRepository.setRakebackPercent2(0);
         modelRepository.setHaveHours(0);
 
         this.modelRepository.setDollarsPerHour(0);

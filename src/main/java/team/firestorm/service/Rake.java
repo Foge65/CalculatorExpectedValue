@@ -12,10 +12,16 @@ public class Rake {
     private final Room room;
     private final Coefficient coefficient;
 
-    public void setRake(double buyIn) {
+    public void setRake1(double buyIn) {
         int index = coefficient.findSelectedCoefficient(room.buyIns(), buyIn);
         int[] rakes = room.rakes();
-        this.modelRepository.setRake(rakes[index]);
+        this.modelRepository.setRake1(rakes[index]);
+    }
+
+    public void setRake2(double buyIn) {
+        int index = coefficient.findSelectedCoefficient(room.buyIns(), buyIn);
+        int[] rakes = room.rakes();
+        this.modelRepository.setRake2(rakes[index]);
     }
 
 }

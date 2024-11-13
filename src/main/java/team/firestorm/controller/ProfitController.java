@@ -15,14 +15,24 @@ public class ProfitController {
     private final ProfitCalc profitCalc;
     private final ModelRepository modelRepository;
 
-    @GetMapping("/needTourneys")
-    public ResponseEntity<Double> needTourneys() {
-        return ResponseEntity.ok(profitCalc.requiredTourneys());
+    @GetMapping("/needTourneys1")
+    public ResponseEntity<Double> needTourneys1() {
+        return ResponseEntity.ok(profitCalc.requiredTourneys1());
     }
 
-    @GetMapping("/expEVT")
-    public ResponseEntity<Double> expEVT() {
-        return ResponseEntity.ok(profitCalc.dollarEVPerTourney());
+    @GetMapping("/needTourneys2")
+    public ResponseEntity<Double> needTourneys2() {
+        return ResponseEntity.ok(profitCalc.requiredTourneys2());
+    }
+
+    @GetMapping("/expEVT1")
+    public ResponseEntity<Double> expEVT1() {
+        return ResponseEntity.ok(profitCalc.dollarEVPerTourney1());
+    }
+
+    @GetMapping("/expEVT2")
+    public ResponseEntity<Double> expEVT2() {
+        return ResponseEntity.ok(profitCalc.dollarEVPerTourney2());
     }
 
     @GetMapping("/needHours")
@@ -30,9 +40,9 @@ public class ProfitController {
         return ResponseEntity.ok(profitCalc.requiredHours());
     }
 
-    @GetMapping("/dollarsPerHour")
-    public ResponseEntity<Double> dollarsPerHour() {
-        return ResponseEntity.ok(profitCalc.dollarsPerHour());
+    @GetMapping("/dollarsPerHour1")
+    public ResponseEntity<Double> dollarsPerHour1() {
+        return ResponseEntity.ok(profitCalc.dollarsPerHour1());
     }
 
     @GetMapping("/tourneys")
@@ -50,14 +60,24 @@ public class ProfitController {
         return ResponseEntity.ok(profitCalc.dollarsPerHour2());
     }
 
-    @GetMapping("/getRollbackPercent")
-    public ResponseEntity<Double> rollbackPercent() {
-        return ResponseEntity.ok(profitCalc.rollbackPercent());
+    @GetMapping("/getRollbackPercent1")
+    public ResponseEntity<Double> rollbackPercent1() {
+        return ResponseEntity.ok(profitCalc.rollbackPercent1());
     }
 
-    @GetMapping("/profitAfterRollback")
-    public ResponseEntity<Double> profitAfterRollback() {
-        return ResponseEntity.ok(profitCalc.profitAfterRollback());
+    @GetMapping("/getRollbackPercent2")
+    public ResponseEntity<Double> rollbackPercent2() {
+        return ResponseEntity.ok(profitCalc.rollbackPercent2());
+    }
+
+    @GetMapping("/profitAfterRollback1")
+    public ResponseEntity<Double> profitAfterRollback1() {
+        return ResponseEntity.ok(profitCalc.profitAfterRollback1());
+    }
+
+    @GetMapping("/profitAfterRollback2")
+    public ResponseEntity<Double> profitAfterRollback2() {
+        return ResponseEntity.ok(profitCalc.profitAfterRollback2());
     }
 
     @PostMapping("/desiredProfit")
@@ -65,14 +85,24 @@ public class ProfitController {
         modelRepository.setDesiredProfit(profit);
     }
 
-    @PostMapping("/expChipsT")
-    public void expChipsT(@RequestParam("chips") double chips) {
-        modelRepository.setExpChipsT(chips);
+    @PostMapping("/expChipsT1")
+    public void expChipsT1(@RequestParam("chips") double chips) {
+        modelRepository.setExpChipsT1(chips);
     }
 
-    @PostMapping("/tables")
-    public void tables(@RequestParam("tables") int tables) {
-        modelRepository.setTables(tables);
+    @PostMapping("/expChipsT2")
+    public void expChipsT2(@RequestParam("chips") double chips) {
+        modelRepository.setExpChipsT2(chips);
+    }
+
+    @PostMapping("/tables1")
+    public void tables1(@RequestParam("tables") int tables) {
+        modelRepository.setTables1(tables);
+    }
+
+    @PostMapping("/tables2")
+    public void tables2(@RequestParam("tables") int tables) {
+        modelRepository.setTables2(tables);
     }
 
     @PostMapping("/haveHours")
@@ -80,8 +110,13 @@ public class ProfitController {
         modelRepository.setHaveHours(hours);
     }
 
-    @PostMapping("/rakebackPct")
-    public void rakebackPct(@RequestParam("rakeback") double rakeback) {
-        modelRepository.setRakebackPercent(rakeback);
+    @PostMapping("/rakebackPct1")
+    public void rakebackPct1(@RequestParam("rakeback") double rakeback) {
+        modelRepository.setRakebackPercent1(rakeback);
+    }
+
+    @PostMapping("/rakebackPct2")
+    public void rakebackPct2(@RequestParam("rakeback") double rakeback) {
+        modelRepository.setRakebackPercent2(rakeback);
     }
 }
