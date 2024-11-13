@@ -1,13 +1,13 @@
 window.onload = () => {
     getByIdFromArray('/getRooms', 'room1');
-    getByIdFromArray('/getRooms', 'room2');
+    // getByIdFromArray('/getRooms', 'room2');
     getByIdFromArray('/getRooms', 'room3');
-    getByIdFromArray('/getRooms', 'room4');
+    // getByIdFromArray('/getRooms', 'room4');
 
     getByIdFromArray('/getBuyIns', 'buyIn1');
-    getByIdFromArray('/getBuyIns', 'buyIn2');
+    // getByIdFromArray('/getBuyIns', 'buyIn2');
     getByIdFromArray('/getBuyIns', 'buyIn3');
-    getByIdFromArray('/getBuyIns', 'buyIn4');
+    // getByIdFromArray('/getBuyIns', 'buyIn4');
 };
 
 async function getByIdFromArray(url, elementId) {
@@ -54,17 +54,17 @@ async function setValue(url, param, value) {
 const setFields = [
     "desiredProfit",
     "expChipsT1",
-    "expChipsT2",
+    // "expChipsT2",
     "expChipsT3",
-    "expChipsT4",
+    // "expChipsT4",
     "tables1",
-    "tables2",
+    // "tables2",
     "tables3",
-    "tables4",
+    // "tables4",
     "rakebackPct1",
-    "rakebackPct2",
+    // "rakebackPct2",
     "rakebackPct3",
-    "rakebackPct4",
+    // "rakebackPct4",
     "haveHours"
 ];
 
@@ -79,40 +79,40 @@ document.addEventListener("DOMContentLoaded", () => {
         setValueOnChange("/setRoom", "room", document.getElementById("room1"));
     });
 
-    getData("/getRooms", data => {
-        buildList(data, "room2");
-        setValueOnChange("/setRoom", "room", document.getElementById("room2"));
-    });
+    // getData("/getRooms", data => {
+    //     buildList(data, "room2");
+    //     setValueOnChange("/setRoom", "room", document.getElementById("room2"));
+    // });
 
     getData("/getRooms", data => {
         buildList(data, "room3");
         setValueOnChange("/setRoom", "room", document.getElementById("room3"));
     });
 
-    getData("/getRooms", data => {
-        buildList(data, "room4");
-        setValueOnChange("/setRoom", "room", document.getElementById("room4"));
-    });
+    // getData("/getRooms", data => {
+    //     buildList(data, "room4");
+    //     setValueOnChange("/setRoom", "room", document.getElementById("room4"));
+    // });
 
     getData("/getBuyIns", data => {
         buildList(data, "buyIn1");
         setValueOnChange("/setBuyIn", "buyIn", document.getElementById("buyIn1"));
     });
 
-    getData("/getBuyIns", data => {
-        buildList(data, "buyIn2");
-        setValueOnChange("/setBuyIn", "buyIn", document.getElementById("buyIn2"));
-    });
+    // getData("/getBuyIns", data => {
+    //     buildList(data, "buyIn2");
+    //     setValueOnChange("/setBuyIn", "buyIn", document.getElementById("buyIn2"));
+    // });
 
     getData("/getBuyIns", data => {
         buildList(data, "buyIn3");
         setValueOnChange("/setBuyIn", "buyIn", document.getElementById("buyIn3"));
     });
 
-    getData("/getBuyIns", data => {
-        buildList(data, "buyIn4");
-        setValueOnChange("/setBuyIn", "buyIn", document.getElementById("buyIn4"));
-    });
+    // getData("/getBuyIns", data => {
+    //     buildList(data, "buyIn4");
+    //     setValueOnChange("/setBuyIn", "buyIn", document.getElementById("buyIn4"));
+    // });
 
     getData("/getMeshes", data => {
         buildListMesh(data, "mesh1");
@@ -127,46 +127,46 @@ document.addEventListener("DOMContentLoaded", () => {
     addToListenerCalculatingFields();
 
     let roomSelect1 = document.getElementById("room1");
-    let roomSelect2 = document.getElementById("room2");
+    // let roomSelect2 = document.getElementById("room2");
     let roomSelect3 = document.getElementById("room3");
-    let roomSelect4 = document.getElementById("room4");
+    // let roomSelect4 = document.getElementById("room4");
 
     roomSelect1.addEventListener("change", () => {
         updateBuyIn(roomSelect1);
     });
 
-    roomSelect2.addEventListener("change", () => {
-        updateBuyIn(roomSelect2);
-    });
+    // roomSelect2.addEventListener("change", () => {
+    //     updateBuyIn(roomSelect2);
+    // });
 
     roomSelect3.addEventListener("change", () => {
         updateBuyIn(roomSelect3);
     });
 
-    roomSelect4.addEventListener("change", () => {
-        updateBuyIn(roomSelect4);
-    });
+    // roomSelect4.addEventListener("change", () => {
+    //     updateBuyIn(roomSelect4);
+    // });
 });
 
 function addToListenerCalculatingFields() {
     getValueById("/expEVT", "expEVT1");
-    getValueById("/expEVT", "expEVT2");
+    // getValueById("/expEVT", "expEVT2");
     getValueById("/expEVT", "expEVT3");
-    getValueById("/expEVT", "expEVT4");
+    // getValueById("/expEVT", "expEVT4");
     getValueById("/getRollbackPercent", "rollbackPct1");
     getValueById("/getRollbackPercent", "rollbackPct2");
     getValueById("/needTourneys", "tourneysNeed1");
-    getValueById("/needTourneys", "tourneysNeed2");
+    // getValueById("/needTourneys", "tourneysNeed2");
     getValueById("/needHours", "hoursNeed1");
-    getValueById("/needHours", "hoursNeed2");
+    // getValueById("/needHours", "hoursNeed2");
     getValueById("/dollarsPerHour", "dollarsPerHour1");
-    getValueById("/dollarsPerHour", "dollarsPerHour2");
+    // getValueById("/dollarsPerHour", "dollarsPerHour2");
     getValueById("/dollarsPerHour", "dollarsPerHour3");
-    getValueById("/dollarsPerHour", "dollarsPerHour4");
+    // getValueById("/dollarsPerHour", "dollarsPerHour4");
     getValueById("/tourneys", "tourneys1");
-    getValueById("/tourneys", "tourneys2");
+    // getValueById("/tourneys", "tourneys2");
     getValueById("/estimatedExpectation", "estimatedExpectation1");
-    getValueById("/estimatedExpectation", "estimatedExpectation2");
+    // getValueById("/estimatedExpectation", "estimatedExpectation2");
 }
 
 function getValueById(request, id) {
@@ -175,6 +175,11 @@ function getValueById(request, id) {
         .then(data => {
             const parsedData = parseFloat(data);
             document.getElementById(id).value = isNaN(parsedData) ? 0 : parsedData.toFixed(2);
+        })
+        .catch(error => {
+            console.error('Error occurred in getValueById function:', error);
+            console.error('Request:', request);
+            console.error('Element ID:', id);
         });
 }
 
@@ -280,29 +285,29 @@ function updateBuyIn(room) {
         method: "POST",
     }).then(() => {
         document.getElementById("buyIn1").innerHTML = "";
-        document.getElementById("buyIn2").innerHTML = "";
+        // document.getElementById("buyIn2").innerHTML = "";
         document.getElementById("buyIn3").innerHTML = "";
-        document.getElementById("buyIn4").innerHTML = "";
+        // document.getElementById("buyIn4").innerHTML = "";
 
         getData("/getBuyIns", data => {
             buildList(data, "buyIn1");
             setValueOnChange("/setBuyIn", "buyIn", document.getElementById("buyIn1"));
         });
 
-        getData("/getBuyIns", data => {
-            buildList(data, "buyIn2");
-            setValueOnChange("/setBuyIn", "buyIn", document.getElementById("buyIn2"));
-        });
+        // getData("/getBuyIns", data => {
+        //     buildList(data, "buyIn2");
+        //     setValueOnChange("/setBuyIn", "buyIn", document.getElementById("buyIn2"));
+        // });
 
         getData("/getBuyIns", data => {
             buildList(data, "buyIn3");
             setValueOnChange("/setBuyIn", "buyIn", document.getElementById("buyIn3"));
         });
 
-        getData("/getBuyIns", data => {
-            buildList(data, "buyIn4");
-            setValueOnChange("/setBuyIn", "buyIn", document.getElementById("buyIn4"));
-        });
+        // getData("/getBuyIns", data => {
+        //     buildList(data, "buyIn4");
+        //     setValueOnChange("/setBuyIn", "buyIn", document.getElementById("buyIn4"));
+        // });
     });
 }
 
