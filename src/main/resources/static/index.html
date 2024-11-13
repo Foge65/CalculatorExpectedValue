@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>FS Profit Calc</title>
-    <link href="css.css" rel="stylesheet">
+    <link href="css.css?v=1.0" rel="stylesheet">
     <link href="data:;base64,iVBORw0KGgo=" rel="icon">
 <body>
 
@@ -15,7 +15,8 @@
             <td>Желаемый профит</td>
             <td colspan="2">
                 <label for="desiredProfit"></label>
-                <input id="desiredProfit" oninput="setValue('/desiredProfit', 'profit', this)" type="number">
+                <input id="desiredProfit" oninput="setValueOnInput('desiredProfit', '/desiredProfit', 'profit')"
+                       type="number">
             </td>
         </tr>
 
@@ -23,7 +24,7 @@
             <td>Рум</td>
             <td>
                 <label for="room1"></label>
-                <select id="room1" onchange="setValue('/setRoom', 'room', this)"></select>
+                <select id="room1" onchange="setValueOnInput('room1', '/setRoom', 'room')"></select>
             </td>
             <!--            <td>-->
             <!--                <label for="room2"></label>-->
@@ -35,7 +36,7 @@
             <td>Лимит</td>
             <td>
                 <label for="buyIn1"></label>
-                <select id="buyIn1" onchange="setValue('/setBuyIn', 'buyIn', this)"></select>
+                <select id="buyIn1" onchange="setValueOnInput('buyIn1', '/setBuyIn', 'buyIn')"></select>
             </td>
             <!--            <td>-->
             <!--                <label for="buyIn2"></label>-->
@@ -83,7 +84,7 @@
             <td>Количество окон одновременно</td>
             <td>
                 <label for="tables1"></label>
-                <input id="tables1" oninput="setValue('/tables', 'tables', this)" type="number">
+                <input id="tables1" oninput="setValueOnInput('tables1', '/tables', 'tables')" type="number">
             </td>
             <!--            <td>-->
             <!--                <label for="tables2"></label>-->
@@ -95,7 +96,8 @@
             <td>Величина RB, %</td>
             <td>
                 <label for="rakebackPct1"></label>
-                <input id="rakebackPct1" oninput="setValue('/rakebackPct', 'rakeback', this)" type="number">
+                <input id="rakebackPct1" oninput="setValueOnInput('rakebackPct1', '/rakebackPct', 'rakeback')"
+                       type="number">
             </td>
             <!--            <td>-->
             <!--                <label for="rakebackPct2"></label>-->
@@ -168,7 +170,7 @@
             <td>Есть часов в месяц</td>
             <td colspan="2">
                 <label for="haveHours"></label>
-                <input id="haveHours" oninput="setValue('/haveHours', 'hours', this)" type="number">
+                <input id="haveHours" oninput="setValueOnInput('haveHours', '/haveHours', 'hours')" type="number">
             </td>
         </tr>
 
