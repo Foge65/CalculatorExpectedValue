@@ -1,185 +1,135 @@
-const setFields = [
-    "desiredProfit",
-    "expChipsT1",
-    "expChipsT3",
-    "tables1",
-    "tables3",
-    "rakebackPct1",
-    "rakebackPct3",
-    "haveHours"
-];
+window.onload = () => {
+    getObject('/api/desiredProfit/getData')
+        .then(json => {
+            document.getElementById('desiredProfit').value = json.desiredProfit;
 
-document.addEventListener("DOMContentLoaded", () => {
-    setDefaultValue();
+            fillElementSelect('room1', 'rooms');
 
-    getData("/getRooms", data => {
-        buildList(data, "room1");
-        setValueOnChange("/setRoom1", "room", document.getElementById("room1"));
-    });
+            fillElementSelect('buyIn1', 'buyIns');
 
-    getData("/getRooms", data => {
-        buildList(data, "room3");
-        setValueOnChange("/setRoom2", "room", document.getElementById("room3"));
-    });
+            document.getElementById('avgChipsT1').value = json.avgChipsT;
 
-    getData("/getBuyIns1", data => {
-        buildList(data, "buyIn1");
-        setValueOnChange("/setBuyIn1", "buyIn", document.getElementById("buyIn1"));
-    });
+            document.getElementById('expChipsT1').value = json.expChipsT;
 
-    getData("/getBuyIns2", data => {
-        buildList(data, "buyIn3");
-        setValueOnChange("/setBuyIn2", "buyIn", document.getElementById("buyIn3"));
-    });
+            document.getElementById('expEVT1').value = json.expDollarEVT;
 
-    getData("/getMeshes", data => {
-        buildListMesh(data, "mesh1");
-        setValueOnChange("/setMesh1", "mesh", document.getElementById("mesh1"));
-    });
+            document.getElementById('tables1').value = json.tables;
 
-    getData("/getMeshes", data => {
-        buildListMesh(data, "mesh2");
-        setValueOnChange("/setMesh2", "mesh", document.getElementById("mesh2"));
-    });
+            document.getElementById('rakebackPct1').value = json.rakebackPct;
 
-    addToListenerCalculatingFields();
+            fillElementSelect('mesh1', 'meshes');
 
-    let roomSelect1 = document.getElementById("room1");
-    let roomSelect3 = document.getElementById("room3");
+            document.getElementById('rollbackPct1').value = json.rollback;
 
-    roomSelect1.addEventListener("change", () => {
-        updateBuyIn1(roomSelect1, '/setRoom1');
-        getData("/getBuyIns1", data => {
-            buildList(data, "buyIn1");
-            setValueOnChange("/setBuyIn1", "buyIn", document.getElementById("buyIn1"));
-        });
-    });
+            document.getElementById('requiredTourneys1').value = json.requiredTourneys;
 
-    roomSelect3.addEventListener("change", () => {
-        updateBuyIn2(roomSelect3, '/setRoom2');
-        getData("/getBuyIns2", data => {
-            buildList(data, "buyIn3");
-            setValueOnChange("/setBuyIn2", "buyIn", document.getElementById("buyIn3"));
-        });
-    });
-});
+            document.getElementById('requiredHours1').value = json.requiredHours;
 
-function addToListenerCalculatingFields() {
-    getValueById("/expEVT1", "expEVT1");
-    getValueById("/expEVT2", "expEVT3");
-    getValueById("/getRollbackPercent1", "rollbackPct1");
-    getValueById("/getRollbackPercent2", "rollbackPct2");
-    getValueById("/needTourneys1", "tourneysNeed1");
-    getValueById("/needHours", "hoursNeed1");
-    getValueById("/dollarsPerHour1", "dollarsPerHour1");
-    getValueById("/dollarsPerHour2", "dollarsPerHour3");
-    getValueById("/tourneys", "tourneys1");
-    getValueById("/estimatedExpectation", "estimatedExpectation1");
-}
+            document.getElementById('dollarsPerHour1').value = json.dollarsPerHour;
 
-function getValueById(request, id) {
-    fetch(request)
-        .then(response => response.text())
-        .then(data => {
-            const parsedData = parseFloat(data);
-            document.getElementById(id).value = isNaN(parsedData) ? 0 : parsedData.toFixed(2);
+            function fillElementSelect(id, key) {
+                const element = document.getElementById(id);
+                element.innerHTML = '';
+                json[key].forEach(item => {
+                    const option = document.createElement('option');
+                    option.value = item;
+                    option.textContent = item;
+                    element.appendChild(option);
+                })
+            }
+
         })
-        .catch(error => {
-            console.error('Error occurred in getValueById function:', error);
-            console.error('Request:', request);
-            console.error('Element ID:', id);
+        .catch(error => console.error('Error onLoad', error));
+
+    getObject('api/haveHoursPerMonth/getData')
+        .then(json => {
+            document.getElementById('haveHours').value = json.haveHours;
+            document.getElementById('tables2').value = json.tables;
+
+            fillElementSelect('room2', 'rooms');
+
+            fillElementSelect('buyIn2', 'buyIns');
+
+            document.getElementById('avgChipsT2').value = json.avgChipsT;
+
+            document.getElementById('expChipsT2').value = json.expChipsT;
+
+            document.getElementById('expEVT2').value = json.expDollarEVT;
+
+            document.getElementById('rakebackPct2').value = json.rakebackPct;
+
+            fillElementSelect('mesh2', 'meshes');
+
+            document.getElementById('rollbackPct2').value = json.rollback;
+
+            document.getElementById('requiredTourneys2').value = json.requiredTourneys;
+
+            document.getElementById('estimatedExpectation').value = json.estimatedExpectation;
+
+            document.getElementById('dollarsPerHour2').value = json.dollarPerHour;
+
+            function fillElementSelect(id, key) {
+                const element = document.getElementById(id);
+                element.innerHTML = '';
+                json[key].forEach(item => {
+                    const option = document.createElement('option');
+                    option.value = item;
+                    option.textContent = item;
+                    element.appendChild(option);
+                })
+            }
+
+        })
+}
+
+function getObject(url) {
+    return fetch(url, {
+        method: 'GET'
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.json();
         });
 }
 
-function getData(url, callback) {
-    let request = new XMLHttpRequest();
-    request.onreadystatechange = () => {
-        if (request.readyState === XMLHttpRequest.DONE) {
-            callback(JSON.parse(request.responseText));
-        }
-    };
-    request.open("GET", url, true);
-    request.send();
-}
+function setValueToObject(id, url, key, value) {
+    const requestValue = value.value;
 
-function buildList(data, id) {
-    let element = document.getElementById(id);
-    data.forEach(item => {
-        let option = document.createElement("option");
-        option.value = item;
-        option.textContent = item;
-        element.appendChild(option);
-    });
-}
-
-function setValueOnChange(request, requestParam, value) {
-    let url = `${request}?${requestParam}=${encodeURIComponent(value.value)}`;
     fetch(url, {
         method: "POST",
-    }).then(() => {
-        addToListenerCalculatingFields();
-    });
-}
-
-function buildListMesh(data, id) {
-    let element = document.getElementById(id);
-    let translation = {
-        ClearProfit: "Чистый профит",
-        BackingWithStudy: "Бекинг с обучением",
-        BackingWithoutStudy: "Бекинг без обучения",
-        StudyWithoutBacking: "Обучение без бекинга",
-    };
-
-    data.forEach(item => {
-        let option = document.createElement("option");
-        option.value = item;
-        option.textContent = translation[item];
-        element.appendChild(option);
-    });
-}
-
-function setValueOnInput(id, request, requestParam) {
-    let value = document.getElementById(id).value;
-    if (value.trim() !== "" && /^\d*\.?\d*$/.test(value)) {
-        let form = new FormData();
-        form.append(requestParam, value);
-
-        fetch(request, {
-            method: "POST",
-            body: form
-        }).then(() => {
-            addToListenerCalculatingFields();
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({[key]: requestValue})
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.json();
+        })
+        .then(response => {
+            console.log('Response from server:', response);
+            document.getElementById(id).value = response[key];
+        })
+        .catch(error => {
+            console.error('Error setting value to object:', error);
         });
-    }
 }
 
-function setDefaultValue() {
-    setFields.forEach(element => {
-        const field = document.getElementById(element);
-        field.value = "0";
-    });
-
-    fetch("/resetAllFields", {
-        method: "POST"
-    });
+function getData(id, url) {
+    return fetch(url, {
+        method: 'GET'
+    })
+        .then(response => response.text())
+        .then(value => {
+            returnFixedDecimal(id, value);
+        })
 }
 
-function updateBuyIn1(room, url) {
-    let uri = `${url}?room=${encodeURIComponent(room.value)}`;
-
-    fetch(uri, {
-        method: "POST",
-    }).then(() => {
-        document.getElementById("buyIn1").innerHTML = "";
-    });
-}
-
-function updateBuyIn2(room, url) {
-    let uri = `${url}?room=${encodeURIComponent(room.value)}`;
-
-    fetch(uri, {
-        method: "POST",
-    }).then(() => {
-        document.getElementById("buyIn3").innerHTML = "";
-    });
+function returnFixedDecimal(id, value) {
+    const double = parseFloat(value);
+    document.getElementById(id).value = isNaN(double) ? 0 : double.toFixed(3);
 }
