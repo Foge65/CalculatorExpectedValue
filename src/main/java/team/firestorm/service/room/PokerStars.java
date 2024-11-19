@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 @Primary
 @Getter
 public class PokerStars implements Room {
+    private final String name = "PokerStars";
     private double[] buyIns;
     private int[] rakes;
     private double[] winCoefficient;
@@ -16,6 +17,7 @@ public class PokerStars implements Room {
 
     @PostConstruct
     public void init() {
+        name();
         buyIns();
         rakes();
         winCoefficient();
@@ -24,7 +26,7 @@ public class PokerStars implements Room {
 
     @Override
     public String name() {
-        return "PokerStars";
+        return name;
     }
 
     @Override

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 @Service
 @Getter
 public class Winamax implements Room {
+    private final String name = "Winamax";
     private double[] buyIns;
     private int[] rakes;
     private double[] winCoefficient;
@@ -14,6 +15,7 @@ public class Winamax implements Room {
 
     @PostConstruct
     public void init() {
+        name();
         buyIns();
         rakes();
         winCoefficient();
@@ -22,7 +24,7 @@ public class Winamax implements Room {
 
     @Override
     public String name() {
-        return "Winamax";
+        return name;
     }
 
     @Override
