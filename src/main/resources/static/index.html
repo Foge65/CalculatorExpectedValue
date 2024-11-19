@@ -13,9 +13,10 @@
 
         <tr>
             <td>Желаемый профит</td>
-            <td colspan="2">
+            <td>
                 <label for="desiredProfit"></label>
-                <input id="desiredProfit" oninput="setValueOnInput('desiredProfit', '/desiredProfit', 'profit')"
+                <input id="desiredProfit"
+                       oninput="setValueToObject('desiredProfit', '/api/desiredProfit/setDesiredProfit', 'desiredProfit', this)"
                        type="number">
             </td>
         </tr>
@@ -24,7 +25,8 @@
             <td>Рум</td>
             <td>
                 <label for="room1"></label>
-                <select id="room1" onchange="setValueOnChange('/setRoom1', 'room', this)"></select>
+                <select id="room1"
+                        onchange="setValueToObject('room1', '/api/desiredProfit/setRoom', 'room', this)"></select>
             </td>
         </tr>
 
@@ -32,7 +34,8 @@
             <td>Лимит</td>
             <td>
                 <label for="buyIn1"></label>
-                <select id="buyIn1" onchange="setValueOnChange('/setBuyIn1', 'buyIn', this)"></select>
+                <select id="buyIn1"
+                        onchange="setValueToObject('buyIn1', '/api/desiredProfit/setBuyIn', 'buyIn', this)"></select>
             </td>
         </tr>
 
@@ -48,7 +51,9 @@
             <td>Ожидаемое ChipEV/T</td>
             <td>
                 <label for="expChipsT1"></label>
-                <input id="expChipsT1" oninput="setValueOnInput('expChipsT1', '/expChipsT1', 'chips')" type="number">
+                <input id="expChipsT1"
+                       oninput="setValueToObject('expChipsT1', '/api/desiredProfit/setExpChipsT', 'expChipsT', this)"
+                       type="number">
             </td>
         </tr>
 
@@ -64,7 +69,9 @@
             <td>Количество окон одновременно</td>
             <td>
                 <label for="tables1"></label>
-                <input id="tables1" oninput="setValueOnInput('tables1', '/tables1', 'tables')" type="number">
+                <input id="tables1"
+                       oninput="setValueToObject('tables1', '/api/desiredProfit/setTables', 'tables', this)"
+                       type="number">
             </td>
         </tr>
 
@@ -72,44 +79,45 @@
             <td>Величина RB, %</td>
             <td>
                 <label for="rakebackPct1"></label>
-                <input id="rakebackPct1" oninput="setValueOnInput('rakebackPct1', '/rakebackPct1', 'rakeback')"
-                       type="number">
+                <input id="rakebackPct1" oninput="setValueToObject('rakebackPct1', '/api/desiredProfit/setRakebackPct',
+                'rakebackPct', this)" type="number">
             </td>
         </tr>
 
         <tr>
             <td>Тип контракта</td>
-            <td colspan="2">
+            <td>
                 <label for="mesh1"></label>
-                <select id="mesh1" onchange="setValueOnChange('/setMesh1', 'mesh', this)"></select>
+                <select id="mesh1"
+                        onchange="setValueToObject('mesh1', '/api/desiredProfit/setMesh', 'mesh', this)"></select>
             </td>
         </tr>
 
         <tr>
             <td>% отката по контракту</td>
-            <td colspan="2">
+            <td>
                 <label for="rollbackPct1"></label>
                 <input id="rollbackPct1" readonly>
             </td>
         </tr>
 
         <tr class="blank-row">
-            <td colspan="3"></td>
+            <td></td>
         </tr>
 
         <tr>
-            <td><b>Необходимое кол-во турниров</b></td>
+            <td><b>Необходимое количество турниров</b></td>
             <td>
-                <label for="tourneysNeed1"></label>
-                <input id="tourneysNeed1" readonly>
+                <label for="requiredTourneys1"></label>
+                <input id="requiredTourneys1" readonly>
             </td>
         </tr>
 
         <tr>
-            <td><b>Необходимое кол-во часов</b></td>
+            <td><b>Необходимое количество часов</b></td>
             <td>
-                <label for="hoursNeed1"></label>
-                <input id="hoursNeed1" readonly>
+                <label for="requiredHours1"></label>
+                <input id="requiredHours1" readonly>
             </td>
         </tr>
 
@@ -128,74 +136,83 @@
 
         <tr>
             <td>Есть часов в месяц</td>
-            <td colspan="2">
+            <td>
                 <label for="haveHours"></label>
-                <input id="haveHours" oninput="setValueOnInput('haveHours', '/haveHours', 'hours')" type="number">
+                <input id="haveHours"
+                       oninput="setValueToObject('haveHours', '/api/haveHoursPerMonth/setHaveHours', 'haveHours', this)"
+                       type="number">
             </td>
         </tr>
 
         <tr>
             <td>Количество окон одновременно</td>
             <td>
-                <label for="tables3"></label>
-                <input id="tables3" oninput="setValueOnInput('tables3', '/tables2', 'tables')" type="number">
+                <label for="tables2"></label>
+                <input id="tables2"
+                       oninput="setValueToObject('tables2', '/api/haveHoursPerMonth/setTables', 'tables', this)"
+                       type="number">
             </td>
         </tr>
 
         <tr>
             <td>Рум</td>
             <td>
-                <label for="room3"></label>
-                <select id="room3"></select>
+                <label for="room2"></label>
+                <select id="room2"
+                        onchange="setValueToObject('room2', '/api/haveHoursPerMonth/setRoom', 'room', this)"></select>
             </td>
         </tr>
 
         <tr>
             <td>Лимит</td>
             <td>
-                <label for="buyIn3"></label>
-                <select id="buyIn3" onchange="setValueOnChange('/setBuyIn2', 'buyIn', this)"></select>
+                <label for="buyIn2"></label>
+                <select id="buyIn2"
+                        onchange="setValueToObject('buyIn2', '/api/haveHoursPerMonth/setBuyIn', 'buyIn', this)"></select>
             </td>
         </tr>
 
         <tr>
             <td>Среднее ChipEV/T по пулу (для ориентира)</td>
             <td>
-                <label for="avgChipsT3"></label>
-                <input id="avgChipsT3">
+                <label for="avgChipsT2"></label>
+                <input id="avgChipsT2" readonly>
             </td>
         </tr>
 
         <tr>
             <td>Ожидаемое ChipEV/T</td>
             <td>
-                <label for="expChipsT3"></label>
-                <input id="expChipsT3" oninput="setValueOnInput('expChipsT3', '/expChipsT2', 'chips')" type="number">
+                <label for="expChipsT2"></label>
+                <input id="expChipsT2"
+                       oninput="setValueToObject('expChipsT2', '/api/haveHoursPerMonth/setExpChipsT', 'expChipsT', this)"
+                       type="number">
             </td>
         </tr>
 
         <tr>
             <td><b>Ожидаемое $EV/Т</b></td>
             <td>
-                <label for="expEVT3"></label>
-                <input id="expEVT3" readonly>
+                <label for="expEVT2"></label>
+                <input id="expEVT2" readonly>
             </td>
         </tr>
 
         <tr>
             <td>Величина RB, %</td>
             <td>
-                <label for="rakebackPct3"></label>
-                <input id="rakebackPct3" oninput="setValueOnInput('rakebackPct3', '/rakebackPct2', 'rakeback')"
-                       type="number">
+                <label for="rakebackPct2"></label>
+                <input id="rakebackPct2" oninput="setValueToObject('rakebackPct2', '/api/haveHoursPerMonth/setRakebackPct',
+                'rakebackPct', this)" type="number">
             </td>
         </tr>
 
         <tr>
             <td>Тип контракта</td>
-            <td colspan="2">
+            <td>
                 <label for="mesh2"></label>
-                <select id="mesh2" onchange="setValueOnChange('/setMesh2', 'mesh', this)"></select>
+                <select id="mesh2"
+                        onchange="setValueToObject('mesh2', '/api/haveHoursPerMonth/setMesh', 'mesh', this)"></select>
             </td>
         </tr>
 
@@ -208,36 +225,36 @@
         </tr>
 
         <tr class="blank-row">
-            <td colspan="3"></td>
+            <td></td>
         </tr>
 
         <tr>
-            <td><b>Количество турниров</b></td>
+            <td><b>Необходимое количество турниров</b></td>
             <td>
-                <label for="tourneys1"></label>
-                <input id="tourneys1" readonly>
+                <label for="requiredTourneys2"></label>
+                <input id="requiredTourneys2" readonly>
             </td>
         </tr>
 
         <tr>
             <td><b>Предполагаемое ожидание</b></td>
             <td>
-                <label for="estimatedExpectation1"></label>
-                <input id="estimatedExpectation1" readonly>
+                <label for="estimatedExpectation"></label>
+                <input id="estimatedExpectation" readonly>
             </td>
         </tr>
 
         <tr>
             <td><b>$/час</b></td>
             <td>
-                <label for="dollarsPerHour3"></label>
-                <input id="dollarsPerHour3" readonly>
+                <label for="dollarsPerHour2"></label>
+                <input id="dollarsPerHour2" readonly>
             </td>
         </tr>
     </table>
 </div>
 
-<script src="script.js"></script>
+<script src="scripts.js"></script>
 
 </body>
 </html>

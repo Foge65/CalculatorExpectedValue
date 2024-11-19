@@ -89,7 +89,7 @@ public class DesiredProfitController {
     }
 
     @GetMapping("/getExpEVT")
-    public double getExpEVT(@RequestBody DesiredProfitRequestDTO request) {
+    public double getExpEVT() {
         double buyIn = model.getBuyIn();
         double chipsEV = model.getExpChipsT();
         double winCoefficient = model.getWinCoefficient();
