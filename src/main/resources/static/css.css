@@ -1,27 +1,25 @@
-.table-container {
-    display: flex;
+table {
+    margin: 10px;
+    border-spacing: 5px 5px;
+    border: 1px solid wheat;
+    border-radius: 10px;
 }
 
-.table-container table {
-    margin: 0 20px;
-}
-
-.table-container td {
+td {
     vertical-align: top;
     text-align: left;
+    white-space: nowrap;
 }
 
-.table-container div {
+div {
     display: flex;
-    justify-content: space-between;
 }
 
-.table-container div a {
+div a {
     margin-right: 10px;
 }
 
-.table-container div select,
-.table-container div input {
+select, input {
     box-sizing: border-box;
     width: 100px;
     border-radius: 5px;
@@ -29,16 +27,21 @@
 }
 
 h3 {
-    margin: 0;
+    margin: 10px;
     font-family: kanit, sans-serif;
-    color: #fff;
+    color: darkorange;
 }
 
 * {
     font-size: medium;
     color: darkgray;
     background-color: #252736;
-    font-family: -apple-system, BlinkMacSystemFont, segoe ui, roboto, oxygen, ubuntu, cantarell, fira sans, droid sans, helvetica neue, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, segoe ui, roboto, oxygen, ubuntu, cantarell, fira sans, droid sans,
+    helvetica neue, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+.blank-row {
+    height: 30px;
 }

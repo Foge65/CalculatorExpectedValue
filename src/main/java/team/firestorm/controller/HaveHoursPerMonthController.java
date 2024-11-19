@@ -1,38 +1,140 @@
-package team.firestorm.service.table;
+package team.firestorm.controller;
 
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
-import team.firestorm.repository.ModelRepository;
-import team.firestorm.service.mesh.BackingWithStudy;
-import team.firestorm.service.mesh.BackingWithoutStudy;
-import team.firestorm.service.mesh.Mesh;
-import team.firestorm.service.mesh.StudyWithoutBacking;
+import org.springframework.web.bind.annotation.*;
+import team.firestorm.dto.HaveHoursPerMonthRequestDTO;
+import team.firestorm.model.HaveHoursPerMonthModel;
+import team.firestorm.service.mesh.*;
+import team.firestorm.service.room.*;
 
+import java.util.Map;
+import java.util.stream.IntStream;
+
+@RestController
+@RequestMapping("/api/haveHoursPerMonth")
 @RequiredArgsConstructor
-public abstract class ResultFiledServiceBase implements ResultFiledService {
-    private final ModelRepository modelRepository;
+public class HaveHoursPerMonthController {
+    private final HaveHoursPerMonthModel model = new HaveHoursPerMonthModel();
+    private Room room;
+    private Mesh mesh;
 
-    @Override
-    public double dollarEVPerTourney() {
-        double buyIn = this.modelRepository.getBuyIn();
-        double chipsEV = this.modelRepository.getChipsEVFromTourney();
-        double winCoefficient = this.modelRepository.getWinCoefficient();
-        double loseCoefficient = this.modelRepository.getLoseCoefficient();
+    @PostConstruct
+    @GetMapping("/getData")
+    public HaveHoursPerMonthModel getData() {
+        model.setRooms(Rooms.values());
 
-        return buyIn * 1 * (((500 + chipsEV) / 1500) * winCoefficient
-                + (1 - ((500 + chipsEV) / 1500)) * loseCoefficient);
+        room = new PokerStars();
+        model.setRoom(room);
+        model.setBuyIns(room.buyIns());
+        model.setRakes(room.rakes());
+        model.setWinCoefficients(room.winCoefficient());
+        model.setLoseCoefficients(room.loseCoefficient());
+        model.setTourneysPerTable(room.tourneysPerTable());
+
+        if (mesh == null) {
+            model.setMeshes(Meshes.values());
+            mesh = new ClearProfit();
+            model.setMesh(mesh);
+        }
+
+        return model;
     }
 
-    @Override
-    public double evBI() {
-        return dollarEVTotal() / this.modelRepository.getBuyIn();
+    @PostMapping("/setHaveHours")
+    public void setHaveHours(@RequestBody HaveHoursPerMonthRequestDTO request) {
+        model.setHaveHours(request.getHaveHours());
     }
 
-    @Override
-    public int rollbackPercent() {
-        double evBI = evBI();
+    @PostMapping("/setTables")
+    public void setTables(@RequestBody HaveHoursPerMonthRequestDTO request) {
+        model.setTables(request.getTables());
+    }
+
+    @PostMapping("/setRoom")
+    public void setRoom(@RequestBody Map<String, String> request) {
+        Rooms rooms = Rooms.valueOf(request.get("room"));
+
+        switch (rooms) {
+            case PokerStars:
+                room = new PokerStars();
+                break;
+            case Winamax:
+                room = new Winamax();
+                break;
+            case iPoker:
+                room = new IPoker();
+                break;
+        }
+
+        model.setRoom(room);
+        model.setBuyIns(room.buyIns());
+        model.setRakes(room.rakes());
+        model.setWinCoefficients(room.winCoefficient());
+        model.setLoseCoefficients(room.loseCoefficient());
+        model.setTourneysPerTable(room.tourneysPerTable());
+    }
+
+    @PostMapping("/setBuyIn")
+    public void setBuyIn(@RequestBody HaveHoursPerMonthRequestDTO request) {
+        double buyIn = request.getBuyIn();
+        model.setBuyIn(buyIn);
+
+        int index = findIndexBySelectedCoefficient(room.buyIns(), buyIn);
+        model.setRake(room.rakes()[index]);
+        model.setWinCoefficient(room.winCoefficient()[index]);
+        model.setLoseCoefficient(room.loseCoefficient()[index]);
+    }
+
+    @PostMapping("/setExpChipsT")
+    public void setExpChipsT(@RequestBody HaveHoursPerMonthRequestDTO request) {
+        model.setExpChipsT(request.getExpChipsT());
+    }
+
+    @GetMapping("/getExpEVT")
+    public double getExpEVT() {
+        double buyIn = model.getBuyIn();
+        double chipsEV = model.getExpChipsT();
+        double winCoefficient = model.getWinCoefficient();
+        double loseCoefficient = model.getLoseCoefficient();
+
+        double expEVT = buyIn * 1 * (((500 + chipsEV) / 1500) * winCoefficient
+                                     + (1 - ((500 + chipsEV) / 1500)) * loseCoefficient);
+
+        model.setExpDollarEVT(expEVT);
+
+        return expEVT;
+    }
+
+    @PostMapping("/setRakebackPct")
+    public void setRakebackPct(@RequestBody HaveHoursPerMonthRequestDTO request) {
+        model.setRakebackPct(request.getRakebackPct());
+    }
+
+    @PostMapping("/setMesh")
+    public void setMesh(@RequestBody Map<String, String> request) {
+        Meshes meshes = Meshes.valueOf(request.get("mesh"));
+
+        switch (meshes) {
+            case BackingWithStudy:
+                mesh = new BackingWithStudy();
+                break;
+            case BackingWithoutStudy:
+                mesh = new BackingWithoutStudy();
+                break;
+            case StudyWithoutBacking:
+                mesh = new StudyWithoutBacking();
+                break;
+        }
+        model.setMesh(mesh);
+    }
+
+    @GetMapping("/getRollback")
+    public double getRollback() {
+        double buyIn = model.getBuyIn();
+        double evBI = model.getEstimatedExpectation() / buyIn;
+
         int rollback = 0;
-        Mesh mesh = this.modelRepository.getMesh();
-        double buyIn = this.modelRepository.getBuyIn();
 
         if (mesh instanceof BackingWithStudy) {
             if (buyIn < 5) {
@@ -174,11 +276,46 @@ public abstract class ResultFiledServiceBase implements ResultFiledService {
             }
         }
 
+        if (mesh instanceof ClearProfit) {
+            rollback = 100;
+        }
+
+        model.setRollback(rollback);
+
         return rollback;
     }
 
-    @Override
-    public double rollbackDollar() {
-        return dollarEVTotal() * rollbackPercent() / 100;
+    @GetMapping("/getRequiredTourneys")
+    public double getRequiredTourneys() {
+        double tourneys = model.getTables() * model.getTourneysPerTable() * model.getHaveHours();
+
+        model.setRequiredTourneys(tourneys);
+
+        return tourneys;
     }
+
+    @GetMapping("/getEstimatedExpectation")
+    public double getEstimatedExpectation() {
+        double exp = (model.getExpDollarEVT() + model.getBuyIn() * (model.getRake() / 100)
+                                                * (model.getRakebackPct() / 100))
+                     * model.getTables() * model.getTourneysPerTable() * model.getHaveHours();
+
+        model.setEstimatedExpectation(exp);
+
+        return exp;
+    }
+
+    @GetMapping("/getDollarPerHour")
+    public double getDollarPerHour() {
+        double dollarsPerHour = model.getEstimatedExpectation() / model.getHaveHours();
+
+        model.setDollarPerHour(dollarsPerHour);
+
+        return dollarsPerHour;
+    }
+
+    private int findIndexBySelectedCoefficient(double[] buyIns, double buyIn) {
+        return IntStream.range(0, buyIns.length).filter(i -> buyIns[i] == buyIn).findFirst().orElse(0);
+    }
+
 }

@@ -1,6 +1,8 @@
 package team.firestorm.service.room;
 
 public interface Room {
+    String name();
+
     double[] buyIns();
 
     int[] rakes();
@@ -8,4 +10,6 @@ public interface Room {
     double[] winCoefficient();
 
     double[] loseCoefficient();
+
+    double tourneysPerTable();
 }
