@@ -1,13 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>FS Profit Calc</title>
-    <link href="css.css?v=1.2" rel="stylesheet">
-    <link href="ico.png" rel="icon" type="image/png">
+    <title>FireStorm Spin Calculator</title>
+    <link th:href="@{/css.css}" th:rel="stylesheet">
+    <link th:href="@{/ico.png}" th:rel="icon">
+</head>
 <body>
 
-<div class="table-container">
+<script th:src="@{/script.js}"></script>
+
+<div class="tables">
     <table>
         <caption><h3>Желаемый профит</h3></caption>
 
@@ -15,8 +18,9 @@
             <td>Желаемый профит</td>
             <td>
                 <label for="desiredProfit"></label>
-                <input id="desiredProfit"
-                       oninput="setValueToObject('desiredProfit', '/api/desiredProfit/setDesiredProfit', 'desiredProfit', this)"
+                <input id="desiredProfit" oninput="setValueToObjectWithoutResponse('desiredProfit', '/api/desiredProfit/setDesiredProfit',
+                       'desiredProfit', this)"
+                       th:value="${desiredProfitModel.desiredProfit}"
                        type="number">
             </td>
         </tr>
@@ -25,8 +29,10 @@
             <td>Рум</td>
             <td>
                 <label for="room1"></label>
-                <select id="room1"
-                        onchange="setValueToObject('room1', '/api/desiredProfit/setRoom', 'room', this)"></select>
+                <select id="room1" onchange="setValueToObjectWithoutResponse('room1', '/api/desiredProfit/setRoom', 'room', this)"
+                        th:value="${desiredProfitModel.room}">
+                    <option th:each="room : ${desiredProfitModel.rooms}" th:text="${room}"></option>
+                </select>
             </td>
         </tr>
 
@@ -34,8 +40,10 @@
             <td>Лимит</td>
             <td>
                 <label for="buyIn1"></label>
-                <select id="buyIn1"
-                        onchange="setValueToObject('buyIn1', '/api/desiredProfit/setBuyIn', 'buyIn', this)"></select>
+                <select id="buyIn1" onchange="setValueToObjectWithoutResponse('buyIn1', '/api/desiredProfit/setBuyIn', 'buyIn', this)"
+                        th:value="${desiredProfitModel.buyIn}">
+                    <option th:each="buyIn : ${desiredProfitModel.buyIns}" th:text="${buyIn}"></option>
+                </select>
             </td>
         </tr>
 
@@ -51,8 +59,9 @@
             <td>Ожидаемое ChipEV/T</td>
             <td>
                 <label for="expChipsT1"></label>
-                <input id="expChipsT1"
-                       oninput="setValueToObject('expChipsT1', '/api/desiredProfit/setExpChipsT', 'expChipsT', this)"
+                <input id="expChipsT1" oninput="setValueToObjectWithoutResponse('expChipsT1', '/api/desiredProfit/setExpChipsT',
+                       'expChipsT', this)"
+                       th:value="${desiredProfitModel.expChipsT}"
                        type="number">
             </td>
         </tr>
@@ -69,8 +78,9 @@
             <td>Количество окон одновременно</td>
             <td>
                 <label for="tables1"></label>
-                <input id="tables1"
-                       oninput="setValueToObject('tables1', '/api/desiredProfit/setTables', 'tables', this)"
+                <input id="tables1" oninput="setValueToObjectWithoutResponse('tables1', '/api/desiredProfit/setTables',
+                       'tables', this)"
+                       th:value="${desiredProfitModel.tables}"
                        type="number">
             </td>
         </tr>
@@ -79,8 +89,10 @@
             <td>Величина RB, %</td>
             <td>
                 <label for="rakebackPct1"></label>
-                <input id="rakebackPct1" oninput="setValueToObject('rakebackPct1', '/api/desiredProfit/setRakebackPct',
-                'rakebackPct', this)" type="number">
+                <input id="rakebackPct1" oninput="setValueToObjectWithoutResponse('rakebackPct1', '/api/desiredProfit/setRakebackPct',
+                       'rakebackPct', this)"
+                       th:value="${desiredProfitModel.rakebackPct}"
+                       type="number">
             </td>
         </tr>
 
@@ -88,8 +100,10 @@
             <td>Тип контракта</td>
             <td>
                 <label for="mesh1"></label>
-                <select id="mesh1"
-                        onchange="setValueToObject('mesh1', '/api/desiredProfit/setMesh', 'mesh', this)"></select>
+                <select id="mesh1" onchange="setValueToObjectWithoutResponse('mesh1', '/api/desiredProfit/setMesh', 'mesh', this)"
+                        th:value="${desiredProfitModel.mesh.name}">
+                    <option th:each="mesh : ${desiredProfitModel.meshes}" th:text="${mesh}"></option>
+                </select>
             </td>
         </tr>
 
@@ -138,8 +152,9 @@
             <td>Есть часов в месяц</td>
             <td>
                 <label for="haveHours"></label>
-                <input id="haveHours"
-                       oninput="setValueToObject('haveHours', '/api/haveHoursPerMonth/setHaveHours', 'haveHours', this)"
+                <input id="haveHours" oninput="setValueToObjectWithoutResponse('haveHours', '/api/haveHoursPerMonth/setHaveHours',
+                       'haveHours', this)"
+                       th:value="${haveHoursModel.haveHours}"
                        type="number">
             </td>
         </tr>
@@ -148,8 +163,9 @@
             <td>Количество окон одновременно</td>
             <td>
                 <label for="tables2"></label>
-                <input id="tables2"
-                       oninput="setValueToObject('tables2', '/api/haveHoursPerMonth/setTables', 'tables', this)"
+                <input id="tables2" oninput="setValueToObjectWithoutResponse('tables2', '/api/haveHoursPerMonth/setTables',
+                       'tables', this)"
+                       th:value="${haveHoursModel.tables}"
                        type="number">
             </td>
         </tr>
@@ -158,8 +174,10 @@
             <td>Рум</td>
             <td>
                 <label for="room2"></label>
-                <select id="room2"
-                        onchange="setValueToObject('room2', '/api/haveHoursPerMonth/setRoom', 'room', this)"></select>
+                <select id="room2" onchange="setValueToObjectWithoutResponse('room2', '/api/haveHoursPerMonth/setRoom', 'room', this)"
+                        th:value="${haveHoursModel.room}">
+                    <option th:each="room : ${haveHoursModel.rooms}" th:text="${room}"></option>
+                </select>
             </td>
         </tr>
 
@@ -167,8 +185,10 @@
             <td>Лимит</td>
             <td>
                 <label for="buyIn2"></label>
-                <select id="buyIn2"
-                        onchange="setValueToObject('buyIn2', '/api/haveHoursPerMonth/setBuyIn', 'buyIn', this)"></select>
+                <select id="buyIn2" onchange="setValueToObjectWithoutResponse('buyIn2', '/api/haveHoursPerMonth/setBuyIn', 'buyIn', this)"
+                        th:value="${haveHoursModel.buyIn}">
+                    <option th:each="buyIn : ${haveHoursModel.buyIns}" th:text="${buyIn}"></option>
+                </select>
             </td>
         </tr>
 
@@ -184,8 +204,9 @@
             <td>Ожидаемое ChipEV/T</td>
             <td>
                 <label for="expChipsT2"></label>
-                <input id="expChipsT2"
-                       oninput="setValueToObject('expChipsT2', '/api/haveHoursPerMonth/setExpChipsT', 'expChipsT', this)"
+                <input id="expChipsT2" oninput="setValueToObjectWithoutResponse('expChipsT2', '/api/haveHoursPerMonth/setExpChipsT',
+                       'expChipsT', this)"
+                       th:value="${haveHoursModel.expChipsT}"
                        type="number">
             </td>
         </tr>
@@ -202,8 +223,10 @@
             <td>Величина RB, %</td>
             <td>
                 <label for="rakebackPct2"></label>
-                <input id="rakebackPct2" oninput="setValueToObject('rakebackPct2', '/api/haveHoursPerMonth/setRakebackPct',
-                'rakebackPct', this)" type="number">
+                <input id="rakebackPct2" oninput="setValueToObjectWithoutResponse('rakebackPct2', '/api/haveHoursPerMonth/setRakebackPct',
+                       'rakebackPct', this)"
+                       th:value="${haveHoursModel.rakebackPct}"
+                       type="number">
             </td>
         </tr>
 
@@ -211,8 +234,10 @@
             <td>Тип контракта</td>
             <td>
                 <label for="mesh2"></label>
-                <select id="mesh2"
-                        onchange="setValueToObject('mesh2', '/api/haveHoursPerMonth/setMesh', 'mesh', this)"></select>
+                <select id="mesh2" onchange="setValueToObjectWithoutResponse('mesh2', '/api/haveHoursPerMonth/setMesh', 'mesh', this)"
+                        th:value="${haveHoursModel.mesh}">
+                    <option th:each="mesh : ${haveHoursModel.meshes}" th:text="${mesh}"></option>
+                </select>
             </td>
         </tr>
 
@@ -251,10 +276,9 @@
                 <input id="dollarsPerHour2" readonly>
             </td>
         </tr>
+
     </table>
 </div>
-
-<script src="script.js"></script>
 
 </body>
 </html>
