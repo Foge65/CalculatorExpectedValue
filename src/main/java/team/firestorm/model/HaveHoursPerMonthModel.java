@@ -1,12 +1,14 @@
 package team.firestorm.model;
 
 import lombok.Data;
+import org.springframework.stereotype.Repository;
 import team.firestorm.service.mesh.Mesh;
 import team.firestorm.service.mesh.Meshes;
 import team.firestorm.service.room.Room;
 import team.firestorm.service.room.Rooms;
 
 @Data
+@Repository
 public class HaveHoursPerMonthModel {
     private double haveHours;
     private double tables;

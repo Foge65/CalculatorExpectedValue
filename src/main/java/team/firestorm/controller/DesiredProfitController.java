@@ -15,7 +15,7 @@ import java.util.stream.IntStream;
 @RequestMapping("/api/desiredProfit")
 @RequiredArgsConstructor
 public class DesiredProfitController {
-    private final DesiredProfitModel model = new DesiredProfitModel();
+    private final DesiredProfitModel model;
     private Room room;
     private Mesh mesh;
 

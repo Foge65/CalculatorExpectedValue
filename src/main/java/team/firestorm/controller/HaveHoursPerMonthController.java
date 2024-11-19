@@ -15,7 +15,7 @@ import java.util.stream.IntStream;
 @RequestMapping("/api/haveHoursPerMonth")
 @RequiredArgsConstructor
 public class HaveHoursPerMonthController {
-    private final HaveHoursPerMonthModel model = new HaveHoursPerMonthModel();
+    private final HaveHoursPerMonthModel model;
     private Room room;
     private Mesh mesh;
 
