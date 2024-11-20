@@ -51,7 +51,7 @@
             <td>Среднее ChipEV/T по пулу (для ориентира)</td>
             <td>
                 <label for="avgChipsT1"></label>
-                <input id="avgChipsT1" readonly>
+                <input id="avgChipsT1" readonly th:value="${desiredProfitModel.avgChipsT}">
             </td>
         </tr>
 
@@ -69,8 +69,8 @@
         <tr>
             <td><b>Ожидаемое $EV/Т</b></td>
             <td>
-                <label for="expEVT1"></label>
-                <input id="expEVT1" readonly th:value="${desiredProfitModel.expDollarEVT}">
+                <label for="expDollarEVT1"></label>
+                <input id="expDollarEVT1" readonly th:value="${desiredProfitModel.expDollarEVT}">
             </td>
         </tr>
 
@@ -111,7 +111,7 @@
             <td>% отката по контракту</td>
             <td>
                 <label for="rollbackPct1"></label>
-                <input id="rollbackPct1" readonly>
+                <input id="rollbackPct1" readonly th:value="${desiredProfitModel.rollback}">
             </td>
         </tr>
 
@@ -123,7 +123,7 @@
             <td><b>Необходимое количество турниров</b></td>
             <td>
                 <label for="requiredTourneys1"></label>
-                <input id="requiredTourneys1" readonly>
+                <input id="requiredTourneys1" readonly th:value="${desiredProfitModel.requiredTourneys}">
             </td>
         </tr>
 
@@ -131,7 +131,7 @@
             <td><b>Необходимое количество часов</b></td>
             <td>
                 <label for="requiredHours1"></label>
-                <input id="requiredHours1" readonly>
+                <input id="requiredHours1" readonly th:value="${desiredProfitModel.requiredHours}">
             </td>
         </tr>
 
@@ -139,7 +139,7 @@
             <td><b>$/час</b></td>
             <td>
                 <label for="dollarsPerHour1"></label>
-                <input id="dollarsPerHour1" readonly>
+                <input id="dollarsPerHour1" readonly th:value="${desiredProfitModel.dollarPerHour}">
             </td>
         </tr>
 
@@ -196,7 +196,7 @@
             <td>Среднее ChipEV/T по пулу (для ориентира)</td>
             <td>
                 <label for="avgChipsT2"></label>
-                <input id="avgChipsT2" readonly>
+                <input id="avgChipsT2" readonly th:value="${haveHoursModel.avgChipsT}">
             </td>
         </tr>
 
@@ -214,8 +214,8 @@
         <tr>
             <td><b>Ожидаемое $EV/Т</b></td>
             <td>
-                <label for="expEVT2"></label>
-                <input id="expEVT2" readonly>
+                <label for="expDollarEVT2"></label>
+                <input id="expDollarEVT2" readonly th:value="${haveHoursModel.expDollarEVT}">
             </td>
         </tr>
 
@@ -245,7 +245,7 @@
             <td>% отката по контракту</td>
             <td>
                 <label for="rollbackPct2"></label>
-                <input id="rollbackPct2" readonly>
+                <input id="rollbackPct2" readonly th:value="${haveHoursModel.rollback}">
             </td>
         </tr>
 
@@ -257,7 +257,7 @@
             <td><b>Необходимое количество турниров</b></td>
             <td>
                 <label for="requiredTourneys2"></label>
-                <input id="requiredTourneys2" readonly>
+                <input id="requiredTourneys2" readonly th:value="${haveHoursModel.requiredTourneys}">
             </td>
         </tr>
 
@@ -265,7 +265,7 @@
             <td><b>Предполагаемое ожидание</b></td>
             <td>
                 <label for="estimatedExpectation"></label>
-                <input id="estimatedExpectation" readonly>
+                <input id="estimatedExpectation" readonly th:value="${haveHoursModel.estimatedExpectation}">
             </td>
         </tr>
 
@@ -273,7 +273,7 @@
             <td><b>$/час</b></td>
             <td>
                 <label for="dollarsPerHour2"></label>
-                <input id="dollarsPerHour2" readonly>
+                <input id="dollarsPerHour2" readonly th:value="${haveHoursModel.dollarPerHour}">
             </td>
         </tr>
 
