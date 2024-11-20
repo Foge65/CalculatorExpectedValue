@@ -32,6 +32,10 @@ public class HaveHoursPerMonthController {
         model.setLoseCoefficients(room.loseCoefficient());
         model.setTourneysPerTable(room.tourneysPerTable());
 
+        HaveHoursPerMonthRequestDTO request = new HaveHoursPerMonthRequestDTO();
+        request.setBuyIn(0.25);
+        setBuyIn(request);
+
         if (mesh == null) {
             model.setMeshes(Meshes.values());
             mesh = new ClearProfit();

@@ -32,6 +32,10 @@ public class DesiredProfitController {
             model.setWinCoefficients(room.winCoefficient());
             model.setLoseCoefficients(room.loseCoefficient());
             model.setTourneysPerTable(room.tourneysPerTable());
+
+            DesiredProfitRequestDTO request = new DesiredProfitRequestDTO();
+            request.setBuyIn(0.25);
+            setBuyIn(request);
         }
 
         if (mesh == null) {
