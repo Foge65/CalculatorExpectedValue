@@ -1,6 +1,5 @@
 package team.firestorm.service.room;
 
-import jakarta.annotation.PostConstruct;
 import lombok.Getter;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
@@ -8,21 +7,12 @@ import org.springframework.stereotype.Service;
 @Service
 @Primary
 @Getter
-public class PokerStars implements Room {
+public final class PokerStars implements Room {
     private final String name = "PokerStars";
     private double[] buyIns;
     private int[] rakes;
     private double[] winCoefficient;
     private double[] loseCoefficient;
-
-    @PostConstruct
-    public void init() {
-        name();
-        buyIns();
-        rakes();
-        winCoefficient();
-        loseCoefficient();
-    }
 
     @Override
     public String name() {

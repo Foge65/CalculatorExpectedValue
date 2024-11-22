@@ -1,26 +1,16 @@
 package team.firestorm.service.room;
 
-import jakarta.annotation.PostConstruct;
 import lombok.Getter;
 import org.springframework.stereotype.Service;
 
 @Service
 @Getter
-public class Winamax implements Room {
+public final class Winamax implements Room {
     private final String name = "Winamax";
     private double[] buyIns;
     private int[] rakes;
     private double[] winCoefficient;
     private double[] loseCoefficient;
-
-    @PostConstruct
-    public void init() {
-        name();
-        buyIns();
-        rakes();
-        winCoefficient();
-        loseCoefficient();
-    }
 
     @Override
     public String name() {
