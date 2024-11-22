@@ -20,8 +20,7 @@ public class DesiredProfitController {
     private Mesh mesh;
 
     @PostConstruct
-    @GetMapping("/getData")
-    public DesiredProfitModel getData() {
+    public void init() {
         model.setRooms(Rooms.values());
 
         if (room == null) {
@@ -33,9 +32,9 @@ public class DesiredProfitController {
             model.setLoseCoefficients(room.loseCoefficient());
             model.setTourneysPerTable(room.tourneysPerTable());
 
-            DesiredProfitRequestDTO request = new DesiredProfitRequestDTO();
-            request.setBuyIn(0.25);
-            setBuyIn(request);
+            DesiredProfitRequestDTO requestDTO = new DesiredProfitRequestDTO();
+            requestDTO.setBuyIn(0.25);
+            setBuyIn(requestDTO);
         }
 
         if (mesh == null) {
@@ -43,7 +42,10 @@ public class DesiredProfitController {
             mesh = new ClearProfit();
             model.setMesh(mesh);
         }
+    }
 
+    @GetMapping("/getData")
+    public DesiredProfitModel getData() {
         return model;
     }
 
@@ -85,6 +87,11 @@ public class DesiredProfitController {
         model.setRake(room.rakes()[index]);
         model.setWinCoefficient(room.winCoefficient()[index]);
         model.setLoseCoefficient(room.loseCoefficient()[index]);
+    }
+
+    @GetMapping("/getBuyIns")
+    public double[] getBuyIns() {
+        return model.getBuyIns();
     }
 
     @PostMapping("/setExpChipsT")

@@ -20,28 +20,32 @@ public class HaveHoursPerMonthController {
     private Mesh mesh;
 
     @PostConstruct
-    @GetMapping("/getData")
-    public HaveHoursPerMonthModel getData() {
+    public void init() {
         model.setRooms(Rooms.values());
 
-        room = new PokerStars();
-        model.setRoom(room);
-        model.setBuyIns(room.buyIns());
-        model.setRakes(room.rakes());
-        model.setWinCoefficients(room.winCoefficient());
-        model.setLoseCoefficients(room.loseCoefficient());
-        model.setTourneysPerTable(room.tourneysPerTable());
+        if (room == null) {
+            room = new PokerStars();
+            model.setRoom(room);
+            model.setBuyIns(room.buyIns());
+            model.setRakes(room.rakes());
+            model.setWinCoefficients(room.winCoefficient());
+            model.setLoseCoefficients(room.loseCoefficient());
+            model.setTourneysPerTable(room.tourneysPerTable());
 
-        HaveHoursPerMonthRequestDTO request = new HaveHoursPerMonthRequestDTO();
-        request.setBuyIn(0.25);
-        setBuyIn(request);
+            HaveHoursPerMonthRequestDTO requestDTO = new HaveHoursPerMonthRequestDTO();
+            requestDTO.setBuyIn(0.25);
+            setBuyIn(requestDTO);
+        }
 
         if (mesh == null) {
             model.setMeshes(Meshes.values());
             mesh = new ClearProfit();
             model.setMesh(mesh);
         }
+    }
 
+    @GetMapping("/getData")
+    public HaveHoursPerMonthModel getData() {
         return model;
     }
 
@@ -88,6 +92,11 @@ public class HaveHoursPerMonthController {
         model.setRake(room.rakes()[index]);
         model.setWinCoefficient(room.winCoefficient()[index]);
         model.setLoseCoefficient(room.loseCoefficient()[index]);
+    }
+
+    @GetMapping("/getBuyIns")
+    public double[] getBuyIns() {
+        return model.getBuyIns();
     }
 
     @PostMapping("/setExpChipsT")
