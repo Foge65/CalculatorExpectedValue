@@ -30,7 +30,7 @@
                 <label for="room1"></label>
                 <select id="room1" onchange="setObjectValue('/api/desiredProfit/setRoom', 'room', this)"
                         th:value="${desiredProfitModel.room}">
-                    <option th:each="room : ${desiredProfitModel.rooms}" th:text="${room}"></option>
+                    <option th:each="room : ${desiredProfitModel.rooms}" th:text="${room}" th:value="${room}"></option>
                 </select>
             </td>
         </tr>
@@ -41,7 +41,8 @@
                 <label for="buyIn1"></label>
                 <select id="buyIn1" onchange="setObjectValue('/api/desiredProfit/setBuyIn', 'buyIn', this)"
                         th:value="${desiredProfitModel.buyIn}">
-                    <option th:each="buyIn : ${desiredProfitModel.buyIns}" th:text="${buyIn}"></option>
+                    <option th:each="buyIn : ${desiredProfitModel.buyIns}" th:text="${buyIn}"
+                            th:value="${buyIn}"></option>
                 </select>
             </td>
         </tr>
@@ -98,7 +99,7 @@
                 <label for="mesh1"></label>
                 <select id="mesh1" onchange="setObjectValue('/api/desiredProfit/setMesh', 'mesh', this)"
                         th:value="${desiredProfitModel.mesh}">
-                    <option th:each="mesh : ${desiredProfitModel.meshes}" th:text="${mesh}"></option>
+                    <option th:each="mesh : ${desiredProfitModel.meshes}" th:text="${mesh}" th:value="${mesh}"></option>
                 </select>
             </td>
         </tr>
@@ -170,7 +171,7 @@
                 <label for="room2"></label>
                 <select id="room2" onchange="setObjectValue('/api/haveHoursPerMonth/setRoom', 'room', this)"
                         th:value="${haveHoursModel.room}">
-                    <option th:each="room : ${haveHoursModel.rooms}" th:text="${room}"></option>
+                    <option th:each="room : ${haveHoursModel.rooms}" th:text="${room}" th:value="${room}"></option>
                 </select>
             </td>
         </tr>
@@ -181,7 +182,7 @@
                 <label for="buyIn2"></label>
                 <select id="buyIn2" onchange="setObjectValue('/api/haveHoursPerMonth/setBuyIn', 'buyIn', this)"
                         th:value="${haveHoursModel.buyIn}">
-                    <option th:each="buyIn : ${haveHoursModel.buyIns}" th:text="${buyIn}"></option>
+                    <option th:each="buyIn : ${haveHoursModel.buyIns}" th:text="${buyIn}" th:value="${buyIn}"></option>
                 </select>
             </td>
         </tr>
@@ -228,7 +229,7 @@
                 <label for="mesh2"></label>
                 <select id="mesh2" onchange="setObjectValue('/api/haveHoursPerMonth/setMesh', 'mesh', this)"
                         th:value="${haveHoursModel.mesh}">
-                    <option th:each="mesh : ${haveHoursModel.meshes}" th:text="${mesh}"></option>
+                    <option th:each="mesh : ${haveHoursModel.meshes}" th:text="${mesh}" th:value="${mesh}"></option>
                 </select>
             </td>
         </tr>
