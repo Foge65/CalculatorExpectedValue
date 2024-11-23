@@ -115,7 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
     rakebackPct2.addEventListener("input", () => updateValue(estimatedExpectation, '/api/haveHoursPerMonth/getEstimatedExpectation'));
 });
 
-function setObjectValue(url, key, value) {
+async function setObjectValue(url, key, value) {
     fetch(url, {
         method: "POST",
         headers: {
@@ -133,7 +133,7 @@ function setObjectValue(url, key, value) {
         });
 }
 
-function updateValue(id, url) {
+async function updateValue(id, url) {
     fetch(url)
         .then(response => {
             if (!response.ok) {
@@ -151,7 +151,7 @@ function updateValue(id, url) {
         });
 }
 
-function updateList(id, url) {
+async function updateList(id, url) {
     id.innerHTML = '';
 
     fetch(url, {
