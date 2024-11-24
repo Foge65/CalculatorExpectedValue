@@ -3,12 +3,14 @@ table {
     border-spacing: 5px 5px;
     border: 1px solid wheat;
     border-radius: 10px;
+    position: relative;
 }
 
 td {
     vertical-align: top;
     text-align: left;
     white-space: nowrap;
+    position: relative;
 }
 
 div {
@@ -44,4 +46,18 @@ h3 {
 
 .blank-row {
     height: 30px;
+}
+
+.icon, .remove-column-btn img {
+    width: 24px;
+    height: 24px;
+}
+
+.remove-column-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
 }

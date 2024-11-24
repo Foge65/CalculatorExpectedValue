@@ -8,10 +8,10 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
-class HaveHoursPerMonthControllerTest {
+class HaveHoursControllerTest {
 
     @MockBean
-    private HaveHoursPerMonthController controller;
+    private HaveHoursController controller;
 
     @BeforeEach
     void setUp() {

@@ -3,78 +3,53 @@ package team.firestorm.controller;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import team.firestorm.dto.HaveHoursPerMonthRequestDTO;
-import team.firestorm.model.HaveHoursPerMonthModel;
+import team.firestorm.dto.HaveHoursRequestDTO;
+import team.firestorm.model.HaveHoursModel;
+import team.firestorm.service.HaveHoursModelService;
 import team.firestorm.service.mesh.*;
 import team.firestorm.service.room.*;
 
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.stream.IntStream;
 
 @RestController
 @RequestMapping("/api/haveHoursPerMonth")
 @RequiredArgsConstructor
-public class HaveHoursPerMonthController {
-    private final HaveHoursPerMonthModel model;
+public class HaveHoursController {
+    private final HaveHoursModelService modelService;
     private Room room;
     private Mesh mesh;
 
     @PostConstruct
     public void init() {
+        createModel();
+        HaveHoursModel model = modelService.findLastModel();
         model.setRooms(Rooms.values());
-
-        if (room == null) {
-            room = new PokerStars();
-            model.setRoom(room);
-            model.setBuyIns(room.buyIns());
-            model.setRakes(room.rakes());
-            model.setWinCoefficients(room.winCoefficient());
-            model.setLoseCoefficients(room.loseCoefficient());
-            model.setTourneysPerTable(room.tourneysPerTable());
-
-            HaveHoursPerMonthRequestDTO requestDTO = new HaveHoursPerMonthRequestDTO();
-            requestDTO.setBuyIn(0.25);
-            setBuyIn(requestDTO);
-        }
-
-        if (mesh == null) {
-            model.setMeshes(Meshes.values());
-            mesh = new ClearProfit();
-            model.setMesh(mesh);
-        }
+        initializeRoom(model);
+        initializeMesh(model);
     }
 
-    @GetMapping("/getData")
-    public HaveHoursPerMonthModel getData() {
-        return model;
+    @PostMapping("/createModel")
+    public void createModel() {
+        modelService.addModel();
+        HaveHoursModel model = modelService.findLastModel();
+        model.setRooms(Rooms.values());
+        initializeRoom(model);
+        initializeMesh(model);
     }
 
-    @PostMapping("/setHaveHours")
-    public void setHaveHours(@RequestBody HaveHoursPerMonthRequestDTO request) {
-        model.setHaveHours(request.getHaveHours());
+    private void initializeRoom(HaveHoursModel model) {
+        room = new PokerStars();
+        propertiesRoom(model);
+
+        HaveHoursRequestDTO requestDTO = new HaveHoursRequestDTO();
+        requestDTO.setBuyIn(0.25);
+        int id = modelService.findLastId();
+        setBuyIn(id, requestDTO);
     }
 
-    @PostMapping("/setTables")
-    public void setTables(@RequestBody HaveHoursPerMonthRequestDTO request) {
-        model.setTables(request.getTables());
-    }
-
-    @PostMapping("/setRoom")
-    public void setRoom(@RequestBody Map<String, String> request) {
-        Rooms rooms = Rooms.valueOf(request.get("room"));
-
-        switch (rooms) {
-            case PokerStars:
-                room = new PokerStars();
-                break;
-            case Winamax:
-                room = new Winamax();
-                break;
-            case iPoker:
-                room = new IPoker();
-                break;
-        }
-
+    private void propertiesRoom(HaveHoursModel model) {
         model.setRoom(room);
         model.setBuyIns(room.buyIns());
         model.setRakes(room.rakes());
@@ -83,8 +58,64 @@ public class HaveHoursPerMonthController {
         model.setTourneysPerTable(room.tourneysPerTable());
     }
 
+    private void initializeMesh(HaveHoursModel model) {
+        if (mesh == null) {
+            model.setMeshes(Meshes.values());
+            mesh = new ClearProfit();
+            model.setMesh(mesh);
+        }
+    }
+
+    @PostMapping("/removeModel")
+    public void removeModel(@RequestParam("id") int id) {
+        modelService.removeModelById(id);
+    }
+
+    @GetMapping("/getModel")
+    public HaveHoursModel getModel(@RequestParam("id") int id) {
+        HaveHoursModel model = modelService.getModels().get(id);
+        if (model == null) {
+            throw new NoSuchElementException("Model with id " + id + " not found");
+        }
+        return model;
+    }
+
+    @GetMapping("/getAllData")
+    public Map<Integer, HaveHoursModel> getData() {
+        return modelService.getModels();
+    }
+
+    @PostMapping("/setHaveHours")
+    public void setHaveHours(@RequestParam("id") int id, @RequestBody HaveHoursRequestDTO request) {
+        HaveHoursModel model = getModel(id);
+        model.setHaveHours(request.getHaveHours());
+    }
+
+    @PostMapping("/setTables")
+    public void setTables(@RequestParam("id") int id, @RequestBody HaveHoursRequestDTO request) {
+        HaveHoursModel model = getModel(id);
+        model.setTables(request.getTables());
+    }
+
+    @PostMapping("/setRoom")
+    public void setRoom(@RequestParam("id") int id, @RequestBody Map<String, String> request) {
+        HaveHoursModel model = getModel(id);
+        Rooms rooms = Rooms.valueOf(request.get("room"));
+        createRoom(rooms);
+        propertiesRoom(model);
+    }
+
+    private void createRoom(Rooms rooms) {
+        switch (rooms) {
+            case PokerStars -> new PokerStars();
+            case Winamax -> new Winamax();
+            case iPoker -> new IPoker();
+        }
+    }
+
     @PostMapping("/setBuyIn")
-    public void setBuyIn(@RequestBody HaveHoursPerMonthRequestDTO request) {
+    public void setBuyIn(@RequestParam("id") int id, @RequestBody HaveHoursRequestDTO request) {
+        HaveHoursModel model = getModel(id);
         double buyIn = request.getBuyIn();
         model.setBuyIn(buyIn);
 
@@ -95,17 +126,19 @@ public class HaveHoursPerMonthController {
     }
 
     @GetMapping("/getBuyIns")
-    public double[] getBuyIns() {
-        return model.getBuyIns();
+    public double[] getBuyIns(@RequestParam("id") int id) {
+        return getModel(id).getBuyIns();
     }
 
     @PostMapping("/setExpChipsT")
-    public void setExpChipsT(@RequestBody HaveHoursPerMonthRequestDTO request) {
+    public void setExpChipsT(@RequestParam("id") int id, @RequestBody HaveHoursRequestDTO request) {
+        HaveHoursModel model = getModel(id);
         model.setExpChipsT(request.getExpChipsT());
     }
 
     @GetMapping("/getExpEVT")
-    public double getExpEVT() {
+    public double getExpEVT(@RequestParam("id") int id) {
+        HaveHoursModel model = getModel(id);
         double buyIn = model.getBuyIn();
         double chipsEV = model.getExpChipsT();
         double winCoefficient = model.getWinCoefficient();
@@ -120,12 +153,14 @@ public class HaveHoursPerMonthController {
     }
 
     @PostMapping("/setRakebackPct")
-    public void setRakebackPct(@RequestBody HaveHoursPerMonthRequestDTO request) {
+    public void setRakebackPct(@RequestParam("id") int id, @RequestBody HaveHoursRequestDTO request) {
+        HaveHoursModel model = getModel(id);
         model.setRakebackPct(request.getRakebackPct());
     }
 
     @PostMapping("/setMesh")
-    public void setMesh(@RequestBody Map<String, String> request) {
+    public void setMesh(@RequestParam("id") int id, @RequestBody Map<String, String> request) {
+        HaveHoursModel model = getModel(id);
         Meshes meshes = Meshes.valueOf(request.get("mesh"));
 
         switch (meshes) {
@@ -143,7 +178,8 @@ public class HaveHoursPerMonthController {
     }
 
     @GetMapping("/getRollback")
-    public double getRollback() {
+    public double getRollback(@RequestParam("id") int id) {
+        HaveHoursModel model = getModel(id);
         double buyIn = model.getBuyIn();
         double evBI = model.getEstimatedExpectation() / buyIn;
 
@@ -299,7 +335,8 @@ public class HaveHoursPerMonthController {
     }
 
     @GetMapping("/getRequiredTourneys")
-    public double getRequiredTourneys() {
+    public double getRequiredTourneys(@RequestParam("id") int id) {
+        HaveHoursModel model = getModel(id);
         double tourneys = model.getTables() * model.getTourneysPerTable() * model.getHaveHours();
 
         model.setRequiredTourneys(tourneys);
@@ -308,7 +345,8 @@ public class HaveHoursPerMonthController {
     }
 
     @GetMapping("/getEstimatedExpectation")
-    public double getEstimatedExpectation() {
+    public double getEstimatedExpectation(@RequestParam("id") int id) {
+        HaveHoursModel model = getModel(id);
         double exp = (model.getExpDollarEVT() + model.getBuyIn() * (model.getRake() / 100)
                                                 * (model.getRakebackPct() / 100))
                      * model.getTables() * model.getTourneysPerTable() * model.getHaveHours();
@@ -319,7 +357,8 @@ public class HaveHoursPerMonthController {
     }
 
     @GetMapping("/getDollarPerHour")
-    public double getDollarPerHour() {
+    public double getDollarPerHour(@RequestParam("id") int id) {
+        HaveHoursModel model = getModel(id);
         double dollarsPerHour = model.getEstimatedExpectation() / model.getHaveHours();
 
         model.setDollarPerHour(dollarsPerHour);

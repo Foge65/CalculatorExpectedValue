@@ -19,7 +19,6 @@
 
     <modules>
         <module>spring</module>
-        <module>web_react</module>
     </modules>
 
 </project>

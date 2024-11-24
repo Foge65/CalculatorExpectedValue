@@ -6,19 +6,31 @@
     <link th:href="@{/css.css?v=3}" th:rel="stylesheet">
     <link th:href="@{/ico.png}" th:rel="icon">
 </head>
+
 <body>
 
 <script th:src="@{/script.js}"></script>
 
 <div class="tables">
-    <table>
+    <table id="desiredProfitTable">
         <caption><h3>Желаемый профит</h3></caption>
+
+        <tr>
+            <td></td>
+            <td></td>
+            <td>
+                <button class="icon-button" id="addColumn1">
+                    <img class="icon" th:src="@{/plus_icon.png}">
+                </button>
+            </td>
+        </tr>
 
         <tr>
             <td>Желаемый профит</td>
             <td>
                 <label for="desiredProfit"></label>
-                <input id="desiredProfit" oninput="setObjectValue('/api/desiredProfit/setDesiredProfit', 'desiredProfit', this)"
+                <input id="desiredProfit"
+                       oninput="setObjectValue('/api/desiredProfit/setDesiredProfit', 'desiredProfit', this)"
                        th:value="${desiredProfitModel.desiredProfit}"
                        type="number">
             </td>
@@ -87,7 +99,8 @@
             <td>Величина RB, %</td>
             <td>
                 <label for="rakebackPct1"></label>
-                <input id="rakebackPct1" oninput="setObjectValue('/api/desiredProfit/setRakebackPct', 'rakebackPct', this)"
+                <input id="rakebackPct1"
+                       oninput="setObjectValue('/api/desiredProfit/setRakebackPct', 'rakebackPct', this)"
                        th:value="${desiredProfitModel.rakebackPct}"
                        type="number">
             </td>
@@ -142,8 +155,18 @@
 
     </table>
 
-    <table>
+    <table id="haveHoursTable">
         <caption><h3>Есть часов в месяц</h3></caption>
+
+        <tr>
+            <td></td>
+            <td></td>
+            <td>
+                <button class="icon-button" id="addColumn2">
+                    <img class="icon" th:src="@{/plus_icon.png}">
+                </button>
+            </td>
+        </tr>
 
         <tr>
             <td>Есть часов в месяц</td>
@@ -199,7 +222,8 @@
             <td>Ожидаемое ChipEV/T</td>
             <td>
                 <label for="expChipsT2"></label>
-                <input id="expChipsT2" oninput="setObjectValue('/api/haveHoursPerMonth/setExpChipsT', 'expChipsT', this)"
+                <input id="expChipsT2"
+                       oninput="setObjectValue('/api/haveHoursPerMonth/setExpChipsT', 'expChipsT', this)"
                        th:value="${haveHoursModel.expChipsT}"
                        type="number">
             </td>
@@ -217,7 +241,8 @@
             <td>Величина RB, %</td>
             <td>
                 <label for="rakebackPct2"></label>
-                <input id="rakebackPct2" oninput="setObjectValue('/api/haveHoursPerMonth/setRakebackPct', 'rakebackPct', this)"
+                <input id="rakebackPct2"
+                       oninput="setObjectValue('/api/haveHoursPerMonth/setRakebackPct', 'rakebackPct', this)"
                        th:value="${haveHoursModel.rakebackPct}"
                        type="number">
             </td>

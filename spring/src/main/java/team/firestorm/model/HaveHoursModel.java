@@ -9,7 +9,7 @@ import team.firestorm.service.room.Rooms;
 
 @Data
 @Repository
-public class HaveHoursPerMonthModel {
+public class HaveHoursModel {
     private double haveHours;
     private double tables;
     private Rooms[] rooms;

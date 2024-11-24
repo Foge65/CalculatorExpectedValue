@@ -1,5 +1,5 @@
 .idea
 spring/target
-web_react/node_modules
+web/node_modules
 todo.md
 *.iml

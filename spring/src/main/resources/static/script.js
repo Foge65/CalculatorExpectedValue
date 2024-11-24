@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const rakebackPct2 = document.getElementById("rakebackPct2");
     const dollarsPerHour2 = document.getElementById("dollarsPerHour2");
 
-    fetch('/api/desiredProfit/getData')
+    fetch('/api/desiredProfit/getAllData')
         .then(response => response.json())
         .then(data => {
             const roomOption = Array.from(room1.options).find(option => option.value === data.room.name);
@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
         })
         .catch(error => console.error('Error:', error));
 
-    fetch('/api/haveHoursPerMonth/getData')
+    fetch('/api/haveHoursPerMonth/getAllData')
         .then(response => response.json())
         .then(data => {
             const roomOption = Array.from(room2.options).find(option => option.value === data.room.name);
@@ -113,6 +113,69 @@ document.addEventListener("DOMContentLoaded", () => {
 
     expDollarEVT2.addEventListener("input", () => updateValue(estimatedExpectation, '/api/haveHoursPerMonth/getEstimatedExpectation'));
     rakebackPct2.addEventListener("input", () => updateValue(estimatedExpectation, '/api/haveHoursPerMonth/getEstimatedExpectation'));
+
+
+    const table1 = document.getElementById('desiredProfitTable');
+    const addColumnButton1 = document.getElementById('addColumn1');
+    let columnCount = 1;
+
+    addColumnButton1.addEventListener('click', () => {
+        columnCount++;
+
+        const rows = table1.querySelectorAll('tr');
+        rows.forEach((row, rowIndex) => {
+            const newCell = document.createElement('td');
+
+            if (rowIndex === 0) {
+                const emptyCell = document.createElement('td');
+                row.appendChild(emptyCell);
+
+                // Первая строка - добавляем заголовок столбца
+                const newHeaderCell = document.createElement('td');
+                newHeaderCell.textContent = `Column ${columnCount}`;
+
+                const removeColumnButton = document.createElement('button');
+                removeColumnButton.classList.add('remove-column-btn');
+                const removeIcon = document.createElement('img');
+                removeIcon.src = 'minus_icon.png';
+                removeIcon.alt = 'Remove Column';
+                removeColumnButton.appendChild(removeIcon);
+                newHeaderCell.appendChild(removeColumnButton);
+
+                row.appendChild(newHeaderCell);
+
+                // Обработчик для удаления столбца
+                removeColumnButton.addEventListener('click', (event) => {
+                    const headerCell = event.target.closest('td');
+                    const columnIndex = Array.from(headerCell.parentNode.children).indexOf(headerCell);
+
+                    // Удаляем соответствующие ячейки в каждой строке
+                    const rows = table1.querySelectorAll('tr');
+                    rows.forEach(row => {
+                        const cellToRemove = row.children[columnIndex];
+                        if (cellToRemove) {
+                            row.removeChild(cellToRemove);
+                        }
+                    });
+                });
+            } else {
+                // Остальные строки - добавляем содержимое
+                const input = document.createElement('input');
+                input.type = 'number'; // Пример: числовое поле ввода
+                input.placeholder = `Value ${columnCount}`;
+                input.classList.add('dynamic-input'); // Добавляем общий класс для управления
+
+                // Пример: Автоматическое обновление данных на сервере
+                input.addEventListener('input', () => {
+                    setObjectValue(`/api/updateColumn/${rowIndex}/${columnCount}`, `value`, input);
+                });
+
+                newCell.appendChild(input);
+                row.appendChild(newCell);
+            }
+        });
+    });
+
 });
 
 async function setObjectValue(url, key, value) {
