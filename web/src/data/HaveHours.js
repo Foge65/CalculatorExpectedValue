@@ -15,6 +15,7 @@ export const ids = {
 }
 
 export const urls = {
+    getModel: "/api/haveHoursPerMonth/getModel",
     getAllData: "/api/haveHoursPerMonth/getAllData",
     getBuyIns: "/api/haveHoursPerMonth/getBuyIns",
     getExpEVT: "/api/haveHoursPerMonth/getExpEVT",

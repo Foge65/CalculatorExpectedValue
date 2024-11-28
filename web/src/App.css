@@ -53,6 +53,11 @@ h3 {
     height: 24px;
 }
 
+.add-column-btn {
+    width: 24px;
+    height: 24px;
+}
+
 .remove-column-btn {
     position: absolute;
     top: 0;

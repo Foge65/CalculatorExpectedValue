@@ -91,6 +91,11 @@ public class DesiredProfitController {
         model.setDesiredProfit(request.getDesiredProfit());
     }
 
+    @GetMapping("/getRooms")
+    public Rooms[] getRooms(@RequestParam("id") int id) {
+        return getModel(id).getRooms();
+    }
+
     @PostMapping("/setRoom")
     public void setRoom(@RequestParam("id") int id, @RequestBody Map<String, String> request) {
         DesiredProfitModel model = getModel(id);
@@ -101,9 +106,9 @@ public class DesiredProfitController {
 
     private void createRoom(Rooms rooms) {
         switch (rooms) {
-            case PokerStars -> new PokerStars();
-            case Winamax -> new Winamax();
-            case iPoker -> new IPoker();
+            case PokerStars -> room = new PokerStars();
+            case Winamax -> room = new Winamax();
+            case iPoker -> room = new IPoker();
         }
     }
 
@@ -146,7 +151,7 @@ public class DesiredProfitController {
         double expEVT = buyIn * 1 * (((500 + chipsEV) / 1500) * winCoefficient
                                      + (1 - ((500 + chipsEV) / 1500)) * loseCoefficient);
 
-        model.setExpDollarEVT(expEVT);
+        model.setExpEVT(expEVT);
 
         return expEVT;
     }
@@ -163,6 +168,11 @@ public class DesiredProfitController {
         model.setRakebackPct(request.getRakebackPct());
     }
 
+    @GetMapping(("/getMeshes"))
+    public Meshes[] getMeshes(@RequestParam("id") int id) {
+        return getModel(id).getMeshes();
+    }
+
     @PostMapping("/setMesh")
     public void setMesh(@RequestParam("id") int id, @RequestBody Map<String, String> request) {
         DesiredProfitModel model = getModel(id);
@@ -174,9 +184,10 @@ public class DesiredProfitController {
 
     private void initializeMesh(Meshes meshes) {
         switch (meshes) {
-            case ClearProfit -> new ClearProfit();
-            case BackingWithStudy -> new BackingWithStudy();
-            case BackingWithoutStudy -> new BackingWithoutStudy();
+            case ClearProfit -> mesh = new ClearProfit();
+            case BackingWithStudy -> mesh = new BackingWithStudy();
+            case BackingWithoutStudy -> mesh = new BackingWithoutStudy();
+            case StudyWithoutBacking -> mesh = new StudyWithoutBacking();
         }
     }
 
@@ -331,7 +342,7 @@ public class DesiredProfitController {
             rollback = 100;
         }
 
-        model.setRollback(rollback);
+        model.setRollbackPct(rollback);
         return rollback;
     }
 
@@ -340,10 +351,10 @@ public class DesiredProfitController {
         DesiredProfitModel model = getModel(id);
         double desiredProfit = model.getDesiredProfit();
         double buyIn = model.getBuyIn();
-        double rollback = model.getRollback();
+        double rollback = model.getRollbackPct();
         double rake = model.getRake();
         double rakeback = model.getRakebackPct();
-        double dollarEVPerTourney = model.getExpDollarEVT();
+        double dollarEVPerTourney = model.getExpEVT();
         double requiredTourneys = desiredProfit / (rollback / 100) / (buyIn * (rake / 100) * (rakeback / 100)
                                                                       + dollarEVPerTourney) + 1;
         model.setRequiredTourneys(requiredTourneys);
@@ -362,7 +373,7 @@ public class DesiredProfitController {
     public double getDollarPerHour(@RequestParam("id") int id) {
         DesiredProfitModel model = getModel(id);
         double dollarsPerHour = model.getDesiredProfit() / model.getRequiredHours();
-        model.setDollarPerHour(dollarsPerHour);
+        model.setDollarsPerHour(dollarsPerHour);
         return dollarsPerHour;
     }
 
