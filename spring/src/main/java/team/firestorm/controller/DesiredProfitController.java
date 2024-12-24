@@ -96,6 +96,11 @@ public class DesiredProfitController {
         return getModel(id).getRooms();
     }
 
+    @GetMapping("/getRoom")
+    public Room getRoom(@RequestParam("id") int id) {
+        return getModel(id).getRoom();
+    }
+
     @PostMapping("/setRoom")
     public void setRoom(@RequestParam("id") int id, @RequestBody Map<String, String> request) {
         DesiredProfitModel model = getModel(id);
@@ -132,6 +137,11 @@ public class DesiredProfitController {
     public double[] getBuyIns(@RequestParam("id") int id) {
         DesiredProfitModel model = getModel(id);
         return model.getBuyIns();
+    }
+
+    @GetMapping("/getBuyIn")
+    public double getBuyIn(@RequestParam("id") int id) {
+        return getModel(id).getBuyIn();
     }
 
     @PostMapping("/setExpChipsT")
@@ -171,6 +181,11 @@ public class DesiredProfitController {
     @GetMapping(("/getMeshes"))
     public Meshes[] getMeshes(@RequestParam("id") int id) {
         return getModel(id).getMeshes();
+    }
+
+    @GetMapping("/getMesh")
+    public Mesh getMesh(@RequestParam("id") int id) {
+        return getModel(id).getMesh();
     }
 
     @PostMapping("/setMesh")

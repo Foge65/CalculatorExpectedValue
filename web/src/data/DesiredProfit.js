@@ -39,6 +39,11 @@ export const urls = {
         url: '/api/desiredProfit/getRooms',
         method: 'get'
     },
+    getRoom: {
+        name: mapper['rooms'],
+        url: '/api/desiredProfit/getRoom',
+        method: 'get'
+    },
     setRoom: {
         name: mapper['room'],
         url: '/api/desiredProfit/setRoom',
@@ -48,6 +53,11 @@ export const urls = {
     getBuyIns: {
         name: mapper['buyIns'],
         url: '/api/desiredProfit/getBuyIns',
+        method: 'get'
+    },
+    getBuyIn: {
+        name: mapper['buyIns'],
+        url: '/api/desiredProfit/getBuyIn',
         method: 'get'
     },
     setBuyIn: {
@@ -80,6 +90,11 @@ export const urls = {
     getMeshes: {
         name: mapper['meshes'],
         url: '/api/desiredProfit/getMeshes',
+        method: 'get'
+    },
+    getMesh: {
+        name: mapper['meshes'],
+        url: '/api/desiredProfit/getMesh',
         method: 'get'
     },
     setMesh: {

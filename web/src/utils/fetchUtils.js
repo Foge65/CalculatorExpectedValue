@@ -1,44 +1,35 @@
-import {findUrlsForReadOnlyIds} from "./dataUtils.js"
-
-export async function fetchAllData(urls) {
-    try {
-        const response = await fetch(urls.getAllData.url)
-        return await response.json()
-    } catch (error) {
-        console.error(`Error fetching all data: ${error}`)
-    }
+export function fetchAllData(urls) {
+    return fetch(urls.getAllData.url)
+        .then((response) => response.json())
 }
 
-export async function fetchDataById(id, urls, setData) {
-    try {
-        const response = await fetch(`${urls.getModel.url}?id=${id}`)
-        const json = await response.json()
-        setData((prevData) => ({
-            ...prevData,
-            ...json,
-            id,
-        }))
-    } catch (error) {
-        console.error(`Error fetching data by ID: ${error}`)
-    }
+export function fetchDataById(urls, id) {
+    return fetch(`${urls.getModel.url}?id=${id}`)
+        .then((response) => response.json())
 }
 
-export async function fetchReadOnlyDataById(ids, urls, id, setData) {
-    try {
-        const readOnlyUrls = findUrlsForReadOnlyIds(ids, urls, id)
+export async function fetchReadOnlyDataById(ids, urls, id) {
+    findUrlsForReadOnlyIds(ids, urls, id).map((url) => {
+        return fetch(url).then((response) => response.json())
+    })
+}
 
-        const results = await Promise.all(
-            readOnlyUrls.map(async (url) => {
-                const response = await fetch(url)
-                return response.json()
-            })
-        )
+function findUrlsForReadOnlyIds(ids, urls, id) {
+    const readOnlyKeys = Object.keys(findReadOnlyIds(ids))
+    return filterInputUrls(urls, readOnlyKeys, id);
+}
 
-        setData((prevData) => ({
-            ...prevData,
-            ...Object.assign({}, ...results),
-        }))
-    } catch (error) {
-        console.error(`Error fetching read-only data: ${error}`)
-    }
+function findReadOnlyIds(ids) {
+    return ids
+        .filter((column) => column.type === 'input' && column.readOnly === true)
+        .reduce((acc, column) => {
+            acc[column.name] = true
+            return acc
+        }, {})
+}
+
+function filterInputUrls(urls, readOnlyKeys, id) {
+    return Object.values(urls)
+        .filter((entry) => entry.type === 'input' && entry.method === 'get' && readOnlyKeys.includes(entry.name))
+        .map((entry) => `${entry.url}?id=${id}`)
 }

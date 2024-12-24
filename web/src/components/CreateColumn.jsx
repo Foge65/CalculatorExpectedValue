@@ -1,8 +1,6 @@
-import {setValue} from "../utils/setValue.js"
+export default function CreateColumn({ids, urls, id, data, setData}) {
 
-export default function CreateColumn({ids, urls, data, setData}) {
-
-    function handleUpdateValue(event) {
+    function handleUpdateValue(event, id) {
         const {name, value} = event.target
 
         setData((prevData) => {
@@ -12,33 +10,69 @@ export default function CreateColumn({ids, urls, data, setData}) {
             }
 
             const urlKey = getUrlKeyByName(name)
-            setValue(urlKey, name, value, data, urls).catch(err => console.error('Error sending data:', err))
+            setValue(urlKey, name, value, id, data, urls).catch((err) => console.error('Error sending data:', err))
 
             return updatedData
         })
     }
 
-    function getUrlKeyByName(name) {
-        return Object.keys(urls).find(key => urls[key].name === name)
+    function setValue(urlKey, field, value, id, data, urls) {
+        const payload = {
+            id: data.id,
+            [field]: value
+        }
+
+        try {
+            if (urls[urlKey].method === 'post') {
+                const url = urls[urlKey].url
+
+                const options = {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                }
+
+                return fetch(`${url}?id=${id}`, options)
+            }
+        } catch (error) {
+            console.error(`Error sending data: ${error.statusText}`)
+        }
     }
 
-    function handleUpdateSelectValue(event, id) {
+    function getUrlKeyByName(name) {
+        return Object.keys(urls).find((key) => urls[key].name === name)
+    }
+
+    function handleUpdateSelectValue(event, id, columnName) {
         const {value} = event.target
 
-        fetch(`${urls.setRoom.url}?id=${id}`, {
+        const nameMap = {
+            rooms: 'room',
+            buyIns: 'buyIn',
+            meshes: 'mesh'
+        }
+        const mappedName = nameMap[columnName]
+        const urlKey = `set${mappedName.charAt(0).toUpperCase() + mappedName.slice(1)}`
+        const selectedUrl = urls[urlKey]?.url
+
+        fetch(`${selectedUrl}?id=${id}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({room: value})
-        }).catch(err => console.error('Error sending data:', err))
+            body: JSON.stringify({[mappedName]: value})
+        })
+            .catch((err) => console.error('Error sending data:', err))
     }
 
     function findSelectElements(ids, data) {
         return ids
             .filter((column) => column.type === 'select')
             .reduce((acc, column) => {
-                acc[column.name] = data[column.name]
+                const values = Object.values(data).map((row) => row?.[column.name])
+                acc[column.name] = values[0]
                 return acc
             }, {})
     }
@@ -49,26 +83,37 @@ export default function CreateColumn({ids, urls, data, setData}) {
         ids.map((column, index) => (
             <tr key={index}>
                 <td>{column.label}</td>
-                {column.type === 'input' ? (
-                    <td>
-                        <input
-                            type="number"
-                            name={column.name}
-                            value={data[column.name] ?? ''}
-                            readOnly={column.readOnly}
-                            onChange={handleUpdateValue}
-                        />
-                    </td>
-                ) : column.type === 'select' ? (
-                    <td>
-                        <select name={column.name}
-                                onChange={(event) => handleUpdateSelectValue(event, data.id)}>
-                            {(selectElements[column.name] || []).map((value, index) => (
-                                <option key={index} value={value}>{value}</option>
-                            ))}
-                        </select>
-                    </td>
-                ) : null}
+                {id.map((rowId) => {
+                    const rowData = data[rowId]
+                    return (
+                        <td key={rowId}>
+                            {column.type === 'input' ? (
+                                <input
+                                    type="number"
+                                    name={column.name}
+                                    value={rowData[column.name] ?? ''}
+                                    readOnly={column.readOnly}
+                                    onChange={(event) => {
+                                        handleUpdateValue(event, rowId)
+                                    }}
+                                />
+                            ) : column.type === 'select' ? (
+                                <select
+                                    name={column.name}
+                                    onChange={(event) => {
+                                        handleUpdateSelectValue(event, rowId, column.name)
+                                    }}
+                                >
+                                    {(selectElements[column.name] || []).map((value, index) => (
+                                        <option key={index} value={value}>
+                                            {value}
+                                        </option>
+                                    ))}
+                                </select>
+                            ) : null}
+                        </td>
+                    )
+                })}
             </tr>
         ))
     )

@@ -1,24 +1,37 @@
 import {createContext, useContext, useEffect, useState} from "react"
-import {findInputIds} from "../../utils/dataUtils.js"
-import {fetchDataById, fetchReadOnlyDataById} from "../../utils/fetchUtils.js"
+import {fetchAllData, fetchDataById, fetchReadOnlyDataById} from "../../utils/fetchUtils.js"
 import {ids, urls} from "../../data/DesiredProfit.js"
 
 const DataContext = createContext()
 
 export function DesiredProfitDataProvider({children}) {
-    const [data, setData] = useState({id: 1})
-
-    const inputIds = JSON.stringify(findInputIds(ids, data))
+    const [id, setId] = useState([])
+    const [data, setData] = useState({})
 
     useEffect(() => {
-        if (data.id) {
-            fetchDataById(data.id, urls, setData)
-            fetchReadOnlyDataById(ids, urls, data.id, setData)
-        }
-    }, [data.id, inputIds])
+        fetchAllData(urls)
+            .then((allData) => {
+                const keys = Object.keys(allData)
+                setId(keys)
+                setData(allData)
+            })
+            .catch(error => console.error("Error fetching initial data:", error))
+    }, [])
+
+    useEffect(() => {
+        id.forEach((id) => {
+            let dataById = fetchDataById(urls, id)
+            let readOnlyData = fetchReadOnlyDataById(ids, urls, id)
+            setData((prevState) => ({
+                ...prevState,
+                dataById,
+                readOnlyData
+            }))
+        })
+    }, [id])
 
     return (
-        <DataContext.Provider value={{data, setData}}>
+        <DataContext.Provider value={{id, setId, data, setData}}>
             {children}
         </DataContext.Provider>
     )
