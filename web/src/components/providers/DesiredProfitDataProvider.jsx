@@ -1,6 +1,6 @@
 import {createContext, useContext, useEffect, useState} from "react"
-import {fetchAllData, fetchDataById, fetchReadOnlyDataById} from "../../utils/fetchUtils.js"
-import {ids, urls} from "../../data/DesiredProfit.js"
+import {fetchAllData, fetchDataById} from "../../utils/fetchUtils.js"
+import {urls} from "../../data/DesiredProfit.js"
 
 const DataContext = createContext()
 
@@ -20,13 +20,15 @@ export function DesiredProfitDataProvider({children}) {
 
     useEffect(() => {
         id.forEach((id) => {
-            let dataById = fetchDataById(urls, id)
-            let readOnlyData = fetchReadOnlyDataById(ids, urls, id)
-            setData((prevState) => ({
-                ...prevState,
-                dataById,
-                readOnlyData
-            }))
+            fetchDataById(urls, id)
+                .then((response) => {
+                    setData((prevState) => ({
+                        ...prevState,
+                        [id]: {
+                            response
+                        }
+                    }))
+                })
         })
     }, [id])
 

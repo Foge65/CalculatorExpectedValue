@@ -8,7 +8,7 @@ export function fetchDataById(urls, id) {
         .then((response) => response.json())
 }
 
-export async function fetchReadOnlyDataById(ids, urls, id) {
+export function fetchReadOnlyDataById(ids, urls, id) {
     findUrlsForReadOnlyIds(ids, urls, id).map((url) => {
         return fetch(url).then((response) => response.json())
     })

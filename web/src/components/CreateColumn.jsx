@@ -1,6 +1,6 @@
 export default function CreateColumn({ids, urls, id, data, setData}) {
 
-    function handleUpdateValue(event, id) {
+    function handleUpdateValue(event, columnId) {
         const {name, value} = event.target
 
         setData((prevData) => {
@@ -10,13 +10,13 @@ export default function CreateColumn({ids, urls, id, data, setData}) {
             }
 
             const urlKey = getUrlKeyByName(name)
-            setValue(urlKey, name, value, id, data, urls).catch((err) => console.error('Error sending data:', err))
+            setValue(urlKey, name, value, columnId).catch((err) => console.error('Error sending data:', err))
 
             return updatedData
         })
     }
 
-    function setValue(urlKey, field, value, id, data, urls) {
+    function setValue(urlKey, field, value, columnId) {
         const payload = {
             id: data.id,
             [field]: value
@@ -34,7 +34,7 @@ export default function CreateColumn({ids, urls, id, data, setData}) {
                     body: JSON.stringify(payload)
                 }
 
-                return fetch(`${url}?id=${id}`, options)
+                return fetch(`${url}?id=${columnId}`, options)
             }
         } catch (error) {
             console.error(`Error sending data: ${error.statusText}`)
@@ -67,7 +67,7 @@ export default function CreateColumn({ids, urls, id, data, setData}) {
             .catch((err) => console.error('Error sending data:', err))
     }
 
-    function findSelectElements(ids, data) {
+    function findSelectElements() {
         return ids
             .filter((column) => column.type === 'select')
             .reduce((acc, column) => {
@@ -77,35 +77,33 @@ export default function CreateColumn({ids, urls, id, data, setData}) {
             }, {})
     }
 
-    const selectElements = findSelectElements(ids, data)
-
     return (
-        ids.map((column, index) => (
-            <tr key={index}>
-                <td>{column.label}</td>
-                {id.map((rowId) => {
-                    const rowData = data[rowId]
+        ids.map((value, key) => (
+            <tr key={key}>
+                <td>{value.label}</td>
+                {id.map((id) => {
+                    const valueData = data[id]
                     return (
-                        <td key={rowId}>
-                            {column.type === 'input' ? (
+                        <td key={id}>
+                            {value.type === 'input' ? (
                                 <input
                                     type="number"
-                                    name={column.name}
-                                    value={rowData[column.name] ?? ''}
-                                    readOnly={column.readOnly}
+                                    name={value.name}
+                                    value={valueData[value.name] ?? ''}
+                                    readOnly={value.readOnly}
                                     onChange={(event) => {
-                                        handleUpdateValue(event, rowId)
+                                        handleUpdateValue(event, id)
                                     }}
                                 />
-                            ) : column.type === 'select' ? (
+                            ) : value.type === 'select' ? (
                                 <select
-                                    name={column.name}
+                                    name={value.name}
                                     onChange={(event) => {
-                                        handleUpdateSelectValue(event, rowId, column.name)
+                                        handleUpdateSelectValue(event, id, value.name)
                                     }}
                                 >
-                                    {(selectElements[column.name] || []).map((value, index) => (
-                                        <option key={index} value={value}>
+                                    {(findSelectElements()[value.name] || []).map((value, key) => (
+                                        <option key={key} value={value}>
                                             {value}
                                         </option>
                                     ))}
