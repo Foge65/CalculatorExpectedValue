@@ -1,6 +1,5 @@
 .idea
-spring/target
-web/node_modules
+.vscode
+*/target
+*/node_modules
 todo.md
-*.iml
-*/.vite
