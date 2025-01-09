@@ -9,27 +9,17 @@ export function fetchDataById(urls, id) {
 }
 
 export function fetchReadOnlyDataById(ids, urls, id) {
-    findUrlsForReadOnlyIds(ids, urls, id).map((url) => {
-        return fetch(url).then((response) => response.json())
-    })
+    const readOnlyIds = getReadOnlyIds(ids)
+    const readOnlyUrls = getReadOnlyUrls(urls, readOnlyIds, id)
+    return Promise.all(readOnlyUrls.map(url => fetch(url).then(response => response.json())))
 }
 
-function findUrlsForReadOnlyIds(ids, urls, id) {
-    const readOnlyKeys = Object.keys(findReadOnlyIds(ids))
-    return filterInputUrls(urls, readOnlyKeys, id);
+function getReadOnlyIds(ids) {
+    return ids.filter(column => column.type === 'input' && column.readOnly).map(column => column.name)
 }
 
-function findReadOnlyIds(ids) {
-    return ids
-        .filter((column) => column.type === 'input' && column.readOnly === true)
-        .reduce((acc, column) => {
-            acc[column.name] = true
-            return acc
-        }, {})
-}
-
-function filterInputUrls(urls, readOnlyKeys, id) {
+function getReadOnlyUrls(urls, readOnlyIds, id) {
     return Object.values(urls)
-        .filter((entry) => entry.type === 'input' && entry.method === 'get' && readOnlyKeys.includes(entry.name))
-        .map((entry) => `${entry.url}?id=${id}`)
+        .filter(entry => entry.type === 'input' && entry.method === 'get' && readOnlyIds.includes(entry.name))
+        .map(entry => `${entry.url}?id=${id}`)
 }
