@@ -1,19 +1,26 @@
-export default function CreateColumn({ids, urls, id, data, setData}) {
+export default function CreateColumn({idsStruct, urlsStruct, data, setData}) {
 
-    function handleUpdateValue(event, columnId) {
+    function handleUpdateValue(event, id) {
         const {name, value} = event.target
 
         setData((prevData) => {
-            const updatedData = {
+            const newData = {
                 ...prevData,
-                [name]: value,
+                [id]: {
+                    ...prevData[id],
+                    [name]: value
+                }
             }
 
-            const urlKey = getUrlKeyByName(name)
-            setValue(urlKey, name, value, columnId).catch((err) => console.error('Error sending data:', err))
+            const urlKey = findUrlKeyInUrls(name)
+            setValue(urlKey, name, value, id).catch((err) => console.error('Error sending data:', err))
 
-            return updatedData
+            return newData
         })
+    }
+
+    function findUrlKeyInUrls(name) {
+        return Object.keys(urlsStruct).find((key) => urlsStruct[key].name === idsStruct[name])
     }
 
     function setValue(urlKey, field, value, columnId) {
@@ -23,8 +30,8 @@ export default function CreateColumn({ids, urls, id, data, setData}) {
         }
 
         try {
-            if (urls[urlKey].method === 'post') {
-                const url = urls[urlKey].url
+            if (urlsStruct[urlKey].method === 'post') {
+                const url = urlsStruct[urlKey].url
 
                 const options = {
                     method: 'POST',
@@ -41,10 +48,6 @@ export default function CreateColumn({ids, urls, id, data, setData}) {
         }
     }
 
-    function getUrlKeyByName(name) {
-        return Object.keys(urls).find((key) => urls[key].name === name)
-    }
-
     function handleUpdateSelectValue(event, id, columnName) {
         const {value} = event.target
 
@@ -55,7 +58,7 @@ export default function CreateColumn({ids, urls, id, data, setData}) {
         }
         const mappedName = nameMap[columnName]
         const urlKey = `set${mappedName.charAt(0).toUpperCase() + mappedName.slice(1)}`
-        const selectedUrl = urls[urlKey]?.url
+        const selectedUrl = urlsStruct[urlKey]?.url
 
         fetch(`${selectedUrl}?id=${id}`, {
             method: 'POST',
@@ -68,50 +71,51 @@ export default function CreateColumn({ids, urls, id, data, setData}) {
     }
 
     function findSelectElements() {
-        return ids
-            .filter((column) => column.type === 'select')
-            .reduce((acc, column) => {
-                const values = Object.values(data).map((row) => row?.[column.name])
-                acc[column.name] = values[0]
+        return Object.keys(idsStruct)
+            .filter((key) => idsStruct[key].type === 'select')
+            .reduce((acc, key) => {
+                const values = Object.values(data).map((obj) => obj[key])
+                acc[key] = values[0]
                 return acc
             }, {})
     }
 
+    const selectElements = findSelectElements()
+
     return (
-        ids.map((value, key) => (
-            <tr key={key}>
-                <td>{value.label}</td>
-                {id.map((id) => {
-                    const valueData = data[id]
-                    return (
-                        <td key={id}>
-                            {value.type === 'input' ? (
+        Object.entries(idsStruct).map(([idsKey, idsValues]) => (
+            <tr key={idsKey}>
+                <td>{idsValues.label}</td>
+                {Object.keys(data).map((dataId) => (
+                    <td key={dataId}>
+                        <div key={idsKey}>
+                            {idsValues.type === 'input' ? (
                                 <input
                                     type="number"
-                                    name={value.name}
-                                    value={valueData[value.name] ?? ''}
-                                    readOnly={value.readOnly}
+                                    name={idsKey}
+                                    value={data[dataId][idsKey]}
+                                    readOnly={idsValues.readOnly}
                                     onChange={(event) => {
-                                        handleUpdateValue(event, id)
+                                        handleUpdateValue(event, dataId)
                                     }}
                                 />
-                            ) : value.type === 'select' ? (
-                                <select
-                                    name={value.name}
-                                    onChange={(event) => {
-                                        handleUpdateSelectValue(event, id, value.name)
-                                    }}
-                                >
-                                    {(findSelectElements()[value.name] || []).map((value, key) => (
-                                        <option key={key} value={value}>
-                                            {value}
-                                        </option>
-                                    ))}
-                                </select>
-                            ) : null}
-                        </td>
-                    )
-                })}
+                            ) : (
+                                idsValues.type === 'select' ? (
+                                    <select
+                                        name={idsKey}
+                                        onChange={(event) => {
+                                            handleUpdateSelectValue(event, dataId, idsKey)
+                                        }}
+                                    >
+                                        {(selectElements[idsKey]).map((value, key) => (
+                                            <option key={key} value={value}>{value}</option>
+                                        ))}
+                                    </select>
+                                ) : null
+                            )}
+                        </div>
+                    </td>
+                ))}
             </tr>
         ))
     )
