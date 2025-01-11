@@ -1,26 +1,72 @@
-export const ids = [
-    {name: 'desiredProfit', type: 'input', label: 'Желаемый профит', readOnly: false},
-    {name: 'rooms', type: 'select', label: 'Рум'},
-    {name: 'buyIns', type: 'select', label: 'Лимит'},
-    {name: 'avgChipsT', type: 'input', label: 'Среднее ChipEV/T по пулу (для ориентира)', readOnly: true},
-    {name: 'expChipsT', type: 'input', label: 'Ожидаемое ChipEV/T', readOnly: false},
-    {name: 'expEVT', type: 'input', label: 'Ожидаемое $EV/Т', readOnly: true},
-    {name: 'tables', type: 'input', label: 'Количество окон одновременно', readOnly: false},
-    {name: 'rakebackPct', type: 'input', label: 'Величина RB, %', readOnly: false},
-    {name: 'meshes', type: 'select', label: 'Тип контракта'},
-    {name: 'rollbackPct', type: 'input', label: '% отката по контракту', readOnly: true},
-    {name: 'requiredTourneys', type: 'input', label: 'Необходимое количество турниров', readOnly: true},
-    {name: 'requiredHours', type: 'input', label: 'Необходимое количество часов', readOnly: true},
-    {name: 'dollarsPerHour', type: 'input', label: '$/час', readOnly: true},
-    {name: 'buttonAddColum', type: 'button'}
-]
+export const idsStruct = {
+    desiredProfit: {
+        label: 'Желаемый профит',
+        type: 'input',
+        readOnly: false
+    },
+    rooms: {
+        label: 'Рум',
+        type: 'select'
+    },
+    buyIns: {
+        label: 'Лимит',
+        type: 'select'
+    },
+    avgChipsT: {
+        label: 'Среднее ChipEV/T по пулу (для ориентира)',
+        type: 'input',
+        readOnly: true
+    },
+    expChipsT: {
+        label: 'Ожидаемое ChipEV/T',
+        type: 'input',
+        readOnly: false
+    },
+    expEVT: {
+        label: 'Ожидаемое $EV/Т',
+        type: 'input',
+        readOnly: true
+    },
+    tables: {
+        label: 'Количество окон одновременно',
+        type: 'input',
+        readOnly: false
+    },
+    rakebackPct: {
+        label: 'Величина RB, %',
+        type: 'input',
+        readOnly: false
+    },
+    meshes: {
+        label: 'Тип контракта',
+        type: 'select'
+    },
+    rollbackPct: {
+        label: '% отката по контракту',
+        type: 'input',
+        readOnly: true
+    },
+    requiredTourneys: {
+        label: 'Необходимое количество турниров',
+        type: 'input',
+        readOnly: true
+    },
+    requiredHours: {
+        label: 'Необходимое количество часов',
+        type: 'input',
+        readOnly: true
+    },
+    dollarsPerHour: {
+        label: '$/час',
+        type: 'input',
+        readOnly: true
+    },
+    buttonAddColum: {
+        type: 'button'
+    }
+}
 
-const mapper = ids.reduce((acc, {name}) => {
-    acc[name] = name
-    return acc
-}, {})
-
-export const urls = {
+export const urlsStruct = {
     getAllData: {
         url: '/api/desiredProfit/getAllData',
         method: 'get'
@@ -30,105 +76,105 @@ export const urls = {
         method: 'get'
     },
     setDesiredProfit: {
-        name: mapper['desiredProfit'],
+        name: idsStruct.desiredProfit,
         url: '/api/desiredProfit/setDesiredProfit',
         method: 'post'
     },
     getRooms: {
-        name: mapper['rooms'],
+        name: idsStruct.rooms,
         url: '/api/desiredProfit/getRooms',
         method: 'get'
     },
     getRoom: {
-        name: mapper['rooms'],
+        name: idsStruct.rooms,
         url: '/api/desiredProfit/getRoom',
         method: 'get'
     },
     setRoom: {
-        name: mapper['room'],
+        name: idsStruct.room,
         url: '/api/desiredProfit/setRoom',
         type: 'select',
         method: 'post'
     },
     getBuyIns: {
-        name: mapper['buyIns'],
+        name: idsStruct.buyIns,
         url: '/api/desiredProfit/getBuyIns',
         method: 'get'
     },
     getBuyIn: {
-        name: mapper['buyIns'],
+        name: idsStruct.buyIns,
         url: '/api/desiredProfit/getBuyIn',
         method: 'get'
     },
     setBuyIn: {
-        name: mapper['buyIn'],
+        name: idsStruct.buyIn,
         url: '/api/desiredProfit/setBuyIn',
         type: 'select',
         method: 'post'
     },
     setExpChipsT: {
-        name: mapper['expChipsT'],
+        name: idsStruct.expChipsT,
         url: '/api/desiredProfit/setExpChipsT',
         method: 'post'
     },
     getExpEVT: {
-        name: mapper['expEVT'],
+        name: idsStruct.expEVT,
         url: '/api/desiredProfit/getExpEVT',
         type: 'input',
         method: 'get'
     },
     setTables: {
-        name: mapper['tables'],
+        name: idsStruct.tables,
         url: '/api/desiredProfit/setTables',
         method: 'post'
     },
     setRakebackPct: {
-        name: mapper['rakebackPct'],
+        name: idsStruct.rakebackPct,
         url: '/api/desiredProfit/setRakebackPct',
         method: 'post'
     },
     getMeshes: {
-        name: mapper['meshes'],
+        name: idsStruct.meshes,
         url: '/api/desiredProfit/getMeshes',
         method: 'get'
     },
     getMesh: {
-        name: mapper['meshes'],
+        name: idsStruct.meshes,
         url: '/api/desiredProfit/getMesh',
         method: 'get'
     },
     setMesh: {
-        name: mapper['mesh'],
+        name: idsStruct.mesh,
         url: '/api/desiredProfit/setMesh',
         type: 'select',
         method: 'post'
     },
     getRollback: {
-        name: mapper['rollbackPct'],
+        name: idsStruct.rollbackPct,
         url: '/api/desiredProfit/getRollback',
         type: 'input',
         method: 'get'
     },
     getRequiredTourneys: {
-        name: mapper['requiredTourneys'],
+        name: idsStruct.requiredTourneys,
         url: '/api/desiredProfit/getRequiredTourneys',
         type: 'input',
         method: 'get'
     },
     getRequiredHours: {
-        name: mapper['requiredHours'],
+        name: idsStruct.requiredHours,
         url: '/api/desiredProfit/getRequiredHours',
         type: 'input',
         method: 'get'
     },
     getDollarPerHour: {
-        name: mapper['dollarsPerHour'],
+        name: idsStruct.dollarsPerHour,
         url: '/api/desiredProfit/getDollarPerHour',
         type: 'input',
         method: 'get'
     },
     addColumn: {
-        name: mapper['buttonAddColum'],
+        name: idsStruct.buttonAddColum,
         url: '/api/desiredProfit/createModel',
         type: 'button',
         method: 'post'
