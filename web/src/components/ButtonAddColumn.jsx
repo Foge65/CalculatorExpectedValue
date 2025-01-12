@@ -1,8 +1,8 @@
-export default function ButtonAddColumn({ids, urls, context}) {
+export default function ButtonAddColumn({idsStruct, urlsStruct, context}) {
     const {setData} = context
 
     function handleAddColumn() {
-        fetch(urls.addColumn.url, {
+        fetch(urlsStruct.addColumn.url, {
             method: 'POST'
         })
             .then((newColumn) => {
@@ -10,7 +10,7 @@ export default function ButtonAddColumn({ids, urls, context}) {
                 ...prevData,
                 [newColumn.name]: '',
             }))
-            ids.push(newColumn)
+                idsStruct.push(newColumn)
         })
             .catch((error) => {
                 console.error('Error adding column:', error)
