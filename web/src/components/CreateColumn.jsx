@@ -12,18 +12,18 @@ export default function CreateColumn({idsStruct, urlsStruct, data, setData}) {
                 }
             }
 
-            const urlKey = findUrlKeyInUrls(name)
+            const urlKey = findIdKeyInUrls(name)
             setValue(urlKey, name, value, id).catch((err) => console.error('Error sending data:', err))
 
             return newData
         })
     }
 
-    function findUrlKeyInUrls(name) {
+    function findIdKeyInUrls(name) {
         return Object.keys(urlsStruct).find((key) => urlsStruct[key].name === idsStruct[name])
     }
 
-    function setValue(urlKey, field, value, columnId) {
+    function setValue(urlKey, field, value, dataId) {
         const payload = {
             id: data.id,
             [field]: value
@@ -41,7 +41,7 @@ export default function CreateColumn({idsStruct, urlsStruct, data, setData}) {
                     body: JSON.stringify(payload)
                 }
 
-                return fetch(`${url}?id=${columnId}`, options)
+                return fetch(`${url}?id=${dataId}`, options)
             }
         } catch (error) {
             console.error(`Error sending data: ${error.statusText}`)
