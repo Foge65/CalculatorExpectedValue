@@ -1,39 +1,42 @@
 import {createContext, useContext, useEffect, useState} from "react"
-import {fetchAllData, fetchDataById} from "../../utils/fetchUtils.js"
-import {urls} from "../../data/DesiredProfit.js"
+import {fetchAllData, fetchDataById, fetchReadOnlyDataById} from "../../utils/fetchUtils.js"
+import {idsStruct, urlsStruct} from "../../data/DesiredProfit.js"
 
 const DataContext = createContext()
 
 export function DesiredProfitDataProvider({children}) {
-    const [id, setId] = useState([])
     const [data, setData] = useState({})
 
     useEffect(() => {
-        fetchAllData(urls)
+        fetchAllData(urlsStruct)
             .then((allData) => {
-                const keys = Object.keys(allData)
-                setId(keys)
                 setData(allData)
             })
             .catch(error => console.error("Error fetching initial data:", error))
     }, [])
 
     useEffect(() => {
-        id.forEach((id) => {
-            fetchDataById(urls, id)
-                .then((response) => {
-                    setData((prevState) => ({
-                        ...prevState,
-                        [id]: {
-                            response
-                        }
-                    }))
-                })
+        Object.keys(data).forEach((id) => {
+            fetchDataById(urlsStruct, id).then((response => {
+                setData((prevState) => ({
+                    ...prevState,
+                    [id]: response
+                }))
+            }))
+            fetchReadOnlyDataById(idsStruct, urlsStruct, id).then((response) => {
+                setData((prevState) => ({
+                    ...prevState,
+                    [id]: {
+                        ...prevState[id],
+                        readOnlyData: response
+                    }
+                }))
+            })
         })
-    }, [id])
+    }, [data])
 
     return (
-        <DataContext.Provider value={{id, setId, data, setData}}>
+        <DataContext.Provider value={{data: data, setData: setData}}>
             {children}
         </DataContext.Provider>
     )
