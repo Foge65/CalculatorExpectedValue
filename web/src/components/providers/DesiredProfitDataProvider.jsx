@@ -33,7 +33,7 @@ export function DesiredProfitDataProvider({children}) {
                 }))
             })
         })
-    }, [data])
+    }, [])
 
     return (
         <DataContext.Provider value={{data: data, setData: setData}}>
