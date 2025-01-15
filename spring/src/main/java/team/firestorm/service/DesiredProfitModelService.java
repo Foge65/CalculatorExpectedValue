@@ -17,11 +17,24 @@ public class DesiredProfitModelService {
     private final Map<Integer, DesiredProfitModel> models = new HashMap<>();
 
     public void addModel() {
+        DesiredProfitModel newModel = new DesiredProfitModel();
         if (models.isEmpty()) {
-            models.put(1, new DesiredProfitModel());
+            models.put(1, newModel);
+            newModel.setDesiredProfit(1000);
+            newModel.setExpChipsT(65);
+            newModel.setTables(6);
+            newModel.setRakebackPct(40);
         } else {
             int lastKey = Collections.max(models.keySet());
-            models.put(lastKey + 1, new DesiredProfitModel());
+            models.put(lastKey + 1, newModel);
+            DesiredProfitModel lastModel = models.get(lastKey);
+            lastModel.setDesiredProfit(lastModel.getDesiredProfit());
+            lastModel.setRoom(lastModel.getRoom());
+            lastModel.setBuyIn(lastModel.getBuyIn());
+            lastModel.setExpChipsT(lastModel.getExpChipsT());
+            lastModel.setTables(lastModel.getTables());
+            lastModel.setRakebackPct(lastModel.getRakebackPct());
+            lastModel.setMesh(lastModel.getMesh());
         }
     }
 
