@@ -4,7 +4,6 @@ import lombok.Data;
 
 @Data
 public class DesiredProfitRequestDTO {
-    private int modelId;
     private double desiredProfit;
     private double buyIn;
     private double expChipsT;
