@@ -2,4 +2,5 @@
 .vscode
 */target
 */node_modules
+*/build
 todo.md
