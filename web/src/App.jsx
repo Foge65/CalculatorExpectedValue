@@ -1,4 +1,4 @@
-import './App.css'
+import "./App.css"
 import {DesiredProfitDataProvider} from "./components/providers/DesiredProfitDataProvider.jsx"
 import DesiredProfitTable from "./components/DesiredProfitTable.jsx"
 import {HaveHoursDataProvider} from "./components/providers/HaveHoursDataProvider.jsx"
