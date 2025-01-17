@@ -2,8 +2,8 @@ services:
   backend:
     build: spring
     ports:
-      - 8081:8081
+      - "8081:8081"
   frontend:
     build: web
     ports:
-      - 80:80
+      - "80:80"
