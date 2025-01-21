@@ -11,4 +11,3 @@ COPY --from=build /app/target/*.jar app.jar
 COPY --from=build /app/src/main/resources /app/
 EXPOSE 8081
 ENTRYPOINT ["java", "-jar", "app.jar"]
-

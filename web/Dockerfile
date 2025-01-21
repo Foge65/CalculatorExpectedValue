@@ -7,6 +7,6 @@ RUN npm run build
 
 FROM nginx:1.27
 WORKDIR /usr/share/nginx/html
-COPY --from=build /app/dist .
+COPY --from=build /app/build .
 COPY nginx.conf /etc/nginx/nginx.conf
 CMD ["nginx", "-g", "daemon off;"]
