@@ -8,14 +8,22 @@ export function DesiredProfitDataProvider({children}) {
     const [data, setData] = useState({})
 
     useEffect(() => {
-        fetchAllData(urlsStruct)
+        const abortController = new AbortController()
+
+        fetchAllData(urlsStruct, {signal: abortController.signal})
             .then((allData) => {
                 setData(allData)
             })
             .catch(error => console.error("Error fetching initial data:", error))
+
+        return () => {
+            abortController.abort("Abort fetching all data")
+        }
     }, [])
 
     useEffect(() => {
+        const abortController = new AbortController()
+
         Object.keys(data).forEach((id) => {
             fetchDataById(urlsStruct, id).then((response => {
                 setData((prevState) => ({
@@ -33,6 +41,10 @@ export function DesiredProfitDataProvider({children}) {
                 }))
             })
         })
+
+        return () => {
+            abortController.abort("Abort fetching data by id")
+        }
     }, [])
 
     return (
