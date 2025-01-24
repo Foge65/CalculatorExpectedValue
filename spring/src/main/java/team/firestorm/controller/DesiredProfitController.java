@@ -37,6 +37,7 @@ public class DesiredProfitController {
         model.setRooms(Rooms.values());
         initializeRoom(model);
         initializeMesh(model);
+        initializeCalcFields(model);
     }
 
     private void initializeRoom(DesiredProfitModel model) {
@@ -64,6 +65,15 @@ public class DesiredProfitController {
             mesh = new ClearProfit();
             model.setMesh(mesh);
         }
+    }
+
+    private void initializeCalcFields(DesiredProfitModel model) {
+        int id = modelService.findLastId();
+        model.setExpEVT(getExpEVT(id));
+        model.setRollbackPct(getRollback(id));
+        model.setRequiredTourneys(getRequiredTourneys(id));
+        model.setRequiredHours(getRequiredHours(id));
+        model.setDollarsPerHour(getDollarPerHour(id));
     }
 
     @PostMapping("/removeModel")
