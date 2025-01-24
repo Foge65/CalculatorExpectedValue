@@ -96,9 +96,10 @@ public class DesiredProfitController {
     }
 
     @PostMapping("/setDesiredProfit")
-    public void setDesiredProfit(@RequestParam("id") int id, @RequestBody DesiredProfitRequestDTO request) {
+    public DesiredProfitModel setDesiredProfit(@RequestParam("id") int id, @RequestBody DesiredProfitRequestDTO request) {
         DesiredProfitModel model = getModel(id);
         model.setDesiredProfit(request.getDesiredProfit());
+        return model;
     }
 
     @GetMapping("/getRooms")
@@ -112,11 +113,12 @@ public class DesiredProfitController {
     }
 
     @PostMapping("/setRoom")
-    public void setRoom(@RequestParam("id") int id, @RequestBody Map<String, String> request) {
+    public DesiredProfitModel setRoom(@RequestParam("id") int id, @RequestBody Map<String, String> request) {
         DesiredProfitModel model = getModel(id);
         Rooms rooms = Rooms.valueOf(request.get("room"));
         createRoom(rooms);
         propertiesRoom(model);
+        return model;
     }
 
     private void createRoom(Rooms rooms) {
@@ -128,7 +130,7 @@ public class DesiredProfitController {
     }
 
     @PostMapping("/setBuyIn")
-    public void setBuyIn(@RequestParam("id") int id, @RequestBody DesiredProfitRequestDTO request) {
+    public DesiredProfitModel setBuyIn(@RequestParam("id") int id, @RequestBody DesiredProfitRequestDTO request) {
         DesiredProfitModel model = getModel(id);
         double buyIn = request.getBuyIn();
         model.setBuyIn(buyIn);
@@ -137,6 +139,8 @@ public class DesiredProfitController {
         model.setRake(room.rakes()[index]);
         model.setWinCoefficient(room.winCoefficient()[index]);
         model.setLoseCoefficient(room.loseCoefficient()[index]);
+
+        return model;
     }
 
     private int findIndexBySelectedCoefficient(double[] buyIns, double buyIn) {
@@ -155,9 +159,10 @@ public class DesiredProfitController {
     }
 
     @PostMapping("/setExpChipsT")
-    public void setExpChipsT(@RequestParam("id") int id, @RequestBody DesiredProfitRequestDTO request) {
+    public DesiredProfitModel setExpChipsT(@RequestParam("id") int id, @RequestBody DesiredProfitRequestDTO request) {
         DesiredProfitModel model = getModel(id);
         model.setExpChipsT(request.getExpChipsT());
+        return model;
     }
 
     @GetMapping("/getExpEVT")
@@ -177,15 +182,17 @@ public class DesiredProfitController {
     }
 
     @PostMapping("/setTables")
-    public void setTables(@RequestParam("id") int id, @RequestBody DesiredProfitRequestDTO request) {
+    public DesiredProfitModel setTables(@RequestParam("id") int id, @RequestBody DesiredProfitRequestDTO request) {
         DesiredProfitModel model = getModel(id);
         model.setTables(request.getTables());
+        return model;
     }
 
     @PostMapping("/setRakebackPct")
-    public void setRakebackPct(@RequestParam("id") int id, @RequestBody DesiredProfitRequestDTO request) {
+    public DesiredProfitModel setRakebackPct(@RequestParam("id") int id, @RequestBody DesiredProfitRequestDTO request) {
         DesiredProfitModel model = getModel(id);
         model.setRakebackPct(request.getRakebackPct());
+        return model;
     }
 
     @GetMapping(("/getMeshes"))
@@ -199,12 +206,14 @@ public class DesiredProfitController {
     }
 
     @PostMapping("/setMesh")
-    public void setMesh(@RequestParam("id") int id, @RequestBody Map<String, String> request) {
+    public DesiredProfitModel setMesh(@RequestParam("id") int id, @RequestBody Map<String, String> request) {
         DesiredProfitModel model = getModel(id);
         Meshes meshes = Meshes.valueOf(request.get("mesh"));
 
         initializeMesh(meshes);
         model.setMesh(mesh);
+
+        return model;
     }
 
     private void initializeMesh(Meshes meshes) {
