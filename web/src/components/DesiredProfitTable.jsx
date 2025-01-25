@@ -1,10 +1,10 @@
-import {useDataContext} from "./providers/DesiredProfitDataProvider.jsx"
-import CreateColumn from "./CreateColumn.jsx"
-import {idsStruct, urlsStruct} from "../data/DesiredProfit.js"
+import {useDataContext} from "./providers/DesiredProfitDataProvider.jsx";
+import CreateColumn from "./CreateColumn.jsx";
+import {idsStruct, urlsStruct} from "../data/DesiredProfit.js";
 import ButtonAddColumn from "./ButtonAddColumn.jsx";
 
 export default function DesiredProfitTable() {
-    const {data, setData} = useDataContext()
+    const {data, setData} = useDataContext();
 
     return (
         <div className="tables">
@@ -16,5 +16,5 @@ export default function DesiredProfitTable() {
                 </tbody>
             </table>
         </div>
-    )
-}
+    );
+};

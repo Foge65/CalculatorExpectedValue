@@ -1,20 +1,20 @@
 export default function ButtonAddColumn({idsStruct, urlsStruct, context}) {
-    const {setData} = context
+    const {setData} = context;
 
     function handleAddColumn() {
         fetch(urlsStruct.addColumn.url, {
             method: 'POST'
         })
             .then((newColumn) => {
-            setData((prevData) => ({
-                ...prevData,
-                [newColumn.name]: '',
-            }))
+                setData((prevData) => ({
+                    ...prevData,
+                    [newColumn.name]: '',
+                }));
                 idsStruct.push(newColumn)
-        })
+            })
             .catch((error) => {
                 console.error('Error adding column:', error)
-            })
+            });
     }
 
     return (
@@ -25,5 +25,5 @@ export default function ButtonAddColumn({idsStruct, urlsStruct, context}) {
                 </button>
             </th>
         </tr>
-    )
+    );
 }

@@ -1,0 +1,2 @@
+it('tests DesiredProfitDataProvider', () => {
+});
