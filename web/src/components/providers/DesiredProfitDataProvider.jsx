@@ -1,8 +1,8 @@
-import {createContext, useContext, useEffect, useState} from "react";
+import {createContext, useEffect, useState} from "react";
 import {fetchAllData, fetchDataById, fetchReadOnlyDataById} from "../../utils/fetchUtils.js";
 import {idsStruct, urlsStruct} from "../../data/DesiredProfit.js";
 
-const DataContext = createContext();
+export const Context = createContext();
 
 export function DesiredProfitDataProvider({children}) {
     const [data, setData] = useState({});
@@ -42,12 +42,8 @@ export function DesiredProfitDataProvider({children}) {
     }, []);
 
     return (
-        <DataContext.Provider value={{data: data, setData: setData}}>
+        <Context.Provider value={{data: data, setData: setData}}>
             {children}
-        </DataContext.Provider>
+        </Context.Provider>
     );
-}
-
-export function useDataContext() {
-    return useContext(DataContext);
 }
