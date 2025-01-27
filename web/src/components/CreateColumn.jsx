@@ -3,30 +3,20 @@ export default function CreateColumn({idsStruct, urlsStruct, data, setData}) {
     function handleUpdateValue(event, id) {
         const {name, value} = event.target;
 
-        setData((prevData) => ({
-            ...prevData,
-            [id]: {
-                ...prevData[id],
-                [name]: value,
-            },
-        }));
+        const urlKey = findIdKeyInUrls(name);
 
-        try {
-            const urlKey = findIdKeyInUrls(name);
-            const updatedData = sendNewValue(urlKey, name, value, id);
-
-            if (updatedData) {
+        sendNewValue(urlKey, name, value, id)
+            .then((response) => response.json())
+            .then((data) => {
                 setData((prevData) => ({
                     ...prevData,
                     [id]: {
                         ...prevData[id],
-                        ...updatedData,
+                        ...data,
                     },
                 }));
-            }
-        } catch (error) {
-            console.error('Error sending data:', error);
-        }
+            })
+            .catch((error) => console.error('Error updating value:', error));
     }
 
     function findIdKeyInUrls(name) {
@@ -35,35 +25,23 @@ export default function CreateColumn({idsStruct, urlsStruct, data, setData}) {
 
     function sendNewValue(urlKey, field, value, dataId) {
         const payload = {
-            id: dataId,
-            [field]: value,
+            id: data.id,
+            [field]: value
         }
 
-        try {
-            if (urlsStruct[urlKey]?.method === 'post') {
-                const url = urlsStruct[urlKey].url;
-
-                const options = {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(payload),
-                }
-
-                const response = fetch(`${url}?id=${dataId}`, options);
-
-                if (!response.ok) {
-                    throw new Error(`Server returned status ${response.status}`);
-                }
-
-                return response.json();
-            }
-        } catch (error) {
-            console.error(`Error sending data: ${error.message}`);
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
         }
 
-        return null;
+        const urlPost = urlsStruct[urlKey];
+        if (urlPost.method === 'post') {
+            const url = urlPost.url;
+            return fetch(`${url}?id=${dataId}`, options);
+        }
     }
 
     function handleUpdateSelectValue(event, id, columnName) {
@@ -74,6 +52,7 @@ export default function CreateColumn({idsStruct, urlsStruct, data, setData}) {
             buyIns: 'buyIn',
             meshes: 'mesh'
         }
+
         const mappedName = nameMap[columnName];
         const urlKey = `set${mappedName.charAt(0).toUpperCase() + mappedName.slice(1)}`;
         const selectedUrl = urlsStruct[urlKey]?.url;
@@ -83,26 +62,19 @@ export default function CreateColumn({idsStruct, urlsStruct, data, setData}) {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({[mappedName]: value}),
+            body: JSON.stringify({[mappedName]: value})
         })
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error(`Server returned status ${response.status}`);
-                }
-                return response.json();
+            .then((response) => response.json())
+            .then((data) => {
+                setData((prevData) => ({
+                    ...prevData,
+                    [id]: {
+                        ...prevData[id],
+                        ...data,
+                    },
+                }));
             })
-            .then((updatedData) => {
-                if (updatedData) {
-                    setData((prevData) => ({
-                        ...prevData,
-                        [id]: {
-                            ...prevData[id],
-                            ...updatedData,
-                        },
-                    }));
-                }
-            })
-            .catch((err) => console.error('Error sending data:', err));
+            .catch((error) => console.error('Error sending data:', error));
     }
 
     function findSelectElements() {
@@ -152,4 +124,5 @@ export default function CreateColumn({idsStruct, urlsStruct, data, setData}) {
             ))}
         </tr>
     ));
+
 }

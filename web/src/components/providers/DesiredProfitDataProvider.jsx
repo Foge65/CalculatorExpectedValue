@@ -1,6 +1,6 @@
 import {createContext, useEffect, useState} from "react";
-import {fetchAllData, fetchDataById, fetchReadOnlyDataById} from "../../utils/fetchUtils.js";
-import {idsStruct, urlsStruct} from "../../data/DesiredProfit.js";
+import {fetchAllData} from "../../utils/fetchUtils.js";
+import {urlsStruct} from "../../data/DesiredProfit.js";
 
 export const Context = createContext();
 
@@ -15,30 +15,6 @@ export function DesiredProfitDataProvider({children}) {
             .catch(error => console.error("Error fetching initial data:", error));
 
         return () => abortController.abort("Abort fetching all data");
-    }, []);
-
-    useEffect(() => {
-        const abortController = new AbortController();
-
-        Object.keys(data).forEach((id) => {
-            fetchDataById(urlsStruct, id).then((response => {
-                setData((prevState) => ({
-                    ...prevState,
-                    [id]: response
-                }));
-            }));
-            fetchReadOnlyDataById(idsStruct, urlsStruct, id).then((response) => {
-                setData((prevState) => ({
-                    ...prevState,
-                    [id]: {
-                        ...prevState[id],
-                        readOnlyData: response
-                    }
-                }));
-            });
-        })
-
-        return () => abortController.abort("Abort fetching data by id");
     }, []);
 
     return (
