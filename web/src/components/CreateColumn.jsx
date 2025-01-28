@@ -1,6 +1,6 @@
 export default function CreateColumn({idsStruct, urlsStruct, data, setData}) {
 
-    function handleUpdateValue(event, id) {
+    function handleUpdateInputValue(event, id) {
         const {name, value} = event.target;
 
         const urlKey = findIdKeyInUrls(name);
@@ -101,7 +101,7 @@ export default function CreateColumn({idsStruct, urlsStruct, data, setData}) {
                                 value={data[dataId][idsKey]}
                                 readOnly={idsValues.readOnly}
                                 onChange={(event) => {
-                                    handleUpdateValue(event, dataId)
+                                    handleUpdateInputValue(event, dataId)
                                 }}
                             />
                         ) : idsValues.type === 'select' ? (
