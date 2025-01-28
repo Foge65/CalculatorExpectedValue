@@ -91,7 +91,6 @@ export const urlsStruct = {
         method: 'get'
     },
     setRoom: {
-        name: idsStruct.room,
         url: '/api/desiredProfit/setRoom',
         type: 'select',
         method: 'post'
@@ -107,7 +106,6 @@ export const urlsStruct = {
         method: 'get'
     },
     setBuyIn: {
-        name: idsStruct.buyIn,
         url: '/api/desiredProfit/setBuyIn',
         type: 'select',
         method: 'post'
@@ -144,7 +142,6 @@ export const urlsStruct = {
         method: 'get'
     },
     setMesh: {
-        name: idsStruct.mesh,
         url: '/api/desiredProfit/setMesh',
         type: 'select',
         method: 'post'
