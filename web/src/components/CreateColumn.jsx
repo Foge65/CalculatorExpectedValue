@@ -25,7 +25,6 @@ export default function CreateColumn({idsStruct, urlsStruct, data, setData}) {
 
     function sendNewValue(urlKey, field, value, dataId) {
         const payload = {
-            id: data.id,
             [field]: value
         }
 
