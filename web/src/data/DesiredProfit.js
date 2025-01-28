@@ -22,11 +22,6 @@ export const idsStruct = {
         type: 'input',
         readOnly: false
     },
-    expEVT: {
-        label: 'Ожидаемое $EV/Т',
-        type: 'input',
-        readOnly: true
-    },
     tables: {
         label: 'Количество окон одновременно',
         type: 'input',
@@ -43,6 +38,11 @@ export const idsStruct = {
     },
     rollbackPct: {
         label: '% отката по контракту',
+        type: 'input',
+        readOnly: true
+    },
+    expEVT: {
+        label: 'Ожидаемое $EV/Т',
         type: 'input',
         readOnly: true
     },
