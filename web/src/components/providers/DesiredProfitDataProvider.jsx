@@ -1,5 +1,4 @@
 import {createContext, useEffect, useState} from "react";
-import {fetchAllData} from "../../utils/fetchUtils.js";
 import {urlsStruct} from "../../data/DesiredProfit.js";
 
 export const Context = createContext();
@@ -10,11 +9,12 @@ export function DesiredProfitDataProvider({children}) {
     useEffect(() => {
         const abortController = new AbortController();
 
-        fetchAllData(urlsStruct, {signal: abortController.signal})
+        fetch(urlsStruct.getAllData.url, {signal: abortController.signal})
+            .then((response) => response.json())
             .then((allData) => setData(allData))
             .catch(error => console.error("Error fetching initial data:", error));
 
-        return () => abortController.abort("Abort fetching all data");
+        return () => abortController.abort();
     }, []);
 
     return (
