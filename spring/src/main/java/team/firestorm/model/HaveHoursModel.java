@@ -25,12 +25,12 @@ public class HaveHoursModel {
     private double tourneysPerTable;
     private double avgChipsT;
     private double expChipsT;
-    private double expDollarEVT;
+    private double expEVT;
     private double rakebackPct;
     private Meshes[] meshes;
     private Mesh mesh;
-    private double rollback;
+    private double rollbackPct;
     private double requiredTourneys;
     private double estimatedExpectation;
-    private double dollarPerHour;
+    private double dollarsPerHour;
 }

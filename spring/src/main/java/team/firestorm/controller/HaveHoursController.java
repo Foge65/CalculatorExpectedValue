@@ -14,7 +14,7 @@ import java.util.NoSuchElementException;
 import java.util.stream.IntStream;
 
 @RestController
-@RequestMapping("/api/haveHoursPerMonth")
+@RequestMapping("/api/haveHours")
 @RequiredArgsConstructor
 public class HaveHoursController {
     private final HaveHoursModelService modelService;
@@ -37,6 +37,7 @@ public class HaveHoursController {
         model.setRooms(Rooms.values());
         initializeRoom(model);
         initializeMesh(model);
+        initializeCalcFields(model);
     }
 
     private void initializeRoom(HaveHoursModel model) {
@@ -66,6 +67,15 @@ public class HaveHoursController {
         }
     }
 
+    private void initializeCalcFields(HaveHoursModel model) {
+        int id = modelService.findLastId();
+        model.setExpEVT(getExpEVT(id));
+        model.setRollbackPct(getRollback(id));
+        model.setRequiredTourneys(getRequiredTourneys(id));
+        model.setEstimatedExpectation(getEstimatedExpectation(id));
+        model.setDollarsPerHour(getDollarPerHour(id));
+    }
+
     @PostMapping("/removeModel")
     public void removeModel(@RequestParam("id") int id) {
         modelService.removeModelById(id);
@@ -86,23 +96,39 @@ public class HaveHoursController {
     }
 
     @PostMapping("/setHaveHours")
-    public void setHaveHours(@RequestParam("id") int id, @RequestBody HaveHoursRequestDTO request) {
+    public HaveHoursModel setHaveHours(@RequestParam("id") int id, @RequestBody HaveHoursRequestDTO request) {
         HaveHoursModel model = getModel(id);
         model.setHaveHours(request.getHaveHours());
+        calcFields(id);
+        return model;
     }
 
     @PostMapping("/setTables")
-    public void setTables(@RequestParam("id") int id, @RequestBody HaveHoursRequestDTO request) {
+    public HaveHoursModel setTables(@RequestParam("id") int id, @RequestBody HaveHoursRequestDTO request) {
         HaveHoursModel model = getModel(id);
         model.setTables(request.getTables());
+        calcFields(id);
+        return model;
+    }
+
+    @GetMapping("/getRooms")
+    public Rooms[] getRooms(@RequestParam("id") int id) {
+        return getModel(id).getRooms();
+    }
+
+    @GetMapping("/getRoom")
+    public Room getRoom(@RequestParam("id") int id) {
+        return getModel(id).getRoom();
     }
 
     @PostMapping("/setRoom")
-    public void setRoom(@RequestParam("id") int id, @RequestBody Map<String, String> request) {
+    public HaveHoursModel setRoom(@RequestParam("id") int id, @RequestBody Map<String, String> request) {
         HaveHoursModel model = getModel(id);
         Rooms rooms = Rooms.valueOf(request.get("room"));
         createRoom(rooms);
         propertiesRoom(model);
+        calcFields(id);
+        return model;
     }
 
     private void createRoom(Rooms rooms) {
@@ -114,7 +140,7 @@ public class HaveHoursController {
     }
 
     @PostMapping("/setBuyIn")
-    public void setBuyIn(@RequestParam("id") int id, @RequestBody HaveHoursRequestDTO request) {
+    public HaveHoursModel setBuyIn(@RequestParam("id") int id, @RequestBody HaveHoursRequestDTO request) {
         HaveHoursModel model = getModel(id);
         double buyIn = request.getBuyIn();
         model.setBuyIn(buyIn);
@@ -123,21 +149,34 @@ public class HaveHoursController {
         model.setRake(room.rakes()[index]);
         model.setWinCoefficient(room.winCoefficient()[index]);
         model.setLoseCoefficient(room.loseCoefficient()[index]);
+        calcFields(id);
+        return model;
+    }
+
+    private int findIndexBySelectedCoefficient(double[] buyIns, double buyIn) {
+        return IntStream.range(0, buyIns.length).filter(i -> buyIns[i] == buyIn).findFirst().orElse(0);
     }
 
     @GetMapping("/getBuyIns")
     public double[] getBuyIns(@RequestParam("id") int id) {
-        return getModel(id).getBuyIns();
+        HaveHoursModel model = getModel(id);
+        return model.getBuyIns();
+    }
+
+    @GetMapping("/getBuyIn")
+    public double getBuyIn(@RequestParam("id") int id) {
+        return getModel(id).getBuyIn();
     }
 
     @PostMapping("/setExpChipsT")
-    public void setExpChipsT(@RequestParam("id") int id, @RequestBody HaveHoursRequestDTO request) {
+    public HaveHoursModel setExpChipsT(@RequestParam("id") int id, @RequestBody HaveHoursRequestDTO request) {
         HaveHoursModel model = getModel(id);
         model.setExpChipsT(request.getExpChipsT());
+        calcFields(id);
+        return model;
     }
 
-    @GetMapping("/getExpEVT")
-    public double getExpEVT(@RequestParam("id") int id) {
+    private double getExpEVT(int id) {
         HaveHoursModel model = getModel(id);
         double buyIn = model.getBuyIn();
         double chipsEV = model.getExpChipsT();
@@ -147,38 +186,52 @@ public class HaveHoursController {
         double expEVT = buyIn * 1 * (((500 + chipsEV) / 1500) * winCoefficient
                                      + (1 - ((500 + chipsEV) / 1500)) * loseCoefficient);
 
-        model.setExpDollarEVT(expEVT);
+        model.setExpEVT(expEVT);
 
         return expEVT;
     }
 
     @PostMapping("/setRakebackPct")
-    public void setRakebackPct(@RequestParam("id") int id, @RequestBody HaveHoursRequestDTO request) {
+    public HaveHoursModel setRakebackPct(@RequestParam("id") int id, @RequestBody HaveHoursRequestDTO request) {
         HaveHoursModel model = getModel(id);
         model.setRakebackPct(request.getRakebackPct());
+        calcFields(id);
+        return model;
+    }
+
+    @GetMapping(("/getMeshes"))
+    public Meshes[] getMeshes(@RequestParam("id") int id) {
+        return getModel(id).getMeshes();
+    }
+
+    @GetMapping("/getMesh")
+    public Mesh getMesh(@RequestParam("id") int id) {
+        return getModel(id).getMesh();
     }
 
     @PostMapping("/setMesh")
-    public void setMesh(@RequestParam("id") int id, @RequestBody Map<String, String> request) {
+    public HaveHoursModel setMesh(@RequestParam("id") int id, @RequestBody Map<String, String> request) {
         HaveHoursModel model = getModel(id);
         Meshes meshes = Meshes.valueOf(request.get("mesh"));
 
-        switch (meshes) {
-            case BackingWithStudy:
-                mesh = new BackingWithStudy();
-                break;
-            case BackingWithoutStudy:
-                mesh = new BackingWithoutStudy();
-                break;
-            case StudyWithoutBacking:
-                mesh = new StudyWithoutBacking();
-                break;
-        }
+        initializeMesh(meshes);
         model.setMesh(mesh);
+
+        calcFields(id);
+
+        return model;
     }
 
-    @GetMapping("/getRollback")
-    public double getRollback(@RequestParam("id") int id) {
+    private void initializeMesh(Meshes meshes) {
+        switch (meshes) {
+            case ClearProfit -> mesh = new ClearProfit();
+            case BackingWithStudy -> mesh = new BackingWithStudy();
+            case BackingWithoutStudy -> mesh = new BackingWithoutStudy();
+            case StudyWithoutBacking -> mesh = new StudyWithoutBacking();
+        }
+    }
+
+    private double getRollback(int id) {
         HaveHoursModel model = getModel(id);
         double buyIn = model.getBuyIn();
         double evBI = model.getEstimatedExpectation() / buyIn;
@@ -329,13 +382,12 @@ public class HaveHoursController {
             rollback = 100;
         }
 
-        model.setRollback(rollback);
+        model.setRollbackPct(rollback);
 
         return rollback;
     }
 
-    @GetMapping("/getRequiredTourneys")
-    public double getRequiredTourneys(@RequestParam("id") int id) {
+    private double getRequiredTourneys(int id) {
         HaveHoursModel model = getModel(id);
         double tourneys = model.getTables() * model.getTourneysPerTable() * model.getHaveHours();
 
@@ -344,10 +396,9 @@ public class HaveHoursController {
         return tourneys;
     }
 
-    @GetMapping("/getEstimatedExpectation")
-    public double getEstimatedExpectation(@RequestParam("id") int id) {
+    private double getEstimatedExpectation(int id) {
         HaveHoursModel model = getModel(id);
-        double exp = (model.getExpDollarEVT() + model.getBuyIn() * (model.getRake() / 100)
+        double exp = (model.getExpEVT() + model.getBuyIn() * (model.getRake() / 100)
                                                 * (model.getRakebackPct() / 100))
                      * model.getTables() * model.getTourneysPerTable() * model.getHaveHours();
 
@@ -356,18 +407,21 @@ public class HaveHoursController {
         return exp;
     }
 
-    @GetMapping("/getDollarPerHour")
-    public double getDollarPerHour(@RequestParam("id") int id) {
+    private double getDollarPerHour(int id) {
         HaveHoursModel model = getModel(id);
         double dollarsPerHour = model.getEstimatedExpectation() / model.getHaveHours();
 
-        model.setDollarPerHour(dollarsPerHour);
+        model.setDollarsPerHour(dollarsPerHour);
 
         return dollarsPerHour;
     }
 
-    private int findIndexBySelectedCoefficient(double[] buyIns, double buyIn) {
-        return IntStream.range(0, buyIns.length).filter(i -> buyIns[i] == buyIn).findFirst().orElse(0);
+    private void calcFields(int id) {
+        getRollback(id);
+        getExpEVT(id);
+        getRequiredTourneys(id);
+        getEstimatedExpectation(id);
+        getDollarPerHour(id);
     }
 
 }
