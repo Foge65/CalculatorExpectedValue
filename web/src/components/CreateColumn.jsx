@@ -90,6 +90,18 @@ export default function CreateColumn({idsStruct, urlsStruct, data, setData}) {
 
     const selectElements = findSelectElements();
 
+    function debounce(func, wait) {
+        let timeoutId;
+        return function (...args) {
+            clearTimeout(timeoutId);
+            timeoutId = setTimeout(() => {
+                func(...args);
+            }, wait);
+        };
+    }
+
+    const handleDebounce = debounce(handleUpdateInputValue, 1000);
+
     return Object.entries(idsStruct).map(([idsKey, idsValues]) => (
         <tr key={idsKey}>
             <td>{idsValues.label}</td>
@@ -104,7 +116,7 @@ export default function CreateColumn({idsStruct, urlsStruct, data, setData}) {
                                 readOnly={idsValues.readOnly}
                                 decimalScale={2}
                                 onChange={(event) => {
-                                    handleUpdateInputValue(event, dataId)
+                                    handleDebounce(event, dataId)
                                 }}
                             />
                         ) : idsValues.type === 'select' ? (
