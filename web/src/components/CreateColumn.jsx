@@ -1,3 +1,5 @@
+import {NumericFormat} from "react-number-format";
+
 export default function CreateColumn({idsStruct, urlsStruct, data, setData}) {
 
     function handleUpdateInputValue(event, id) {
@@ -95,11 +97,12 @@ export default function CreateColumn({idsStruct, urlsStruct, data, setData}) {
                 <td key={dataId}>
                     <div key={idsKey}>
                         {idsValues.type === 'input' ? (
-                            <input
+                            <NumericFormat
                                 type="number"
                                 name={idsKey}
                                 value={data[dataId][idsKey]}
                                 readOnly={idsValues.readOnly}
+                                decimalScale={2}
                                 onChange={(event) => {
                                     handleUpdateInputValue(event, dataId)
                                 }}

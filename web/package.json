@@ -28,6 +28,7 @@
     "eslint-plugin-react-refresh": "^0.4.16",
     "globals": "^15.14.0",
     "jsdom": "^26.0.0",
+    "react-number-format": "^5.4.3",
     "vitest": "^3.0.3",
     "yarn": "^1.22.22"
   }
