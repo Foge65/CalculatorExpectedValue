@@ -115,12 +115,6 @@ export const urlsStruct = {
         url: '/api/desiredProfit/setExpChipsT',
         method: 'post'
     },
-    getExpEVT: {
-        name: idsStruct.expEVT,
-        url: '/api/desiredProfit/getExpEVT',
-        type: 'input',
-        method: 'get'
-    },
     setTables: {
         name: idsStruct.tables,
         url: '/api/desiredProfit/setTables',
@@ -145,30 +139,6 @@ export const urlsStruct = {
         url: '/api/desiredProfit/setMesh',
         type: 'select',
         method: 'post'
-    },
-    getRollback: {
-        name: idsStruct.rollbackPct,
-        url: '/api/desiredProfit/getRollback',
-        type: 'input',
-        method: 'get'
-    },
-    getRequiredTourneys: {
-        name: idsStruct.requiredTourneys,
-        url: '/api/desiredProfit/getRequiredTourneys',
-        type: 'input',
-        method: 'get'
-    },
-    getRequiredHours: {
-        name: idsStruct.requiredHours,
-        url: '/api/desiredProfit/getRequiredHours',
-        type: 'input',
-        method: 'get'
-    },
-    getDollarPerHour: {
-        name: idsStruct.dollarsPerHour,
-        url: '/api/desiredProfit/getDollarPerHour',
-        type: 'input',
-        method: 'get'
     },
     addColumn: {
         name: idsStruct.buttonAddColum,

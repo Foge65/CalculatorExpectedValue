@@ -99,6 +99,7 @@ public class DesiredProfitController {
     public DesiredProfitModel setDesiredProfit(@RequestParam("id") int id, @RequestBody DesiredProfitRequestDTO request) {
         DesiredProfitModel model = getModel(id);
         model.setDesiredProfit(request.getDesiredProfit());
+        calcFields(id);
         return model;
     }
 
@@ -118,6 +119,7 @@ public class DesiredProfitController {
         Rooms rooms = Rooms.valueOf(request.get("room"));
         createRoom(rooms);
         propertiesRoom(model);
+        calcFields(id);
         return model;
     }
 
@@ -139,7 +141,7 @@ public class DesiredProfitController {
         model.setRake(room.rakes()[index]);
         model.setWinCoefficient(room.winCoefficient()[index]);
         model.setLoseCoefficient(room.loseCoefficient()[index]);
-
+        calcFields(id);
         return model;
     }
 
@@ -162,11 +164,11 @@ public class DesiredProfitController {
     public DesiredProfitModel setExpChipsT(@RequestParam("id") int id, @RequestBody DesiredProfitRequestDTO request) {
         DesiredProfitModel model = getModel(id);
         model.setExpChipsT(request.getExpChipsT());
+        calcFields(id);
         return model;
     }
 
-    @GetMapping("/getExpEVT")
-    public double getExpEVT(@RequestParam("id") int id) {
+    private double getExpEVT(int id) {
         DesiredProfitModel model = getModel(id);
         double buyIn = model.getBuyIn();
         double chipsEV = model.getExpChipsT();
@@ -185,6 +187,7 @@ public class DesiredProfitController {
     public DesiredProfitModel setTables(@RequestParam("id") int id, @RequestBody DesiredProfitRequestDTO request) {
         DesiredProfitModel model = getModel(id);
         model.setTables(request.getTables());
+        calcFields(id);
         return model;
     }
 
@@ -192,6 +195,7 @@ public class DesiredProfitController {
     public DesiredProfitModel setRakebackPct(@RequestParam("id") int id, @RequestBody DesiredProfitRequestDTO request) {
         DesiredProfitModel model = getModel(id);
         model.setRakebackPct(request.getRakebackPct());
+        calcFields(id);
         return model;
     }
 
@@ -213,6 +217,8 @@ public class DesiredProfitController {
         initializeMesh(meshes);
         model.setMesh(mesh);
 
+        calcFields(id);
+
         return model;
     }
 
@@ -225,8 +231,7 @@ public class DesiredProfitController {
         }
     }
 
-    @GetMapping("/getRollback")
-    public double getRollback(@RequestParam("id") int id) {
+    private double getRollback(int id) {
         DesiredProfitModel model = getModel(id);
         double buyIn = model.getBuyIn();
         double evBI = model.getDesiredProfit() / buyIn;
@@ -380,8 +385,7 @@ public class DesiredProfitController {
         return rollback;
     }
 
-    @GetMapping("/getRequiredTourneys")
-    public double getRequiredTourneys(@RequestParam("id") int id) {
+    private double getRequiredTourneys(int id) {
         DesiredProfitModel model = getModel(id);
         double desiredProfit = model.getDesiredProfit();
         double buyIn = model.getBuyIn();
@@ -395,8 +399,7 @@ public class DesiredProfitController {
         return requiredTourneys;
     }
 
-    @GetMapping("/getRequiredHours")
-    public double getRequiredHours(@RequestParam("id") int id) {
+    private double getRequiredHours(int id) {
         DesiredProfitModel model = getModel(id);
         double requiredHours = model.getRequiredTourneys() / (model.getTables() * model.getTourneysPerTable());
         model.setRequiredHours(requiredHours);
@@ -409,6 +412,14 @@ public class DesiredProfitController {
         double dollarsPerHour = model.getDesiredProfit() / model.getRequiredHours();
         model.setDollarsPerHour(dollarsPerHour);
         return dollarsPerHour;
+    }
+
+    private void calcFields(int id) {
+        getRollback(id);
+        getExpEVT(id);
+        getRequiredTourneys(id);
+        getRequiredHours(id);
+        getDollarPerHour(id);
     }
 
 }
