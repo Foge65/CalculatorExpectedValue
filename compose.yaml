@@ -10,3 +10,5 @@ services:
       - "8085:8085"
     depends_on:
       - backend
+    volumes:
+      - /etc/nginx/sites-enabled/calc.firestorm.team:/etc/nginx/nginx.conf:ro
