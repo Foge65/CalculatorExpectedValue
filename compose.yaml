@@ -3,8 +3,6 @@ services:
     build: spring
     ports:
       - "8084:8084"
-    networks:
-      - calcev_network
 
   frontend:
     build: web
@@ -12,13 +10,3 @@ services:
       - "8085:8085"
     depends_on:
       - backend
-    volumes:
-      - /etc/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-      - /etc/nginx/sites-enabled/calc.firestorm.team:/etc/nginx/sites-enabled/calc.firestorm.team:ro
-      - /etc/letsencrypt:/etc/letsencrypt:ro
-    networks:
-      - calcev_network
-
-networks:
-  calcev_network:
-    driver: bridge
