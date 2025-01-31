@@ -13,3 +13,4 @@ services:
     volumes:
       - /etc/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - /etc/nginx/sites-enabled/calc.firestorm.team:/etc/nginx/sites-enabled/calc.firestorm.team
+      - /etc/letsencrypt:/etc/letsencrypt:ro
