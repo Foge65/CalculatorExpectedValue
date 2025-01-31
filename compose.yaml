@@ -2,11 +2,11 @@ services:
   backend:
     build: spring
     ports:
-      - "8081:8081"
+      - "8084:8084"
 
   frontend:
     build: web
     ports:
-      - "8082:8082"
+      - "8085:8085"
     depends_on:
       - backend
