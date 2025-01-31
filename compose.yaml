@@ -11,4 +11,5 @@ services:
     depends_on:
       - backend
     volumes:
-      - /etc/nginx/sites-enabled/calc.firestorm.team:/etc/nginx/nginx.conf:ro
+      - /etc/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - /etc/nginx/sites-enabled/calc.firestorm.team:/etc/nginx/sites-enabled/calc.firestorm.team
