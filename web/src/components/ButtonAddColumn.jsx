@@ -21,7 +21,7 @@ export default function ButtonAddColumn({idsStruct, urlsStruct, context}) {
         <tr>
             <th>
                 <button name="addColumn" onClick={handleAddColumn}>
-                    <img className="add-column-btn" src="/public/plus_icon.png" alt="Add Column"/>
+                    <img className="add-column-btn" src="/plus_icon.png" alt="Add Column"/>
                 </button>
             </th>
         </tr>
