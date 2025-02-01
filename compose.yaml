@@ -10,10 +10,16 @@ services:
     build: web
     ports:
       - "8085:8085"
+      - "8443:443"
     depends_on:
       - backend
     networks:
       - calcEv_bridge
+    volumes:
+      - ./web/fullchain.pem:/etc/letsencrypt/live/calc.firestorm.team/fullchain.pem:ro
+      - ./web/privkey.pem:/etc/letsencrypt/live/calc.firestorm.team/privkey.pem:ro
+      - ./web/options-ssl-nginx.conf:/etc/letsencrypt/options-ssl-nginx.conf:ro
+      - ./web/ssl-dhparams.pem:/etc/letsencrypt/ssl-dhparams.pem:ro
 
 networks:
   calcEv_bridge:
