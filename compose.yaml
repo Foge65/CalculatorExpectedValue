@@ -3,6 +3,8 @@ services:
     build: spring
     ports:
       - "8084:8084"
+    networks:
+      - calcEv_bridge
 
   frontend:
     build: web
@@ -10,3 +12,9 @@ services:
       - "8085:8085"
     depends_on:
       - backend
+    networks:
+      - calcEv_bridge
+
+networks:
+  calcEv_bridge:
+    driver: bridge
