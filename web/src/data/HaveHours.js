@@ -36,6 +36,10 @@ export const idsStruct = {
         label: 'Тип контракта',
         type: 'select'
     },
+    blank: {},
+    blank2: {},
+    blank3: {},
+    blank4: {},
     rollbackPct: {
         label: '% отката по контракту',
         type: 'input',
