@@ -28,7 +28,7 @@ export default function CreateColumn({idsStruct, urlsStruct, data, setData}) {
     function sendNewValue(urlKey, field, value, dataId) {
         const payload = {
             [field]: value
-        }
+        };
 
         const options = {
             method: 'POST',
@@ -36,7 +36,7 @@ export default function CreateColumn({idsStruct, urlsStruct, data, setData}) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(payload)
-        }
+        };
 
         const urlPost = urlsStruct[urlKey];
         if (urlPost.method === 'post') {
@@ -52,7 +52,7 @@ export default function CreateColumn({idsStruct, urlsStruct, data, setData}) {
             rooms: 'room',
             buyIns: 'buyIn',
             meshes: 'mesh'
-        }
+        };
 
         const mappedName = nameMap[columnName];
         const urlKey = `set${mappedName.charAt(0).toUpperCase() + mappedName.slice(1)}`;
@@ -117,6 +117,13 @@ export default function CreateColumn({idsStruct, urlsStruct, data, setData}) {
             });
     }
 
+    const mashesName = {
+        ClearProfit: 'Чистый профит',
+        BackingWithStudy: 'Бекинг с обучением',
+        BackingWithoutStudy: 'Бекинг без обучения',
+        StudyWithoutBacking: 'Обучение без бекинга'
+    };
+
     return (
         <div>
             <table>
@@ -146,7 +153,7 @@ export default function CreateColumn({idsStruct, urlsStruct, data, setData}) {
                                         >
                                             {selectElements[idsKey].map((value, key) => (
                                                 <option key={key} value={value}>
-                                                    {value}
+                                                    {mashesName[value] || value}
                                                 </option>
                                             ))}
                                         </select>
