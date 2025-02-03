@@ -102,41 +102,68 @@ export default function CreateColumn({idsStruct, urlsStruct, data, setData}) {
 
     const handleDebounce = debounce(handleUpdateInputValue, 1000);
 
-    return Object.entries(idsStruct).map(([idsKey, idsValues]) => (
-        <tr key={idsKey}>
-            <td>{idsValues.label}</td>
-            {Object.keys(data).map((dataId) => (
-                <td key={dataId}>
-                    <div key={idsKey}>
-                        {idsValues.type === 'input' ? (
-                            <NumericFormat
-                                type="number"
-                                name={idsKey}
-                                value={data[dataId][idsKey]}
-                                readOnly={idsValues.readOnly}
-                                decimalScale={2}
-                                onChange={(event) => {
-                                    handleDebounce(event, dataId)
-                                }}
-                            />
-                        ) : idsValues.type === 'select' ? (
-                            <select
-                                name={idsKey}
-                                onChange={(event) => {
-                                    handleUpdateSelectValue(event, dataId, idsKey)
-                                }}
-                            >
-                                {selectElements[idsKey].map((value, key) => (
-                                    <option key={key} value={value}>
-                                        {value}
-                                    </option>
-                                ))}
-                            </select>
-                        ) : null}
-                    </div>
-                </td>
-            ))}
-        </tr>
-    ));
+    function handleAddColumn() {
+        fetch(urlsStruct.addColumn.url, {
+            method: 'POST'
+        })
+            .then((newColumn) => {
+                setData((prevData) => ({
+                    ...prevData,
+                    [newColumn.name]: '',
+                }));
+            })
+            .catch((error) => {
+                console.error('Error adding column:', error)
+            });
+    }
+
+    return (
+        <div>
+            <table>
+                {Object.entries(idsStruct).map(([idsKey, idsValues]) => (
+                    <tr key={idsKey}>
+                        <td>{idsValues.label}</td>
+                        {Object.keys(data).map((dataId) => (
+                            <td key={dataId}>
+                                <div key={idsKey}>
+                                    {idsValues.type === 'input' ? (
+                                        <NumericFormat
+                                            type="number"
+                                            name={idsKey}
+                                            value={data[dataId][idsKey]}
+                                            readOnly={idsValues.readOnly}
+                                            decimalScale={2}
+                                            onChange={(event) => {
+                                                handleDebounce(event, dataId)
+                                            }}
+                                        />
+                                    ) : idsValues.type === 'select' ? (
+                                        <select
+                                            name={idsKey}
+                                            onChange={(event) => {
+                                                handleUpdateSelectValue(event, dataId, idsKey)
+                                            }}
+                                        >
+                                            {selectElements[idsKey].map((value, key) => (
+                                                <option key={key} value={value}>
+                                                    {value}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    ) : null}
+                                </div>
+                            </td>
+                        ))}
+                    </tr>
+                ))}
+            </table>
+            <button name="addColumn" onClick={handleAddColumn} style={{
+                border: 'none',
+                cursor: 'pointer'
+            }}>
+                <img className="add-column-btn" src="/plus_icon.png" alt="Add Column"/>
+            </button>
+        </div>
+    );
 
 }

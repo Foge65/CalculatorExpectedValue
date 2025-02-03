@@ -1,7 +1,6 @@
 import {Context} from "./providers/DesiredProfitDataProvider.jsx";
 import CreateColumn from "./CreateColumn.jsx";
 import {idsStruct, urlsStruct} from "../data/DesiredProfit.js";
-import ButtonAddColumn from "./ButtonAddColumn.jsx";
 import {useContext} from "react";
 
 export default function DesiredProfitTable() {
@@ -13,7 +12,6 @@ export default function DesiredProfitTable() {
                 <caption><h3>Желаемый профит</h3></caption>
                 <tbody>
                 <CreateColumn idsStruct={idsStruct} urlsStruct={urlsStruct} data={data} setData={setData}/>
-                <ButtonAddColumn idsStruct={idsStruct} urlsStruct={urlsStruct} context={useContext(Context)}/>
                 </tbody>
             </table>
         </div>
