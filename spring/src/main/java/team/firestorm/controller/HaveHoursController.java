@@ -25,22 +25,22 @@ public class HaveHoursController {
     public void init() {
         createModel();
         HaveHoursModel model = modelService.findLastModel();
-        model.setRooms(Rooms.values());
-        initializeRoom(model);
-        initializeMesh(model);
-    }
-
-    @PostMapping("/createModel")
-    public void createModel() {
-        modelService.addModel();
-        HaveHoursModel model = modelService.findLastModel();
-        model.setRooms(Rooms.values());
         initializeRoom(model);
         initializeMesh(model);
         initializeCalcFields(model);
     }
 
+    @PostMapping("/createModel")
+    public HaveHoursModel createModel() {
+        HaveHoursModel model = modelService.addModel();
+        initializeRoom(model);
+        initializeMesh(model);
+        initializeCalcFields(model);
+        return model;
+    }
+
     private void initializeRoom(HaveHoursModel model) {
+        model.setRooms(Rooms.values());
         room = new PokerStars();
         propertiesRoom(model);
 
@@ -60,11 +60,9 @@ public class HaveHoursController {
     }
 
     private void initializeMesh(HaveHoursModel model) {
-        if (mesh == null) {
-            model.setMeshes(Meshes.values());
-            mesh = new ClearProfit();
-            model.setMesh(mesh);
-        }
+        model.setMeshes(Meshes.values());
+        mesh = new ClearProfit();
+        model.setMesh(mesh);
     }
 
     private void initializeCalcFields(HaveHoursModel model) {
@@ -399,7 +397,7 @@ public class HaveHoursController {
     private double getEstimatedExpectation(int id) {
         HaveHoursModel model = getModel(id);
         double exp = (model.getExpEVT() + model.getBuyIn() * (model.getRake() / 100)
-                                                * (model.getRakebackPct() / 100))
+                                          * (model.getRakebackPct() / 100))
                      * model.getTables() * model.getTourneysPerTable() * model.getHaveHours();
 
         model.setEstimatedExpectation(exp);

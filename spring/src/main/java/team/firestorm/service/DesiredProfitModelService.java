@@ -16,7 +16,7 @@ import java.util.NoSuchElementException;
 public class DesiredProfitModelService {
     private final Map<Integer, DesiredProfitModel> models = new HashMap<>();
 
-    public void addModel() {
+    public DesiredProfitModel addModel() {
         DesiredProfitModel newModel = new DesiredProfitModel();
         if (models.isEmpty()) {
             models.put(1, newModel);
@@ -28,14 +28,19 @@ public class DesiredProfitModelService {
             int lastKey = Collections.max(models.keySet());
             models.put(lastKey + 1, newModel);
             DesiredProfitModel lastModel = models.get(lastKey);
-            lastModel.setDesiredProfit(lastModel.getDesiredProfit());
-            lastModel.setRoom(lastModel.getRoom());
-            lastModel.setBuyIn(lastModel.getBuyIn());
-            lastModel.setExpChipsT(lastModel.getExpChipsT());
-            lastModel.setTables(lastModel.getTables());
-            lastModel.setRakebackPct(lastModel.getRakebackPct());
-            lastModel.setMesh(lastModel.getMesh());
+            initModel(lastModel, newModel);
         }
+        return newModel;
+    }
+
+    private void initModel(DesiredProfitModel lastModel, DesiredProfitModel newModel) {
+        newModel.setRoom(lastModel.getRoom());
+        newModel.setBuyIn(lastModel.getBuyIn());
+        newModel.setMesh(lastModel.getMesh());
+        newModel.setDesiredProfit(lastModel.getDesiredProfit());
+        newModel.setExpChipsT(lastModel.getExpChipsT());
+        newModel.setTables(lastModel.getTables());
+        newModel.setRakebackPct(lastModel.getRakebackPct());
     }
 
     public void removeModelById(int id) {

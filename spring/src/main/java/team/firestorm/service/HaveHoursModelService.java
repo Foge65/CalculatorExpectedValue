@@ -16,11 +16,11 @@ import java.util.NoSuchElementException;
 public class HaveHoursModelService {
     private final Map<Integer, HaveHoursModel> models = new HashMap<>();
 
-    public void addModel() {
+    public HaveHoursModel addModel() {
         HaveHoursModel newModel = new HaveHoursModel();
         if (models.isEmpty()) {
             models.put(1, newModel);
-            newModel.setHaveHours(1000);
+            newModel.setHaveHours(120);
             newModel.setExpChipsT(65);
             newModel.setTables(6);
             newModel.setRakebackPct(40);
@@ -28,14 +28,19 @@ public class HaveHoursModelService {
             int lastKey = Collections.max(models.keySet());
             models.put(lastKey + 1, newModel);
             HaveHoursModel lastModel = models.get(lastKey);
-            lastModel.setHaveHours(lastModel.getHaveHours());
-            lastModel.setRoom(lastModel.getRoom());
-            lastModel.setBuyIn(lastModel.getBuyIn());
-            lastModel.setExpChipsT(lastModel.getExpChipsT());
-            lastModel.setTables(lastModel.getTables());
-            lastModel.setRakebackPct(lastModel.getRakebackPct());
-            lastModel.setMesh(lastModel.getMesh());
+            initModel(lastModel, newModel);
         }
+        return newModel;
+    }
+
+    private void initModel(HaveHoursModel lastModel, HaveHoursModel newModel) {
+        newModel.setRoom(lastModel.getRoom());
+        newModel.setBuyIn(lastModel.getBuyIn());
+        newModel.setMesh(lastModel.getMesh());
+        newModel.setHaveHours(lastModel.getHaveHours());
+        newModel.setExpChipsT(lastModel.getExpChipsT());
+        newModel.setTables(lastModel.getTables());
+        newModel.setRakebackPct(lastModel.getRakebackPct());
     }
 
     public void removeModelById(int id) {

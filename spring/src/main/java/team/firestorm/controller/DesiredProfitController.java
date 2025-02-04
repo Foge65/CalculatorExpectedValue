@@ -25,22 +25,22 @@ public class DesiredProfitController {
     public void init() {
         createModel();
         DesiredProfitModel model = modelService.findLastModel();
-        model.setRooms(Rooms.values());
-        initializeRoom(model);
-        initializeMesh(model);
-    }
-
-    @PostMapping("/createModel")
-    public void createModel() {
-        modelService.addModel();
-        DesiredProfitModel model = modelService.findLastModel();
-        model.setRooms(Rooms.values());
         initializeRoom(model);
         initializeMesh(model);
         initializeCalcFields(model);
     }
 
+    @PostMapping("/createModel")
+    public DesiredProfitModel createModel() {
+        DesiredProfitModel model = modelService.addModel();
+        initializeRoom(model);
+        initializeMesh(model);
+        initializeCalcFields(model);
+        return model;
+    }
+
     private void initializeRoom(DesiredProfitModel model) {
+        model.setRooms(Rooms.values());
         room = new PokerStars();
         propertiesRoom(model);
 
@@ -60,11 +60,9 @@ public class DesiredProfitController {
     }
 
     private void initializeMesh(DesiredProfitModel model) {
-        if (mesh == null) {
-            model.setMeshes(Meshes.values());
-            mesh = new ClearProfit();
-            model.setMesh(mesh);
-        }
+        model.setMeshes(Meshes.values());
+        mesh = new ClearProfit();
+        model.setMesh(mesh);
     }
 
     private void initializeCalcFields(DesiredProfitModel model) {
