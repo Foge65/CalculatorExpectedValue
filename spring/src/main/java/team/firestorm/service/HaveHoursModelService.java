@@ -16,7 +16,7 @@ import java.util.NoSuchElementException;
 public class HaveHoursModelService {
     private final Map<Integer, HaveHoursModel> models = new HashMap<>();
 
-    public HaveHoursModel addModel() {
+    public void createModel() {
         HaveHoursModel newModel = new HaveHoursModel();
         if (models.isEmpty()) {
             models.put(1, newModel);
@@ -30,7 +30,6 @@ public class HaveHoursModelService {
             HaveHoursModel lastModel = models.get(lastKey);
             initModel(lastModel, newModel);
         }
-        return newModel;
     }
 
     private void initModel(HaveHoursModel lastModel, HaveHoursModel newModel) {

@@ -31,12 +31,13 @@ public class DesiredProfitController {
     }
 
     @PostMapping("/createModel")
-    public DesiredProfitModel createModel() {
-        DesiredProfitModel model = modelService.addModel();
+    public Map<Integer, DesiredProfitModel> createModel() {
+        modelService.createModel();
+        DesiredProfitModel model = modelService.findLastModel();
         initializeRoom(model);
         initializeMesh(model);
         initializeCalcFields(model);
-        return model;
+        return modelService.getModels();
     }
 
     private void initializeRoom(DesiredProfitModel model) {

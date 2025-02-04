@@ -16,7 +16,7 @@ import java.util.NoSuchElementException;
 public class DesiredProfitModelService {
     private final Map<Integer, DesiredProfitModel> models = new HashMap<>();
 
-    public DesiredProfitModel addModel() {
+    public void createModel() {
         DesiredProfitModel newModel = new DesiredProfitModel();
         if (models.isEmpty()) {
             models.put(1, newModel);
@@ -30,7 +30,6 @@ public class DesiredProfitModelService {
             DesiredProfitModel lastModel = models.get(lastKey);
             initModel(lastModel, newModel);
         }
-        return newModel;
     }
 
     private void initModel(DesiredProfitModel lastModel, DesiredProfitModel newModel) {

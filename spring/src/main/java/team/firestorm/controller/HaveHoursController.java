@@ -31,12 +31,13 @@ public class HaveHoursController {
     }
 
     @PostMapping("/createModel")
-    public HaveHoursModel createModel() {
-        HaveHoursModel model = modelService.addModel();
+    public Map<Integer, HaveHoursModel> createModel() {
+        modelService.createModel();
+        HaveHoursModel model = modelService.findLastModel();
         initializeRoom(model);
         initializeMesh(model);
         initializeCalcFields(model);
-        return model;
+        return modelService.getModels();
     }
 
     private void initializeRoom(HaveHoursModel model) {
