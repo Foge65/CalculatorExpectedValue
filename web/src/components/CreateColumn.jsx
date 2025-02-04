@@ -106,10 +106,11 @@ export default function CreateColumn({idsStruct, urlsStruct, data, setData}) {
         fetch(urlsStruct.addColumn.url, {
             method: 'POST'
         })
-            .then((newColumn) => {
-                setData((prevData) => ({
-                    ...prevData,
-                    [newColumn.name]: '',
+            .then((response) => response.json())
+            .then((data) => {
+                setData((prevState) => ({
+                    ...prevState,
+                    ...data
                 }));
             })
             .catch((error) => {
