@@ -118,6 +118,10 @@ export default function CreateColumn({idsStruct, urlsStruct, data, setData}) {
             });
     }
 
+    function handleRemoveColumn(id) {
+        console.log('deleting id number', id);
+    }
+
     const mashesName = {
         ClearProfit: 'Чистый профит',
         BackingWithStudy: 'Бекинг с обучением',
@@ -128,6 +132,17 @@ export default function CreateColumn({idsStruct, urlsStruct, data, setData}) {
     return (
         <div>
             <table>
+                <tr>
+                    {Object.keys(data).map((dataId, index) => (
+                        <td key={dataId}>
+                            <div className="remove-column-btn-container">
+                                <button onClick={() => handleRemoveColumn(dataId)}>
+                                    <img className="remove-column-btn" src="/minus_icon.png" alt="Remove Column"/>
+                                </button>
+                            </div>
+                        </td>
+                    ))}
+                </tr>
                 {Object.entries(idsStruct).map(([idsKey, idsValues]) => (
                     <tr key={idsKey}>
                         <td>{idsValues.label}</td>
@@ -165,12 +180,11 @@ export default function CreateColumn({idsStruct, urlsStruct, data, setData}) {
                     </tr>
                 ))}
             </table>
-            <button name="addColumn" onClick={handleAddColumn} style={{
-                border: 'none',
-                cursor: 'pointer'
-            }}>
-                <img className="add-column-btn" src="/plus_icon.png" alt="Add Column"/>
-            </button>
+            <div className="add-column-btn-container">
+                <button onClick={handleAddColumn}>
+                    <img className="add-column-btn" src="/plus_icon.png" alt="Add Column"/>
+                </button>
+            </div>
         </div>
     );
 

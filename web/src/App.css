@@ -44,25 +44,26 @@ h3 {
     -moz-osx-font-smoothing: grayscale;
 }
 
-.blank-row {
-    height: 30px;
-}
-
-.icon, .remove-column-btn img {
-    width: 24px;
-    height: 24px;
-}
-
 .add-column-btn {
     width: 24px;
     height: 24px;
 }
 
+.add-column-btn-container button {
+    border: none;
+    cursor: pointer;
+}
+
 .remove-column-btn {
-    position: absolute;
-    top: 0;
-    right: 0;
-    background-color: transparent;
+    width: 24px;
+    height: 24px;
+}
+
+.remove-column-btn-container {
+    float: right;
+}
+
+.remove-column-btn-container button {
     border: none;
     cursor: pointer;
 }
