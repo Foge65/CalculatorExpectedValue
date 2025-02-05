@@ -1,4 +1,7 @@
 export const idsStruct = {
+    buttonRemoveColum: {
+        type: 'button'
+    },
     haveHours: {
         label: 'Есть часов в месяц',
         type: 'input',

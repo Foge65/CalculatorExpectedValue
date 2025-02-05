@@ -1,4 +1,7 @@
 export const idsStruct = {
+    buttonRemoveColum: {
+        type: 'button'
+    },
     desiredProfit: {
         label: 'Желаемый профит',
         type: 'input',
