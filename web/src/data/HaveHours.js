@@ -152,5 +152,11 @@ export const urlsStruct = {
         url: '/api/haveHours/createModel',
         type: 'button',
         method: 'post'
+    },
+    removeColumn: {
+        name: idsStruct.buttonRemoveColum,
+        url: '/api/haveHours/removeModel',
+        type: 'button',
+        method: 'post'
     }
 }

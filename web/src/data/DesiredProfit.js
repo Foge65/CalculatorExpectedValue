@@ -152,5 +152,11 @@ export const urlsStruct = {
         url: '/api/desiredProfit/createModel',
         type: 'button',
         method: 'post'
+    },
+    removeColumn: {
+        name: idsStruct.buttonRemoveColum,
+        url: '/api/desiredProfit/removeModel',
+        type: 'button',
+        method: 'post'
     }
 }
