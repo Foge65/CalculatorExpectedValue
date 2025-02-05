@@ -76,8 +76,9 @@ public class DesiredProfitController {
     }
 
     @PostMapping("/removeModel")
-    public void removeModel(@RequestParam("id") int id) {
+    public Map<Integer, DesiredProfitModel> removeModel(@RequestParam("id") int id) {
         modelService.removeModelById(id);
+        return modelService.getModels();
     }
 
     @GetMapping("/getModel")
