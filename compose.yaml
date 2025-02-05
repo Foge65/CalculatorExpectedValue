@@ -7,6 +7,6 @@ services:
   frontend:
     build: web
     ports:
-      - "8085:8085"
+      - "80:8085"
     depends_on:
       - backend
