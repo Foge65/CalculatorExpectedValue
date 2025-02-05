@@ -118,8 +118,26 @@ export default function CreateColumn({idsStruct, urlsStruct, data, setData}) {
             });
     }
 
-    function handleRemoveColumn(id) {
-        console.log('deleting id number', id);
+    function handleRemoveColumn(event, id) {
+        event.preventDefault();
+
+        fetch(`${urlsStruct.removeColumn.url}?id=${id}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then((response) => response.json())
+            .then(() => {
+                setData((prevState) => {
+                    const newData = {...prevState};
+                    delete newData[id];
+                    return newData;
+                });
+            })
+            .catch((error) => {
+                console.error('Error deleting column:', error);
+            });
     }
 
     const mashesName = {
@@ -132,14 +150,17 @@ export default function CreateColumn({idsStruct, urlsStruct, data, setData}) {
     return (
         <div>
             <table>
+                <tbody>
                 <tr>
                     {Object.keys(data).map((dataId, index) => (
                         <td key={dataId}>
-                            <div className="remove-column-btn-container">
-                                <button onClick={() => handleRemoveColumn(dataId)}>
-                                    <img className="remove-column-btn" src="/minus_icon.png" alt="Remove Column"/>
-                                </button>
-                            </div>
+                            {index > 0 && (
+                                <div className="remove-column-btn-container">
+                                    <button onClick={(event) => handleRemoveColumn(event, dataId)}>
+                                        <img className="remove-column-btn" src="/minus_icon.png" alt="Remove Column"/>
+                                    </button>
+                                </div>
+                            )}
                         </td>
                     ))}
                 </tr>
@@ -179,6 +200,7 @@ export default function CreateColumn({idsStruct, urlsStruct, data, setData}) {
                         ))}
                     </tr>
                 ))}
+                </tbody>
             </table>
             <div className="add-column-btn-container">
                 <button onClick={handleAddColumn}>

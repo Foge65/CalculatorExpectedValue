@@ -7,11 +7,15 @@ export default function HaveHoursTable() {
     const {data, setData} = useContext(Context);
 
     return (
-        <div className="tables">
-            <table id="desiredProfitTable">
+        <div>
+            <table>
                 <caption><h3>Есть часов в месяц</h3></caption>
                 <tbody>
-                <CreateColumn idsStruct={idsStruct} urlsStruct={urlsStruct} data={data} setData={setData}/>
+                <tr>
+                    <td colSpan="100%">
+                        <CreateColumn idsStruct={idsStruct} urlsStruct={urlsStruct} data={data} setData={setData}/>
+                    </td>
+                </tr>
                 </tbody>
             </table>
         </div>
