@@ -9,7 +9,7 @@ export default function HaveHoursTable() {
     return (
         <div>
             <table>
-                <caption><h3>Есть часов в месяц</h3></caption>
+                <caption><h3>Сколько часов в месяц у тебя есть на игру?</h3></caption>
                 <tbody>
                 <tr>
                     <td colSpan="100%">

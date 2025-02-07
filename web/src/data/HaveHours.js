@@ -8,7 +8,7 @@ export const idsStruct = {
         readOnly: false
     },
     tables: {
-        label: 'Количество окон одновременно',
+        label: 'Количество столов одновременно',
         type: 'input',
         readOnly: false
     },
@@ -31,7 +31,7 @@ export const idsStruct = {
         readOnly: false
     },
     rakebackPct: {
-        label: 'Величина RB, %',
+        label: 'Rakeback tot, %',
         type: 'input',
         readOnly: false
     },
@@ -49,7 +49,7 @@ export const idsStruct = {
         readOnly: true
     },
     expEVT: {
-        label: 'Ожидаемое $EV/Т',
+        label: 'Ожидаемое $EV/Т tot (PoolEV + RB tot)',
         type: 'input',
         readOnly: true
     },

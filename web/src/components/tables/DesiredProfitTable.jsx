@@ -9,7 +9,7 @@ export default function DesiredProfitTable() {
     return (
         <div>
             <table>
-                <caption><h3>Желаемый профит</h3></caption>
+                <caption><h3>Сколько ты хочешь зарабатывать в месяц?</h3></caption>
                 <tbody>
                 <tr>
                     <td colSpan="100%">
