@@ -66,3 +66,20 @@ h3 {
     border: none;
     cursor: pointer;
 }
+
+.auth-container {
+    user-select: none;
+    flex-direction: column;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.btnAuth {
+    font-size: 18px;
+    color: #f8f9fa;
+    background-color: #198754;
+    cursor: pointer;
+    border-radius: 5px;
+}

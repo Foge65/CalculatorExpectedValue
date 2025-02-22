@@ -1,30 +1,27 @@
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import Cookies from "js-cookie";
 
 const lk = `https://lk.firestorm.team`;
 
 export default function CheckCookies({children}) {
+    const [isAuthenticated, setIsAuthenticated] = useState(true);
+
     useEffect(() => {
-        const email = "email";
-        const id = "id";
-        const token = "token";
-        const username = "username";
-
-        const emailCookie = Cookies.get(email);
-        const idCookie = Cookies.get(id);
-        const tokenCookie = Cookies.get(token);
-        const usernameCookie = Cookies.get(username);
-
-        console.log(emailCookie);
-        console.log(idCookie);
-        console.log(tokenCookie);
-        console.log(usernameCookie);
-        // debugger;
-
-        if (!tokenCookie) {
-            window.location.href = lk;
+        if (!Cookies.get("token")) {
+            setIsAuthenticated(false);
         }
     }, []);
+
+    if (!isAuthenticated) {
+        return (
+            <div className="auth-container">
+                <p>Для работы с калькулятором, вы должны быть авторизованы в личном кабинете</p>
+                <button className="btnAuth" onClick={() => window.location.href = lk}>Авторизоваться через личный
+                    кабинет
+                </button>
+            </div>
+        );
+    }
 
     return children;
 };
