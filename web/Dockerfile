@@ -4,10 +4,6 @@ COPY package.json ./
 RUN npm install
 COPY . .
 RUN npm run build
+RUN npm install -g serve
+CMD ["serve", "-s", "dist", "-l", "8085"]
 
-FROM nginx:1.27
-WORKDIR /usr/share/nginx/html
-COPY --from=build /app/dist ./
-COPY nginx.conf /etc/nginx/nginx.conf
-EXPOSE 8085
-CMD ["nginx", "-g", "daemon off;"]
