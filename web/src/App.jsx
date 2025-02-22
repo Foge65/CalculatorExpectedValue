@@ -1,18 +1,19 @@
-import {DesiredProfitDataProvider} from "./components/providers/DesiredProfitDataProvider.jsx";
 import DesiredProfitTable from "./components/tables/DesiredProfitTable.jsx";
-import {HaveHoursDataProvider} from "./components/providers/HaveHoursDataProvider.jsx";
 import HaveHoursTable from "./components/tables/HaveHoursTable.jsx";
+import {DataProvider} from "./components/tables/DataProvider.jsx";
+import {urlsStructDesiredProfit} from "./data/DesiredProfit.js";
+import {urlsStructHaveHours} from "./data/HaveHours.js";
 
 export default function App() {
     return (
         <>
-            <DesiredProfitDataProvider>
+            <DataProvider urlsStruct={urlsStructDesiredProfit}>
                 <DesiredProfitTable/>
-            </DesiredProfitDataProvider>
+            </DataProvider>
 
-            <HaveHoursDataProvider>
+            <DataProvider urlsStruct={urlsStructHaveHours}>
                 <HaveHoursTable/>
-            </HaveHoursDataProvider>
+            </DataProvider>
         </>
     );
 }

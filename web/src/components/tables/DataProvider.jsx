@@ -1,9 +1,9 @@
 import {createContext, useEffect, useState} from "react";
-import {urlsStruct} from "../../data/HaveHours.js";
 
 export const Context = createContext();
 
-export function HaveHoursDataProvider({children}) {
+export function DataProvider({children, urlsStruct}) {
+    const [loading, setLoading] = useState(true);
     const [data, setData] = useState({});
 
     useEffect(() => {
@@ -14,8 +14,14 @@ export function HaveHoursDataProvider({children}) {
             .then((allData) => setData(allData))
             .catch(error => console.error("Error fetching initial data:", error));
 
+        setLoading(false);
+
         return () => abortController.abort();
     }, []);
+
+    if (loading) {
+        return <p>Loading...</p>;
+    }
 
     return (
         <Context.Provider value={{data: data, setData: setData}}>

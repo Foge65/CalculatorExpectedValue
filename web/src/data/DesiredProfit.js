@@ -1,4 +1,4 @@
-export const idsStruct = {
+export const idsStructDesiredProfit = {
     buttonRemoveColum: {
         type: 'button'
     },
@@ -73,7 +73,7 @@ export const idsStruct = {
     }
 }
 
-export const urlsStruct = {
+export const urlsStructDesiredProfit = {
     getAllData: {
         url: '/api/desiredProfit/getAllData',
         method: 'get'
@@ -83,17 +83,17 @@ export const urlsStruct = {
         method: 'get'
     },
     setDesiredProfit: {
-        name: idsStruct.desiredProfit,
+        name: idsStructDesiredProfit.desiredProfit,
         url: '/api/desiredProfit/setDesiredProfit',
         method: 'post'
     },
     getRooms: {
-        name: idsStruct.rooms,
+        name: idsStructDesiredProfit.rooms,
         url: '/api/desiredProfit/getRooms',
         method: 'get'
     },
     getRoom: {
-        name: idsStruct.rooms,
+        name: idsStructDesiredProfit.rooms,
         url: '/api/desiredProfit/getRoom',
         method: 'get'
     },
@@ -103,12 +103,12 @@ export const urlsStruct = {
         method: 'post'
     },
     getBuyIns: {
-        name: idsStruct.buyIns,
+        name: idsStructDesiredProfit.buyIns,
         url: '/api/desiredProfit/getBuyIns',
         method: 'get'
     },
     getBuyIn: {
-        name: idsStruct.buyIns,
+        name: idsStructDesiredProfit.buyIns,
         url: '/api/desiredProfit/getBuyIn',
         method: 'get'
     },
@@ -118,27 +118,27 @@ export const urlsStruct = {
         method: 'post'
     },
     setExpChipsT: {
-        name: idsStruct.expChipsT,
+        name: idsStructDesiredProfit.expChipsT,
         url: '/api/desiredProfit/setExpChipsT',
         method: 'post'
     },
     setTables: {
-        name: idsStruct.tables,
+        name: idsStructDesiredProfit.tables,
         url: '/api/desiredProfit/setTables',
         method: 'post'
     },
     setRakebackPct: {
-        name: idsStruct.rakebackPct,
+        name: idsStructDesiredProfit.rakebackPct,
         url: '/api/desiredProfit/setRakebackPct',
         method: 'post'
     },
     getMeshes: {
-        name: idsStruct.meshes,
+        name: idsStructDesiredProfit.meshes,
         url: '/api/desiredProfit/getMeshes',
         method: 'get'
     },
     getMesh: {
-        name: idsStruct.meshes,
+        name: idsStructDesiredProfit.meshes,
         url: '/api/desiredProfit/getMesh',
         method: 'get'
     },
@@ -148,13 +148,13 @@ export const urlsStruct = {
         method: 'post'
     },
     addColumn: {
-        name: idsStruct.buttonAddColum,
+        name: idsStructDesiredProfit.buttonAddColum,
         url: '/api/desiredProfit/createModel',
         type: 'button',
         method: 'post'
     },
     removeColumn: {
-        name: idsStruct.buttonRemoveColum,
+        name: idsStructDesiredProfit.buttonRemoveColum,
         url: '/api/desiredProfit/removeModel',
         type: 'button',
         method: 'post'

@@ -1,7 +1,7 @@
 import {useContext} from "react";
-import {Context} from "../providers/HaveHoursDataProvider.jsx";
-import CreateColumn from "../CreateColumn.jsx";
-import {idsStruct, urlsStruct} from "../../data/HaveHours.js";
+import {Context} from "./DataProvider.jsx";
+import CreateColumn from "./CreateColumn.jsx";
+import {idsStructHaveHours, urlsStructHaveHours} from "../../data/HaveHours.js";
 
 export default function HaveHoursTable() {
     const {data, setData} = useContext(Context);
@@ -13,7 +13,8 @@ export default function HaveHoursTable() {
                 <tbody>
                 <tr>
                     <td colSpan="100%">
-                        <CreateColumn idsStruct={idsStruct} urlsStruct={urlsStruct} data={data} setData={setData}/>
+                        <CreateColumn idsStruct={idsStructHaveHours} urlsStruct={urlsStructHaveHours}
+                                      data={data} setData={setData}/>
                     </td>
                 </tr>
                 </tbody>

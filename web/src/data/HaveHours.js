@@ -1,4 +1,4 @@
-export const idsStruct = {
+export const idsStructHaveHours = {
     buttonRemoveColum: {
         type: 'button'
     },
@@ -73,7 +73,7 @@ export const idsStruct = {
     }
 }
 
-export const urlsStruct = {
+export const urlsStructHaveHours = {
     getAllData: {
         url: '/api/haveHours/getAllData',
         method: 'get'
@@ -83,17 +83,17 @@ export const urlsStruct = {
         method: 'get'
     },
     setHaveHours: {
-        name: idsStruct.haveHours,
+        name: idsStructHaveHours.haveHours,
         url: '/api/haveHours/setHaveHours',
         method: 'post'
     },
     getRooms: {
-        name: idsStruct.rooms,
+        name: idsStructHaveHours.rooms,
         url: '/api/haveHours/getRooms',
         method: 'get'
     },
     getRoom: {
-        name: idsStruct.rooms,
+        name: idsStructHaveHours.rooms,
         url: '/api/haveHours/getRoom',
         method: 'get'
     },
@@ -103,12 +103,12 @@ export const urlsStruct = {
         method: 'post'
     },
     getBuyIns: {
-        name: idsStruct.buyIns,
+        name: idsStructHaveHours.buyIns,
         url: '/api/haveHours/getBuyIns',
         method: 'get'
     },
     getBuyIn: {
-        name: idsStruct.buyIns,
+        name: idsStructHaveHours.buyIns,
         url: '/api/haveHours/getBuyIn',
         method: 'get'
     },
@@ -118,27 +118,27 @@ export const urlsStruct = {
         method: 'post'
     },
     setExpChipsT: {
-        name: idsStruct.expChipsT,
+        name: idsStructHaveHours.expChipsT,
         url: '/api/haveHours/setExpChipsT',
         method: 'post'
     },
     setTables: {
-        name: idsStruct.tables,
+        name: idsStructHaveHours.tables,
         url: '/api/haveHours/setTables',
         method: 'post'
     },
     setRakebackPct: {
-        name: idsStruct.rakebackPct,
+        name: idsStructHaveHours.rakebackPct,
         url: '/api/haveHours/setRakebackPct',
         method: 'post'
     },
     getMeshes: {
-        name: idsStruct.meshes,
+        name: idsStructHaveHours.meshes,
         url: '/api/haveHours/getMeshes',
         method: 'get'
     },
     getMesh: {
-        name: idsStruct.meshes,
+        name: idsStructHaveHours.meshes,
         url: '/api/haveHours/getMesh',
         method: 'get'
     },
@@ -148,13 +148,13 @@ export const urlsStruct = {
         method: 'post'
     },
     addColumn: {
-        name: idsStruct.buttonAddColum,
+        name: idsStructHaveHours.buttonAddColum,
         url: '/api/haveHours/createModel',
         type: 'button',
         method: 'post'
     },
     removeColumn: {
-        name: idsStruct.buttonRemoveColum,
+        name: idsStructHaveHours.buttonRemoveColum,
         url: '/api/haveHours/removeModel',
         type: 'button',
         method: 'post'

@@ -1,7 +1,7 @@
-import {Context} from "../providers/DesiredProfitDataProvider.jsx";
-import CreateColumn from "../CreateColumn.jsx";
-import {idsStruct, urlsStruct} from "../../data/DesiredProfit.js";
 import {useContext} from "react";
+import {Context} from "./DataProvider.jsx";
+import CreateColumn from "./CreateColumn.jsx";
+import {idsStructDesiredProfit, urlsStructDesiredProfit} from "../../data/DesiredProfit.js";
 
 export default function DesiredProfitTable() {
     const {data, setData} = useContext(Context);
@@ -13,7 +13,8 @@ export default function DesiredProfitTable() {
                 <tbody>
                 <tr>
                     <td colSpan="100%">
-                        <CreateColumn idsStruct={idsStruct} urlsStruct={urlsStruct} data={data} setData={setData}/>
+                        <CreateColumn idsStruct={idsStructDesiredProfit} urlsStruct={urlsStructDesiredProfit}
+                                      data={data} setData={setData}/>
                     </td>
                 </tr>
                 </tbody>
