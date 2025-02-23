@@ -1,0 +1,30 @@
+name: "SSH Execute"
+
+inputs:
+  command:
+    required: true
+  ssh_private_key:
+    required: true
+  ssh_user:
+    required: true
+  ssh_host:
+    required: true
+  project_path:
+    required: true
+
+runs:
+  using: "composite"
+
+  steps:
+    - name: Setup SSH access
+      uses: webfactory/ssh-agent@v0.5.3
+      with:
+        ssh-private-key: ${{ inputs.ssh_private_key }}
+
+    - name: Execute SSH Command
+      shell: bash
+      run: |
+        ssh -o StrictHostKeyChecking=no ${{ inputs.ssh_user }}@${{ inputs.ssh_host }} << 'EOF'
+          cd ${{ inputs.project_path }}
+          ${{ inputs.command }}
+        EOF

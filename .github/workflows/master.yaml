@@ -1,13 +1,44 @@
 name: FS EV Calculator
+
 on:
   push:
     branches:
       - master
+
 jobs:
-  deploy:
+  update_code:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Install deps
-        run: yarn
+
+      - name: Git pull
+        uses: ./.github/actions/ssh-execute
+        with:
+          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+          ssh_user: ${{ secrets.SSH_USER }}
+          ssh_host: ${{ secrets.SSH_HOST }}
+          project_path: ${{ secrets.PROJECT_PATH }}
+          command:
+            git pull
+
+  restart_containers:
+    runs-on: ubuntu-latest
+    needs: update_code
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Restart Docker containers
+        uses: ./.github/actions/ssh-execute
+        with:
+          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+          ssh_user: ${{ secrets.SSH_USER }}
+          ssh_host: ${{ secrets.SSH_HOST }}
+          project_path: ${{ secrets.PROJECT_PATH }}
+          command: |
+            docker compose down
+            docker compose up --build -d
+            docker system prune -af
